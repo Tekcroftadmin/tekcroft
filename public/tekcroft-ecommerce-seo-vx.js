@@ -22,9 +22,16 @@
 
   var still   = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var src     = sec.getAttribute("data-video") || "";
-  var videoId = src.split("?")[0].split("/").pop();          /* the file name, for the analytics events */
+  function ytIdFrom(u){
+    var m = String(u || "").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/))([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : "";
+  }
+  var ytId    = ytIdFrom(src);
+  var isYt    = !!ytId || sec.classList.contains("vx-yt");
+  if (isYt) sec.classList.add("vx-yt");
+  var videoId = isYt ? (ytId || "youtube") : src.split("?")[0].split("/").pop();          /* file name or YouTube id for analytics */
   var cover   = media.querySelector("img");
-  var playing = false, vid = null;
+  var playing = false, vid = null, frameEl = null;
 
   /* ---- measurement events for analytics (GTM / GA4 read dataLayer) ---- */
   function ping(name){
@@ -32,10 +39,39 @@
     window.dataLayer.push({ event: name, video_id: videoId, video_slot: "after-trust-bar", page_path: location.pathname });
   }
 
+  function ytCommand(fn){
+    if (!frameEl || !frameEl.contentWindow) return;
+    try {
+      frameEl.contentWindow.postMessage(JSON.stringify({ event: "command", func: fn, args: [] }), "*");
+    } catch (e) {}
+  }
+
   /* ---- click to play ---- */
   function start(){
     if (playing) return;
     playing = true;
+
+    /* YouTube: lazy iframe embed (same click-to-play UX as the mp4 path) */
+    if (isYt) {
+      sec.classList.add("is-playing");
+      playNow = function(){
+        if (started) return;
+        started = true;
+        var title = sec.getAttribute("data-title") || "Video";
+        var iframe = frameEl = document.createElement("iframe");
+        iframe.src = "https://www.youtube.com/embed/" + ytId +
+          "?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=" +
+          encodeURIComponent(location.origin);
+        iframe.title = title;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+        media.appendChild(iframe);
+        ping("video_play");
+      };
+      return;
+    }
+
     var v = vid = document.createElement("video");
     v.controls = true; v.playsInline = true; v.preload = "auto";
     v.setAttribute("controlslist", "nodownload");
@@ -110,7 +146,7 @@
   var expand = function(){ return false; };
   play.addEventListener("click", function(){
     start();
-    if (strict) { playNow(); expand(null); }
+    if (isYt || still || strict) { playNow(); if (!isYt && !still) expand(null); }
     else if (!expand(playNow)) playNow();
   });
 
@@ -125,12 +161,24 @@
 
     /* a video that has scrolled out of sight should not keep playing behind the page */
     var away = new IntersectionObserver(function(es){
-      if (vid && !es[0].isIntersecting && !vid.paused) vid.pause();
+      if (!es[0].isIntersecting) {
+        if (vid && !vid.paused) vid.pause();
+        if (frameEl) ytCommand("pauseVideo");
+      }
     }, { threshold: .05 });
     away.observe(stage);
   }
 
-  if (still) return;   /* reduced motion: the film stays put at full size */
+  /* YouTube / reduced-motion: no sticky growth — CSS owns the 16:9 + 10px inset layout */
+  if (isYt || still) {
+    if (frame) frame.removeAttribute("style");
+    if (head) head.removeAttribute("style");
+    if (cta) cta.removeAttribute("style");
+    if (glow) glow.removeAttribute("style");
+    if (cue) cue.removeAttribute("style");
+    if (cover) cover.style.transform = "";
+    return;
+  }
 
   /* ---- scroll-driven growth ----
      How it is kept smooth:

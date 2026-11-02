@@ -218,7 +218,7 @@ html[data-theme="dark"] #seo-services-page{
   scroll-padding-top:calc(var(--nav-h) + 12px);}
 
 #seo-services-page{margin:0; background:var(--bg); color:var(--text); font-size:16px; line-height:1.65;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased; overflow-x:clip; /* clip keeps sticky (#watch) working; hidden forced overflow-y:auto */
   transition:background .35s var(--ease), color .35s var(--ease);}
 
 #seo-services-page h1,

@@ -16,6 +16,33 @@
 .vx{--vx-bg:var(--surface);   /* the same surface as the section that follows, so there is no seam under the film */
   position:relative; background:var(--vx-bg); color:var(--text);}
 
+/* Page shells that use overflow-x:hidden break position:sticky (overflow-y becomes auto).
+   Keep the film scroll-expand working wherever #watch is mounted. */
+#seo-services-page:has(> #main #watch),
+#seo-services-page:has(#watch){
+  overflow-x:clip;
+}
+
+/* Keep #watch chrome free of page-scoped button / heading overrides */
+#seo-services-page #watch .vx-head h2{
+  font-size:clamp(26px,3.3vw,44px) !important;
+  font-weight:800 !important;
+  letter-spacing:-.04em !important;
+  line-height:1.08 !important;
+  max-width:24ch;
+  margin:0 auto;
+  text-transform:none !important;
+}
+#seo-services-page #watch .vx-cta-wrap .btn{
+  transform:none;
+}
+#seo-services-page #watch .vx-cta-wrap .btn:hover{
+  transform:translateY(-3px);
+}
+#seo-services-page #watch .vx-cta-wrap .btn::before{
+  display:none;
+}
+
 /* the track is the scroll distance: one stage-height of pinning plus
    about a screen and a bit of travel while the pill grows */
 .vx-track{position:relative;
@@ -61,7 +88,9 @@
   transform:scale(calc(1.06 - .06 * var(--vx-e)));}
 /* the film is sized to exactly 16:9 (see measure() in the script), so object-fit:cover
    fills edge to edge with no top/bottom crop and no black bars */
-.vx-media video{position:absolute; inset:0; width:100%; height:100%; background:#000; object-fit:cover; object-position:50% 45%;}
+.vx-media video,
+.vx-media iframe{position:absolute; inset:0; width:100%; height:100%; background:#000; border:0;}
+.vx-media video{object-fit:cover; object-position:50% 45%;}
 .vx-spin{position:absolute; left:50%; top:50%; z-index:2; width:54px; height:54px; margin:-27px 0 0 -27px;
   border-radius:50%; border:3px solid rgba(255,255,255,.25); border-top-color:#fff; pointer-events:none;
   animation:vxSpin .9s linear infinite;}
@@ -154,4 +183,123 @@
   .vx-cta-wrap, .vx.is-playing .vx-cta-wrap{position:relative; left:auto; top:auto; width:auto; transform:none;
     margin-top:22px; justify-content:center; padding:0 20px;}
   .vx.is-playing .vx-cta-wrap .btn{padding:14px 22px; font-size:14px;}
+}
+
+/* ── YouTube embed mode (.vx-yt) ─────────────────────────────────────
+   No sticky scroll-expand. Frame is always true 16:9 with a 10px inset
+   from the section edges — full video visible, no crop, no side bars. */
+.vx.vx-yt{
+  --vx-r:24px;
+  padding-block:0;
+}
+.vx.vx-yt .vx-track{
+  height:auto !important;
+}
+.vx.vx-yt .vx-stage{
+  --vx-r:24px;
+  position:relative !important;
+  top:auto !important;
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible;
+  padding:0 0 clamp(28px,4vw,48px);
+}
+.vx.vx-yt .vx-glow,
+.vx.vx-yt .vx-scroll{
+  display:none !important;
+}
+.vx.vx-yt .vx-head{
+  position:relative !important;
+  left:auto; right:auto; top:auto;
+  opacity:1 !important;
+  transform:none !important;
+  will-change:auto;
+  padding:clamp(36px,5vw,64px) 20px 18px;
+  pointer-events:none;
+}
+.vx.vx-yt .vx-frame{
+  position:relative !important;
+  left:auto !important;
+  top:auto !important;
+  box-sizing:border-box;
+  width:calc(100% - 20px) !important;
+  max-width:none;
+  height:auto !important;
+  min-height:0 !important;
+  aspect-ratio:16 / 9;
+  margin:10px 10px !important; /* exact 10px inset from section edges */
+  transform:none !important;
+  will-change:auto;
+  border-radius:24px !important;
+  overflow:hidden;
+  isolation:isolate;
+  background:transparent;
+  box-shadow:0 28px 56px -36px rgba(var(--ink-rgb),.28);
+}
+.vx.vx-yt .vx-media{
+  position:absolute;
+  inset:0;
+  background:transparent;
+}
+.vx.vx-yt .vx-poster{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain; /* never crop head / table / subtitles */
+  object-position:center;
+  transform:none !important;
+  background:transparent;
+}
+.vx.vx-yt .vx-media video,
+.vx.vx-yt .vx-media iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  border:0;
+  background:transparent;
+}
+.vx.vx-yt .vx-media video{
+  object-fit:contain;
+  object-position:center;
+}
+.vx.vx-yt .vx-frame::after{
+  /* keep CTA readable on the poster; hide once playing */
+  background:linear-gradient(180deg, rgba(8,8,8,0) 55%, rgba(8,8,8,.4));
+}
+.vx.vx-yt .vx-cta-wrap,
+.vx.vx-yt.is-playing .vx-cta-wrap{
+  position:relative !important;
+  left:auto !important;
+  top:auto !important;
+  width:calc(100% - 20px) !important;
+  max-width:none;
+  margin:14px 10px 0;
+  transform:none !important;
+  justify-content:center !important;
+  padding:0 !important;
+  pointer-events:none;
+}
+.vx.vx-yt .vx-cta-wrap .btn{
+  pointer-events:auto;
+}
+.vx.vx-yt.is-playing .vx-cta-wrap .btn{
+  padding:14px 22px;
+  font-size:14px;
+}
+
+@media (max-width:760px){
+  .vx.vx-yt .vx-frame{
+    border-radius:18px !important;
+  }
+  .vx.vx-yt .vx-head{
+    padding:clamp(28px,8vw,44px) 16px 14px;
+  }
+  .vx.vx-yt .vx-cta-wrap,
+  .vx.vx-yt.is-playing .vx-cta-wrap{
+    width:calc(100% - 20px) !important;
+    margin-left:10px;
+    margin-right:10px;
+  }
 }

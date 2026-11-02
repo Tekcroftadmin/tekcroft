@@ -10,6 +10,8 @@ import "@/app/seo-services.css";
 import "@/app/tm-shell-lock.css";
 import "@/app/footer-lock.css";
 import "@/app/service-hero-lock.css";
+/* Video CTA (#watch) — same scroll-expand player as ecommerce-seo */
+import "@/app/ecommerce-seo-vx.css";
 
 export const metadata: Metadata = {
   title: meta.title,
@@ -56,6 +58,7 @@ export default function SeoServicesPage() {
       />
       <Homepage html={html} />
       <Script src={assets.seoServices} strategy="afterInteractive" />
+      <Script src="/tekcroft-ecommerce-seo-vx.js" strategy="afterInteractive" />
     </>
   );
 }
