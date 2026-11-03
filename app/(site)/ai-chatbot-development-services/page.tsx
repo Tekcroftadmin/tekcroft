@@ -12,8 +12,9 @@ import "@/app/ai-chatbot-services-tm.css";
 import "@/app/ai-chatbot-types.css";
 import "@/app/tm-shell-lock.css";
 import "@/app/footer-lock.css";
-/* Shared service hero shell — same style/design on every /services page */
 import "@/app/service-hero-lock.css";
+/* Last: head + rail overrides for #chatbot-services */
+import "@/app/chatbot-services-rail-fix.css";
 
 export const metadata: Metadata = {
   title: meta.title,

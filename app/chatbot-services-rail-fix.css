@@ -1,0 +1,69 @@
+/* chatbot-services-rail-fix.css — load last on AI Chatbot Development Services.
+   Full-width head: title left, intro right + blue line, right edge flush with .tm-rail.
+   Beats tm-shell-lock 1-col collapse and ai-chatbot-services-tm centered .wd-head. */
+
+#chatbot-services .tm-head,
+#chatbot-services .wd-head{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  align-items:center !important;
+  justify-items:stretch !important;
+  gap:clamp(24px,4vw,64px) !important;
+  width:100% !important;
+  max-width:none !important;
+  margin-inline:0 !important;
+  margin-bottom:clamp(24px,2.6vw,36px) !important;
+  text-align:left !important;
+}
+#chatbot-services .tm-head h2,
+#chatbot-services .wd-head h2{
+  margin:0 !important;
+  text-align:left !important;
+}
+#chatbot-services .tm-head h2 em,
+#chatbot-services .wd-head h2 em{display:block;}
+#chatbot-services .wd-lede{
+  margin:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  justify-self:stretch !important;
+  padding-left:20px !important;
+  border-left:2px solid var(--primary) !important;
+  text-align:left !important;
+  font-size:clamp(15px,1.1vw,17px) !important;
+  line-height:1.6 !important;
+  color:var(--text-2) !important;
+}
+html[data-theme="dark"] #chatbot-services .wd-lede{
+  border-left-color:var(--primary) !important;
+}
+@media (max-width:980px){
+  #chatbot-services .tm-head,
+  #chatbot-services .wd-head{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:14px !important;
+  }
+  #chatbot-services .wd-lede{padding-left:14px !important;}
+}
+
+/* Shell-lock --tm-n sizing wins over legacy 5-panel flex / min-width */
+@media (min-width:981px){
+  #chatbot-services .tm-item,
+  #chatbot-services .tm-item:not(.on),
+  #chatbot-services .tm-item.on{
+    flex-grow:0 !important;
+    flex-shrink:0 !important;
+    min-width:0 !important;
+  }
+  #chatbot-services .tm-item:not(.on){
+    flex-basis:var(--tm-slim, 64px) !important;
+  }
+  #chatbot-services .tm-item.on{
+    flex-basis:calc(100% - (var(--tm-n) - 1) * (var(--tm-slim, 64px) + var(--tm-gap, 7px))) !important;
+  }
+  #chatbot-services .tm-open{
+    right:auto !important;
+    max-width:none !important;
+    width:calc(100cqw - (var(--tm-n) - 1) * (var(--tm-slim, 64px) + var(--tm-gap, 7px))) !important;
+  }
+}

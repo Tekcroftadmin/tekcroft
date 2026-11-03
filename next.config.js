@@ -47,6 +47,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/services/web-and-app-development",
+        destination: "/web-and-app-development-services",
+        permanent: true,
+      },
+      {
         source: "/services/web-design-and-development",
         destination: "/web-design-and-development-services",
         permanent: true,

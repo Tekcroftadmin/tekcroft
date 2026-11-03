@@ -20,6 +20,7 @@ const routes = [
   "/local-seo-services",
   "/google-business-profile-optimization-services",
   "/franchise-seo-services",
+  "/web-and-app-development-services",
   "/web-design-and-development-services",
   "/custom-software-development-services",
   "/mobile-app-development-services",

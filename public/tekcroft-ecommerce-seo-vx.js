@@ -27,8 +27,10 @@
     return m ? m[1] : "";
   }
   var ytId    = ytIdFrom(src);
-  var isYt    = !!ytId || sec.classList.contains("vx-yt");
-  if (isYt) sec.classList.add("vx-yt");
+  var isYt    = !!ytId;                                      /* YouTube embed on play */
+  /* .vx-yt is an explicit static layout opt-in — do NOT force it for every YT URL,
+     or the ecommerce scroll-expand design is lost on pages that share this script. */
+  var staticYt = sec.classList.contains("vx-yt");
   var videoId = isYt ? (ytId || "youtube") : src.split("?")[0].split("/").pop();          /* file name or YouTube id for analytics */
   var cover   = media.querySelector("img");
   var playing = false, vid = null, frameEl = null;
@@ -146,7 +148,9 @@
   var expand = function(){ return false; };
   play.addEventListener("click", function(){
     start();
-    if (isYt || still || strict) { playNow(); if (!isYt && !still) expand(null); }
+    /* Same expand-then-play path for mp4 and YouTube; only reduced-motion / Safari
+       start immediately so autoplay is not blocked. */
+    if (still || strict) { playNow(); if (!still) expand(null); }
     else if (!expand(playNow)) playNow();
   });
 
@@ -169,8 +173,9 @@
     away.observe(stage);
   }
 
-  /* YouTube / reduced-motion: no sticky growth — CSS owns the 16:9 + 10px inset layout */
-  if (isYt || still) {
+  /* Explicit .vx-yt or reduced-motion: no sticky growth — CSS owns the 16:9 + 10px inset layout.
+     YouTube URLs still use scroll-expand unless .vx-yt is set on the section. */
+  if (staticYt || still) {
     if (frame) frame.removeAttribute("style");
     if (head) head.removeAttribute("style");
     if (cta) cta.removeAttribute("style");

@@ -21,8 +21,7 @@ var SERVICES = [
       {name:"Google Business Profile Optimization Services", href:"/google-business-profile-optimization-services", note:"Turn the listing into calls and visits.", img:"localGbp"},
       {name:"Franchise SEO Services", href:"/franchise-seo-services", note:"One system across every location.", img:"localFranchise"}
     ]},
-  /* No hub page for this pillar — heading is dropdown-only (no href). */
-  { title:"Web and Software Development", href:"", icon:"code", img:"web",
+  { title:"Web and App Development Services", href:"/web-and-app-development-services", icon:"code", img:"web",
     items:[
       {name:"Web Design and Development Services", href:"/web-design-and-development-services", note:"Sites built to convert, not just to look good.", img:"webDesign"},
       {name:"Custom Software Development Services", href:"/custom-software-development-services", note:"Custom platforms and internal tools.", img:"webSoftware"},
@@ -47,7 +46,7 @@ var BG = {
   localSeo:{src:"/images/mm-local-b28a2a8554.webp", alt:"Local SEO team planning map-based rankings and service-area visibility", title:"Local SEO Services"},
   localGbp:{src:"/images/mm-local-gbp-93ba89bfb1.webp", alt:"Specialist optimizing a Google Business Profile listing for calls and visits", title:"Google Business Profile Optimization Services"},
   localFranchise:{src:"/images/mm-local-franchise-88dcef3e9a.webp", alt:"Franchise SEO planners aligning multi-location search strategy across sites", title:"Franchise SEO Services"},
-  web:{src:"/images/mm-web-cat-11f5aab015.webp", alt:"Web and software team collaborating on product and application development", title:"Web and Software Development"},
+  web:{src:"/images/mm-web-cat-11f5aab015.webp", alt:"Web and app team collaborating on product and application development", title:"Web and App Development Services"},
   webDesign:{src:"/images/mm-web-9b5da82227.webp", alt:"Designers and developers building a conversion-focused website interface", title:"Web Design and Development Services"},
   webSoftware:{src:"/images/mm-web-software-c140d05592.webp", alt:"Engineers building custom software platforms and internal business tools", title:"Custom Software Development Services"},
   webMobile:{src:"/images/mm-web-mobile-95ffa25bf8.webp", alt:"Mobile app developers shipping iOS and Android from one shared codebase", title:"Mobile App Development Services"},
@@ -57,7 +56,7 @@ var BG = {
   aiAgent:{src:"/images/mm-ai-agent-e2a21e5ca1.webp", alt:"Specialists designing AI agents that run multi-step work end to end", title:"AI Agent Development Services"},
   team:{src:"/images/mm-team.webp", alt:"TekCroft team collaborating on digital services", title:"TekCroft Services"},
   keys:{src:"/images/mm-keys.webp", alt:"Local SEO planning with maps and location strategy", title:"Local SEO"},
-  laptops:{src:"/images/mm-laptops.webp", alt:"Developers working on web and software projects", title:"Web and Software Development"},
+  laptops:{src:"/images/mm-laptops.webp", alt:"Developers working on web and app projects", title:"Web and App Development Services"},
   devs:{src:"/images/mm-devs.webp", alt:"Engineers building software and AI systems", title:"Artificial Intelligence Services"},
   meeting:{src:"/images/mm-meeting.webp", alt:"Team meeting to plan TekCroft service delivery", title:"TekCroft Services"},
   table:{src:"/images/mm-table.webp", alt:"Workshop table with product and service planning materials", title:"TekCroft Services"},

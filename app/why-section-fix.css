@@ -1,0 +1,12 @@
+/* why-section-fix.css — load last on Web and App Development Services */
+
+/* Homepage #why centres .wy-say; this page uses .wy-say for panel copy. */
+#why .wy-say{
+  text-align:left;
+}
+
+/* Small card footnote — keep at 12.8px (avoid body-copy locks on <p>). */
+#why .wy-note{
+  font-size:12.8px;
+  line-height:1.45;
+}
