@@ -7856,7 +7856,7 @@ html[data-theme="dark"] #services-2 .ac-card,html[data-theme="dark"] #services-2
   --wrap-x:clamp(16px,4vw,26px);
   --cta-pad-y:clamp(28px,3.6vw,48px);
   --hero-pad-top:clamp(30px,3.4vw,62px);
-  --hero-pad-bot:clamp(48px,5.4vw,104px);
+  --hero-pad-bot:20px;
 }
 
 /* Future-proof layout primitives (optional on new sections) */
@@ -7917,17 +7917,27 @@ section.sec,
 #apart.sec,
 #clients.sec,
 #fit.sec,
-#industries.sec,
-#proof.sec{
+#industries.sec{
   padding-block:var(--sec-y) !important;
 }
 
-/* Proof strip under hero stays intentionally tighter */
+/* Under-hero stats strip — rhythm owned by stats-strip.css (#proof-v2) */
+/* Legacy #ai.tb (different section) stays tighter */
 .sec.tb,
-#proof.sec,
 html body #ai.tb,
 html body #ai.tb.sec{
   padding-block:var(--sec-y-tight) !important;
+}
+
+/* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
+html body{
+  font-family:var(--font);
+}
+html body :is(h1, h2, h3, h4, h5, h6, .hs-h1, .ct-hero h1),
+html body .hs .hs-h1,
+html body .sec-head h2,
+html body .lamp h1{
+  font-family:var(--font-display) !important;
 }
 
 /* ── Headings: one size per level — beat page-local clamps ──────────── */
@@ -8277,7 +8287,7 @@ html body .gw-say > p{
     --wrap-x:clamp(16px,3.5vw,22px) !important;
     --cta-pad-y:clamp(26px,4vw,40px) !important;
     --hero-pad-top:clamp(26px,3vw,48px) !important;
-    --hero-pad-bot:clamp(40px,5vw,72px) !important;
+    --hero-pad-bot:20px !important;
   }
 }
 
@@ -8297,7 +8307,7 @@ html body .gw-say > p{
     --wrap-x:16px !important;
     --cta-pad-y:clamp(24px,6vw,36px) !important;
     --hero-pad-top:26px !important;
-    --hero-pad-bot:36px !important;
+    --hero-pad-bot:20px !important;
     --body-lh:1.65 !important;
   }
 
@@ -8360,13 +8370,11 @@ html body .gw-say > p{
   html body #clients.sec,
   html body #fit.sec,
   html body #industries.sec,
-  html body #proof.sec,
   html body .sec-pad,
   html body .sec-pad-feat{
     padding-block:var(--sec-y) !important;
   }
   html body .sec.tb,
-  html body #proof.sec,
   html body .sec-pad-tight{
     padding-block:var(--sec-y-tight) !important;
   }
@@ -8633,16 +8641,23 @@ html body .gw-say > p{
   }
 }
 
-/* === ZEBRA GROUND LOCK (auto) === */
-html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
-.sec.vs{--ground:transparent;}
-#chatbot-services[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#chatbot-types[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#systems[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#reviews[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#why[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#faq[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+/* === ZEBRA GROUND LOCK (site) === */
+html body section[data-ground="tint"],
+html body .sec[data-ground="tint"],
+html body .sec.is-tint{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+html body section[data-ground="white"],
+html body .sec[data-ground="white"],
+html body .sec.is-white{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
+
+/* In-page hash targets clear the fixed nav */
+#approach{
+  scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}

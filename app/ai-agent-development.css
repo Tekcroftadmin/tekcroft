@@ -8121,7 +8121,7 @@ html[data-theme="dark"] #tech-stack.st-legacy-disabled{background:var(--bg);}
   --wrap-x:clamp(16px,4vw,26px);
   --cta-pad-y:clamp(28px,3.6vw,48px);
   --hero-pad-top:clamp(30px,3.4vw,62px);
-  --hero-pad-bot:clamp(48px,5.4vw,104px);
+  --hero-pad-bot:20px;
 }
 
 /* Future-proof layout primitives (optional on new sections) */
@@ -8182,17 +8182,27 @@ section.sec,
 #apart.sec,
 #clients.sec,
 #fit.sec,
-#industries.sec,
-#proof.sec{
+#industries.sec{
   padding-block:var(--sec-y) !important;
 }
 
-/* Proof strip under hero stays intentionally tighter */
+/* Under-hero stats strip — rhythm owned by stats-strip.css (#proof-v2) */
+/* Legacy #ai.tb (different section) stays tighter */
 .sec.tb,
-#proof.sec,
 html body #ai.tb,
 html body #ai.tb.sec{
   padding-block:var(--sec-y-tight) !important;
+}
+
+/* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
+html body{
+  font-family:var(--font);
+}
+html body :is(h1, h2, h3, h4, h5, h6, .hs-h1, .ct-hero h1),
+html body .hs .hs-h1,
+html body .sec-head h2,
+html body .lamp h1{
+  font-family:var(--font-display) !important;
 }
 
 /* ── Headings: one size per level — beat page-local clamps ──────────── */
@@ -8542,7 +8552,7 @@ html body .gw-say > p{
     --wrap-x:clamp(16px,3.5vw,22px) !important;
     --cta-pad-y:clamp(26px,4vw,40px) !important;
     --hero-pad-top:clamp(26px,3vw,48px) !important;
-    --hero-pad-bot:clamp(40px,5vw,72px) !important;
+    --hero-pad-bot:20px !important;
   }
 }
 
@@ -8562,7 +8572,7 @@ html body .gw-say > p{
     --wrap-x:16px !important;
     --cta-pad-y:clamp(24px,6vw,36px) !important;
     --hero-pad-top:26px !important;
-    --hero-pad-bot:36px !important;
+    --hero-pad-bot:20px !important;
     --body-lh:1.65 !important;
   }
 
@@ -8625,13 +8635,11 @@ html body .gw-say > p{
   html body #clients.sec,
   html body #fit.sec,
   html body #industries.sec,
-  html body #proof.sec,
   html body .sec-pad,
   html body .sec-pad-feat{
     padding-block:var(--sec-y) !important;
   }
   html body .sec.tb,
-  html body #proof.sec,
   html body .sec-pad-tight{
     padding-block:var(--sec-y-tight) !important;
   }
@@ -8898,72 +8906,23 @@ html body .gw-say > p{
   }
 }
 
-/* AAG CTA shot carrier + band photo
-   White band so it alternates after tinted #faq (not the same blue). */
-#contact.cta,
-#contact.sec.cta{
+/* === ZEBRA GROUND LOCK (site) === */
+html body section[data-ground="tint"],
+html body .sec[data-ground="tint"],
+html body .sec.is-tint{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+html body section[data-ground="white"],
+html body .sec[data-ground="white"],
+html body .sec.is-white{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
-  --cta-pic:url("/images/aag-cta-3a733870fa.webp") !important;
-  --cta-shot:url("/images/aag-cta-3a733870fa.webp") !important;
-}
-#contact.cta > .wrap::before,
-#contact.sec.cta > .wrap::before{
-  background-image:url("/images/aag-cta-3a733870fa.webp") !important;
-  background-position:58% 45% !important;
-  background-size:cover !important;
-  background-repeat:no-repeat !important;
-}
-#contact .cta-shot{
-  position:absolute !important; width:1px !important; height:1px !important;
-  padding:0 !important; margin:-1px !important; overflow:hidden !important;
-  clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important;
 }
 
-/* Single FAQ aside photo (AI Agent) */
-:root{ --faq-shot:url("/images/aag-faq-180b4c0ff3.webp"); }
-#faq .faq-pic{position:absolute; inset:0; background:none; opacity:1;}
-#faq .faq-pic > img{position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center; display:block;}
-#faq .faq-aside::after{
-  background:
-    radial-gradient(780px 440px at 50% 48%, rgba(0,0,0,.45) 0%, transparent 72%),
-    linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.52) 42%,
-                    rgba(0,0,0,.92) 100%);}
-
-/* AAG #process per-step disc photos */
-#process .eg-face{background:#0A0C0E; isolation:isolate;}
-#process .eg-face::before{display:none;}
-#process .eg-face::after{z-index:1;}
-#process .eg-pic{
-  position:absolute; inset:0; z-index:0;
-  background:none;
-  opacity:0; visibility:hidden;
-  transition:opacity .45s var(--ease), visibility 0s linear .45s;
+/* In-page hash targets clear the fixed nav */
+#approach{
+  scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
 }
-#process .eg[data-at="0"] .eg-pic:nth-child(1),
-#process .eg[data-at="1"] .eg-pic:nth-child(2),
-#process .eg[data-at="2"] .eg-pic:nth-child(3),
-#process .eg[data-at="3"] .eg-pic:nth-child(4),
-#process .eg[data-at="4"] .eg-pic:nth-child(5),
-#process .eg:not([data-at]) .eg-pic:nth-child(1){
-  opacity:1; visibility:visible; transition-delay:0s;
-}
-#process .eg-pic > img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; object-position:center; display:block;
-}
-#process .eg-face > *:not(.eg-pic){position:relative; z-index:2;}
-
-/* === ZEBRA GROUND LOCK (auto) === */
-html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
-.sec.vs{--ground:transparent;}
-#problem[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#agent-services[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#why[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#reviews[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#tech-stack[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
