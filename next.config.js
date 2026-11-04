@@ -7,8 +7,8 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
   experimental: {
-    /* Critters: inline above-the-fold CSS, defer the rest (LCP/FCP) */
-    optimizeCss: true,
+    /* Critical CSS is manually inlined in (site)/layout; Critters off to avoid double-processing */
+    optimizeCss: false,
   },
   images: {
     formats: ["image/webp", "image/avif"],
@@ -101,6 +101,7 @@ const nextConfig = {
     const headers = [
       { source: "/images/:path*", headers: immutable },
       { source: "/tekcroft-main.:hash.js", headers: immutable },
+      { source: "/tekcroft-home-defer.:hash.js", headers: immutable },
       { source: "/tekcroft-mm.:hash.js", headers: immutable },
       { source: "/tekcroft-vs-halo.:hash.js", headers: immutable },
       { source: "/tekcroft-contact.:hash.js", headers: immutable },

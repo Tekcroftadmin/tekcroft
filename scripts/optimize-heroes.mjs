@@ -1,6 +1,6 @@
 /**
- * Re-encode hero WebPs smaller while keeping visual quality / aspect ratio.
- * Targets substantially under prior ~88–100KB sizes without changing pixels' framing.
+ * Re-encode home-hero WebPs at quality ~72–78, same dimensions.
+ * Keeps mobile (-m) + desktop pairs used by the existing srcset.
  */
 import fs from "fs";
 import path from "path";
@@ -9,9 +9,19 @@ import { fileURLToPath } from "url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dir = path.join(ROOT, "public", "images");
-const MAX = 72 * 1024;
 
-async function opt(name, maxW) {
+const FILES = [
+  "home-hero-1.webp",
+  "home-hero-1-m.webp",
+  "home-hero-2.webp",
+  "home-hero-2-m.webp",
+  "home-hero-3.webp",
+  "home-hero-3-m.webp",
+  "home-hero-4.webp",
+  "home-hero-4-m.webp",
+];
+
+async function opt(name) {
   const src = path.join(dir, name);
   if (!fs.existsSync(src)) {
     console.warn("skip missing", name);
@@ -21,41 +31,35 @@ async function opt(name, maxW) {
   const meta = await sharp(buf).metadata();
   let best = null;
 
-  for (const width of [maxW, maxW - 100, maxW - 200, 1100, 1000].filter(
-    (w, i, a) => w >= 900 && a.indexOf(w) === i
-  )) {
-    for (let q = 76; q >= 58; q -= 2) {
-      const out = await sharp(buf)
-        .rotate()
-        .resize({
-          width,
-          withoutEnlargement: true,
-          fit: "inside",
-        })
-        .webp({ quality: q, effort: 6, smartSubsample: true })
-        .toBuffer();
-      if (out.length <= MAX) {
-        best = { out, q, width, bytes: out.length };
-        break;
-      }
-      if (!best || out.length < best.bytes) {
-        best = { out, q, width, bytes: out.length };
-      }
+  for (let q = 78; q >= 72; q -= 2) {
+    const out = await sharp(buf)
+      .rotate()
+      .webp({ quality: q, effort: 6, smartSubsample: true })
+      .toBuffer();
+    const outMeta = await sharp(out).metadata();
+    if (outMeta.width !== meta.width || outMeta.height !== meta.height) {
+      throw new Error(`${name}: dimension changed at q${q}`);
     }
-    if (best && best.bytes <= MAX) break;
+    if (!best || out.length < best.bytes) {
+      best = { out, q, bytes: out.length };
+    }
+    /* Prefer the first quality that shrinks; stop once we have a solid win */
+    if (out.length < buf.length * 0.92) break;
   }
 
   if (!best) throw new Error("failed " + name);
+  if (best.bytes >= buf.length) {
+    console.log(
+      `${name}: keep ${(buf.length / 1024).toFixed(1)} KB (re-encode not smaller)`
+    );
+    return;
+  }
   fs.writeFileSync(src, best.out);
-  const outMeta = await sharp(best.out).metadata();
   console.log(
     `${name}: ${(buf.length / 1024).toFixed(1)} → ${(best.bytes / 1024).toFixed(1)} KB ` +
-      `@w${best.width} q${best.q} (${meta.width}x${meta.height} → ${outMeta.width}x${outMeta.height})`
+      `q${best.q} (${meta.width}x${meta.height})`
   );
 }
 
-await opt("home-hero-1.webp", 1400);
-await opt("home-hero-2.webp", 1200);
-await opt("home-hero-3.webp", 1200);
-await opt("home-hero-4.webp", 1200);
+for (const f of FILES) await opt(f);
 console.log("done");

@@ -69,6 +69,7 @@ async function hashFile(name) {
 
 const names = [
   "tekcroft-main.js",
+  "tekcroft-home-defer.js",
   "tekcroft-mm.js",
   "tekcroft-vs-halo.js",
   "tekcroft-ecommerce-seo.js",
@@ -96,6 +97,7 @@ const names = [
 
 const keys = [
   "main",
+  "homeDefer",
   "mm",
   "vsHalo",
   "ecommerceSeo",
@@ -143,7 +145,36 @@ if (fs.existsSync(localSeoCss)) {
 const tekcroftCss = path.join(ROOT, "app", "tekcroft.css");
 if (fs.existsSync(tekcroftCss)) {
   const lines = fs.readFileSync(tekcroftCss, "utf8").split(/\n/);
-  /* Lines 0–559 = tekcroft-critical.css (blocking); remainder deferred */
-  fs.writeFileSync(path.join(cssOut, "tekcroft-defer.css"), lines.slice(560).join("\n"));
-  console.log("synced public/css/tekcroft-defer.css");
+  /* Lines 0–719 = above-the-fold (tokens/nav/hero); remainder deferred */
+  const CRITICAL_END = 720;
+  let critical = lines.slice(0, CRITICAL_END).join("\n") + "\n";
+  for (const extra of ["stats-strip.css", "nav-pill.css", "perf.css"]) {
+    const p = path.join(ROOT, "app", extra);
+    if (fs.existsSync(p)) {
+      critical +=
+        "\n/* === " + extra + " === */\n" + fs.readFileSync(p, "utf8") + "\n";
+    }
+  }
+  /* Pin home hero box so deferred mobile overrides cannot CLS .hero-in */
+  critical +=
+    "\n@media (max-width:900px){\n" +
+    "  #top.hero, header.hero{\n" +
+    "    min-height:100vh!important;min-height:100svh!important;\n" +
+    "    padding-top:calc(var(--nav-h) + 62px)!important;\n" +
+    "    padding-bottom:20px!important;\n" +
+    "  }\n" +
+    "  #top.hero .hero-in, header.hero .hero-in{margin-block:auto!important;}\n" +
+    "}\n";
+  fs.writeFileSync(path.join(ROOT, "app", "tekcroft-critical.css"), critical);
+  fs.writeFileSync(
+    path.join(cssOut, "tekcroft-defer.css"),
+    lines.slice(CRITICAL_END).join("\n")
+  );
+  console.log(
+    "synced tekcroft-critical.css + public/css/tekcroft-defer.css (split @" +
+      CRITICAL_END +
+      ", critical " +
+      (critical.length / 1024).toFixed(1) +
+      "KB)"
+  );
 }

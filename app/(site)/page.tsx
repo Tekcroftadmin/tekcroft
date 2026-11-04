@@ -56,6 +56,11 @@ export default function HomePage() {
       <Homepage html={html} />
       {/* afterInteractive: body markup exists; boot can measure nav logo */}
       <Script src={assets.main} strategy="afterInteractive" />
+      {/* Below-fold widgets (NSR / AI ecosystem / carousels) — idle load */}
+      <Script
+        src={assets.homeDefer || "/tekcroft-home-defer.js"}
+        strategy="lazyOnload"
+      />
       {meta.jsonLd.map((data, i) => (
         <script
           key={i}

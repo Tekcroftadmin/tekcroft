@@ -1,4 +1,3 @@
-/* Critical chrome (tokens/nav/btn/wrap/tag) — rest deferred */
 /* Extracted from tekcroft-site-mega-menus ? do not reformat */
 
 /* ============================================================
@@ -440,12 +439,29 @@ html[data-theme="dark"] .nav.stuck .nav-shell{box-shadow:0 16px 38px -22px rgba(
   background-position:left center; background-size:contain;}
 .nav-links{display:flex; gap:22px; font-size:14.5px; font-weight:500; color:var(--muted);
   text-transform:uppercase; letter-spacing:.04em;}
-.nav-links a{position:relative; padding:5px 0; transition:color .18s var(--ease);}
-.nav-links a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
+.nav-links a,
+.nav-links > button:not(.mm-trigger){
+  position:relative; padding:5px 0; transition:color .18s var(--ease);
+  background:none; border:0; font:inherit; color:inherit; letter-spacing:inherit;
+  text-transform:inherit; cursor:pointer;}
+.nav-links a::after,
+.nav-links > button:not(.mm-trigger)::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
   background:var(--primary); transition:right .25s var(--ease);}
-.nav-links a:hover{color:var(--text);}
-.nav-links a:hover::after{right:0;}
+.nav-links a:hover,
+.nav-links > button:not(.mm-trigger):hover{color:var(--text);}
+.nav-links a:hover::after,
+.nav-links > button:not(.mm-trigger):hover::after{right:0;}
 .nav-right{display:flex; align-items:center; gap:10px; margin-left:auto;}
+/* In-page scroll controls that used to be <a href="#…"> */
+button.btn{font:inherit; cursor:pointer;}
+/* .pf-card keeps page flex/padding/border/background — only reset UA button bits.
+   background:none here made sticky stacks show lower-card text through. */
+button.pf-card{
+  display:flex; flex-direction:column; width:100%; text-align:left;
+  font:inherit; color:inherit; cursor:pointer;}
+button.wk-visit{
+  display:inline-flex; align-items:center; width:auto; text-align:left;
+  font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0;}
 
 .theme-btn{width:44px; height:44px; border-radius:50%; border:1px solid var(--border);
   background:transparent; color:var(--text-2); display:grid; place-items:center; flex-shrink:0;
@@ -511,8 +527,11 @@ html[data-theme="dark"] .theme-btn .sun{display:none;}
   border-radius:0 0 25px 25px;
   backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);}
 .mnav.open{display:flex;}
-.mnav a{padding:11px 0; font-size:15.5px; font-weight:600; border-bottom:1px solid var(--border-soft);
-  text-transform:uppercase; letter-spacing:.04em;}
+.mnav a,
+.mnav > button[data-scroll]{padding:11px 0; font-size:15.5px; font-weight:600; border-bottom:1px solid var(--border-soft);
+  text-transform:uppercase; letter-spacing:.04em;
+  background:none; border-left:0; border-right:0; border-top:0; font:inherit; color:inherit;
+  text-align:left; cursor:pointer; width:100%;}
 .mnav .mm-acc{text-transform:uppercase; letter-spacing:.04em;}
 .mnav .mm-accp a{text-transform:none; letter-spacing:0;}
 .mnav .btn{margin-top:12px; border-bottom:none; text-transform:none; letter-spacing:0;}
@@ -559,3 +578,630 @@ h2 em{font-style:normal; color:var(--brand-text);}
     hsl(var(--brand-h) 100% 45% / var(--beam)) 0%, transparent 70%);}
 
 /* ============================================================
+   HERO
+   One headline, in the page's normal ink, with the rotating keyword
+   carrying the brand colour. Nothing is lit and nothing is tracked.
+   ============================================================ */
+.hero{position:relative; min-height:100vh; min-height:100svh; height:auto; display:flex;
+  flex-direction:column; justify-content:flex-start; color:#fff; overflow:hidden;
+  padding:calc(var(--nav-h) + 62px) 0 20px;
+  /* the floor the slider sits on. If every photo fails to load the hero is
+     still a finished dark slab rather than a hole. */
+  background:linear-gradient(160deg, var(--n900) 0%, var(--ink-plate) 55%, #050505 100%);}
+
+/* ---- the slider ----
+   Four photographs, cross-faded, each drifting slowly closer while it is
+   on screen. The photos are requested in greyscale and the brand tint is
+   painted over them, so whatever the picture happens to be it arrives in
+   the palette instead of fighting it. */
+.hero-slider{position:absolute; inset:0; z-index:0;}
+.hero-slide{position:absolute; inset:0; opacity:0; will-change:opacity;
+  transition:opacity 1.4s var(--ease);}
+.hero-slide.on{opacity:1;}
+.hero-slide img{width:100%; height:100%; object-fit:cover; display:block;
+  transform:scale(1); transition:transform 9s linear; will-change:transform;}
+.hero-slide.on img{transform:scale(1.09);}
+/* the tint: brand light from above, ink everywhere else, so the copy has a
+   guaranteed contrast floor no matter which frame is showing */
+.hero-scrim{position:absolute; inset:0; z-index:1; pointer-events:none;
+  /* black, not ink. The navy wash was tinting the photographs blue and
+     flattening them; neutral black leaves the greys as greys and lets the
+     one blue on the page be the only colour in the frame. */
+  background:
+    radial-gradient(780px 440px at 50% 48%, rgba(0,0,0,.50) 0%, transparent 72%),
+    linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.58) 42%,
+                    rgba(0,0,0,.90) 100%);}
+/* ---- the side columns ----
+   A centred headline leaves two tall empty margins on a wide screen. Rather
+   than decorate them, they carry the two things a visitor actually wants
+   early: proof on the left, scope on the right. Quiet type, hairline rules,
+   no boxes ? they frame the headline instead of competing with it. */
+.hero-rail{position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:170px; display:grid; gap:26px;}
+.hero-rail.l{left:34px;}
+.hero-rail.r{right:34px; text-align:right;}
+.hero-rail .it{opacity:0; transform:translateY(16px);
+  transition:opacity .8s var(--ease) var(--d,0ms), transform .8s var(--pop) var(--d,0ms);}
+.hero.play .hero-rail .it{opacity:1; transform:none;}
+.hero-rail.l .it{padding-left:15px; border-left:1px solid rgba(255,255,255,.20);}
+.hero-rail.r .it{padding-right:15px; border-right:1px solid rgba(255,255,255,.20);}
+.hero-rail b{display:block; font-family:var(--font-display); font-size:22px; font-weight:800;
+  letter-spacing:-0.04em; line-height:1.1; color:#fff; font-variant-numeric:tabular-nums;}
+.hero-rail span{display:block; font-size:11.5px; line-height:1.45; margin-top:4px;
+  color:rgba(255,255,255,.52);}
+.hero-rail .ix,.hero-rail .nm{font-style:normal;}
+.hero-rail .ix{display:block; font-size:10.5px; font-weight:700; letter-spacing:.16em;
+  color:var(--primary); margin-bottom:3px;}
+.hero-rail .nm{display:block; font-family:var(--font-display); font-size:15px; font-weight:700;
+  letter-spacing:-0.02em; color:#fff;}
+
+.hero-in{position:relative; z-index:3; text-align:center; width:100%; margin-block:auto;}
+.hero .tag{margin-bottom:26px;}
+
+.lamp{position:relative; display:block; width:fit-content; max-width:100%;
+  margin:0 auto 24px;}
+/* set in caps. Sora ExtraBold at this size needs the tracking opened up
+   from the lowercase -0.05em, or the letters run into each other; the size
+   comes down a step too, because caps read a good deal larger than the
+   same words in mixed case and the longest line has to hold one line. */
+.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  letter-spacing:-0.012em; line-height:1.08; margin:0;}
+.lamp .ln{display:block; overflow:hidden; padding-bottom:.05em;}
+.lamp .ln > span{display:block; transform:translateY(110%);
+  transition:transform 1s var(--ease) var(--d,0ms);}
+.hero.play .lamp .ln > span{transform:none;}
+.lamp em{font-style:normal; color:var(--primary);}
+
+/* the keyword slot ? every word is stacked in one grid cell, so the
+   box is always as wide as the longest option and the line never
+   reflows as the words swap. */
+/* Grid cell sizes to the longest keyword (all i share 1/1) — no width JS,
+   no width animation. Only transform/opacity swap the words (composited). */
+.kw{display:inline-grid; vertical-align:baseline; color:var(--primary);
+  padding-bottom:.12em; margin-bottom:-.12em;
+  /* overflow (not clip-path) so word transform/opacity stay compositor-only */
+  overflow:hidden; padding-inline:.4em; margin-inline:-.4em; justify-items:center;}
+.kw u{display:none;}
+.kw i{grid-area:1/1; font-style:normal; text-align:center; white-space:nowrap;
+  /* flat brand blue ? no glow behind the glyphs */
+  text-shadow:none;
+  transform:translateY(105%); opacity:0;
+  transition:transform .5s cubic-bezier(.62,0,.2,1), opacity .3s var(--ease);}
+.kw i.on{transform:none; opacity:1; transition-delay:.44s;}
+.kw i.out{transform:translateY(-105%); opacity:0; transition-delay:0s;}
+
+.hero .lede{font-size:var(--lede); color:rgba(255,255,255,.76); max-width:54ch;
+  margin:0 auto 32px;}
+.hero-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+.hero-note{margin-top:22px; font-size:13px; color:rgba(255,255,255,.62);
+  display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap;}
+.hero-note b{color:#fff; font-weight:600;}
+.hero-note s{text-decoration:none; color:rgba(255,255,255,.35);}
+
+/* client ticker — in-flow under CTAs (homepage .hero + service .hs) */
+.ticker{position:relative; z-index:3; width:100%; margin-top:32px; margin-bottom:0;
+  padding:14px 0 16px; border-top:1px solid rgba(255,255,255,.16);}
+.hs > .ticker{z-index:4;}
+.hs:has(> .ticker),
+.hero:has(> .ticker){padding-bottom:20px;}
+.marq{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+.marq-track{display:flex; gap:44px; width:max-content; animation:slide 38s linear infinite;}
+.marq:hover .marq-track{animation-play-state:paused;}
+@keyframes slide{to{transform:translateX(-50%);}}
+.marq span{display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:600;
+  color:rgba(255,255,255,.62); white-space:nowrap; transition:color .2s var(--ease);}
+.marq span::before{content:""; width:5px; height:5px; border-radius:50%;
+  background:var(--primary); flex-shrink:0;}
+.marq span:hover{color:#fff;}
+
+/* Proof / stats strip under every service hero.
+   Light: white plate. Dark: follow the theme ? no forced white. */
+section#proof{
+  --ground:#fff;
+  --panel:#fff;
+  background:#fff !important;
+}
+html[data-theme="dark"] section#proof{
+  --ground:var(--bg);
+  --panel:var(--surface);
+  background:var(--bg) !important;
+  color:var(--text);
+}
+html[data-theme="dark"] section#proof .tb-figs{
+  background:var(--surface) !important;
+  border-color:var(--border);
+  box-shadow:0 18px 40px -28px rgba(0,0,0,.65);
+}
+html[data-theme="dark"] section#proof .tb-fig b{color:var(--text);}
+html[data-theme="dark"] section#proof .tb-fig .tb-cap{color:var(--text-2);}
+html[data-theme="dark"] section#proof .tb-meter{background:var(--border);}
+html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--border);}
+
+/* === stats-strip.css === */
+/* Shared stats strip — identical on every page (#proof-v2).
+   Four figures, hairline dividers, #DAEEF6 ground. */
+
+html body #proof-v2.st.sec,
+html body #proof-v2.st[data-ground],
+#proof-v2.st{
+  margin-top:0;
+  padding-block:clamp(34px,3.6vw,52px) !important;
+  background:#DAEEF6 !important;
+  border:0 !important;
+}
+html[data-theme="dark"] body #proof-v2.st.sec,
+html[data-theme="dark"] body #proof-v2.st[data-ground],
+html[data-theme="dark"] #proof-v2.st{
+  background:hsl(var(--brand-h) 28% 14%) !important;
+}
+
+#proof-v2 .st-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:stretch;
+  gap:0;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+#proof-v2 .st-c{
+  position:relative;
+  padding:clamp(22px,2.4vw,32px) clamp(16px,2vw,28px);
+  text-align:center;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+#proof-v2 .st-c b{
+  display:inline-flex;
+  align-items:baseline;
+  gap:2px;
+  font-family:var(--font-display);
+  font-size:clamp(34px,3.4vw,50px);
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:1;
+  color:var(--text);
+}
+#proof-v2 .st-c b em{
+  font-style:normal;
+  font-size:calc(1em - 2px);
+  line-height:1;
+  color:var(--primary);
+  letter-spacing:-.045em;
+}
+#proof-v2 .st-c p{
+  margin:10px auto 0;
+  max-width:24ch;
+  font-size:14px;
+  line-height:1.5;
+  color:var(--text-2);
+}
+
+/* Kill legacy timeline .st-row rail-dot / hover chrome that bleeds into this strip */
+#proof-v2 .st-row:hover,
+#proof-v2 .st-row.on,
+#proof-v2 .st-c:hover{
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+}
+#proof-v2 .st-row::before,
+#proof-v2 .st-row.on::before,
+#proof-v2 .st-row.done::before,
+#proof-v2 .st-c::after{
+  content:none !important;
+  display:none !important;
+  border:0 !important;
+  width:0 !important;
+  height:0 !important;
+  box-shadow:none !important;
+  background:none !important;
+}
+
+/* Clean vertical dividers between stats (not before first / after last) */
+#proof-v2 .st-c + .st-c::before{
+  content:"" !important;
+  display:block !important;
+  position:absolute !important;
+  left:0 !important;
+  top:18% !important;
+  bottom:18% !important;
+  width:1px !important;
+  height:auto !important;
+  background:var(--border, #D2D9E0) !important;
+  box-shadow:none !important;
+  border:0 !important;
+  pointer-events:none !important;
+}
+html[data-theme="dark"] #proof-v2 .st-c + .st-c::before{
+  background:var(--border) !important;
+}
+
+@media (max-width:900px){
+  #proof-v2 .st-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  /* hide vertical dividers when wrapped to 2x2 */
+  #proof-v2 .st-c + .st-c::before{content:none !important; display:none !important;}
+  /* hairline between the two rows only */
+  #proof-v2 .st-c:nth-child(n+3){
+    border-top:1px solid var(--border, #D2D9E0) !important;
+  }
+  html[data-theme="dark"] #proof-v2 .st-c:nth-child(n+3){
+    border-top-color:var(--border) !important;
+  }
+}
+@media (max-width:420px){
+  #proof-v2 .st-c b{font-size:32px;}
+  #proof-v2 .st-c{padding:20px 10px;}
+}
+
+
+/* === nav-pill.css === */
+/* HighGate-style shared nav pill — Tekcroft blue. Look only; mega/burger structure untouched. */
+
+.nav{
+  transition: padding .3s var(--ease);
+}
+.nav-shell{
+  border-style:solid !important;
+  border-width:1.5px !important;
+  border-color:hsl(var(--brand-h) 85% 72% / .55) !important;
+  border-radius:999px;
+  background:transparent !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  box-shadow:none !important;
+  transition:
+    background .3s var(--ease),
+    border-color .3s var(--ease),
+    box-shadow .3s var(--ease),
+    backdrop-filter .3s var(--ease),
+    -webkit-backdrop-filter .3s var(--ease) !important;
+}
+
+/* ---- Inner layout: logo | centered links | theme+CTA ----
+   3-column grid keeps links truly centered without squeezing them
+   into a flex:1 strip (which forced word-wrap into tall pills). */
+.nav-shell > .nav-in,
+.nav .nav-in{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) !important;
+  align-items:center !important;
+  column-gap:12px !important;
+  row-gap:0 !important;
+  height:68px !important;
+  padding-left:20px !important;
+  padding-right:12px !important;
+  box-sizing:border-box !important;
+  transition:height .3s var(--ease);
+}
+.nav .logo{
+  grid-column:1 !important;
+  justify-self:start !important;
+  flex:none !important;
+  position:relative;
+  z-index:2;
+}
+.nav-links{
+  grid-column:2 !important;
+  position:static !important;
+  left:auto !important;
+  right:auto !important;
+  transform:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex:0 0 auto !important;
+  flex-wrap:nowrap !important;
+  gap:4px !important;
+  width:max-content !important;
+  max-width:none !important;
+  min-width:0 !important;
+  font-size:15px;
+  font-weight:600 !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+  color:inherit;
+  white-space:nowrap !important;
+}
+.nav-links a,
+.nav-links .mm-trigger{
+  display:inline-flex !important;
+  align-items:center !important;
+  flex:0 0 auto !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:auto !important;
+  height:36px !important;
+  padding:8px 14px !important;
+  border-radius:999px !important;
+  line-height:1 !important;
+  font-size:15px !important;
+  font-weight:600 !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+  white-space:nowrap !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+  background:transparent;
+  color:inherit;
+  box-sizing:border-box !important;
+  transition:
+    color .18s var(--ease),
+    background .18s var(--ease) !important;
+}
+/* Drop the old underline rail */
+.nav-links a::after,
+.nav-links > button:not(.mm-trigger)::after,
+.nav-links .mm-trigger::after{
+  content:none !important;
+  display:none !important;
+}
+.nav-links .mm-trigger svg{
+  width:12px;
+  height:12px;
+  flex-shrink:0;
+  margin-left:2px;
+}
+.nav-right{
+  grid-column:3 !important;
+  justify-self:end !important;
+  flex:none !important;
+  margin-left:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  position:relative;
+  z-index:2;
+}
+.nav-right .theme-btn,
+.nav-right .burger{
+  flex:0 0 auto !important;
+}
+
+/* ---- CTA: brand blue gradient pill ---- */
+.nav-right > .btn.btn-primary{
+  height:48px !important;
+  padding:0 24px !important;
+  white-space:nowrap !important;
+  max-width:none !important;
+  flex:0 0 auto !important;
+  background:linear-gradient(135deg, hsl(var(--brand-h) 100% 48%), hsl(var(--brand-h) 95% 38%)) !important;
+  border-color:transparent !important;
+  color:#fff !important;
+  box-shadow:0 10px 22px -12px hsl(var(--brand-h) 90% 28% / .6);
+}
+.nav-right > .btn.btn-primary:hover{
+  box-shadow:0 14px 28px -12px hsl(var(--brand-h) 90% 28% / .7);
+}
+
+/* ---- Top (over dark hero): transparent + border ---- */
+.nav:not(.stuck) .nav-shell{
+  background:transparent !important;
+  border-color:hsl(var(--brand-h) 85% 72% / .55) !important;
+  box-shadow:none !important;
+}
+.nav:not(.stuck) .logo{--logo:var(--logo-white);}
+.nav:not(.stuck) .nav-links a,
+.nav:not(.stuck) .nav-links .mm-trigger{
+  color:rgba(255,255,255,.88) !important;
+}
+.nav:not(.stuck) .nav-links a:hover,
+.nav:not(.stuck) .nav-links a[aria-current="page"],
+.nav:not(.stuck) .nav-links .mm-trigger:hover,
+.nav:not(.stuck) .nav-links .mm-trigger[aria-expanded="true"],
+.nav:not(.stuck) .nav-links .mm-trigger[aria-current="page"]{
+  color:#fff !important;
+  background:rgba(255,255,255,.14) !important;
+}
+.nav:not(.stuck) .theme-btn{
+  color:rgba(255,255,255,.85);
+  border-color:rgba(255,255,255,.3);
+}
+.nav:not(.stuck) .theme-btn:hover{color:#fff; border-color:#fff;}
+.nav:not(.stuck) .burger{border-color:rgba(255,255,255,.3);}
+.nav:not(.stuck) .burger i{background:#fff;}
+
+/* ---- Sticky: solid white + border + shadow ---- */
+.nav.stuck{
+  --nav-gap:10px;
+}
+.nav.stuck .nav-shell{
+  background:#FFFFFF !important;
+  border-color:hsl(var(--brand-h) 85% 72% / .6) !important;
+  box-shadow:0 14px 34px -18px hsl(var(--brand-h) 60% 25% / .35) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.nav.stuck .nav-in{height:68px !important;}
+.nav.stuck .logo{--logo:var(--logo-ink);}
+.nav.stuck .nav-links a,
+.nav.stuck .nav-links .mm-trigger{
+  color:#0F1720 !important;
+}
+.nav.stuck .nav-links a:hover,
+.nav.stuck .nav-links a[aria-current="page"],
+.nav.stuck .nav-links .mm-trigger:hover,
+.nav.stuck .nav-links .mm-trigger[aria-expanded="true"],
+.nav.stuck .nav-links .mm-trigger[aria-current="page"]{
+  color:var(--primary) !important;
+  background:hsl(var(--brand-h) 90% 94%) !important;
+}
+.nav.stuck .theme-btn{
+  color:#0F1720;
+  border-color:hsl(var(--brand-h) 40% 80% / .55);
+}
+.nav.stuck .theme-btn:hover{
+  color:var(--primary);
+  border-color:var(--primary);
+}
+.nav.stuck .burger{border-color:hsl(var(--brand-h) 40% 80% / .55);}
+.nav.stuck .burger i{background:#0F1720;}
+
+/* ---- Dark mode sticky ---- */
+html[data-theme="dark"] .nav.stuck .nav-shell{
+  background:#15191E !important;
+  border-color:hsl(var(--brand-h) 70% 55% / .35) !important;
+  box-shadow:0 14px 34px -18px rgba(0,0,0,.55) !important;
+}
+html[data-theme="dark"] .nav.stuck .logo{--logo:var(--logo-white);}
+html[data-theme="dark"] .nav.stuck .nav-links a,
+html[data-theme="dark"] .nav.stuck .nav-links .mm-trigger{
+  color:rgba(255,255,255,.9) !important;
+}
+html[data-theme="dark"] .nav.stuck .nav-links a:hover,
+html[data-theme="dark"] .nav.stuck .nav-links a[aria-current="page"],
+html[data-theme="dark"] .nav.stuck .nav-links .mm-trigger:hover,
+html[data-theme="dark"] .nav.stuck .nav-links .mm-trigger[aria-expanded="true"],
+html[data-theme="dark"] .nav.stuck .nav-links .mm-trigger[aria-current="page"]{
+  color:#fff !important;
+  background:rgba(255,255,255,.08) !important;
+}
+html[data-theme="dark"] .nav.stuck .theme-btn{
+  color:rgba(255,255,255,.85);
+  border-color:rgba(255,255,255,.22);
+}
+html[data-theme="dark"] .nav.stuck .burger{border-color:rgba(255,255,255,.22);}
+html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
+
+/* Tighter links on mid desktops — still one line, never wrap */
+@media (max-width:1200px){
+  .nav-links{gap:2px !important;}
+  .nav-links a,
+  .nav-links .mm-trigger{
+    padding:8px 10px !important;
+    font-size:14px !important;
+    height:34px !important;
+  }
+  .nav-shell > .nav-in,
+  .nav .nav-in{
+    padding-left:16px !important;
+    padding-right:10px !important;
+  }
+}
+
+/* Open mobile sheet: keep card radius (existing), border still brand-tinted */
+.nav-shell:has(.mnav.open){
+  border-radius:26px;
+}
+
+/* Mobile: burger layout — hide desktop links (beat our own flex !important) */
+@media (max-width:1080px){
+  .nav-shell > .nav-in,
+  .nav .nav-in{
+    display:flex !important;
+    grid-template-columns:none !important;
+  }
+  .nav-links{display:none !important;}
+  .nav .logo{grid-column:auto !important;}
+  .nav-right{
+    grid-column:auto !important;
+    justify-self:auto !important;
+    margin-left:auto !important;
+  }
+}
+
+
+/* === perf.css === */
+/* Performance-only additions — visual design tokens stay in tekcroft.css */
+
+/* next/font CSS variables → existing design tokens (same faces/weights) */
+:root {
+  --font: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), sans-serif;
+}
+
+/*
+  content-visibility speeds scroll by skipping off-screen paint.
+  Exclude the AI ecosystem (CSS background brand marks) and the hero.
+*/
+.sec:not(#ai-ecosystem) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+#ai-ecosystem,
+.hero,
+#top,
+#hero-1,
+.hs,
+.boot,
+#boot,
+#why {
+  content-visibility: visible;
+  contain-intrinsic-size: auto none;
+}
+
+/* Hero must never wait on IntersectionObserver / JS for visibility (LCP) */
+.hero .rv,
+.hero .lamp .ln > span,
+.hero .hero-rail .it,
+#hero-1 .hs-copy > *,
+#hero-1 .hs-form-wrap {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* If JS is late/fails, reveals still appear (does not change the .in look) */
+@keyframes tc-rv-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rv:not(.in) {
+  animation: tc-rv-failsafe 0.01s linear 2.5s forwards;
+}
+.rv.in {
+  animation: none;
+}
+
+/* Prefer compositor-friendly layer promotion for continuous movers */
+.hero-slide.on img,
+.wk-card.on,
+.cn-lift.on,
+.marq-track {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Nav plate: keep the look, avoid animating box-shadow on stick toggle */
+.nav-shell {
+  transition:
+    background 0.32s var(--ease),
+    border-color 0.32s var(--ease),
+    backdrop-filter 0.32s var(--ease) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marq-track,
+  .nav-beam,
+  .cg-seal svg {
+    animation: none !important;
+  }
+  .rv:not(.in) {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .marq-track {
+    animation-duration: 55s;
+  }
+}
+
+
+@media (max-width:900px){
+  #top.hero, header.hero{
+    min-height:100vh!important;min-height:100svh!important;
+    padding-top:calc(var(--nav-h) + 62px)!important;
+    padding-bottom:20px!important;
+  }
+  #top.hero .hero-in, header.hero .hero-in{margin-block:auto!important;}
+}

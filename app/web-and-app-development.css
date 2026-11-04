@@ -11535,46 +11535,47 @@ html[data-theme="dark"] #web-and-app-development-page .tv{background:rgba(10,22,
 
 #web-and-app-development-page #services .wd-split{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
 
-#web-and-app-development-page #services .wf,
-#web-and-app-development-page #services .mk{position:relative; display:flex; flex-direction:column; gap:6px; padding:10px 10px 26px; border-radius:12px; min-height:150px;}
+/* UI/UX mock (panel 05) — wd-* names so global .hero/.btn cannot inflate the window */
+#web-and-app-development-page #services .wd-wf,
+#web-and-app-development-page #services .wd-mk{position:relative; display:flex; flex-direction:column; gap:6px; padding:10px 10px 26px; border-radius:12px; min-height:150px; max-height:100%; box-sizing:border-box;}
 
-#web-and-app-development-page #services .wf{border:1.5px dashed #BFD3DF; background:repeating-linear-gradient(0deg,transparent 0 11px,#F1F6F9 11px 12px),repeating-linear-gradient(90deg,transparent 0 11px,#F1F6F9 11px 12px);}
+#web-and-app-development-page #services .wd-wf{border:1.5px dashed #BFD3DF; background:repeating-linear-gradient(0deg,transparent 0 11px,#F1F6F9 11px 12px),repeating-linear-gradient(90deg,transparent 0 11px,#F1F6F9 11px 12px);}
 
-#web-and-app-development-page #services .wf i{display:block; height:8px; border-radius:3px; background:#D6E3EB;}
+#web-and-app-development-page #services .wd-wf > i{display:block; height:8px; border-radius:3px; background:#D6E3EB;}
 
-#web-and-app-development-page #services .wf .n{height:6px; width:100%;}
+#web-and-app-development-page #services .wd-wf .wd-n{height:6px; width:100%;}
 
-#web-and-app-development-page #services .wf .h{height:12px; width:80%;}
+#web-and-app-development-page #services .wd-wf .wd-h{height:12px; width:80%;}
 
-#web-and-app-development-page #services .wf .h2{width:55%;}
+#web-and-app-development-page #services .wd-wf .wd-h2{width:55%;}
 
-#web-and-app-development-page #services .wf .g,
-#web-and-app-development-page #services .mk .g{display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-top:auto;}
+#web-and-app-development-page #services .wd-wf .wd-g,
+#web-and-app-development-page #services .wd-mk .wd-g{display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-top:auto;}
 
-#web-and-app-development-page #services .wf .g i{height:26px; border:1px dashed #BFD3DF; background:none;}
+#web-and-app-development-page #services .wd-wf .wd-g i{height:26px; border:1px dashed #BFD3DF; background:none;}
 
-#web-and-app-development-page #services .wf em,
-#web-and-app-development-page #services .mk em{position:absolute; left:10px; bottom:7px; font:700 10.5px/1 var(--font-display); font-style:normal; letter-spacing:.04em; text-transform:uppercase; color:#8A9AA6;}
+#web-and-app-development-page #services .wd-wf em,
+#web-and-app-development-page #services .wd-mk em{position:absolute; left:10px; bottom:7px; font:700 10.5px/1 var(--font-display); font-style:normal; letter-spacing:.04em; text-transform:uppercase; color:#8A9AA6;}
 
-#web-and-app-development-page #services .mk{background:#fff; border:1px solid #E1ECF3; box-shadow:0 10px 22px -16px rgba(0,80,130,.5); animation:wdPop 4s ease-in-out infinite;}
+#web-and-app-development-page #services .wd-mk{background:#fff; border:1px solid #E1ECF3; box-shadow:0 10px 22px -16px rgba(0,80,130,.5); animation:wdPop 4s ease-in-out infinite;}
 
-#web-and-app-development-page #services .mk em{color:var(--primary);}
+#web-and-app-development-page #services .wd-mk em{color:var(--primary);}
 
-#web-and-app-development-page #services .mk .n{display:flex; align-items:center; gap:4px;}
+#web-and-app-development-page #services .wd-mk .wd-n{display:flex; align-items:center; gap:4px; height:auto; width:auto;}
 
-#web-and-app-development-page #services .mk .n b{width:14px; height:6px; border-radius:3px; background:var(--primary);}
+#web-and-app-development-page #services .wd-mk .wd-n b{width:14px; height:6px; border-radius:3px; background:var(--primary);}
 
-#web-and-app-development-page #services .mk .n i{width:10px; height:4px; border-radius:2px; background:#CFDCE5;}
+#web-and-app-development-page #services .wd-mk .wd-n i{width:10px; height:4px; border-radius:2px; background:#CFDCE5;}
 
-#web-and-app-development-page #services .mk .n b+i{margin-left:auto;}
+#web-and-app-development-page #services .wd-mk .wd-n b+i{margin-left:auto;}
 
-#web-and-app-development-page #services .mk .hero{display:flex; flex-direction:column; gap:6px; padding:9px; border-radius:8px; background:linear-gradient(135deg,#0096D5,#3DB7EC); color:#fff;}
+#web-and-app-development-page #services .wd-mk .wd-hero{display:flex; flex-direction:column; gap:6px; padding:9px; border-radius:8px; background:linear-gradient(135deg,#0096D5,#3DB7EC); color:#fff; min-height:0; height:auto; position:relative; overflow:visible;}
 
-#web-and-app-development-page #services .mk .hero b{font:800 11px/1.2 var(--font-display);}
+#web-and-app-development-page #services .wd-mk .wd-hero b{font:800 11px/1.2 var(--font-display);}
 
-#web-and-app-development-page #services .mk .hero .btn{display:block; width:42px; height:9px; border-radius:5px; background:#fff;}
+#web-and-app-development-page #services .wd-mk .wd-hero .wd-cta{display:block; width:42px; height:9px; border-radius:5px; background:#fff; padding:0; border:0; min-height:0; box-shadow:none;}
 
-#web-and-app-development-page #services .mk .g i{height:26px; border-radius:5px; background:#EAF5FB;}
+#web-and-app-development-page #services .wd-mk .wd-g i{height:26px; border-radius:5px; background:#EAF5FB;}
 
 @keyframes wdPop{0%,100%{transform:none} 50%{transform:translateY(-3px)}}
 
@@ -11704,14 +11705,14 @@ html[data-theme="dark"] #web-and-app-development-page #services .wd-prod,
 html[data-theme="dark"] #web-and-app-development-page #services .wd-pay span,
 html[data-theme="dark"] #web-and-app-development-page #services .wd-ba li,
 html[data-theme="dark"] #web-and-app-development-page #services .wd-f b,
-html[data-theme="dark"] #web-and-app-development-page #services .mk{border-color:rgba(255,255,255,.1);}
+html[data-theme="dark"] #web-and-app-development-page #services .wd-mk{border-color:rgba(255,255,255,.1);}
 
-html[data-theme="dark"] #web-and-app-development-page #services .mk{background:#18232D;}
+html[data-theme="dark"] #web-and-app-development-page #services .wd-mk{background:#18232D;}
 
-html[data-theme="dark"] #web-and-app-development-page #services .wf{background:none; border-color:rgba(255,255,255,.18);}
+html[data-theme="dark"] #web-and-app-development-page #services .wd-wf{background:none; border-color:rgba(255,255,255,.18);}
 
-html[data-theme="dark"] #web-and-app-development-page #services .wf i,
-html[data-theme="dark"] #web-and-app-development-page #services .mk .g i{background:rgba(255,255,255,.1);}
+html[data-theme="dark"] #web-and-app-development-page #services .wd-wf > i,
+html[data-theme="dark"] #web-and-app-development-page #services .wd-mk .wd-g i{background:rgba(255,255,255,.1);}
 
 html[data-theme="dark"] #web-and-app-development-page #services .wd-pay .on{background:rgba(0,150,213,.15);}
 
@@ -12056,8 +12057,8 @@ html[data-theme="dark"] #web-and-app-development-page #services .wa-ph u{backgro
 
 /* the wireframe and the design sit a little shorter here, under the steps */
 
-#web-and-app-development-page #services .wf,
-#web-and-app-development-page #services .mk{min-height:118px;}
+#web-and-app-development-page #services .wd-wf,
+#web-and-app-development-page #services .wd-mk{min-height:118px;}
 
 /* Read More — the site's "Learn more" link, in the casing it was written in */
 

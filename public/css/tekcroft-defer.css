@@ -1,162 +1,3 @@
-.rv.in{opacity:1; transform:none;}
-
-/* ============================================================
-   THE DARK SLABS ? a fixed wash, not a light
-   Nothing here moves and nothing follows anything. The dot grid is
-   faded off at the edges and a single soft gradient sits under the
-   top of the section, so the slab has depth without ever drawing
-   attention to itself.
-   ============================================================ */
-.beam-zone{position:relative; overflow:hidden;}
-.z-dots{position:absolute; inset:0; pointer-events:none; opacity:.55;
-  background-image:radial-gradient(circle, var(--dot) 1px, transparent 1px);
-  background-size:26px 26px;
-  -webkit-mask-image:radial-gradient(115% 85% at 50% 0%, #000 0%, transparent 72%);
-  mask-image:radial-gradient(115% 85% at 50% 0%, #000 0%, transparent 72%);}
-.z-beam{position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(900px 520px at 50% -14%,
-    hsl(var(--brand-h) 100% 45% / var(--beam)) 0%, transparent 70%);}
-
-/* ============================================================
-   HERO
-   One headline, in the page's normal ink, with the rotating keyword
-   carrying the brand colour. Nothing is lit and nothing is tracked.
-   ============================================================ */
-.hero{position:relative; min-height:100vh; min-height:100svh; height:auto; display:flex;
-  flex-direction:column; justify-content:flex-start; color:#fff; overflow:hidden;
-  padding:calc(var(--nav-h) + 62px) 0 20px;
-  /* the floor the slider sits on. If every photo fails to load the hero is
-     still a finished dark slab rather than a hole. */
-  background:linear-gradient(160deg, var(--n900) 0%, var(--ink-plate) 55%, #050505 100%);}
-
-/* ---- the slider ----
-   Four photographs, cross-faded, each drifting slowly closer while it is
-   on screen. The photos are requested in greyscale and the brand tint is
-   painted over them, so whatever the picture happens to be it arrives in
-   the palette instead of fighting it. */
-.hero-slider{position:absolute; inset:0; z-index:0;}
-.hero-slide{position:absolute; inset:0; opacity:0; will-change:opacity;
-  transition:opacity 1.4s var(--ease);}
-.hero-slide.on{opacity:1;}
-.hero-slide img{width:100%; height:100%; object-fit:cover; display:block;
-  transform:scale(1); transition:transform 9s linear; will-change:transform;}
-.hero-slide.on img{transform:scale(1.09);}
-/* the tint: brand light from above, ink everywhere else, so the copy has a
-   guaranteed contrast floor no matter which frame is showing */
-.hero-scrim{position:absolute; inset:0; z-index:1; pointer-events:none;
-  /* black, not ink. The navy wash was tinting the photographs blue and
-     flattening them; neutral black leaves the greys as greys and lets the
-     one blue on the page be the only colour in the frame. */
-  background:
-    radial-gradient(780px 440px at 50% 48%, rgba(0,0,0,.50) 0%, transparent 72%),
-    linear-gradient(180deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.58) 42%,
-                    rgba(0,0,0,.90) 100%);}
-/* ---- the side columns ----
-   A centred headline leaves two tall empty margins on a wide screen. Rather
-   than decorate them, they carry the two things a visitor actually wants
-   early: proof on the left, scope on the right. Quiet type, hairline rules,
-   no boxes ? they frame the headline instead of competing with it. */
-.hero-rail{position:absolute; top:50%; transform:translateY(-50%); z-index:3;
-  width:170px; display:grid; gap:26px;}
-.hero-rail.l{left:34px;}
-.hero-rail.r{right:34px; text-align:right;}
-.hero-rail .it{opacity:0; transform:translateY(16px);
-  transition:opacity .8s var(--ease) var(--d,0ms), transform .8s var(--pop) var(--d,0ms);}
-.hero.play .hero-rail .it{opacity:1; transform:none;}
-.hero-rail.l .it{padding-left:15px; border-left:1px solid rgba(255,255,255,.20);}
-.hero-rail.r .it{padding-right:15px; border-right:1px solid rgba(255,255,255,.20);}
-.hero-rail b{display:block; font-family:var(--font-display); font-size:22px; font-weight:800;
-  letter-spacing:-0.04em; line-height:1.1; color:#fff; font-variant-numeric:tabular-nums;}
-.hero-rail span{display:block; font-size:11.5px; line-height:1.45; margin-top:4px;
-  color:rgba(255,255,255,.52);}
-.hero-rail .ix,.hero-rail .nm{font-style:normal;}
-.hero-rail .ix{display:block; font-size:10.5px; font-weight:700; letter-spacing:.16em;
-  color:var(--primary); margin-bottom:3px;}
-.hero-rail .nm{display:block; font-family:var(--font-display); font-size:15px; font-weight:700;
-  letter-spacing:-0.02em; color:#fff;}
-
-.hero-in{position:relative; z-index:3; text-align:center; width:100%; margin-block:auto;}
-.hero .tag{margin-bottom:26px;}
-
-.lamp{position:relative; display:block; width:fit-content; max-width:100%;
-  margin:0 auto 24px;}
-/* set in caps. Sora ExtraBold at this size needs the tracking opened up
-   from the lowercase -0.05em, or the letters run into each other; the size
-   comes down a step too, because caps read a good deal larger than the
-   same words in mixed case and the longest line has to hold one line. */
-.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase;
-  letter-spacing:-0.012em; line-height:1.08; margin:0;}
-.lamp .ln{display:block; overflow:hidden; padding-bottom:.05em;}
-.lamp .ln > span{display:block; transform:translateY(110%);
-  transition:transform 1s var(--ease) var(--d,0ms);}
-.hero.play .lamp .ln > span{transform:none;}
-.lamp em{font-style:normal; color:var(--primary);}
-
-/* the keyword slot ? every word is stacked in one grid cell, so the
-   box is always as wide as the longest option and the line never
-   reflows as the words swap. */
-.kw{display:inline-grid; vertical-align:baseline; color:var(--primary);
-  padding-bottom:.12em; margin-bottom:-.12em;
-  clip-path:inset(0 -.4em);
-  transition:width .34s cubic-bezier(.58,.02,.18,1) .1s;}
-/* measures a word without ever being seen */
-.kw u{position:absolute; visibility:hidden; white-space:nowrap; text-decoration:none;}
-.kw i{grid-area:1/1; min-width:0; font-style:normal; text-align:center; white-space:nowrap;
-  /* flat brand blue ? no glow behind the glyphs */
-  text-shadow:none;
-  transform:translateY(105%); opacity:0;
-  transition:transform .5s cubic-bezier(.62,0,.2,1), opacity .3s var(--ease);}
-.kw i.on{transform:none; opacity:1; transition-delay:.44s;}
-.kw i.out{transform:translateY(-105%); opacity:0; transition-delay:0s;}
-
-.hero .lede{font-size:var(--lede); color:rgba(255,255,255,.76); max-width:54ch;
-  margin:0 auto 32px;}
-.hero-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
-.hero-note{margin-top:22px; font-size:13px; color:rgba(255,255,255,.62);
-  display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap;}
-.hero-note b{color:#fff; font-weight:600;}
-.hero-note s{text-decoration:none; color:rgba(255,255,255,.35);}
-
-/* client ticker — in-flow under CTAs (homepage .hero + service .hs) */
-.ticker{position:relative; z-index:3; width:100%; margin-top:32px; margin-bottom:0;
-  padding:14px 0 16px; border-top:1px solid rgba(255,255,255,.16);}
-.hs > .ticker{z-index:4;}
-.hs:has(> .ticker),
-.hero:has(> .ticker){padding-bottom:20px;}
-.marq{overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
-.marq-track{display:flex; gap:44px; width:max-content; animation:slide 38s linear infinite;}
-.marq:hover .marq-track{animation-play-state:paused;}
-@keyframes slide{to{transform:translateX(-50%);}}
-.marq span{display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:600;
-  color:rgba(255,255,255,.62); white-space:nowrap; transition:color .2s var(--ease);}
-.marq span::before{content:""; width:5px; height:5px; border-radius:50%;
-  background:var(--primary); flex-shrink:0;}
-.marq span:hover{color:#fff;}
-
-/* Proof / stats strip under every service hero.
-   Light: white plate. Dark: follow the theme ? no forced white. */
-section#proof{
-  --ground:#fff;
-  --panel:#fff;
-  background:#fff !important;
-}
-html[data-theme="dark"] section#proof{
-  --ground:var(--bg);
-  --panel:var(--surface);
-  background:var(--bg) !important;
-  color:var(--text);
-}
-html[data-theme="dark"] section#proof .tb-figs{
-  background:var(--surface) !important;
-  border-color:var(--border);
-  box-shadow:0 18px 40px -28px rgba(0,0,0,.65);
-}
-html[data-theme="dark"] section#proof .tb-fig b{color:var(--text);}
-html[data-theme="dark"] section#proof .tb-fig .tb-cap{color:var(--text-2);}
-html[data-theme="dark"] section#proof .tb-meter{background:var(--border);}
-html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--border);}
 
 /* ============================================================
    WHY US ? the honest contrast. Left column is the industry
@@ -5929,15 +5770,19 @@ html[data-theme="dark"] .nsr-box{background:hsl(var(--brand-h) 45% 14%); border-
 /* ?? the stage: nodes, wires, orb, screens ?? */
 .nsr-stage{position:relative;}
 .nsr-nodes{position:relative; z-index:2; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(6px,.9vw,12px);}
-.nsr-node{display:flex; flex-direction:column; align-items:center; gap:7px; padding:12px 6px 10px; border-radius:16px;
+.nsr-node{position:relative; display:flex; flex-direction:column; align-items:center; gap:7px; padding:12px 6px 10px; border-radius:16px;
   background:var(--surface); border:1px solid var(--border); cursor:pointer; font:inherit;
   box-shadow:0 10px 24px -22px hsl(var(--brand-h) 90% 25% / .8);
-  transition:border-color .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);}
+  transition:transform .35s var(--ease);}
+.nsr-node::after{content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+  border:1px solid var(--primary);
+  box-shadow:0 16px 30px -22px hsl(var(--brand-h) 95% 35% / .9);
+  opacity:0; transition:opacity .35s var(--ease);}
 .nsr-node b{font-family:var(--font-display); font-size:11.6px; font-weight:700; letter-spacing:-.01em;
   color:var(--text); text-align:center; line-height:1.25;}
 .nsr-node:hover{border-color:hsl(var(--brand-h) 70% 78%);}
-.nsr-node.on{border-color:var(--primary); transform:translateY(-2px);
-  box-shadow:0 16px 30px -22px hsl(var(--brand-h) 95% 35% / .9);}
+.nsr-node.on{border-color:transparent; transform:translateY(-2px);}
+.nsr-node.on::after{opacity:1;}
 .nsr-node:focus-visible{outline:2px solid var(--primary); outline-offset:2px;}
 .nsr-logo{display:block; width:30px; height:30px; background:var(--logo) center/contain no-repeat;}
 .nsr-spark{display:grid; place-items:center; width:30px; height:30px; color:var(--primary);}
@@ -5970,11 +5815,15 @@ html[data-theme="dark"] .nsr-box{background:hsl(var(--brand-h) 45% 14%); border-
   border:1px solid var(--border); box-shadow:0 22px 46px -34px hsl(var(--brand-h) 90% 25% / .7);}
 .nsr-rail{flex:1; display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:2px;}
 .nsr-rail::-webkit-scrollbar{display:none;}
-.nsr-card{flex:0 0 clamp(150px,17vw,188px); scroll-snap-align:center; padding:11px; border-radius:14px;
+.nsr-card{position:relative; flex:0 0 clamp(150px,17vw,188px); scroll-snap-align:center; padding:11px; border-radius:14px;
   background:var(--surface); border:1px solid var(--border-soft); box-shadow:0 10px 22px -20px hsl(var(--brand-h) 90% 25% / .8);
-  transition:border-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);}
-.nsr-card.on{border-color:var(--primary); transform:translateY(-3px);
-  box-shadow:0 18px 32px -24px hsl(var(--brand-h) 95% 35% / .9);}
+  transition:transform .35s var(--ease);}
+.nsr-card::after{content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+  border:1px solid var(--primary);
+  box-shadow:0 18px 32px -24px hsl(var(--brand-h) 95% 35% / .9);
+  opacity:0; transition:opacity .35s var(--ease);}
+.nsr-card.on{border-color:transparent; transform:translateY(-3px);}
+.nsr-card.on::after{opacity:1;}
 .nsr-card header{display:flex; align-items:center; gap:7px; padding-bottom:9px; border-bottom:1px solid var(--border-soft);}
 .nsr-card header b{font-family:var(--font-display); font-size:11px; font-weight:700; color:var(--text);}
 .nsr-g{display:grid; place-items:center; width:20px; height:20px;}
@@ -6098,7 +5947,7 @@ html[data-theme="dark"] .nsr-box{background:hsl(var(--brand-h) 45% 14%); border-
    so it carries the room the lifted card and its shadow need */
 #ai-ecosystem .nsr-rail{padding:12px 4px 14px;}
 #ai-ecosystem .nsr-card{box-shadow:0 10px 24px -22px hsl(var(--brand-h) 90% 25% / .75);}
-#ai-ecosystem .nsr-card.on{box-shadow:0 0 0 1px var(--primary), 0 14px 30px -18px hsl(var(--brand-h) 95% 35% / .45);}
+#ai-ecosystem .nsr-card::after{box-shadow:0 0 0 1px var(--primary), 0 14px 30px -18px hsl(var(--brand-h) 95% 35% / .45);}
 #ai-ecosystem .nsr-deck{padding-block:clamp(8px,1vw,12px);}
 
 

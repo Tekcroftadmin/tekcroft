@@ -175,8 +175,10 @@ const ALT_BY_SRC = {
   "/images/ecom-img15-f6eab34835.webp": "Amazon ecommerce platform logo",
   "/images/ecom-img16-e6190bc777.webp": "Ecommerce platform logo",
   "/images/ecom-img17-767cd35d01.webp": "Etsy ecommerce marketplace logo",
-  "/images/web-and-app-development/wad-img1-6ef691051f.webp":
-    "Web and app development product interface preview",
+  "/images/web-and-app-development/wad-hero-f20ca6d1a7.webp":
+    "Web and App Development Services: Know the Plan Before We Code",
+  "/images/web-and-app-development/wad-hero-m-8abf6d619e.webp":
+    "Web and App Development Services: Know the Plan Before We Code",
   "/images/web-and-app-development/wad-tm-01-fffff22467.webp":
     "Custom web application development visual",
   "/images/web-and-app-development/wad-tm-02-94f7c101c6.webp":
