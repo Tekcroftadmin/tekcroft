@@ -67,6 +67,7 @@ export default function RootLayout({
         </Script>
         <NoHashScroll />
         {children}
+        <Script src={assets.leadSubmit || "/tekcroft-lead-submit.js"} strategy="afterInteractive" />
         <Script src={assets.vsHalo} strategy="lazyOnload" />
         <Script src={assets.mm} strategy="lazyOnload" />
       </body>

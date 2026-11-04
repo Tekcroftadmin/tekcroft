@@ -4055,7 +4055,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
     rgba(4,14,22,.90) 100%);
 }
 .mm-copy{position:relative; z-index:2; color:#fff; margin-top:auto;}
-.mm-copy h3, .mm-copy .mm-title{font-size:var(--h3); line-height:1.24; color:#fff; text-wrap:balance;
+.mm-copy .mm-title{font-size:var(--h3); line-height:1.24; color:#fff; text-wrap:balance;
   text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .mm-copy .mm-note{color:rgba(255,255,255,.88); text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .mm-copy p{margin:9px 0 0; font-size:13.5px; line-height:1.5; max-width:30ch;
@@ -4138,7 +4138,7 @@ html[data-theme="dark"] .mm-foot .arw{
 @media (max-width:1240px){
   .mm-hero-grid{grid-template-columns:1fr 210px; gap:14px;}
   .mm-hero{min-height:280px; padding:20px 18px;}
-  .mm-copy h3, .mm-copy .mm-title{font-size:var(--h3);}
+  .mm-copy .mm-title{font-size:var(--h3);}
   .mm-dsc{display:none;}
 }
 /* below this the site switches to the burger, so the panel stands down */
@@ -4870,7 +4870,7 @@ html[data-theme="dark"] .modal .field.sel select{
   content:""; width:6px; height:6px; border-radius:50%;
   background:var(--primary); flex:none;}
 /* restored */
-.mm-copy h3, .mm-copy .mm-title{font-size:var(--h3); font-weight:800; letter-spacing:-.03em;
+.mm-copy .mm-title{font-size:var(--h3); font-weight:800; letter-spacing:-.03em;
   line-height:1.22; color:#fff; text-transform:none;}
 .faq-aside p{
   margin:10px 0 0; font-size:var(--body); line-height:1.6;

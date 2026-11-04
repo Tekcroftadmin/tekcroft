@@ -23,8 +23,12 @@ export function statsStripHtml(items: StatsItem[] = DEFAULT_STATS): string {
         `<div class="st-c"><b><span>${escapeHtml(it.num)}</span><em>${escapeHtml(it.sign)}</em></b><p>${escapeHtml(it.caption)}</p></div>`
     )
     .join("");
-  return `<section class="sec st" id="proof-v2">
-  <div class="wrap"><div class="st-row rv">${cells}</div></div>
+  return `<section class="sec st" id="proof-v2" data-ground="tint" aria-label="Tekcroft results">
+  <div class="wrap">
+    <div class="st-row rv">
+      ${cells}
+    </div>
+  </div>
 </section>`;
 }
 

@@ -23,10 +23,24 @@
         "Digital marketing"
       ],
       "sameAs": [
-        "TODO: LinkedIn URL",
-        "TODO: X URL",
-        "TODO: Clutch profile URL"
-      ]
+        "https://www.x.com/tekcroft",
+        "https://www.instagram.com/tekcroft",
+        "https://www.pinterest.com/tekcroft/",
+        "https://www.linkedin.com/company/tekcroft/",
+        "https://www.youtube.com/@tekcroft",
+        "https://www.tiktok.com/@tekcroft",
+        "https://www.facebook.com/Tekcroft"
+      ],
+      "email": "admin@tekcroft.com",
+      "telephone": "+1-800-555-3100",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "30 N Gould St Ste N",
+        "addressLocality": "Sheridan",
+        "addressRegion": "WY",
+        "postalCode": "82801",
+        "addressCountry": "US"
+      }
     },
     {
       "@context": "https://schema.org",

@@ -5529,7 +5529,7 @@ html[data-theme="dark"] .acv .vz-au-row.on{background:hsl(var(--brand-h) 45% 20%
    stays readable whatever the picture does behind it.
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 #services-2 .ac-item.on{background:#0A0C0E; border-color:#0A0C0E;}
-#services-2 .ac-fb{background:url("/images/onpage-deliverables-panel.jpg") center/cover no-repeat;}
+#services-2 .ac-fb{background:url("/images/onpage-deliverables-panel.webp") center/cover no-repeat;}
 #services-2 .ac-fb::before{
   background-image:linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
                    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);

@@ -7,7 +7,12 @@ type StatsStripProps = {
 /** Shared under-hero stats strip — identical markup/classes on every page. */
 export default function StatsStrip({ items = DEFAULT_STATS }: StatsStripProps) {
   return (
-    <section className="sec st" id="proof-v2">
+    <section
+      className="sec st"
+      id="proof-v2"
+      data-ground="tint"
+      aria-label="Tekcroft results"
+    >
       <div className="wrap">
         <div className="st-row rv">
           {items.map((it) => (

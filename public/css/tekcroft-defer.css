@@ -3515,7 +3515,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
     rgba(4,14,22,.90) 100%);
 }
 .mm-copy{position:relative; z-index:2; color:#fff; margin-top:auto;}
-.mm-copy h3, .mm-copy .mm-title{font-size:var(--h3); line-height:1.24; color:#fff; text-wrap:balance;
+.mm-copy .mm-title{font-size:var(--h3); line-height:1.24; color:#fff; text-wrap:balance;
   text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .mm-copy .mm-note{color:rgba(255,255,255,.88); text-shadow:0 1px 3px rgba(0,0,0,.45);}
 .mm-copy p{margin:9px 0 0; font-size:13.5px; line-height:1.5; max-width:30ch;
@@ -3598,7 +3598,7 @@ html[data-theme="dark"] .mm-foot .arw{
 @media (max-width:1240px){
   .mm-hero-grid{grid-template-columns:1fr 210px; gap:14px;}
   .mm-hero{min-height:280px; padding:20px 18px;}
-  .mm-copy h3, .mm-copy .mm-title{font-size:var(--h3);}
+  .mm-copy .mm-title{font-size:var(--h3);}
   .mm-dsc{display:none;}
 }
 /* below this the site switches to the burger, so the panel stands down */
@@ -3813,17 +3813,17 @@ html[data-theme="dark"] .mm-svc-col .mm-row.is-current .mm-n,html[data-theme="da
 .sec.ax,.sec.bl-sec,.sec.eg-sec,.sec.revs{ padding-block:var(--sec-y); }
 
 /* ?? 2. sections alternate, and only alternate ?????????????????????????
-   White, then the brand tint, all the way down after the hero. */
+   White, then the brand tint, all the way down after the hero.
+   (Selected work removed — keep the beat without #work.) */
 #about,
 #why,
-#work,
-#ai-ecosystem,
+#approach,
+#reviews,
 #faq{ background:var(--surface); }
 
 #services,
 #industries,
-#approach,
-#reviews,
+#ai-ecosystem,
 #contact{ background:var(--bg-alt); }
 
 /* leftover / removed section classes ? keep them in the tint lane */
@@ -4330,7 +4330,7 @@ html[data-theme="dark"] .modal .field.sel select{
   content:""; width:6px; height:6px; border-radius:50%;
   background:var(--primary); flex:none;}
 /* restored */
-.mm-copy h3, .mm-copy .mm-title{font-size:var(--h3); font-weight:800; letter-spacing:-.03em;
+.mm-copy .mm-title{font-size:var(--h3); font-weight:800; letter-spacing:-.03em;
   line-height:1.22; color:#fff; text-transform:none;}
 .faq-aside p{
   margin:10px 0 0; font-size:var(--body); line-height:1.6;
@@ -5903,7 +5903,7 @@ html[data-theme="dark"] .iy-card i{background:hsl(var(--brand-h) 40% 18%);}
    their wires run down into one AI core, and the screens those surfaces
    produce sit under it on a rail the reader can step through.
    ?????????????????????????????????????????????????????????????????????? */
-#ai-ecosystem{padding-block:clamp(44px,5vw,76px); background:var(--surface);}
+#ai-ecosystem{padding-block:clamp(44px,5vw,76px);}
 .nsr-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.04fr); gap:clamp(28px,4vw,60px); align-items:center;}
 
 .nsr-eyebrow{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:99px;
@@ -6493,18 +6493,17 @@ html[data-theme="dark"] .iw-box{background:hsl(var(--brand-h) 45% 12%);}
 #industries-v2 .ig-card{gap:12px; padding:clamp(16px,1.6vw,20px);}
 
 /* ?? homepage section grounds ? final lock (white / tint) ???????????????
-   After hero: white ? tint ? white ? tint ? so later section CSS cannot
-   break the page rhythm. CTA keeps the tint lane under its photo card. */
+   After hero: white → tint → white → tint. Selected work removed.
+   CTA keeps the tint lane under its photo card. */
 #about,
 #why,
-#work,
-#ai-ecosystem,
+#approach,
+#reviews,
 #faq{ background:var(--surface); }
 
 #services,
 #industries,
-#approach,
-#reviews,
+#ai-ecosystem,
 #contact{ background:var(--bg-alt); }
 
 /* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
