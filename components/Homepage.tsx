@@ -135,6 +135,19 @@ export default function Homepage({
 
     fillHeroMarq();
 
+    // Sticky header plate — every page that uses Homepage (not only home)
+    const nav = document.getElementById("nav");
+    const syncNavStuck = () => {
+      if (!nav) return;
+      const booting = document.body.classList.contains("booting");
+      nav.classList.toggle("stuck", !booting && window.scrollY > 12);
+    };
+    syncNavStuck();
+    window.addEventListener("scroll", syncNavStuck, {
+      passive: true,
+      signal: abort.signal,
+    });
+
     // Desktop nav: mark the current page (HighGate-style active pill)
     const path = (location.pathname || "/").replace(/\/+$/, "") || "/";
     root?.querySelectorAll(".nav-links a[href]").forEach((a) => {

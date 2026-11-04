@@ -1007,10 +1007,12 @@ html[data-theme="dark"] #proof-v2 .st-c + .st-c::before{
 .nav:not(.stuck) .burger{border-color:rgba(255,255,255,.3);}
 .nav:not(.stuck) .burger i{background:#fff;}
 
-/* ---- Sticky: solid white + border + shadow ---- */
+/* ---- Sticky: solid white + border + shadow (light mode) ---- */
 .nav.stuck{
   --nav-gap:10px;
 }
+html:not([data-theme="dark"]) .nav.stuck .nav-shell,
+html[data-theme="light"] .nav.stuck .nav-shell,
 .nav.stuck .nav-shell{
   background:#FFFFFF !important;
   border-color:hsl(var(--brand-h) 85% 72% / .6) !important;
