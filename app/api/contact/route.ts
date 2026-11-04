@@ -116,7 +116,7 @@ export async function POST(req: Request) {
         row("Service", service),
         row("Date", date),
         row("Time", time),
-        row("Message / goals", message),
+        row(/question/i.test(formName) ? "Your question" : "Message / goals", message),
         row("Page / source", page),
         row("Submitted at", timestamp),
       ].join("")}</table>
@@ -133,7 +133,8 @@ export async function POST(req: Request) {
     service && `Service: ${service}`,
     date && `Date: ${date}`,
     time && `Time: ${time}`,
-    message && `Message / goals:\n${message}`,
+    message &&
+      `${/question/i.test(formName) ? "Your question" : "Message / goals"}:\n${message}`,
     page && `Page / source: ${page}`,
     `Submitted at: ${timestamp}`,
   ]

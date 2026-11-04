@@ -655,6 +655,8 @@
   }
 
   $$("[data-modal]").forEach(function(btn){
+    /* data-modal="ask" opens #askModal (tekcroft-ask-modal.js) — leave it alone */
+    if (btn.getAttribute("data-modal") === "ask") return;
     btn.addEventListener("click", function(e){ e.preventDefault(); openModal(btn); });
   });
   $$("[data-close]", modal).forEach(function(el){
@@ -686,6 +688,7 @@
     var cands = $$(".nav-right [data-modal]").concat($$("[data-modal]"));
     for (var i = 0; i < cands.length; i++){
       var el = cands[i];
+      if (el.getAttribute("data-modal") === "ask") continue;
       if (!el.offsetParent) continue;
       var r = el.getBoundingClientRect();
       if (r.width && r.top > 4 && r.bottom < window.innerHeight - 4) return el;

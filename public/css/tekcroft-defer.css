@@ -7171,3 +7171,17 @@ html body .gw-say > p{
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#about[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#services[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#why[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#industries[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#approach[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#ai-ecosystem[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#reviews[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
