@@ -63,14 +63,16 @@ export default function RootLayout({
         <meta charSet="utf-8" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        {/* Strip hash before paint so the browser never lands on a section id */}
+        {/* Capture #section before paint, strip it from the URL, stay at top;
+            NoHashScroll then smooth-scrolls to the matching element id. */}
         <Script id="no-hash-scroll-boot" strategy="beforeInteractive">
-          {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";function k(){if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0)}k();requestAnimationFrame(function(){k();requestAnimationFrame(k)});window.addEventListener("hashchange",k);window.addEventListener("pageshow",k);}catch(e){}})();`}
+          {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";var h=location.hash;if(h&&h.length>1){window.__tekcroftHash=decodeURIComponent(h.slice(1));history.replaceState(null,"",location.pathname+location.search)}scrollTo(0,0)}catch(e){}})();`}
         </Script>
         <NoHashScroll />
         <JsonLd data={sitewideSchema} />
         {children}
         <Script src={assets.leadSubmit || "/tekcroft-lead-submit.js"} strategy="afterInteractive" />
+        <Script src="/tekcroft-ask-modal.js" strategy="afterInteractive" />
         <Script src={assets.vsHalo} strategy="lazyOnload" />
         <Script src={assets.mm} strategy="lazyOnload" />
       </body>

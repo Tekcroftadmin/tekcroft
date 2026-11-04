@@ -840,3 +840,8 @@ html body .sec.is-white{
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
 }
+
+/* In-page hash targets clear the fixed nav */
+#approach{
+  scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}

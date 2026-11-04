@@ -3,6 +3,12 @@
 import { useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 
+declare global {
+  interface Window {
+    __tekcroftHash?: string;
+  }
+}
+
 function stripHashFromUrl() {
   if (!window.location.hash) return false;
   history.replaceState(
@@ -13,13 +19,48 @@ function stripHashFromUrl() {
   return true;
 }
 
-/** Undo any browser hash jump (load, hashchange, or late layout). */
-function killHashAndStayTop() {
+function hashTargetId(hash: string): string {
+  if (!hash || hash === "#") return "";
+  try {
+    return decodeURIComponent(hash.replace(/^#/, "")).trim();
+  } catch {
+    return hash.replace(/^#/, "").trim();
+  }
+}
+
+function findHashTarget(id: string): HTMLElement | null {
+  if (!id) return null;
+  try {
+    return document.getElementById(id);
+  } catch {
+    return null;
+  }
+}
+
+function scrollToSection(el: HTMLElement, behavior: ScrollBehavior) {
+  el.scrollIntoView({ behavior, block: "start" });
+}
+
+/** Consume a pending/boot hash or the current location hash and scroll to it. */
+function consumeHashScroll(behavior: ScrollBehavior) {
+  const pending = window.__tekcroftHash;
+  if (pending) delete window.__tekcroftHash;
+
+  const id = pending || hashTargetId(window.location.hash);
+  if (!id) return;
+
   stripHashFromUrl();
-  window.scrollTo(0, 0);
-  requestAnimationFrame(() => {
+
+  const el = findHashTarget(id);
+  if (!el) {
     window.scrollTo(0, 0);
-    requestAnimationFrame(() => window.scrollTo(0, 0));
+    return;
+  }
+
+  /* Wait a frame so layout (nav, images) has settled before measuring. */
+  requestAnimationFrame(() => {
+    scrollToSection(el, behavior);
+    requestAnimationFrame(() => scrollToSection(el, behavior));
   });
 }
 
@@ -42,8 +83,8 @@ function isNavigationalHashHref(href: string | null): boolean {
 }
 
 /**
- * Disable browser hash → section scrolling site-wide.
- * Keeps section ids intact for CSS/animations; never leaves # in the URL.
+ * Hash links that target a real section id smooth-scroll there (and the
+ * hash is cleared from the URL). Unknown hashes are stripped without a jump.
  */
 export default function NoHashScroll() {
   const pathname = usePathname();
@@ -57,18 +98,23 @@ export default function NoHashScroll() {
       /* ignore */
     }
 
-    if (window.location.hash) killHashAndStayTop();
+    /* Landing with #section (or boot-captured __tekcroftHash). */
+    if (window.__tekcroftHash || window.location.hash) {
+      consumeHashScroll("smooth");
+    }
 
-    /* Browser scrolls to the target before hashchange — always undo to top. */
-    const onHashChange = () => killHashAndStayTop();
+    const onHashChange = () => {
+      if (window.location.hash) consumeHashScroll("smooth");
+    };
     window.addEventListener("hashchange", onHashChange);
 
-    const onPageShow = () => {
-      if (window.location.hash) killHashAndStayTop();
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted && (window.__tekcroftHash || window.location.hash)) {
+        consumeHashScroll("auto");
+      }
     };
     window.addEventListener("pageshow", onPageShow);
 
-    /* Safety net: never let in-page hash <a> change the URL or jump */
     const onClick = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0) return;
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -78,15 +124,29 @@ export default function NoHashScroll() {
       if (!a || !document.documentElement.contains(a)) return;
       const href = a.getAttribute("href");
       if (!isNavigationalHashHref(href)) return;
+
       e.preventDefault();
+
       try {
         const u = new URL(href!, window.location.href);
-        if (
-          u.pathname !== window.location.pathname ||
-          u.search !== window.location.search
-        ) {
-          window.location.assign(u.pathname + u.search);
+        const id = hashTargetId(u.hash);
+        const samePage =
+          u.pathname === window.location.pathname &&
+          u.search === window.location.search;
+
+        if (!samePage) {
+          /* Keep the hash so the destination page can scroll to it. */
+          window.location.assign(u.pathname + u.search + (id ? `#${id}` : ""));
+          return;
         }
+
+        if (!id) return;
+
+        const el = findHashTarget(id);
+        if (!el) return;
+
+        stripHashFromUrl();
+        scrollToSection(el, "smooth");
       } catch {
         /* ignore */
       }
@@ -101,7 +161,9 @@ export default function NoHashScroll() {
   }, []);
 
   useLayoutEffect(() => {
-    if (window.location.hash) killHashAndStayTop();
+    if (window.__tekcroftHash || window.location.hash) {
+      consumeHashScroll("smooth");
+    }
   }, [pathname]);
 
   return null;
