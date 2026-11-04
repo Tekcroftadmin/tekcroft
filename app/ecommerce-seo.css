@@ -1048,6 +1048,19 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
        stick. The section opts out; the beam is drawn on .z-dots, which
        has its own bounds. */
     overflow:visible;}
+/* Ecommerce #why only: beat any later .beam-zone overflow:hidden so .wy-art can stick */
+#why.wy.beam-zone,
+#why.wy{
+  overflow:visible !important;
+}
+/* Page shells with overflow-x:hidden force overflow-y:auto and break sticky.
+   Same fix as #watch (ecommerce-seo-vx.css): clip on x, visible on y. */
+html:has(#why.wy.beam-zone),
+body:has(#why.wy.beam-zone),
+#tekcroft-root:has(#why.wy.beam-zone){
+  overflow-x:clip !important;
+  overflow-y:visible !important;
+}
 .wy-in{position:relative; z-index:3;}
 
 /* ?? the two columns ?????????????????????????????????????????????????
@@ -1058,7 +1071,14 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
 .wy-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);
   gap:clamp(34px,4.4%,70px); align-items:start;}
 .wy-art{position:sticky; top:calc(var(--nav-h) + 28px);
-  container-type:inline-size; min-width:0;}
+  container-type:inline-size; min-width:0; align-self:start;}
+#why .wy-grid{align-items:start;}
+#why .wy-art{
+  position:sticky;
+  top:calc(var(--nav-h) + 28px);
+  align-self:start;
+  container-type:inline-size;
+}
 
 .wy-say h2{font-size:var(--h2); line-height:1.16; letter-spacing:-0.038em;}
 .wy-say h2 em{font-style:normal; color:var(--brand-text);}
@@ -1115,9 +1135,9 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
    never escapes into the next section. .wy-grid is align-items:start for
    the same reason: a stretched item has no room to travel. */
 .wy-art{position:sticky; top:calc(var(--nav-h) + 28px);
-  container-type:inline-size; min-width:0;}
+  container-type:inline-size; min-width:0; align-self:start;}
 
-.wy-win{position:relative; z-index:2; border-radius:3.03cqw; overflow:hidden;
+.wy-win{position:relative; z-index:2; border-radius:15px; overflow:hidden;
   background:var(--n0); box-shadow:0 22px 54px -24px rgba(var(--ink-rgb),.34);}
 .wy-bar{display:flex; align-items:center; gap:1cqw;
   height:6.8cqw; padding:0 3.2cqw; border-bottom:1px solid #EDF1F5;}
@@ -1129,7 +1149,7 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
 /* ?? the four figures ?? */
 .wy-kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
   gap:1.7cqw; margin-top:2.6cqw;}
-.wy-kpi{padding:1.9cqw; border:1px solid #E8EDF3; border-radius:1.6cqw;
+.wy-kpi{padding:1.9cqw; border:1px solid #E8EDF3; border-radius:15px;
   min-width:0;}
 .wy-kpi-t{display:flex; align-items:center; gap:1.1cqw; min-width:0;}
 .wy-ki{display:grid; place-items:center; flex-shrink:0;
@@ -1149,7 +1169,7 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
 
 /* ?? the chart ?? */
 .wy-chart{margin-top:2.2cqw; padding:2.2cqw;
-  border:1px solid #E8EDF3; border-radius:1.9cqw;}
+  border:1px solid #E8EDF3; border-radius:15px;}
 .wy-chart-t{display:flex; align-items:flex-start; justify-content:space-between;
   gap:2cqw;}
 .wy-chart-t b{font-family:var(--font-display); font-weight:700; color:var(--n800);
@@ -1171,9 +1191,9 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
 /* ?? the listing, sitting over the foot of the chart ?? */
 .wy-prod{position:relative; z-index:3; margin:-3.4cqw 4cqw 0;
   display:grid; grid-template-columns:26% 1fr; gap:2.4cqw; align-items:center;
-  padding:2.2cqw; border-radius:1.9cqw;
+  padding:2.2cqw; border-radius:15px;
   background:var(--n0); box-shadow:0 16px 40px -18px rgba(var(--ink-rgb),.34);}
-.wy-shot{aspect-ratio:1; border-radius:1.4cqw; background:#F1F4F7;
+.wy-shot{aspect-ratio:1; border-radius:15px; background:#F1F4F7;
   display:grid; place-items:center;}
 .wy-shot svg{width:78%; height:auto;}
 .wy-meta{min-width:0;}
@@ -1200,7 +1220,7 @@ html[data-theme="dark"] .pf-c7 .pf-ic{background:#fff;}
 /* ?? the outcomes ?? */
 .wy-out{position:relative; z-index:2; margin-top:2.6cqw;
   display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
-  padding:2.8cqw 1cqw; border-radius:2.4cqw;
+  padding:2.8cqw 1cqw; border-radius:15px;
   background:var(--n0); box-shadow:0 16px 40px -22px rgba(var(--ink-rgb),.26);}
 .wy-o{display:flex; align-items:center; gap:1.5cqw; padding:0 1.6cqw; min-width:0;}
 .wy-oi{display:grid; place-items:center; flex-shrink:0;
