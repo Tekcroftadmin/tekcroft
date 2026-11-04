@@ -6649,3 +6649,19 @@ html body #seo-services-page #hero-1 .hs-h1 em{
 #seo-services-page .eh-sprite{
   position:absolute!important;width:0!important;height:0!important;overflow:hidden!important;
 }
+
+/* === ZEBRA GROUND LOCK (auto) === */
+#seo-services-page .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#seo-services-page .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#seo-services-page .sec.vs{background:transparent !important;}
+#seo-services-page .sec.vs[data-ground],#seo-services-page section.vs[data-ground]{/* photo band — ignore ground paint */}
+#seo-services-page .sec.vs{--ground:transparent;}
+#seo-services-page #watch[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#seo-services-page #focus[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#seo-services-page #services[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#seo-services-page #process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#seo-services-page #commit[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#seo-services-page #goals[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#seo-services-page #cost[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#seo-services-page #whyus[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#seo-services-page #faq[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}

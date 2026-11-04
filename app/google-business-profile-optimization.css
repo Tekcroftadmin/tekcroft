@@ -6115,11 +6115,13 @@ html[data-theme="dark"] .dc-ic{background:hsl(var(--brand-h) 40% 18%);}
 }
 @media (prefers-reduced-motion:reduce){ .dc-tap,.dc-pin.b{animation:none;} }
 
-/* Beat page-level #apart { background:var(--ground)!important } so dc gradient wins */
+/* Beat page-level #apart { background:var(--ground)!important } so dc gradient wins.
+   Tint band (#DAEEF6) so white industries → tint apart → white process. */
 #apart.dc{
-  background:linear-gradient(180deg,var(--bg,#fff) 0%,hsl(var(--brand-h) 90% 97%) 55%,var(--bg,#fff) 100%) !important;
+  --ground:#DAEEF6;
+  background:linear-gradient(180deg,#DAEEF6 0%,hsl(var(--brand-h) 90% 97%) 55%,#DAEEF6 100%) !important;
 }
-html[data-theme="dark"] #apart.dc{background:var(--bg) !important;}
+html[data-theme="dark"] #apart.dc{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
 
 /* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
 /* ══════════════════════════════════════════════════════════════════════
@@ -6940,3 +6942,16 @@ html body .gw-say > p{
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#gbp-what[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#gbp-process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#apart[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#process[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#reviews[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

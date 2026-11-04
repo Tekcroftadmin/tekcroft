@@ -156,7 +156,7 @@ for (const root of textRoots) {
 
 /* ── 4) Alt + title on every <img> in body HTML ── */
 const ALT_BY_SRC = {
-  "/images/about/about-hc-01-93f9f9a157.webp":
+  "/images/about/about-hc-01-dc71a4cc3f.webp":
     "Tekcroft team collaborating on technology and digital marketing strategy",
   "/images/aid-hero-62a278e464.webp":
     "AI development team building custom machine learning solutions for business growth",

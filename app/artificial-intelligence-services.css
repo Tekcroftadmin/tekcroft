@@ -4203,8 +4203,8 @@ html[data-theme="dark"] .tv{background:rgba(10,22,34,.92); border-color:rgba(255
 
 /* === ai-delivers === */
 /* WHAT TEKCROFT DELIVERS — the tm panels, three services */
-#model{background:#DAEEF6 !important;}
-html[data-theme="dark"] #model{background:var(--bg-alt) !important;}
+#model{background:var(--surface) !important;}
+html[data-theme="dark"] #model{background:var(--surface) !important;}
 #model .tm-item:not(.on){background:#fff;}
 html[data-theme="dark"] #model .tm-item:not(.on){background:var(--surface);}
 #model .tm-item:not(.on){/* slim width via --tm-slim / global open-anim */}
@@ -4270,7 +4270,8 @@ html[data-theme="dark"] .tv-int span{background:hsl(var(--brand-h) 60% 18%); col
 /* === b5-styles === */
 /* WHAT YOU CAN BUILD WITH AI — v3 (after the supplied reference): centred head, 4 + 3 cards,
    each with an icon disc, title, short rule, copy, and a small product UI at the foot. */
-#build-v3.b5{position:relative; padding-block:clamp(52px,5.4vw,84px); background:var(--surface); overflow:hidden;}
+#build-v3.b5{position:relative; padding-block:clamp(52px,5.4vw,84px); background:#DAEEF6; overflow:hidden;}
+html[data-theme="dark"] #build-v3.b5{background:var(--bg-alt);}
 #build-v3.b5::before,#build-v3.b5::after{content:""; position:absolute; top:40px; width:220px; height:320px; pointer-events:none;
   background-image:radial-gradient(hsl(var(--brand-h) 60% 70% / .35) 1.2px, transparent 1.4px); background-size:16px 16px;
   -webkit-mask-image:radial-gradient(closest-side,#000,transparent); mask-image:radial-gradient(closest-side,#000,transparent);}
@@ -4668,7 +4669,7 @@ html[data-theme="dark"] .u-sup .ctx{background:hsl(var(--brand-h) 60% 16%); colo
 
 /* Tekcroft branding for the supplied Technologies section: brand blue only, site fonts, section rhythm, dark mode */
 #tech-v4.ai-tx{--ax-navy:var(--text); --ax-text:var(--text-2); --ax-blue:var(--primary); --ax-line:hsl(var(--brand-h) 40% 30% / .12);
-  background:#DAEEF6; color:var(--text);}
+  background:var(--surface); color:var(--text);}
 #tech-v4.ai-tx::before{background:radial-gradient(40% 50% at 8% 0%,rgba(255,255,255,.7),transparent 70%),radial-gradient(35% 45% at 100% 100%,hsl(var(--brand-h) 90% 60% / .12),transparent 70%);}
 #tech-v4 .ax-gen,#tech-v4 .ax-nlp,#tech-v4 .ax-ml,#tech-v4 .ax-rag,#tech-v4 .ax-cv,#tech-v4 .ax-agt{--c:var(--primary); --c2:#4CC6F6;}
 #tech-v4 .ax-wrap{max-width:var(--maxw); padding:clamp(56px,5.6vw,90px) 26px;}
@@ -4711,7 +4712,7 @@ html[data-theme="dark"] .u-sup .ctx{background:hsl(var(--brand-h) 60% 16%); colo
 #tech-v4 .vz-ped,#tech-v4 .vz-ped::before{background:#2B5D7A;}
 #tech-v4 .ax-pane::before{background:radial-gradient(50% 60% at 100% 0%,hsl(var(--brand-h) 95% 50% / .07),transparent 70%);}
 /* dark */
-html[data-theme="dark"] #tech-v4.ai-tx{background:var(--bg-alt); --ax-line:var(--border);}
+html[data-theme="dark"] #tech-v4.ai-tx{background:var(--surface); --ax-line:var(--border);}
 html[data-theme="dark"] #tech-v4.ai-tx::before{opacity:.25;}
 html[data-theme="dark"] #tech-v4 .ax-eye{background:var(--surface);}
 html[data-theme="dark"] #tech-v4 .ax-tab{background:rgba(255,255,255,.03);}
@@ -4882,7 +4883,8 @@ html[data-theme="dark"] #tech-v4 .g1-l.s{border-color:var(--border);}
 /* AI INTEGRATION WITH YOUR EXISTING SYSTEMS — copy on the left; on the right an integration canvas:
    the AI layer in the middle wired by secure APIs into a CRM, ERP, support desk and an internal platform,
    with the small-start-then-scale path underneath. */
-#integ.ig{padding-block:clamp(56px,5.6vw,90px); background:var(--surface);}
+#integ.ig{padding-block:clamp(56px,5.6vw,90px); background:#DAEEF6;}
+html[data-theme="dark"] #integ.ig{background:var(--bg-alt);}
 .ig-wrap{display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); gap:clamp(28px,4.4vw,72px); align-items:center;}
 .ig-copy h2{margin:0; font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); font-weight:800; letter-spacing:-.045em; line-height:1.05; color:var(--text); text-transform:none;}
 .ig-copy h2 em{display:block; font-style:normal; color:var(--primary);}
@@ -4999,8 +5001,8 @@ html[data-theme="dark"] .ig-ai{background:hsl(var(--brand-h) 60% 16%); border-co
 /* AI SECURITY, GOVERNANCE AND RELIABILITY — the five safeguards as checkpoints an AI action passes through,
    in the order the copy gives them (data → access → evaluation → human sign-off → monitoring after launch).
    A pulse travels the rail; each gate it reaches turns to a check and lights its column. */
-#govern.gv{padding-block:clamp(56px,5.6vw,90px); background:#DAEEF6 !important;}
-html[data-theme="dark"] #govern.gv{background:var(--bg-alt) !important;}
+#govern.gv{padding-block:clamp(56px,5.6vw,90px); background:var(--surface) !important;}
+html[data-theme="dark"] #govern.gv{background:var(--surface) !important;}
 .gv-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(18px,3vw,48px); align-items:end; margin-bottom:clamp(26px,3vw,42px);}
 .gv-head h2{margin:0; font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); font-weight:800; letter-spacing:-.045em; line-height:1.05; color:var(--text); text-transform:none;}
 .gv-head h2 em{font-style:normal; color:var(--primary);}
@@ -5300,14 +5302,15 @@ html[data-theme="dark"] .v-ho .bt span:first-child{background:var(--primary); co
 #industries .pf-card{background:#fff !important; border-left-color:#fff; border-right-color:#fff; border-bottom-color:#fff;}
 html[data-theme="dark"] #industries .pf-card{background:var(--surface) !important; border-color:var(--border);}
 .pf-c6 .pf-mk,.pf-o6 .pf-face .pf-mk{-webkit-mask:var(--mk) center / contain no-repeat; mask:var(--mk) center / contain no-repeat; background:currentColor; width:54%; height:54%;}
-#industries{--ground:#DAEEF6; background:#DAEEF6 !important;}
-html[data-theme="dark"] #industries{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+#industries{--ground:var(--surface); background:var(--surface) !important;}
+html[data-theme="dark"] #industries{--ground:var(--surface); background:var(--surface) !important;}
 #industries h2,#industries h2 span,#industries h2 em,#industries .pf-card h3,#industries .pf-card h3 em{text-transform:none !important;}
 
 /* === wy-styles === */
 /* WHY CHOOSE TEKCROFT — tab bar of differentiators over one panel (copy left, proof card right).
    Placeholder text until the differentiators are supplied. */
-#why.wy{padding-block:clamp(56px,5.6vw,90px); background:var(--surface);}
+#why.wy{padding-block:clamp(56px,5.6vw,90px); background:#DAEEF6;}
+html[data-theme="dark"] #why.wy{background:var(--bg-alt);}
 .wy-head{text-align:center; max-width:860px; margin:0 auto clamp(22px,2.4vw,32px);}
 .wy-head .smark{margin-bottom:16px;}
 .wy-head h2{margin:0; font-family:var(--font-display); font-size:clamp(30px,3.4vw,52px); font-weight:800; letter-spacing:-.045em; line-height:1.06; color:var(--text); text-transform:none;}
@@ -5356,8 +5359,8 @@ html[data-theme="dark"] .wy-row u{background:rgba(255,255,255,.1);}
 /* === em-styles === */
 /* ENGAGEMENT MODELS — plan columns. Three tall plans side by side, the middle one (the ongoing team) raised
    on deep navy; each carries the situation it suits as a tag, a large glyph, the copy, and the page CTA. */
-#models.em{padding-block:clamp(56px,5.6vw,90px); background:#DAEEF6 !important;}
-html[data-theme="dark"] #models.em{background:var(--bg-alt) !important;}
+#models.em{padding-block:clamp(56px,5.6vw,90px); background:var(--surface) !important;}
+html[data-theme="dark"] #models.em{background:var(--surface) !important;}
 .em-head{text-align:center; max-width:820px; margin:0 auto clamp(28px,3.2vw,46px);}
 .em-head h2{margin:0; font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); font-weight:800; letter-spacing:-.045em; line-height:1.06; color:var(--text); text-transform:none;}
 .em-head h2 em{font-style:normal; color:var(--primary);}
@@ -5414,8 +5417,12 @@ html[data-theme="dark"] .em-plan.feat .em-go .btn .arw{border-color:#fff; color:
 html[data-theme="dark"] .em-plan.feat .em-go .btn:hover{background:#0aa6e6; color:#fff;}
 html[data-theme="dark"] .em-tag{background:hsl(var(--brand-h) 70% 22%); color:#B8E6FA;}
 
+/* Process stays tint between white govern and white industries */
+#process.eg-sec{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+html[data-theme="dark"] #process.eg-sec{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+
 /* === faq-ai === */
-#faq{--ground:var(--surface); background:var(--surface) !important;} #faq h2,#faq h2 em,#faq .faq-t{text-transform:none !important;} #faq .faq-aside .btn{align-self:flex-start; margin-top:auto;}
+#faq{--ground:#DAEEF6; background:#DAEEF6 !important;} html[data-theme="dark"] #faq{--ground:var(--bg-alt); background:var(--bg-alt) !important;} #faq h2,#faq h2 em,#faq .faq-t{text-transform:none !important;} #faq .faq-aside .btn{align-self:flex-start; margin-top:auto;}
 
 /* === cta-ai === */
 #contact{--ground:#DAEEF6; background:#DAEEF6 !important;} html[data-theme="dark"] #contact{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
@@ -5534,3 +5541,19 @@ html[data-theme="dark"] .em-tag{background:hsl(var(--brand-h) 70% 22%); color:#B
 
 /* === ais-eyebrow === */
 #hero-1 .hs-copy .tag{text-transform:none !important; letter-spacing:0 !important; font-family:var(--font-display); font-size:14.5px; font-weight:700;} #proof .tb-figs{background:var(--surface) !important;} #hero-1 .hs-h1,#hero-1 .hs-h1 span,#hero-1 .hs-h1 em{text-transform:none !important;}
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#model[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#build-v3[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#tech-v4[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#integ[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#govern[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#why[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#models[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

@@ -12760,3 +12760,16 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 #web-and-app-development-page .eh-sprite{
   position:absolute!important;width:0!important;height:0!important;overflow:hidden!important;
 }
+
+/* === ZEBRA GROUND LOCK (auto) === */
+#web-and-app-development-page .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#web-and-app-development-page .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page .sec.vs{background:transparent !important;}
+#web-and-app-development-page .sec.vs[data-ground],#web-and-app-development-page section.vs[data-ground]{/* photo band — ignore ground paint */}
+#web-and-app-development-page .sec.vs{--ground:transparent;}
+#web-and-app-development-page #services[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#web-and-app-development-page #build-type[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page #industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#web-and-app-development-page #why[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page #process[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#web-and-app-development-page #faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

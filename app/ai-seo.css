@@ -2386,7 +2386,7 @@ html[data-theme="dark"] #measure .mr-live{background:var(--bg-alt); color:var(--
 
 /* RESULTS — one featured case shown as the proof itself (the AI answer, before and after),
    two smaller cases beside it. Bracketed fields are placeholders for real client data. */
-#results.cs{padding-block:clamp(44px,4.6vw,72px); background:linear-gradient(180deg,hsl(var(--brand-h) 60% 98%),#fff);}
+#results.cs{padding-block:clamp(44px,4.6vw,72px); background:#DAEEF6;}
 html[data-theme="dark"] #results.cs{background:var(--bg-alt);}
 .cs-head{text-align:center; display:flex; flex-direction:column; align-items:center;}
 .cs-head .smark{margin-bottom:10px;}
@@ -3712,3 +3712,17 @@ html body .gw-say > p{
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#model[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#measure[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#results[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#why[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#industries[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#reviews[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

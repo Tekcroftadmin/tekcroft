@@ -3171,7 +3171,7 @@ html[data-theme="dark"] #wgw .tgl{background:#1b1c1e; border-color:#333;}
   --n0:#FFFFFF; --n200:#DDDEE2; --n500:#6A6D75;
   --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-display:'Sora','Inter',sans-serif; --ease:cubic-bezier(.22,.7,.3,1); --spring:cubic-bezier(.34,1.56,.64,1);
-  --cta-img:url("/images/about/about-css-01-93f9f9a157.webp");
+  --cta-img:url("/images/about/about-cta-shot-e224508879.webp");
 }
 html[data-theme="light"] #ctaw{ --sec-bg:#EDF6FB; }
 html[data-theme="dark"] #ctaw{ --n950:#131314; --sec-bg:var(--n950); }
@@ -3831,3 +3831,68 @@ section.built,
     padding-inline:20px;
   }
 }
+
+/* About #how-we-work per-step disc photos */
+#hwww #how-we-work .eg-face,
+#how-we-work .eg-face{
+  background:#0A0C0E;
+  isolation:isolate;
+}
+#hwww #how-we-work .eg-face::before,
+#how-we-work .eg-face::before{display:none;}
+#hwww #how-we-work .eg-face::after,
+#how-we-work .eg-face::after{
+  z-index:1;
+  background:
+    radial-gradient(54% 55% at 50% 48%, rgba(0,0,0,.42) 0%, transparent 72%),
+    linear-gradient(180deg, rgba(0,0,0,.58) 0%, rgba(0,0,0,.48) 42%,
+                    rgba(0,0,0,.82) 100%);
+}
+#hwww #how-we-work .eg-pic,
+#how-we-work .eg-pic{
+  position:absolute; inset:0; z-index:0;
+  background:none;
+  opacity:0; visibility:hidden;
+  transition:opacity .45s var(--ease), visibility 0s linear .45s;
+}
+#hwww #how-we-work .eg[data-at="0"] .eg-pic:nth-child(1),
+#hwww #how-we-work .eg[data-at="1"] .eg-pic:nth-child(2),
+#hwww #how-we-work .eg[data-at="2"] .eg-pic:nth-child(3),
+#hwww #how-we-work .eg[data-at="3"] .eg-pic:nth-child(4),
+#hwww #how-we-work .eg:not([data-at]) .eg-pic:nth-child(1),
+#how-we-work .eg[data-at="0"] .eg-pic:nth-child(1),
+#how-we-work .eg[data-at="1"] .eg-pic:nth-child(2),
+#how-we-work .eg[data-at="2"] .eg-pic:nth-child(3),
+#how-we-work .eg[data-at="3"] .eg-pic:nth-child(4),
+#how-we-work .eg:not([data-at]) .eg-pic:nth-child(1){
+  opacity:1; visibility:visible; transition-delay:0s;
+}
+#hwww #how-we-work .eg-pic > img,
+#how-we-work .eg-pic > img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center; display:block;
+  max-width:none;
+}
+#hwww #how-we-work .eg-face > *:not(.eg-pic),
+#how-we-work .eg-face > *:not(.eg-pic){position:relative; z-index:2;}
+
+/* About CTA band photo as <img> (alt/title) */
+#ctaw .cta-bg{
+  background:none !important;
+}
+#ctaw .cta-bg > img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center; display:block;
+  max-width:none;
+}
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#what-we-do-h[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#rp-sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#how-we-work[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#ppl-sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#wg[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}

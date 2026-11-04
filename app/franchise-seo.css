@@ -7347,12 +7347,12 @@ html[data-theme="dark"] .gv-c{background:hsl(var(--brand-h) 40% 18%);}
 }
 
 /* === rhythm-app === */
-/* Strict white / tint alternation after the dark hero + white proof strip.
+/* Strict white / tint alternation after the dark hero + tint proof strip.
    white = --surface, tint = --bg-alt
-   proof(w) → what-is(t) → franchise-signs(w) → covers(t) → industries(w)
-   → governance(t) → duplicate(w) → compare(t) → why(w) → faq(t) → contact(w) */
+   proof(t) → what-is(w) → franchise-signs(t) → covers(w) → industries(t)
+   → governance(w) → duplicate(t) → compare(w) → faq(t) → contact(w/cta) */
 #proof-v2,
-#franchise-signs,
+#franchise-covers,
 #industries,
 #duplicate,
 #why,
@@ -7362,7 +7362,7 @@ html[data-theme="dark"] .gv-c{background:hsl(var(--brand-h) 40% 18%);}
 }
 
 #what-is,
-#franchise-covers,
+#franchise-signs,
 #governance,
 #compare,
 #faq{
@@ -8763,3 +8763,17 @@ html body .gw-say > p{
   object-fit:cover; display:block; z-index:0;
 }
 #franchise-covers .tm-veil{z-index:1;}
+
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#what-is[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#franchise-signs[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#franchise-covers[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#industries[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#governance[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#duplicate[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#compare[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

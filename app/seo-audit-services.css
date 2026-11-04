@@ -3811,27 +3811,40 @@ html[data-theme="dark"] .c-us .vs-m{background:rgba(42,157,92,.20);}
   border-radius:var(--r-lg); background:var(--surface);
   border:1px solid var(--border); box-shadow:var(--shadow);}
 
-/* the run between the badges, drawn left to right once the panel is in */
-.bpx-line{position:absolute; left:12.5%; right:12.5%; top:-1px; height:1px;
+/* the run between the badges, drawn left to right once the panel is in.
+   Inset = half a column of a 4-col grid (12.5%), so the line runs badge→badge. */
+#process.bl-sec .bpx-line,
+.bl-sec .bpx-line{position:absolute; left:12.5%; right:12.5%; top:-1px; height:1px;
   background:repeating-linear-gradient(to right,
     var(--brand-text) 0 4px, transparent 4px 9px);
   transform:scaleX(0); transform-origin:0 50%;
   transition:transform 1.1s var(--ease) .15s;}
-.rv.in .bpx-line{transform:scaleX(1);}
+#process.bl-sec .rv.in .bpx-line,
+.bl-sec .rv.in .bpx-line,
+#process.bl-sec.rv.in .bpx-line{transform:scaleX(1);}
 
-.bpx-row{display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
-  list-style:none; margin:0; padding:0;}
-.bpx-stage{position:relative; display:grid; justify-items:center; text-align:center;
+/* Beat global .bpx-row{repeat(6)} from tekcroft-defer — this page has 4 stages only. */
+#process.bl-sec .bpx-row,
+.bl-sec .bpx-row{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  list-style:none; margin:0; padding:0;
+}
+#process.bl-sec .bpx-stage,
+.bl-sec .bpx-stage{position:relative; display:grid; justify-items:center; text-align:center;
   padding:clamp(30px,3.2vw,42px) clamp(10px,1.2vw,18px) clamp(22px,2.4vw,32px);
   opacity:0; transform:translateY(14px);
   transition:opacity .55s var(--ease) var(--lay),
              transform .55s var(--ease) var(--lay), background .3s var(--ease);
   --lay:calc(var(--i) * 90ms);}
-.rv.in .bpx-stage{opacity:1; transform:none;}
+#process.bl-sec .rv.in .bpx-stage,
+.bl-sec .rv.in .bpx-stage{opacity:1; transform:none;}
 /* the uprights stop short of the panel's own edges */
-.bpx-stage + .bpx-stage::before{content:""; position:absolute; left:0;
+#process.bl-sec .bpx-stage + .bpx-stage::before,
+.bl-sec .bpx-stage + .bpx-stage::before{content:""; position:absolute; left:0;
   top:14%; bottom:14%; width:1px; background:var(--border);}
-.rv.in .bpx-stage:hover{transform:translateY(-4px); background:var(--bg-alt);}
+#process.bl-sec .rv.in .bpx-stage:hover,
+.bl-sec .rv.in .bpx-stage:hover{transform:translateY(-4px); background:var(--bg-alt);}
 
 /* the badge rides the top edge */
 .bpx-n{position:absolute; top:0; left:50%; transform:translate(-50%,-50%);
@@ -3873,10 +3886,14 @@ html[data-theme="dark"] .c-us .vs-m{background:rgba(42,157,92,.20);}
    longer along the top of a row, so it becomes the rail the badges sit on
    and the stages read down it ? which is the same connection, turned. */
 @media (max-width:1080px){
-  .bpx-row{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .bpx-line{display:none;}
-  .bpx-stage:nth-child(2n+1)::before{display:none;}
-  .bpx-stage:nth-child(n+3){border-top:1px solid var(--border);}
+  #process.bl-sec .bpx-row,
+  .bl-sec .bpx-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #process.bl-sec .bpx-line,
+  .bl-sec .bpx-line{display:none;}
+  #process.bl-sec .bpx-stage:nth-child(2n+1)::before,
+  .bl-sec .bpx-stage:nth-child(2n+1)::before{display:none;}
+  #process.bl-sec .bpx-stage:nth-child(n+3),
+  .bl-sec .bpx-stage:nth-child(n+3){border-top:1px solid var(--border);}
 }
 @media (max-width:720px){
   /* ---- one column, and a rail down the side ----
@@ -3892,7 +3909,8 @@ html[data-theme="dark"] .c-us .vs-m{background:rgba(42,157,92,.20);}
      --bpx-gut is .wrap's own padding at these widths. It is restated here
      because a margin cannot read the padding of an ancestor; if the wrap's
      gutter is ever changed below 760px, this is the second place. */
-  .bpx{--bpx-in:46px;      /* cards, from the block's left edge   */
+  #process.bl-sec .bpx,
+  .bl-sec .bpx{--bpx-in:46px;      /* cards, from the block's left edge   */
        --bpx-edge:13px;    /* badge's left edge, from the screen  */
        --bpx-r:15px;       /* half the badge                      */
        --bpx-gut:20px;     /* .wrap padding below 760px           */
@@ -3900,28 +3918,37 @@ html[data-theme="dark"] .c-us .vs-m{background:rgba(42,157,92,.20);}
     margin-left:calc(var(--bpx-edge) + var(--bpx-r)
                      - var(--bpx-in) / 2 - var(--bpx-gut));
     padding-left:var(--bpx-in);}
-  .bpx-row{grid-template-columns:minmax(0,1fr); gap:14px;}
-  .bpx::before{content:""; position:absolute; left:calc(var(--bpx-in) / 2);
+  #process.bl-sec .bpx-row,
+  .bl-sec .bpx-row{grid-template-columns:minmax(0,1fr); gap:14px;}
+  #process.bl-sec .bpx::before,
+  .bl-sec .bpx::before{content:""; position:absolute; left:calc(var(--bpx-in) / 2);
     top:22px; bottom:22px;
     width:2px; border-radius:2px; transform:translateX(-1px);
     background:linear-gradient(180deg, var(--primary), var(--border));}
-  .bpx-stage{justify-items:start; text-align:left; border-top:0;
+  #process.bl-sec .bpx-stage,
+  .bl-sec .bpx-stage{justify-items:start; text-align:left; border-top:0;
     grid-template-columns:auto 1fr; column-gap:16px;
     padding:clamp(14px,3vw,18px);
     border-radius:var(--r-lg); background:var(--surface);
     border:1px solid var(--border); box-shadow:var(--shadow);}
-  .bpx-stage::before{display:none;}
+  #process.bl-sec .bpx-stage::before,
+  .bl-sec .bpx-stage::before{display:none;}
   /* On one column the badge rides the rail beside its card, so it is
      centred on the card rather than pinned to the top of it ? otherwise
      a two-line card leaves its own number sitting level with nothing. */
-  .bpx-n{position:absolute; left:calc(var(--bpx-in) / -2); top:50%;
+  #process.bl-sec .bpx-n,
+  .bl-sec .bpx-n{position:absolute; left:calc(var(--bpx-in) / -2); top:50%;
     transform:translate(-50%,-50%);
     width:calc(var(--bpx-r) * 2); height:calc(var(--bpx-r) * 2);
     font-size:11px;}
-  .bpx-ico{grid-row:1 / span 3;}
-  .bpx-stage h3{margin-top:0; align-self:center;}
-  .bpx-rule{display:none;}
-  .bpx-stage p{grid-column:2; margin-top:6px;}
+  #process.bl-sec .bpx-ico,
+  .bl-sec .bpx-ico{grid-row:1 / span 3;}
+  #process.bl-sec .bpx-stage h3,
+  .bl-sec .bpx-stage h3{margin-top:0; align-self:center;}
+  #process.bl-sec .bpx-rule,
+  .bl-sec .bpx-rule{display:none;}
+  #process.bl-sec .bpx-stage p,
+  .bl-sec .bpx-stage p{grid-column:2; margin-top:6px;}
   .bl-cta .btn{width:100%;}
 }
 @media (prefers-reduced-motion:reduce){
@@ -7595,3 +7622,30 @@ html[data-theme="dark"] #audit-why .wv-tg .ch{
   animation:none !important;
 } }
 
+/* === ZEBRA GROUND LOCK (auto) === */
+html body .sec[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+.sec.vs[data-ground],section.vs[data-ground]{/* photo band — ignore ground paint */}
+.sec.vs{--ground:transparent;}
+#who[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#services-2[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#audit-why[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#process[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#receive[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#reviews[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+
+/* Blueprint: 4 stages must span full width (override global 6-col .bpx-row) */
+#process.bl-sec .bpx-row{
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+}
+#process.bl-sec .bpx-line{
+  left:12.5% !important;
+  right:12.5% !important;
+}
+@media (max-width:1080px){
+  #process.bl-sec .bpx-row{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+}
+@media (max-width:720px){
+  #process.bl-sec .bpx-row{grid-template-columns:minmax(0,1fr) !important;}
+}
