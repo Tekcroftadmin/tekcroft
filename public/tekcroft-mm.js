@@ -227,9 +227,7 @@ function mxIc(n){
   }
   var homeHref = hrefAt(0, '/');
   var aboutHref = hrefAt(1, '/about-us');
-  var workHref = hrefAt(2, '/case-studies');
-  var blogHref = hrefAt(3, '/blog');
-  var contactHref = hrefAt(4, '/contact-us');
+  var contactHref = hrefAt(2, '/contact-us');
   var oldCta = mnav.querySelector(':scope > .btn, :scope > button[data-jump], :scope > button[data-modal]');
   var ctaModal = oldCta && oldCta.hasAttribute('data-modal');
   var ctaAttrs = ctaModal ? ' data-modal' : ' data-jump';
@@ -262,8 +260,6 @@ function mxIc(n){
     + '<a class="mx-link" href="'+homeHref+'">Home</a>'
     + '<a class="mx-link" href="'+aboutHref+'">About us</a>'
     + cards
-    + '<a class="mx-link" href="'+workHref+'">Case studies</a>'
-    + '<a class="mx-link" href="'+blogHref+'">Blog</a>'
     + '<a class="mx-link" href="'+contactHref+'">Contact us</a>'
     + '</div>'
     + '<div class="mx-foot">'
