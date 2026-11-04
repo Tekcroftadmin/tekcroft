@@ -105,54 +105,54 @@ export const sitewideSchema = {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/seo-services#service",
                   "name": "SEO Services",
-                  "url": "https://www.tekcroft.com/seo-services"
+                  "url": "https://www.tekcroft.com/services/seo-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/ecommerce-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#service",
                   "name": "Ecommerce SEO Services",
-                  "url": "https://www.tekcroft.com/ecommerce-seo-services"
+                  "url": "https://www.tekcroft.com/services/ecommerce-seo-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/seo-audit-services#service",
+                  "@id": "https://www.tekcroft.com/services/seo-audit-services#service",
                   "name": "SEO Audit Services",
-                  "url": "https://www.tekcroft.com/seo-audit-services"
+                  "url": "https://www.tekcroft.com/services/seo-audit-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/on-page-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/on-page-seo-services#service",
                   "name": "On-Page SEO Services",
-                  "url": "https://www.tekcroft.com/on-page-seo-services"
+                  "url": "https://www.tekcroft.com/services/on-page-seo-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/technical-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/technical-seo-services#service",
                   "name": "Technical SEO Services",
-                  "url": "https://www.tekcroft.com/technical-seo-services"
+                  "url": "https://www.tekcroft.com/services/technical-seo-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/ai-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/ai-seo-services#service",
                   "name": "AI SEO Services",
-                  "url": "https://www.tekcroft.com/ai-seo-services"
+                  "url": "https://www.tekcroft.com/services/ai-seo-services"
                 }
               }
             ]
@@ -165,27 +165,27 @@ export const sitewideSchema = {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/local-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/local-seo-services#service",
                   "name": "Local SEO Services",
-                  "url": "https://www.tekcroft.com/local-seo-services"
+                  "url": "https://www.tekcroft.com/services/local-seo-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#service",
+                  "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#service",
                   "name": "Google Business Profile Optimization Services",
-                  "url": "https://www.tekcroft.com/google-business-profile-optimization-services"
+                  "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/franchise-seo-services#service",
+                  "@id": "https://www.tekcroft.com/services/franchise-seo-services#service",
                   "name": "Franchise SEO Services",
-                  "url": "https://www.tekcroft.com/franchise-seo-services"
+                  "url": "https://www.tekcroft.com/services/franchise-seo-services"
                 }
               }
             ]
@@ -198,27 +198,27 @@ export const sitewideSchema = {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/ai-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/ai-development-services#service",
                   "name": "AI Development Services",
-                  "url": "https://www.tekcroft.com/ai-development-services"
+                  "url": "https://www.tekcroft.com/services/ai-development-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/ai-chatbot-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#service",
                   "name": "AI Chatbot Development Services",
-                  "url": "https://www.tekcroft.com/ai-chatbot-development-services"
+                  "url": "https://www.tekcroft.com/services/ai-chatbot-development-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/ai-agent-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/ai-agent-development-services#service",
                   "name": "AI Agent Development Services",
-                  "url": "https://www.tekcroft.com/ai-agent-development-services"
+                  "url": "https://www.tekcroft.com/services/ai-agent-development-services"
                 }
               }
             ]
@@ -231,27 +231,27 @@ export const sitewideSchema = {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/web-design-and-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/web-design-and-development-services#service",
                   "name": "Web Design and Development Services",
-                  "url": "https://www.tekcroft.com/web-design-and-development-services"
+                  "url": "https://www.tekcroft.com/services/web-design-and-development-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/custom-software-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/custom-software-development-services#service",
                   "name": "Custom Software Development Services",
-                  "url": "https://www.tekcroft.com/custom-software-development-services"
+                  "url": "https://www.tekcroft.com/services/custom-software-development-services"
                 }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "@id": "https://www.tekcroft.com/mobile-app-development-services#service",
+                  "@id": "https://www.tekcroft.com/services/mobile-app-development-services#service",
                   "name": "Mobile App Development Services",
-                  "url": "https://www.tekcroft.com/mobile-app-development-services"
+                  "url": "https://www.tekcroft.com/services/mobile-app-development-services"
                 }
               }
             ]
@@ -458,8 +458,8 @@ export const seoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/seo-services#webpage",
-      "url": "https://www.tekcroft.com/seo-services",
+      "@id": "https://www.tekcroft.com/services/seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/seo-services",
       "name": "SEO Services | Tekcroft",
       "description": "Search engine optimization services covering technical SEO, on-page SEO, content and AI search visibility to grow organic traffic and leads for US businesses.",
       "isPartOf": {
@@ -470,19 +470,19 @@ export const seoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/seo-services#service",
+      "@id": "https://www.tekcroft.com/services/seo-services#service",
       "name": "SEO Services",
       "serviceType": "Search Engine Optimization",
       "description": "Search engine optimization services covering technical SEO, on-page SEO, content and AI search visibility to grow organic traffic and leads for US businesses.",
-      "url": "https://www.tekcroft.com/seo-services",
+      "url": "https://www.tekcroft.com/services/seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -507,45 +507,45 @@ export const seoServicesSchema = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/ecommerce-seo-services#service",
+              "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#service",
               "name": "Ecommerce SEO Services",
-              "url": "https://www.tekcroft.com/ecommerce-seo-services"
+              "url": "https://www.tekcroft.com/services/ecommerce-seo-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/seo-audit-services#service",
+              "@id": "https://www.tekcroft.com/services/seo-audit-services#service",
               "name": "SEO Audit Services",
-              "url": "https://www.tekcroft.com/seo-audit-services"
+              "url": "https://www.tekcroft.com/services/seo-audit-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/on-page-seo-services#service",
+              "@id": "https://www.tekcroft.com/services/on-page-seo-services#service",
               "name": "On-Page SEO Services",
-              "url": "https://www.tekcroft.com/on-page-seo-services"
+              "url": "https://www.tekcroft.com/services/on-page-seo-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/technical-seo-services#service",
+              "@id": "https://www.tekcroft.com/services/technical-seo-services#service",
               "name": "Technical SEO Services",
-              "url": "https://www.tekcroft.com/technical-seo-services"
+              "url": "https://www.tekcroft.com/services/technical-seo-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/ai-seo-services#service",
+              "@id": "https://www.tekcroft.com/services/ai-seo-services#service",
               "name": "AI SEO Services",
-              "url": "https://www.tekcroft.com/ai-seo-services"
+              "url": "https://www.tekcroft.com/services/ai-seo-services"
             }
           }
         ]
@@ -553,7 +553,7 @@ export const seoServicesSchema = {
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -565,7 +565,7 @@ export const seoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         }
       ]
     }
@@ -577,8 +577,8 @@ export const ecommerceSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/ecommerce-seo-services#webpage",
-      "url": "https://www.tekcroft.com/ecommerce-seo-services",
+      "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/ecommerce-seo-services",
       "name": "Ecommerce SEO Services | Tekcroft",
       "description": "Ecommerce SEO services that optimize product pages, category pages, site architecture and technical health so online stores rank and sell more from organic search.",
       "isPartOf": {
@@ -589,19 +589,19 @@ export const ecommerceSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/ecommerce-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/ecommerce-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/ecommerce-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#service",
       "name": "Ecommerce SEO Services",
       "serviceType": "Ecommerce SEO",
       "description": "Ecommerce SEO services that optimize product pages, category pages, site architecture and technical health so online stores rank and sell more from organic search.",
-      "url": "https://www.tekcroft.com/ecommerce-seo-services",
+      "url": "https://www.tekcroft.com/services/ecommerce-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -619,12 +619,12 @@ export const ecommerceSeoServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/ecommerce-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/ecommerce-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -636,13 +636,13 @@ export const ecommerceSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Ecommerce SEO Services",
-          "item": "https://www.tekcroft.com/ecommerce-seo-services"
+          "item": "https://www.tekcroft.com/services/ecommerce-seo-services"
         }
       ]
     }
@@ -654,8 +654,8 @@ export const seoAuditServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/seo-audit-services#webpage",
-      "url": "https://www.tekcroft.com/seo-audit-services",
+      "@id": "https://www.tekcroft.com/services/seo-audit-services#webpage",
+      "url": "https://www.tekcroft.com/services/seo-audit-services",
       "name": "SEO Audit Services | Tekcroft",
       "description": "SEO audit services that review technical health, on-page content, backlinks and AI search visibility, then deliver a prioritized action plan.",
       "isPartOf": {
@@ -666,19 +666,19 @@ export const seoAuditServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/seo-audit-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-audit-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/seo-audit-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/seo-audit-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/seo-audit-services#service",
+      "@id": "https://www.tekcroft.com/services/seo-audit-services#service",
       "name": "SEO Audit Services",
       "serviceType": "SEO Audit",
       "description": "SEO audit services that review technical health, on-page content, backlinks and AI search visibility, then deliver a prioritized action plan.",
-      "url": "https://www.tekcroft.com/seo-audit-services",
+      "url": "https://www.tekcroft.com/services/seo-audit-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -696,12 +696,12 @@ export const seoAuditServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/seo-audit-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/seo-audit-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -713,13 +713,13 @@ export const seoAuditServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "SEO Audit Services",
-          "item": "https://www.tekcroft.com/seo-audit-services"
+          "item": "https://www.tekcroft.com/services/seo-audit-services"
         }
       ]
     }
@@ -731,8 +731,8 @@ export const onPageSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/on-page-seo-services#webpage",
-      "url": "https://www.tekcroft.com/on-page-seo-services",
+      "@id": "https://www.tekcroft.com/services/on-page-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/on-page-seo-services",
       "name": "On-Page SEO Services | Tekcroft",
       "description": "On-page SEO services that optimize titles, headings, content, internal links and structured data so every page ranks for the right search intent.",
       "isPartOf": {
@@ -743,19 +743,19 @@ export const onPageSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/on-page-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/on-page-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/on-page-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/on-page-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/on-page-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/on-page-seo-services#service",
       "name": "On-Page SEO Services",
       "serviceType": "On-Page SEO",
       "description": "On-page SEO services that optimize titles, headings, content, internal links and structured data so every page ranks for the right search intent.",
-      "url": "https://www.tekcroft.com/on-page-seo-services",
+      "url": "https://www.tekcroft.com/services/on-page-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -773,12 +773,12 @@ export const onPageSeoServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/on-page-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/on-page-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -790,13 +790,13 @@ export const onPageSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "On-Page SEO Services",
-          "item": "https://www.tekcroft.com/on-page-seo-services"
+          "item": "https://www.tekcroft.com/services/on-page-seo-services"
         }
       ]
     }
@@ -808,8 +808,8 @@ export const technicalSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/technical-seo-services#webpage",
-      "url": "https://www.tekcroft.com/technical-seo-services",
+      "@id": "https://www.tekcroft.com/services/technical-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/technical-seo-services",
       "name": "Technical SEO Services | Tekcroft",
       "description": "Technical SEO services that fix crawlability, indexing, site speed, Core Web Vitals, structured data and site architecture issues.",
       "isPartOf": {
@@ -820,19 +820,19 @@ export const technicalSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/technical-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/technical-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/technical-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/technical-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/technical-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/technical-seo-services#service",
       "name": "Technical SEO Services",
       "serviceType": "Technical SEO",
       "description": "Technical SEO services that fix crawlability, indexing, site speed, Core Web Vitals, structured data and site architecture issues.",
-      "url": "https://www.tekcroft.com/technical-seo-services",
+      "url": "https://www.tekcroft.com/services/technical-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -850,12 +850,12 @@ export const technicalSeoServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/technical-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/technical-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -867,13 +867,13 @@ export const technicalSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Technical SEO Services",
-          "item": "https://www.tekcroft.com/technical-seo-services"
+          "item": "https://www.tekcroft.com/services/technical-seo-services"
         }
       ]
     }
@@ -885,8 +885,8 @@ export const aiSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/ai-seo-services#webpage",
-      "url": "https://www.tekcroft.com/ai-seo-services",
+      "@id": "https://www.tekcroft.com/services/ai-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/ai-seo-services",
       "name": "AI SEO Services | Tekcroft",
       "description": "AI SEO services that structure content to be cited in Google AI Overviews, ChatGPT, Gemini and Perplexity, and track brand visibility across AI answers.",
       "isPartOf": {
@@ -897,19 +897,19 @@ export const aiSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/ai-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/ai-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/ai-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/ai-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/ai-seo-services#service",
       "name": "AI SEO Services",
       "serviceType": "AI Search Optimization",
       "description": "AI SEO services that structure content to be cited in Google AI Overviews, ChatGPT, Gemini and Perplexity, and track brand visibility across AI answers.",
-      "url": "https://www.tekcroft.com/ai-seo-services",
+      "url": "https://www.tekcroft.com/services/ai-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -927,12 +927,12 @@ export const aiSeoServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/seo-services#service"
+        "@id": "https://www.tekcroft.com/services/seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/ai-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/ai-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -944,13 +944,13 @@ export const aiSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "SEO Services",
-          "item": "https://www.tekcroft.com/seo-services"
+          "item": "https://www.tekcroft.com/services/seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "AI SEO Services",
-          "item": "https://www.tekcroft.com/ai-seo-services"
+          "item": "https://www.tekcroft.com/services/ai-seo-services"
         }
       ]
     }
@@ -962,8 +962,8 @@ export const localSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/local-seo-services#webpage",
-      "url": "https://www.tekcroft.com/local-seo-services",
+      "@id": "https://www.tekcroft.com/services/local-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/local-seo-services",
       "name": "Local SEO Services | Tekcroft",
       "description": "Local SEO services that improve visibility in Google Maps and local search results through Google Business Profile optimization, citations, reviews and location pages.",
       "isPartOf": {
@@ -974,19 +974,19 @@ export const localSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/local-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/local-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/local-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/local-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/local-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/local-seo-services#service",
       "name": "Local SEO Services",
       "serviceType": "Local SEO",
       "description": "Local SEO services that improve visibility in Google Maps and local search results through Google Business Profile optimization, citations, reviews and location pages.",
-      "url": "https://www.tekcroft.com/local-seo-services",
+      "url": "https://www.tekcroft.com/services/local-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1011,18 +1011,18 @@ export const localSeoServicesSchema = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#service",
+              "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#service",
               "name": "Google Business Profile Optimization Services",
-              "url": "https://www.tekcroft.com/google-business-profile-optimization-services"
+              "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/franchise-seo-services#service",
+              "@id": "https://www.tekcroft.com/services/franchise-seo-services#service",
               "name": "Franchise SEO Services",
-              "url": "https://www.tekcroft.com/franchise-seo-services"
+              "url": "https://www.tekcroft.com/services/franchise-seo-services"
             }
           }
         ]
@@ -1030,7 +1030,7 @@ export const localSeoServicesSchema = {
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/local-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/local-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1042,7 +1042,7 @@ export const localSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Local SEO Services",
-          "item": "https://www.tekcroft.com/local-seo-services"
+          "item": "https://www.tekcroft.com/services/local-seo-services"
         }
       ]
     }
@@ -1054,8 +1054,8 @@ export const googleBusinessProfileOptimizationServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#webpage",
-      "url": "https://www.tekcroft.com/google-business-profile-optimization-services",
+      "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#webpage",
+      "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services",
       "name": "Google Business Profile Optimization Services | Tekcroft",
       "description": "Google Business Profile optimization services covering categories, services, photos, posts and review strategy to rank in the local map pack.",
       "isPartOf": {
@@ -1066,19 +1066,19 @@ export const googleBusinessProfileOptimizationServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#service"
+        "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#service",
+      "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#service",
       "name": "Google Business Profile Optimization Services",
       "serviceType": "Google Business Profile Optimization",
       "description": "Google Business Profile optimization services covering categories, services, photos, posts and review strategy to rank in the local map pack.",
-      "url": "https://www.tekcroft.com/google-business-profile-optimization-services",
+      "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1096,12 +1096,12 @@ export const googleBusinessProfileOptimizationServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/local-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/local-seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/google-business-profile-optimization-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1113,13 +1113,13 @@ export const googleBusinessProfileOptimizationServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Local SEO Services",
-          "item": "https://www.tekcroft.com/local-seo-services"
+          "item": "https://www.tekcroft.com/services/local-seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Google Business Profile Optimization Services",
-          "item": "https://www.tekcroft.com/google-business-profile-optimization-services"
+          "item": "https://www.tekcroft.com/services/google-business-profile-optimization-services"
         }
       ]
     }
@@ -1131,8 +1131,8 @@ export const franchiseSeoServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/franchise-seo-services#webpage",
-      "url": "https://www.tekcroft.com/franchise-seo-services",
+      "@id": "https://www.tekcroft.com/services/franchise-seo-services#webpage",
+      "url": "https://www.tekcroft.com/services/franchise-seo-services",
       "name": "Franchise SEO Services | Tekcroft",
       "description": "Franchise SEO services for multi-location brands, managing location pages, Google Business Profiles and local rankings across every location.",
       "isPartOf": {
@@ -1143,19 +1143,19 @@ export const franchiseSeoServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/franchise-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/franchise-seo-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/franchise-seo-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/franchise-seo-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/franchise-seo-services#service",
+      "@id": "https://www.tekcroft.com/services/franchise-seo-services#service",
       "name": "Franchise SEO Services",
       "serviceType": "Franchise SEO",
       "description": "Franchise SEO services for multi-location brands, managing location pages, Google Business Profiles and local rankings across every location.",
-      "url": "https://www.tekcroft.com/franchise-seo-services",
+      "url": "https://www.tekcroft.com/services/franchise-seo-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1173,12 +1173,12 @@ export const franchiseSeoServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/local-seo-services#service"
+        "@id": "https://www.tekcroft.com/services/local-seo-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/franchise-seo-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/franchise-seo-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1190,13 +1190,13 @@ export const franchiseSeoServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Local SEO Services",
-          "item": "https://www.tekcroft.com/local-seo-services"
+          "item": "https://www.tekcroft.com/services/local-seo-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Franchise SEO Services",
-          "item": "https://www.tekcroft.com/franchise-seo-services"
+          "item": "https://www.tekcroft.com/services/franchise-seo-services"
         }
       ]
     }
@@ -1208,8 +1208,8 @@ export const aiDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/ai-development-services#webpage",
-      "url": "https://www.tekcroft.com/ai-development-services",
+      "@id": "https://www.tekcroft.com/services/ai-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/ai-development-services",
       "name": "AI Development Services | Tekcroft",
       "description": "AI development services that design and build custom AI solutions, including AI chatbots, AI agents and business automation.",
       "isPartOf": {
@@ -1220,19 +1220,19 @@ export const aiDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/ai-development-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/ai-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/ai-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/ai-development-services#service",
+      "@id": "https://www.tekcroft.com/services/ai-development-services#service",
       "name": "AI Development Services",
       "serviceType": "Artificial Intelligence Development",
       "description": "AI development services that design and build custom AI solutions, including AI chatbots, AI agents and business automation.",
-      "url": "https://www.tekcroft.com/ai-development-services",
+      "url": "https://www.tekcroft.com/services/ai-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1257,18 +1257,18 @@ export const aiDevelopmentServicesSchema = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/ai-chatbot-development-services#service",
+              "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#service",
               "name": "AI Chatbot Development Services",
-              "url": "https://www.tekcroft.com/ai-chatbot-development-services"
+              "url": "https://www.tekcroft.com/services/ai-chatbot-development-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/ai-agent-development-services#service",
+              "@id": "https://www.tekcroft.com/services/ai-agent-development-services#service",
               "name": "AI Agent Development Services",
-              "url": "https://www.tekcroft.com/ai-agent-development-services"
+              "url": "https://www.tekcroft.com/services/ai-agent-development-services"
             }
           }
         ]
@@ -1276,7 +1276,7 @@ export const aiDevelopmentServicesSchema = {
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/ai-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/ai-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1288,7 +1288,7 @@ export const aiDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "AI Development Services",
-          "item": "https://www.tekcroft.com/ai-development-services"
+          "item": "https://www.tekcroft.com/services/ai-development-services"
         }
       ]
     }
@@ -1300,8 +1300,8 @@ export const aiChatbotDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/ai-chatbot-development-services#webpage",
-      "url": "https://www.tekcroft.com/ai-chatbot-development-services",
+      "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/ai-chatbot-development-services",
       "name": "AI Chatbot Development Services | Tekcroft",
       "description": "AI chatbot development services that build custom chatbots for websites and customer support, trained on your business data.",
       "isPartOf": {
@@ -1312,19 +1312,19 @@ export const aiChatbotDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/ai-chatbot-development-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/ai-chatbot-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/ai-chatbot-development-services#service",
+      "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#service",
       "name": "AI Chatbot Development Services",
       "serviceType": "AI Chatbot Development",
       "description": "AI chatbot development services that build custom chatbots for websites and customer support, trained on your business data.",
-      "url": "https://www.tekcroft.com/ai-chatbot-development-services",
+      "url": "https://www.tekcroft.com/services/ai-chatbot-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1342,12 +1342,12 @@ export const aiChatbotDevelopmentServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/ai-development-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-development-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/ai-chatbot-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/ai-chatbot-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1359,13 +1359,13 @@ export const aiChatbotDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "AI Development Services",
-          "item": "https://www.tekcroft.com/ai-development-services"
+          "item": "https://www.tekcroft.com/services/ai-development-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "AI Chatbot Development Services",
-          "item": "https://www.tekcroft.com/ai-chatbot-development-services"
+          "item": "https://www.tekcroft.com/services/ai-chatbot-development-services"
         }
       ]
     }
@@ -1377,8 +1377,8 @@ export const aiAgentDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/ai-agent-development-services#webpage",
-      "url": "https://www.tekcroft.com/ai-agent-development-services",
+      "@id": "https://www.tekcroft.com/services/ai-agent-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/ai-agent-development-services",
       "name": "AI Agent Development Services | Tekcroft",
       "description": "AI agent development services that build AI agents and workflow automation to handle repetitive business tasks.",
       "isPartOf": {
@@ -1389,19 +1389,19 @@ export const aiAgentDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/ai-agent-development-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-agent-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/ai-agent-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/ai-agent-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/ai-agent-development-services#service",
+      "@id": "https://www.tekcroft.com/services/ai-agent-development-services#service",
       "name": "AI Agent Development Services",
       "serviceType": "AI Agent Development",
       "description": "AI agent development services that build AI agents and workflow automation to handle repetitive business tasks.",
-      "url": "https://www.tekcroft.com/ai-agent-development-services",
+      "url": "https://www.tekcroft.com/services/ai-agent-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1419,12 +1419,12 @@ export const aiAgentDevelopmentServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/ai-development-services#service"
+        "@id": "https://www.tekcroft.com/services/ai-development-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/ai-agent-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/ai-agent-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1436,13 +1436,13 @@ export const aiAgentDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "AI Development Services",
-          "item": "https://www.tekcroft.com/ai-development-services"
+          "item": "https://www.tekcroft.com/services/ai-development-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "AI Agent Development Services",
-          "item": "https://www.tekcroft.com/ai-agent-development-services"
+          "item": "https://www.tekcroft.com/services/ai-agent-development-services"
         }
       ]
     }
@@ -1454,8 +1454,8 @@ export const webDesignAndDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/web-design-and-development-services#webpage",
-      "url": "https://www.tekcroft.com/web-design-and-development-services",
+      "@id": "https://www.tekcroft.com/services/web-design-and-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/web-design-and-development-services",
       "name": "Web Design and Development Services | Tekcroft",
       "description": "Web design and development services that build fast, SEO-ready websites designed to turn visitors into leads.",
       "isPartOf": {
@@ -1466,19 +1466,19 @@ export const webDesignAndDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/web-design-and-development-services#service"
+        "@id": "https://www.tekcroft.com/services/web-design-and-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/web-design-and-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/web-design-and-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/web-design-and-development-services#service",
+      "@id": "https://www.tekcroft.com/services/web-design-and-development-services#service",
       "name": "Web Design and Development Services",
       "serviceType": "Web Design and Development",
       "description": "Web design and development services that build fast, SEO-ready websites designed to turn visitors into leads.",
-      "url": "https://www.tekcroft.com/web-design-and-development-services",
+      "url": "https://www.tekcroft.com/services/web-design-and-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1503,18 +1503,18 @@ export const webDesignAndDevelopmentServicesSchema = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/custom-software-development-services#service",
+              "@id": "https://www.tekcroft.com/services/custom-software-development-services#service",
               "name": "Custom Software Development Services",
-              "url": "https://www.tekcroft.com/custom-software-development-services"
+              "url": "https://www.tekcroft.com/services/custom-software-development-services"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "@id": "https://www.tekcroft.com/mobile-app-development-services#service",
+              "@id": "https://www.tekcroft.com/services/mobile-app-development-services#service",
               "name": "Mobile App Development Services",
-              "url": "https://www.tekcroft.com/mobile-app-development-services"
+              "url": "https://www.tekcroft.com/services/mobile-app-development-services"
             }
           }
         ]
@@ -1522,7 +1522,7 @@ export const webDesignAndDevelopmentServicesSchema = {
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/web-design-and-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/web-design-and-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1534,7 +1534,7 @@ export const webDesignAndDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Web Design and Development Services",
-          "item": "https://www.tekcroft.com/web-design-and-development-services"
+          "item": "https://www.tekcroft.com/services/web-design-and-development-services"
         }
       ]
     }
@@ -1546,8 +1546,8 @@ export const customSoftwareDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/custom-software-development-services#webpage",
-      "url": "https://www.tekcroft.com/custom-software-development-services",
+      "@id": "https://www.tekcroft.com/services/custom-software-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/custom-software-development-services",
       "name": "Custom Software Development Services | Tekcroft",
       "description": "Custom software development services that build web applications, CRMs and business software tailored to your workflows.",
       "isPartOf": {
@@ -1558,19 +1558,19 @@ export const customSoftwareDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/custom-software-development-services#service"
+        "@id": "https://www.tekcroft.com/services/custom-software-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/custom-software-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/custom-software-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/custom-software-development-services#service",
+      "@id": "https://www.tekcroft.com/services/custom-software-development-services#service",
       "name": "Custom Software Development Services",
       "serviceType": "Custom Software Development",
       "description": "Custom software development services that build web applications, CRMs and business software tailored to your workflows.",
-      "url": "https://www.tekcroft.com/custom-software-development-services",
+      "url": "https://www.tekcroft.com/services/custom-software-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1588,12 +1588,12 @@ export const customSoftwareDevelopmentServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/web-design-and-development-services#service"
+        "@id": "https://www.tekcroft.com/services/web-design-and-development-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/custom-software-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/custom-software-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1605,13 +1605,13 @@ export const customSoftwareDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Web Design and Development Services",
-          "item": "https://www.tekcroft.com/web-design-and-development-services"
+          "item": "https://www.tekcroft.com/services/web-design-and-development-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Custom Software Development Services",
-          "item": "https://www.tekcroft.com/custom-software-development-services"
+          "item": "https://www.tekcroft.com/services/custom-software-development-services"
         }
       ]
     }
@@ -1623,8 +1623,8 @@ export const mobileAppDevelopmentServicesSchema = {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.tekcroft.com/mobile-app-development-services#webpage",
-      "url": "https://www.tekcroft.com/mobile-app-development-services",
+      "@id": "https://www.tekcroft.com/services/mobile-app-development-services#webpage",
+      "url": "https://www.tekcroft.com/services/mobile-app-development-services",
       "name": "Mobile App Development Services | Tekcroft",
       "description": "Mobile app development services for iOS and Android, from product planning and UI design to development and launch.",
       "isPartOf": {
@@ -1635,19 +1635,19 @@ export const mobileAppDevelopmentServicesSchema = {
       },
       "inLanguage": "en-US",
       "mainEntity": {
-        "@id": "https://www.tekcroft.com/mobile-app-development-services#service"
+        "@id": "https://www.tekcroft.com/services/mobile-app-development-services#service"
       },
       "breadcrumb": {
-        "@id": "https://www.tekcroft.com/mobile-app-development-services#breadcrumb"
+        "@id": "https://www.tekcroft.com/services/mobile-app-development-services#breadcrumb"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://www.tekcroft.com/mobile-app-development-services#service",
+      "@id": "https://www.tekcroft.com/services/mobile-app-development-services#service",
       "name": "Mobile App Development Services",
       "serviceType": "Mobile App Development",
       "description": "Mobile app development services for iOS and Android, from product planning and UI design to development and launch.",
-      "url": "https://www.tekcroft.com/mobile-app-development-services",
+      "url": "https://www.tekcroft.com/services/mobile-app-development-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
       },
@@ -1665,12 +1665,12 @@ export const mobileAppDevelopmentServicesSchema = {
         "description": "Free proposal with custom pricing based on your business, market and goals."
       },
       "isRelatedTo": {
-        "@id": "https://www.tekcroft.com/web-design-and-development-services#service"
+        "@id": "https://www.tekcroft.com/services/web-design-and-development-services#service"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.tekcroft.com/mobile-app-development-services#breadcrumb",
+      "@id": "https://www.tekcroft.com/services/mobile-app-development-services#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -1682,13 +1682,13 @@ export const mobileAppDevelopmentServicesSchema = {
           "@type": "ListItem",
           "position": 2,
           "name": "Web Design and Development Services",
-          "item": "https://www.tekcroft.com/web-design-and-development-services"
+          "item": "https://www.tekcroft.com/services/web-design-and-development-services"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Mobile App Development Services",
-          "item": "https://www.tekcroft.com/mobile-app-development-services"
+          "item": "https://www.tekcroft.com/services/mobile-app-development-services"
         }
       ]
     }

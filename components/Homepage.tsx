@@ -158,22 +158,7 @@ export default function Homepage({
     const mm = document.getElementById("mmTrigger");
     if (mm) {
       const onService =
-        path === "/services" ||
-        path === "/seo-services" ||
-        path.startsWith("/seo-") ||
-        path.startsWith("/local-seo") ||
-        path.startsWith("/ecommerce-seo") ||
-        path.startsWith("/on-page-seo") ||
-        path.startsWith("/technical-seo") ||
-        path.startsWith("/ai-seo") ||
-        path.startsWith("/franchise-seo") ||
-        path.startsWith("/google-business-profile") ||
-        path.startsWith("/artificial-intelligence") ||
-        path.startsWith("/ai-") ||
-        path.startsWith("/web-design") ||
-        path.startsWith("/custom-software") ||
-        path.startsWith("/mobile-app") ||
-        path.startsWith("/web-and-app");
+        path === "/services" || path.startsWith("/services/");
       if (onService) mm.setAttribute("aria-current", "page");
       else mm.removeAttribute("aria-current");
     }

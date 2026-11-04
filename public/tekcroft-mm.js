@@ -8,30 +8,30 @@
 if (window.__tekcroftMm) return;
 window.__tekcroftMm = true;
 var SERVICES = [
-  { title:"SEO Services", href:"/seo-services", icon:"chart", img:"seo",
+  { title:"SEO Services", href:"/services/seo-services", icon:"chart", img:"seo",
     items:[
-      {name:"Ecommerce SEO Services", href:"/ecommerce-seo-services", note:"Rankings for product and category pages.", img:"seoEcommerce"},
-      {name:"SEO Audit Services", href:"/seo-audit-services", note:"Find what is holding the site back.", img:"seoAudit"},
-      {name:"On-Page SEO Services", href:"/on-page-seo-services", note:"Titles, content and internal links.", img:"seoOnpage"},
-      {name:"Technical SEO Services", href:"/technical-seo-services", note:"Crawling, speed and indexing fixes.", img:"seoTechnical"},
-      {name:"AI SEO Services", href:"/ai-seo-services", note:"Get cited inside AI answers.", img:"seoAi"}
+      {name:"Ecommerce SEO Services", href:"/services/ecommerce-seo-services", note:"Rankings for product and category pages.", img:"seoEcommerce"},
+      {name:"SEO Audit Services", href:"/services/seo-audit-services", note:"Find what is holding the site back.", img:"seoAudit"},
+      {name:"On-Page SEO Services", href:"/services/on-page-seo-services", note:"Titles, content and internal links.", img:"seoOnpage"},
+      {name:"Technical SEO Services", href:"/services/technical-seo-services", note:"Crawling, speed and indexing fixes.", img:"seoTechnical"},
+      {name:"AI SEO Services", href:"/services/ai-seo-services", note:"Get cited inside AI answers.", img:"seoAi"}
     ]},
-  { title:"Local SEO Services", href:"/local-seo-services", icon:"pin", img:"localSeo",
+  { title:"Local SEO Services", href:"/services/local-seo-services", icon:"pin", img:"localSeo",
     items:[
-      {name:"Google Business Profile Optimization Services", href:"/google-business-profile-optimization-services", note:"Turn the listing into calls and visits.", img:"localGbp"},
-      {name:"Franchise SEO Services", href:"/franchise-seo-services", note:"One system across every location.", img:"localFranchise"}
+      {name:"Google Business Profile Optimization Services", href:"/services/google-business-profile-optimization-services", note:"Turn the listing into calls and visits.", img:"localGbp"},
+      {name:"Franchise SEO Services", href:"/services/franchise-seo-services", note:"One system across every location.", img:"localFranchise"}
     ]},
-  { title:"Web and App Development Services", href:"/web-and-app-development-services", icon:"code", img:"web",
+  { title:"Web and App Development Services", href:"/services/web-and-app-development-services", icon:"code", img:"web",
     items:[
-      {name:"Web Design and Development Services", href:"/web-design-and-development-services", note:"Sites built to convert, not just to look good.", img:"webDesign"},
-      {name:"Custom Software Development Services", href:"/custom-software-development-services", note:"Custom platforms and internal tools.", img:"webSoftware"},
-      {name:"Mobile App Development Services", href:"/mobile-app-development-services", note:"iOS and Android, one codebase.", img:"webMobile"}
+      {name:"Web Design and Development Services", href:"/services/web-design-and-development-services", note:"Sites built to convert, not just to look good.", img:"webDesign"},
+      {name:"Custom Software Development Services", href:"/services/custom-software-development-services", note:"Custom platforms and internal tools.", img:"webSoftware"},
+      {name:"Mobile App Development Services", href:"/services/mobile-app-development-services", note:"iOS and Android, one codebase.", img:"webMobile"}
     ]},
-  { title:"Artificial Intelligence Services", href:"/artificial-intelligence-services", icon:"chip", img:"ai",
+  { title:"Artificial Intelligence Services", href:"/services/artificial-intelligence-services", icon:"chip", img:"ai",
     items:[
-      {name:"AI Development Services", href:"/ai-development-services", note:"Models wired into your own stack.", img:"aiDev"},
-      {name:"AI Chatbot Development Services", href:"/ai-chatbot-development-services", note:"Answer customers day and night.", img:"aiChatbot"},
-      {name:"AI Agent Development Services", href:"/ai-agent-development-services", note:"Run multi-step work end to end.", img:"aiAgent"}
+      {name:"AI Development Services", href:"/services/ai-development-services", note:"Models wired into your own stack.", img:"aiDev"},
+      {name:"AI Chatbot Development Services", href:"/services/ai-chatbot-development-services", note:"Answer customers day and night.", img:"aiChatbot"},
+      {name:"AI Agent Development Services", href:"/services/ai-agent-development-services", note:"Run multi-step work end to end.", img:"aiAgent"}
     ]}
 ];
 

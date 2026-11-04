@@ -15,61 +15,141 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      /* Short legacy aliases → root service slugs */
+      /* Old root service URLs → /services/<slug> */
+      {
+        source: "/google-business-profile-optimization-services",
+        destination: "/services/google-business-profile-optimization-services",
+        permanent: true,
+      },
+      {
+        source: "/custom-software-development-services",
+        destination: "/services/custom-software-development-services",
+        permanent: true,
+      },
+      {
+        source: "/web-design-and-development-services",
+        destination: "/services/web-design-and-development-services",
+        permanent: true,
+      },
+      {
+        source: "/web-and-app-development-services",
+        destination: "/services/web-and-app-development-services",
+        permanent: true,
+      },
+      {
+        source: "/artificial-intelligence-services",
+        destination: "/services/artificial-intelligence-services",
+        permanent: true,
+      },
+      {
+        source: "/ai-chatbot-development-services",
+        destination: "/services/ai-chatbot-development-services",
+        permanent: true,
+      },
+      {
+        source: "/mobile-app-development-services",
+        destination: "/services/mobile-app-development-services",
+        permanent: true,
+      },
+      {
+        source: "/ai-agent-development-services",
+        destination: "/services/ai-agent-development-services",
+        permanent: true,
+      },
+      {
+        source: "/ai-development-services",
+        destination: "/services/ai-development-services",
+        permanent: true,
+      },
+      {
+        source: "/franchise-seo-services",
+        destination: "/services/franchise-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/ecommerce-seo-services",
+        destination: "/services/ecommerce-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/technical-seo-services",
+        destination: "/services/technical-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/on-page-seo-services",
+        destination: "/services/on-page-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/seo-audit-services",
+        destination: "/services/seo-audit-services",
+        permanent: true,
+      },
+      {
+        source: "/local-seo-services",
+        destination: "/services/local-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/ai-seo-services",
+        destination: "/services/ai-seo-services",
+        permanent: true,
+      },
+      {
+        source: "/seo-services",
+        destination: "/services/seo-services",
+        permanent: true,
+      },
+      /* Short legacy aliases → prefixed service slugs */
       {
         source: "/services/ecommerce-seo",
-        destination: "/ecommerce-seo-services",
+        destination: "/services/ecommerce-seo-services",
         permanent: true,
       },
       {
         source: "/services/on-page-seo",
-        destination: "/on-page-seo-services",
+        destination: "/services/on-page-seo-services",
         permanent: true,
       },
       {
         source: "/services/technical-seo",
-        destination: "/technical-seo-services",
+        destination: "/services/technical-seo-services",
         permanent: true,
       },
       {
         source: "/services/local-seo",
-        destination: "/local-seo-services",
+        destination: "/services/local-seo-services",
         permanent: true,
       },
       {
         source: "/services/google-business-profile-optimization",
-        destination: "/google-business-profile-optimization-services",
+        destination: "/services/google-business-profile-optimization-services",
         permanent: true,
       },
       {
         source: "/services/franchise-seo",
-        destination: "/franchise-seo-services",
+        destination: "/services/franchise-seo-services",
         permanent: true,
       },
       {
         source: "/services/web-and-app-development",
-        destination: "/web-and-app-development-services",
+        destination: "/services/web-and-app-development-services",
         permanent: true,
       },
       {
         source: "/services/web-design-and-development",
-        destination: "/web-design-and-development-services",
+        destination: "/services/web-design-and-development-services",
         permanent: true,
       },
       {
         source: "/services/software-development-services",
-        destination: "/custom-software-development-services",
+        destination: "/services/custom-software-development-services",
         permanent: true,
       },
       {
         source: "/services/mobile-app-development",
-        destination: "/mobile-app-development-services",
-        permanent: true,
-      },
-      /* Legacy /services/<slug> → /<slug> (bare /services is the catalog page) */
-      {
-        source: "/services/:slug+",
-        destination: "/:slug+",
+        destination: "/services/mobile-app-development-services",
         permanent: true,
       },
       /* TEMP: /case-studies not built yet */
