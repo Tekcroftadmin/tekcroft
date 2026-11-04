@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { aiChatbotDevelopmentServicesSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -53,6 +55,7 @@ export default function AiChatbotDevelopmentServicesPage() {
       <Homepage html={html} />
       <ChatbotTypesScript />
       <Script src={assets.aiChatbotDevelopment} strategy="afterInteractive" />
+      <JsonLd data={aiChatbotDevelopmentServicesSchema} />
     </>
   );
 }

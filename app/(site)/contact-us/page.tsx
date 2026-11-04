@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { contactUsSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default function ContactUsPage() {
   const html = fs.readFileSync(
     path.join(process.cwd(), "lib", "contact-body.html"),
     "utf8"
@@ -44,6 +46,7 @@ export default function ContactPage() {
       />
       <Homepage html={html} />
       <Script src={assets.contact} strategy="afterInteractive" />
+      <JsonLd data={contactUsSchema} />
     </>
   );
 }

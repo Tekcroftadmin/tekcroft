@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { aiAgentDevelopmentServicesSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -61,6 +63,7 @@ export default function AiAgentDevelopmentServicesPage() {
       />
       <Homepage html={html} />
       <Script src={assets.aiAgentDevelopment} strategy="afterInteractive" />
+      <JsonLd data={aiAgentDevelopmentServicesSchema} />
     </>
   );
 }

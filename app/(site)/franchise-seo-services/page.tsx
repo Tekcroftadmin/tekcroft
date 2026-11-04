@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { franchiseSeoServicesSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -64,6 +66,7 @@ export default function FranchiseSeoServicesPage() {
       </Homepage>
       <FranchiseCovers />
       <Script src={assets.franchiseSeo} strategy="afterInteractive" />
+      <JsonLd data={franchiseSeoServicesSchema} />
     </>
   );
 }

@@ -78,16 +78,16 @@ const nextConfig = {
         destination: "/:slug*",
         permanent: true,
       },
-      /* TEMP: pages not built yet — remove when /case-studies, /contact-us ship */
+      /* TEMP: /case-studies not built yet */
       {
         source: "/case-studies",
         destination: "/",
         permanent: false,
       },
       {
-        source: "/contact-us",
-        destination: "/contact",
-        permanent: false,
+        source: "/contact",
+        destination: "/contact-us",
+        permanent: true,
       },
     ];
   },

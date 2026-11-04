@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { webDesignAndDevelopmentServicesSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -57,6 +59,7 @@ export default function WebDesignAndDevelopmentServicesPage() {
       />
       <Homepage html={html} />
       <Script src={assets.webDesignAndDevelopment} strategy="afterInteractive" />
+      <JsonLd data={webDesignAndDevelopmentServicesSchema} />
     </>
   );
 }

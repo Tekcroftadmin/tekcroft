@@ -17,10 +17,23 @@
   position:relative; background:var(--vx-bg); color:var(--text);}
 
 /* Page shells that use overflow-x:hidden break position:sticky (overflow-y becomes auto).
-   Keep the film scroll-expand working wherever #watch is mounted. */
+   Keep the film scroll-expand working wherever #watch is mounted.
+   Explicit overflow-y:visible is required so clip on x does not compute y to auto. */
+html:has(#watch),
+body:has(#watch),
+#tekcroft-root:has(#watch),
 #seo-services-page:has(> #main #watch),
-#seo-services-page:has(#watch){
+#seo-services-page:has(#watch),
+#seo-services-page:has(#watch) #main{
   overflow-x:clip;
+  overflow-y:visible;
+}
+
+/* responsive.css sets img[width][height]{height:auto} — keep the poster filling the film */
+.vx-poster[width][height]{
+  max-width:none;
+  width:100%;
+  height:100%;
 }
 
 /* Keep #watch chrome free of page-scoped button / heading overrides */

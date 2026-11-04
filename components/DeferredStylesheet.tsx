@@ -1,6 +1,9 @@
 /**
  * Non-blocking stylesheet download (media=print), flip to all as soon as
  * the file is ready — do not idle-delay (that late style+font apply steals LCP).
+ *
+ * The inline loader mutates media before React hydrates, so suppressHydrationWarning
+ * is required on the link (print in React tree vs all in the live DOM).
  */
 export default function DeferredStylesheet({ href }: { href: string }) {
   const safe = JSON.stringify(href);
@@ -11,6 +14,7 @@ export default function DeferredStylesheet({ href }: { href: string }) {
         href={href}
         media="print"
         data-deferred-css={href}
+        suppressHydrationWarning
       />
       <script
         dangerouslySetInnerHTML={{

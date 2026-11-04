@@ -3,8 +3,10 @@ import fs from "fs";
 import path from "path";
 import Script from "next/script";
 import Homepage from "@/components/Homepage";
+import JsonLd from "@/components/JsonLd";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/homepage-meta.json";
+import { homeSchema } from "@/lib/schema";
 /* Shared mobile hero logos/ticker flow (≤900px) — same as /services pages */
 import "@/app/service-hero-lock.css";
 
@@ -61,13 +63,7 @@ export default function HomePage() {
         src={assets.homeDefer || "/tekcroft-home-defer.js"}
         strategy="lazyOnload"
       />
-      {meta.jsonLd.map((data, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
-      ))}
+      <JsonLd data={homeSchema} />
     </>
   );
 }

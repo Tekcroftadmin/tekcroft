@@ -3,9 +3,11 @@ import fs from "fs";
 import path from "path";
 import Script from "next/script";
 import DeferredStylesheet from "@/components/DeferredStylesheet";
+import JsonLd from "@/components/JsonLd";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/local-seo-meta.json";
 import lcp from "@/lib/local-seo-lcp.json";
+import { localSeoServicesSchema } from "@/lib/schema";
 /* Tiny above-the-fold hero paint (LCP) — full page CSS loads deferred */
 import "@/app/local-seo-critical.css";
 /* Shared service hero shell — same style/design on every /services page */
@@ -66,6 +68,7 @@ export default function LocalSeoPage() {
         dangerouslySetInnerHTML={{ __html: html }}
       />
       <Script src={assets.localSeo} strategy="lazyOnload" />
+      <JsonLd data={localSeoServicesSchema} />
     </>
   );
 }

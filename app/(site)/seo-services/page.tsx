@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { seoServicesSchema } from "@/lib/schema";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
@@ -59,6 +61,7 @@ export default function SeoServicesPage() {
       <Homepage html={html} />
       <Script src={assets.seoServices} strategy="afterInteractive" />
       <Script src="/tekcroft-ecommerce-seo-vx.js" strategy="afterInteractive" />
+      <JsonLd data={seoServicesSchema} />
     </>
   );
 }

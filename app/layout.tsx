@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Inter, Sora } from "next/font/google";
 import assets from "@/lib/asset-manifest.json";
 import NoHashScroll from "@/components/NoHashScroll";
+import JsonLd from "@/components/JsonLd";
+import { sitewideSchema } from "@/lib/schema";
 
 /* Self-hosted via next/font — same families/weights, no render-blocking Google CSS */
 const inter = Inter({
@@ -66,6 +68,7 @@ export default function RootLayout({
           {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";function k(){if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0)}k();requestAnimationFrame(function(){k();requestAnimationFrame(k)});window.addEventListener("hashchange",k);window.addEventListener("pageshow",k);}catch(e){}})();`}
         </Script>
         <NoHashScroll />
+        <JsonLd data={sitewideSchema} />
         {children}
         <Script src={assets.leadSubmit || "/tekcroft-lead-submit.js"} strategy="afterInteractive" />
         <Script src={assets.vsHalo} strategy="lazyOnload" />
