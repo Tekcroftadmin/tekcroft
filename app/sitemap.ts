@@ -7,6 +7,7 @@ const routes = [
   "/about-us",
   "/blog",
   "/contact",
+  "/book-a-free-evaluation",
   "/privacy-policy",
   "/terms-of-use",
   "/accessibility",

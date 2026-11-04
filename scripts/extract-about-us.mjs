@@ -1,7 +1,7 @@
 /**
- * Extract About Us page from about-us-hero-variants HTML → Next.js assets.
- * Includes all Hero (A/B/C) + What we do (A/B/C) variants with review switchers.
- * Defaults: Hero C (#hero-1) + What we do C (#what-we-do-c).
+ * Extract About Us page from about-us-hero-variants-25 HTML → Next.js assets.
+ * Defaults: Hero C (#hero-1) + What we do H (#what-we-do-h) + RP H (Business map · fit).
+ * What we do ships H only (A/B/G dropped). In-page RP segment switcher kept.
  * Typography stays site tokens (--font / --font-display = Inter / Sora).
  *
  * Run: node scripts/extract-about-us.mjs
@@ -15,7 +15,7 @@ import sharp from "sharp";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC =
   process.env.TEKCROFT_ABOUT_HTML ||
-  "C:/Users/Super/Downloads/about-us-hero-variants (6).html";
+  "C:/Users/Super/Downloads/about-us-hero-variants-25.html";
 const IMG = path.join(ROOT, "public", "images");
 const PREFIX = "about";
 const MAX_BYTES = 80 * 1024;
@@ -68,14 +68,7 @@ function extractById(tag, id) {
 }
 
 function sectionById(id) {
-  return (
-    html.match(
-      new RegExp(
-        `<section\\b[^>]*\\bid=["']${id}["'][^>]*>[\\s\\S]*?<\\/section>`,
-        "i"
-      )
-    )?.[0] || ""
-  );
+  return extractById("section", id);
 }
 
 async function dataToWebp(dataUrl, slug) {
@@ -160,7 +153,7 @@ const STYLE_IDS = [
   "rhythm-styles",
 ];
 
-let css = `/* About Us — extracted from about-us-hero-variants. Design locked.
+let css = `/* About Us — extracted from about-us-hero-variants-25. Design locked.
    Fonts: inherit site --font (Inter) / --font-display (Sora). */\n`;
 
 for (const id of STYLE_IDS) {
@@ -172,6 +165,16 @@ for (const id of STYLE_IDS) {
   css += `\n/* === ${id} === */\n${block}\n`;
 }
 
+/* Orphan mobile gutter for What we do H (lives beside the section in source) */
+const orphanStyles = [...html.matchAll(/<style(?![^>]*\bid=)[^>]*>([\s\S]*?)<\/style>/gi)].map(
+  (m) => m[1]
+);
+for (const block of orphanStyles) {
+  if (/#what-we-do-h\.does/.test(block)) {
+    css += `\n/* === what-we-do-h mobile gutter === */\n${block}\n`;
+  }
+}
+
 /* why-exact scoped theme (was inline in the HTML) */
 const whyDiv = extractById("div", "why-exact");
 const whyStyle = whyDiv.match(/<style[^>]*>([\s\S]*?)<\/style>/i)?.[1] || "";
@@ -180,6 +183,8 @@ if (whyStyle) css += `\n/* === why-exact === */\n${whyStyle}\n`;
 /* Variant switchers stay visible; section rhythm matches site --sec-y */
 css += `
 section[hidden]{display:none !important;}
+.ppl-variant[hidden],
+.rp-variant[hidden]{display:none !important;}
 
 /* ── Site section rhythm lock (match other pages) ───────────────────── */
 :root{
@@ -190,6 +195,7 @@ section[hidden]{display:none !important;}
 #hwww,
 #hwww .sec,
 #rpw,
+#pplw,
 #wgw,
 #ctaw,
 #wwb,
@@ -198,10 +204,12 @@ section[hidden]{display:none !important;}
 }
 #what-we-do.bt,
 #what-we-do-b.tw,
-#what-we-do-c.xc,
+#what-we-do-g.wtl,
+#what-we-do-h.does,
 #what-we-do.sec,
 #what-we-do-b.sec,
-#what-we-do-c.sec,
+#what-we-do-g.sec,
+#what-we-do-h.sec,
 #why-exact .wx-why,
 .wx-why,
 #wwb .built,
@@ -210,6 +218,7 @@ section.built,
 #rp.rp,
 #hwww .sec,
 #how-we-work.sec,
+#ppl-sec.pplx,
 #wgw .wg,
 #wg.wg,
 #ctaw .cta,
@@ -221,6 +230,7 @@ section.built,
 #wgw .wg,
 #ctaw .cta,
 #hwww .sec,
+#ppl-sec.pplx,
 #why-exact .wx-why,
 #wwb .built{
   padding-inline:24px;
@@ -230,6 +240,7 @@ section.built,
   #wgw .wg,
   #ctaw .cta,
   #hwww .sec,
+  #ppl-sec.pplx,
   #why-exact .wx-why,
   #wwb .built{
     padding-inline:20px;
@@ -253,45 +264,31 @@ function ensureAlt(chunk, alt, title) {
   );
 }
 
-/* ── Body sections: all hero + what-we-do variants ── */
-let heroA = extractById("section", "about-hero");
-let heroB = extractById("section", "about-hero-b");
-let heroC = extractById("section", "hero-1");
-let wwdA = extractById("section", "what-we-do") || sectionById("what-we-do");
-let wwdB = extractById("section", "what-we-do-b") || sectionById("what-we-do-b");
-let wwdC = extractById("section", "what-we-do-c") || sectionById("what-we-do-c");
+/* ── Body sections ── */
+let heroC = sectionById("hero-1");
+let wwdH = sectionById("what-we-do-h");
 let why = whyDiv.replace(/<style[^>]*>[\s\S]*?<\/style>/i, "");
 let built = extractById("div", "wwb");
-let rp = extractById("div", "rpw") || sectionById("rp");
+let rp = extractById("div", "rpw") || sectionById("rp-sec");
 let hww = extractById("div", "hwww") || sectionById("how-we-work");
+let ppl = extractById("div", "pplw") || sectionById("ppl-sec");
 let wg = extractById("div", "wgw") || sectionById("wg");
 let cta = extractById("div", "ctaw") || sectionById("cta");
 
-if (!heroA || !heroB || !heroC) throw new Error("missing hero variants");
-if (!wwdA || !wwdB || !wwdC) throw new Error("missing what-we-do variants");
+if (!heroC) throw new Error("missing hero-1");
+if (!wwdH) throw new Error("missing what-we-do-h");
+if (!why || !built || !rp || !hww || !ppl || !wg || !cta) {
+  throw new Error(
+    `missing section(s): why=${!!why} built=${!!built} rp=${!!rp} hww=${!!hww} ppl=${!!ppl} wg=${!!wg} cta=${!!cta}`
+  );
+}
 
-heroA = ensureHidden(
-  ensureAlt(
-    (await replaceDataImages(heroA, "about-ha")).html,
-    "Tekcroft technology and digital marketing",
-    "About Tekcroft — Hero A"
-  ),
-  true
-);
-heroB = ensureHidden(
-  ensureAlt(
-    (await replaceDataImages(heroB, "about-hb")).html,
-    "Tekcroft team helping businesses grow",
-    "About Tekcroft — Hero B"
-  ),
-  true
-);
 heroC = ensureAlt(
   (await replaceDataImages(heroC, "about-hc")).html,
   "Tekcroft team at work — technology and digital marketing for growing businesses",
   "About Tekcroft"
 );
-/* LCP: mark first img in default hero C */
+/* LCP: mark first img in default hero */
 heroC = heroC.replace(
   /(<img\b[^>]*src="\/images\/about\/[^"]+"[^>]*?)>/i,
   (full) =>
@@ -300,13 +297,54 @@ heroC = heroC.replace(
       : full.replace(/>$/, ' fetchpriority="high">')
 );
 
-wwdA = ensureHidden((await replaceDataImages(wwdA, "about-wwda")).html, true);
-wwdB = ensureHidden((await replaceDataImages(wwdB, "about-wwdb")).html, true);
-wwdC = (await replaceDataImages(wwdC, "about-wwdc")).html;
+wwdH = (await replaceDataImages(wwdH, "about-wwdh")).html;
 why = (await replaceDataImages(why, "about-why")).html;
 built = (await replaceDataImages(built, "about-built")).html;
 rp = (await replaceDataImages(rp, "about-rp")).html;
+/* Drop Rich Picture Mapping board / Rich picture / App window (A/B/C) */
+rp = rp
+  .replace(/\s*<button type="button" data-rv="a">Mapping board<\/button>\s*/i, "\n      ")
+  .replace(/\s*<button type="button" data-rv="b">Rich picture<\/button>\s*/i, "\n      ")
+  .replace(/\s*<button type="button" data-rv="c">App window<\/button>\s*/i, "\n      ");
+for (const letter of ["a", "b", "c"]) {
+  const marker = `class="rp-variant" data-rv="${letter}"`;
+  const start = rp.indexOf(marker);
+  if (start < 0) continue;
+  const openStart = rp.lastIndexOf("<div", start);
+  let i = rp.indexOf(">", openStart) + 1;
+  let depth = 1;
+  const openTag = /<div\b/gi;
+  const closeTag = /<\/div>/gi;
+  while (depth > 0 && i < rp.length) {
+    openTag.lastIndex = i;
+    closeTag.lastIndex = i;
+    const o = openTag.exec(rp);
+    const c = closeTag.exec(rp);
+    if (!c) break;
+    if (o && o.index < c.index) {
+      depth++;
+      i = o.index + 1;
+    } else {
+      depth--;
+      i = c.index + c[0].length;
+    }
+  }
+  let from = openStart;
+  const before = rp.slice(Math.max(0, openStart - 120), openStart);
+  const comment = before.match(/<!--[\s\S]*?-->\s*$/);
+  if (comment) from = openStart - comment[0].length;
+  rp = rp.slice(0, from) + rp.slice(i);
+}
 hww = (await replaceDataImages(hww, "about-hww")).html;
+ppl = (await replaceDataImages(ppl, "about-ppl")).html;
+/* Keep People Timeline only — drop Split (A) + Cards (B) review variants */
+ppl = ppl
+  .replace(/<div class="ppl-switch">[\s\S]*?<\/div>\s*<\/div>\s*/i, "")
+  .replace(
+    /<!--\s*=====\s*Variant A[\s\S]*?<!--\s*=====\s*Variant C[^\n]*-->\s*<div class="ppl-variant" data-pv="c">\s*/i,
+    ""
+  )
+  .replace(/\s*<\/div>\s*(?=<\/section>)/i, "\n\n");
 wg = (await replaceDataImages(wg, "about-wg")).html;
 cta = (await replaceDataImages(cta, "about-cta")).html;
 
@@ -336,21 +374,10 @@ const afterNav = shell.slice(mmEnd);
 const footer = afterNav.match(/<footer[\s\S]*$/i)?.[0];
 if (!nav || !footer) throw new Error("could not split contact shell");
 
-const switchers = `<div class="hv-sw" id="hv-sw"><span>Hero</span><button type="button" data-v="about-hero">A</button><button type="button" data-v="about-hero-b">B</button><button type="button" class="on" data-v="hero-1">C</button></div>
-<div class="hv-sw sec-sw" id="sec-sw"><span>What we do</span><button type="button" data-v="what-we-do">A</button><button type="button" data-v="what-we-do-b">B</button><button type="button" class="on" data-v="what-we-do-c">C</button></div>`;
-
 const main = `<main id="main">
-${heroA}
-
-${heroB}
-
 ${heroC}
 
-${wwdA}
-
-${wwdB}
-
-${wwdC}
+${wwdH}
 
 ${why}
 
@@ -359,6 +386,8 @@ ${built}
 ${rp}
 
 ${hww}
+
+${ppl}
 
 ${wg}
 
@@ -370,21 +399,10 @@ const body = `${nav}
 ${main}
 
 ${footer}
-
-${switchers}
 `;
 
 fs.writeFileSync(path.join(ROOT, "lib", "about-us-body.html"), body);
 fs.writeFileSync(path.join(ROOT, "app", "about-us.css"), css);
-
-/* ── Scripts ── */
-const hvSwScript = `(function(){var w=document.getElementById('hv-sw'),ids=['about-hero','about-hero-b','hero-1'];
-function set(v){ids.forEach(function(id){var e=document.getElementById(id);if(e)e.hidden=id!==v;});[].forEach.call(w.querySelectorAll('button'),function(x){x.classList.toggle('on',x.dataset.v===v);});window.scrollTo(0,0);}
-w.addEventListener('click',function(e){var x=e.target.closest('button');if(x)set(x.dataset.v);});set("hero-1");})();`;
-
-const secSwScript = `(function(){var w=document.getElementById('sec-sw'),ids=['what-we-do','what-we-do-b','what-we-do-c'];
-function set(v){ids.forEach(function(id){var e=document.getElementById(id);if(e)e.hidden=id!==v;});[].forEach.call(w.querySelectorAll('button'),function(x){x.classList.toggle('on',x.dataset.v===v);});}
-w.addEventListener('click',function(e){var x=e.target.closest('button');if(x)set(x.dataset.v);});set('what-we-do-c');})();`;
 
 /* Shared site chrome: theme, btn labels, sticky white nav on scroll, burger */
 const chromeScript = `(function(){
@@ -465,23 +483,32 @@ const chromeScript = `(function(){
 
 const jsParts = [
   chromeScript,
-  scriptById("a3-script") ||
-    html.match(
-      /<script(?![^>]*src)[^>]*>\(\s*function\s*\(\s*\)\s*\{\s*var s=document\.querySelector\('#hero-1\.a3'[\s\S]*?<\/script>/i
-    )?.[0]?.replace(/^<script[^>]*>|<\/script>$/gi, "") ||
-    "",
-  scriptById("ab-hero-script"),
-  scriptById("abb-script"),
-  scriptById("tw-script"),
-  scriptById("xc-script"),
+  scriptById("wh-script"),
   scriptById("wwb-script"),
-  scriptById("rp-script"),
+  /* Rich Picture switcher only — Mapping board / Rich picture / App window removed */
+  `(function(){
+  var sw=document.getElementById('rp-switch');
+  if(sw){
+    sw.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      var v=b.dataset.rv;
+      [].forEach.call(document.querySelectorAll('.rp-variant'),function(el){ el.hidden=el.dataset.rv!==v; });
+      [].forEach.call(sw.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
+    });
+  }
+})();`,
+  scriptById("rp-fj-script"),
+  scriptById("rpk-script"),
+  scriptById("rpm-script"),
   scriptById("hww-script"),
+  /* People Timeline only (Split/Cards removed) */
+  `(function(){
+  var cc=document.getElementById('people-c');
+  if(cc){ new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){cc.classList.add('sp-seen');o.disconnect();}});},{threshold:.2}).observe(cc); }
+})();`,
   scriptById("wg-script"),
   scriptById("cta-script"),
   scriptById("walk-script"),
-  hvSwScript,
-  secSwScript,
 ].filter(Boolean);
 
 const js =
@@ -491,7 +518,7 @@ const js =
 
 fs.writeFileSync(path.join(ROOT, "public", "tekcroft-about-us.js"), js);
 
-/* LCP preload = first about hero image (default Hero C) */
+/* LCP preload = first about hero image */
 const lcpHref =
   heroC.match(/src="(\/images\/about\/[^"]+)"/)?.[1] ||
   "/images/about/about-hero-01.webp";
@@ -520,4 +547,15 @@ console.log("wrote lib/about-us-body.html", body.length);
 console.log("wrote app/about-us.css", css.length);
 console.log("wrote public/tekcroft-about-us.js", js.length);
 console.log("lcp", lcpHref);
+console.log("sections", {
+  hero: !!heroC,
+  wwdH: !!wwdH,
+  why: !!why,
+  built: !!built,
+  rp: !!rp,
+  hww: !!hww,
+  ppl: !!ppl,
+  wg: !!wg,
+  cta: !!cta,
+});
 console.log("done");

@@ -105,6 +105,7 @@ const nextConfig = {
       { source: "/tekcroft-vs-halo.:hash.js", headers: immutable },
       { source: "/tekcroft-contact.:hash.js", headers: immutable },
       { source: "/tekcroft-about-us.:hash.js", headers: immutable },
+      { source: "/tekcroft-book-a-free-evaluation.:hash.js", headers: immutable },
       { source: "/tekcroft-ecommerce-seo.:hash.js", headers: immutable },
       { source: "/tekcroft-seo-audit-services.:hash.js", headers: immutable },
       { source: "/tekcroft-technical-seo.:hash.js", headers: immutable },

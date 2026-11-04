@@ -155,7 +155,11 @@
   });
 
   var ctaLink = sec.querySelector("[data-vx-cta]");
-  if (ctaLink) ctaLink.addEventListener("click", function(){ ping("video_cta_click"); });
+  if (ctaLink) ctaLink.addEventListener("click", function(e){
+    /* Keep navigation to the booking page — never let the video frame steal the click */
+    e.stopPropagation();
+    ping("video_cta_click");
+  });
 
   if ("IntersectionObserver" in window) {
     var seen = new IntersectionObserver(function(es){

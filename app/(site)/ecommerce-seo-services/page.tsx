@@ -10,8 +10,6 @@ import "@/app/ecommerce-seo.css";
 import "@/app/footer-lock.css";
 /* Shared service hero shell — same style/design on every /services page */
 import "@/app/service-hero-lock.css";
-/* Video CTA (#watch) scroll-expand — verbatim from tekcroft-video-section.html */
-import "@/app/ecommerce-seo-vx.css";
 
 export const metadata: Metadata = {
   title: meta.title,
@@ -58,7 +56,6 @@ export default function EcommerceSeoPage() {
       />
       <Homepage html={html} />
       <Script src={assets.ecommerceSeo} strategy="afterInteractive" />
-      <Script src="/tekcroft-ecommerce-seo-vx.js" strategy="afterInteractive" />
     </>
   );
 }

@@ -90,6 +90,7 @@ const names = [
   "tekcroft-ai-seo.js",
   "tekcroft-contact.js",
   "tekcroft-about-us.js",
+  "tekcroft-book-a-free-evaluation.js",
 ];
 
 const keys = [
@@ -115,6 +116,7 @@ const keys = [
   "aiSeo",
   "contact",
   "aboutUs",
+  "bookAFreeEvaluation",
 ];
 
 const manifest = {};
