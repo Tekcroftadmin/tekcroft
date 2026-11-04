@@ -172,7 +172,8 @@ function close(){
 }
 function closeSoon(){ clearTimeout(hideTimer); hideTimer = setTimeout(close, 180); }
 
-btn.addEventListener('click', function(e){ e.stopPropagation(); panel.hidden ? open() : close(); });
+/* Click navigates to /services; hover still opens the mega menu */
+btn.addEventListener('click', function(e){ e.stopPropagation(); });
 btn.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); showTimer = setTimeout(open, 90); });
 btn.addEventListener('mouseleave', function(){ clearTimeout(showTimer); closeSoon(); });
 
@@ -227,7 +228,8 @@ function mxIc(n){
   }
   var homeHref = hrefAt(0, '/');
   var aboutHref = hrefAt(1, '/about-us');
-  var contactHref = hrefAt(2, '/contact-us');
+  var servicesHref = hrefAt(2, '/services');
+  var contactHref = hrefAt(3, '/contact-us');
   var oldCta = mnav.querySelector(':scope > .btn, :scope > button[data-jump], :scope > button[data-modal]');
   var ctaModal = oldCta && oldCta.hasAttribute('data-modal');
   var ctaAttrs = ctaModal ? ' data-modal' : ' data-jump';
@@ -260,6 +262,7 @@ function mxIc(n){
     + '<a class="mx-link" href="'+homeHref+'">Home</a>'
     + '<a class="mx-link" href="'+aboutHref+'">About us</a>'
     + cards
+    + '<a class="mx-link" href="'+servicesHref+'">Services</a>'
     + '<a class="mx-link" href="'+contactHref+'">Contact us</a>'
     + '</div>'
     + '<div class="mx-foot">'

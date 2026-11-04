@@ -5,6 +5,7 @@ const BASE = "https://www.tekcroft.com";
 const routes = [
   "/",
   "/about-us",
+  "/services",
   "/blog",
   "/contact",
   "/book-a-free-evaluation",

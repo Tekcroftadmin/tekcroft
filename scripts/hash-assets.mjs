@@ -91,6 +91,7 @@ const names = [
   "tekcroft-ai-seo.js",
   "tekcroft-contact.js",
   "tekcroft-about-us.js",
+  "tekcroft-services.js",
   "tekcroft-book-a-free-evaluation.js",
   "tekcroft-lead-submit.js",
 ];
@@ -119,6 +120,7 @@ const keys = [
   "aiSeo",
   "contact",
   "aboutUs",
+  "services",
   "bookAFreeEvaluation",
   "leadSubmit",
 ];

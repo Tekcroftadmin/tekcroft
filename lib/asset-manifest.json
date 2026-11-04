@@ -1,7 +1,7 @@
 {
-  "main": "/tekcroft-main.bb0086bf4b.js",
+  "main": "/tekcroft-main.8b47488dfb.js",
   "homeDefer": "/tekcroft-home-defer.83ea27dbe5.js",
-  "mm": "/tekcroft-mm.b9a34accc6.js",
+  "mm": "/tekcroft-mm.4f5e963d8b.js",
   "vsHalo": "/tekcroft-vs-halo.a5d194ac00.js",
   "ecommerceSeo": "/tekcroft-ecommerce-seo.d251b6fe4f.js",
   "seoServices": "/tekcroft-seo-services.e14c2ef283.js",
@@ -22,6 +22,7 @@
   "aiSeo": "/tekcroft-ai-seo.fea6d8a99e.js",
   "contact": "/tekcroft-contact.eb69f6ca9a.js",
   "aboutUs": "/tekcroft-about-us.ef4fe8a84a.js",
+  "services": "/tekcroft-services.4f08a68e44.js",
   "bookAFreeEvaluation": "/tekcroft-book-a-free-evaluation.d959c38cf0.js",
   "leadSubmit": "/tekcroft-lead-submit.e00cdf582b.js"
 }

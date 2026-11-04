@@ -122,6 +122,7 @@
     var mm = $("#mmTrigger");
     if (!mm) return;
     var service =
+      path === "/services" ||
       path === "/seo-services" ||
       path.indexOf("/seo-") === 0 ||
       path.indexOf("/local-seo") === 0 ||
@@ -135,7 +136,8 @@
       path.indexOf("/ai-") === 0 ||
       path.indexOf("/web-design") === 0 ||
       path.indexOf("/custom-software") === 0 ||
-      path.indexOf("/mobile-app") === 0;
+      path.indexOf("/mobile-app") === 0 ||
+      path.indexOf("/web-and-app") === 0;
     if (service) mm.setAttribute("aria-current", "page");
     else mm.removeAttribute("aria-current");
   })();
