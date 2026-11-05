@@ -1174,21 +1174,12 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
    was drawn for the near-white. Those three fix the parity of the other
    nine, which is why this is one block rather than a rule beside each
    section: a run cannot be decided a section at a time. */
-#industries,#ai-search,#faq{
+/* Grounds owned by rhythm-app below — keep these from inverting neighbours. */
+#industries,#ai-search,#reviews,#why,#contact{
   --ground:var(--bg-alt);  --panel:var(--surface); }
-#services-2,#contact{
+#services-2,#process,#pricing,#guide,#faq{
   --ground:var(--surface); --panel:var(--bg-alt); }
-/* White cards need somewhere to be white against, so the process joins
-   the pair #scope and #clients use: the page's own near-white under
-   them, and each card read off its own edge rather than off a change of
-   colour. */
-/* #scope has gone, and #process moves off the near-white with it: it and
-   #clients were the only two left on that ground and they had become
-   neighbours, which is two near-white bands in a row. #clients cannot
-   move — its cells are written white — so #process takes the tint, where
-   its white cards read off a change of colour instead of an edge. */
 #clients{ --ground:var(--bg); --panel:var(--surface); }
-#process{ --ground:var(--bg-alt); --panel:var(--surface); }
 
 /* and the closing band takes a different photograph from the one the FAQ
    aside already uses — the same picture twice on one page is the reader
@@ -4324,7 +4315,7 @@ html[data-theme="dark"] .dv{--il-blob:hsl(var(--brand-h) 45% 15%); --il-glow:hsl
    rules, six standing step cards joined by a wire through their numbers,
    then three engagement cards. Illustrations are SVG in brand blue.
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-#process{--ground:var(--bg-alt); --panel:var(--surface);}
+#process{--ground:var(--surface); --panel:var(--bg-alt);}
 #engagement{--ground:var(--bg); --panel:var(--surface);}
 .fw,.em{
   --il-blob:hsl(var(--brand-h) 85% 95%); --il-tile:#FFFFFF; --il-soft:hsl(var(--brand-h) 80% 94%);
@@ -5735,12 +5726,12 @@ html[data-theme="dark"] .bs{border-color:var(--border);
 #reviews .gr-bar .btn-line,#reviews .gr-acts .btn:not(.btn-primary){background:var(--surface);}
 
 /* === rhythm-app === */
-/* White / tint / white / tint after the dark hero.
-   #fit keeps a photo plate (not a solid band). #why stays tint so
-   the white folder tabs read against the section ground. */
-#proof,
-#industries,
-#reviews,
+/* White / tint / white / tint after the dark hero + tint proof strip.
+   proof(t) → services-2(w) → industries(t) → process(w) → reviews(t)
+   → pricing(w) → fit(photo) → guide(w) → why(t) → faq(w) → contact(t)
+   #fit keeps a photo plate (not a solid band). */
+#services-2,
+#process,
 #pricing,
 #guide,
 #faq{
@@ -5748,9 +5739,9 @@ html[data-theme="dark"] .bs{border-color:var(--border);
   --panel:var(--bg-alt);
 }
 
-#services-2,
-#process,
-#work,
+#proof-v2,
+#industries,
+#reviews,
 #why,
 #contact{
   --ground:var(--bg-alt) !important;
@@ -5773,12 +5764,11 @@ html[data-theme="dark"] #guide .bg-card{
 }
 
 
-#proof,
+#proof-v2,
 #services-2,
 #industries,
 #process,
 #reviews,
-#work,
 #pricing,
 #guide,
 #why,
