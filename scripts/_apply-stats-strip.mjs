@@ -12,8 +12,8 @@ const lib = path.join("c:/Tekcroft/lib");
 
 const DEFAULT = [
   { num: "180", sign: "%", caption: "Organic traffic growth" },
-  { num: "400", sign: "+", caption: "Pages optimized monthly" },
-  { num: "50", sign: "$M+", caption: "Client revenue impact" },
+  { num: "24", sign: "h", caption: "Response time" },
+  { num: "20", sign: "+", caption: "Expert Team Members" },
   { num: "98", sign: "%", caption: "Client satisfaction" },
 ];
 
