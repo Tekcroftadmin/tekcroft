@@ -9,6 +9,7 @@ import "./../mobile-menu.css";
 import "./../vs-halo-lock.css";
 import "./../pf-mode-lock.css";
 import "./../a11y-lock.css";
+import "./../internal-link.css";
 /* stats-strip / nav-pill / perf are inlined via tekcroft-critical.css */
 
 const criticalCss = fs.readFileSync(

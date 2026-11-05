@@ -1,0 +1,18 @@
+/* Inline internal-linking anchors only — not nav, footer, buttons, or CTAs */
+a.internal-link{
+  color:#0096D5;
+  text-decoration:underline;
+  text-underline-offset:0.12em;
+  text-decoration-thickness:from-font;
+}
+a.internal-link:hover,
+a.internal-link:focus-visible{
+  color:#0085C0;
+}
+html[data-theme="dark"] a.internal-link{
+  color:var(--p300);
+}
+html[data-theme="dark"] a.internal-link:hover,
+html[data-theme="dark"] a.internal-link:focus-visible{
+  color:var(--p200);
+}
