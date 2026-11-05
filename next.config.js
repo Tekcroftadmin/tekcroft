@@ -15,6 +15,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      /* Legacy short privacy URL → canonical privacy policy */
+      {
+        source: "/privacy",
+        destination: "/privacy-policy",
+        permanent: true,
+      },
       /* Old root service URLs → /services/<slug> */
       {
         source: "/google-business-profile-optimization-services",

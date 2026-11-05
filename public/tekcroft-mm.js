@@ -130,7 +130,9 @@ function showBg(key){
 /* ── open, close, and the caret that points at the trigger ── */
 var hideTimer = null, showTimer = null;
 var titleEl = panel.querySelector('.mm-title'), noteEl = panel.querySelector('.mm-note');
-var baseTitle = titleEl.textContent, baseNote = noteEl.textContent;
+/* Defaults live in JS so page HTML/source does not expose mega-menu copy as page content. */
+var baseTitle = 'Everything we do, in one place';
+var baseNote = 'Search, local, development and AI, pick a service to see what it covers.';
 
 function placeCaret(){
   /* PERF: batch geometry reads before the CSS write */
@@ -141,6 +143,12 @@ function placeCaret(){
 }
 function reset(){
   showBg(activeImg || null);
+  /* Keep copy out of the DOM while the panel is closed (not page content). */
+  if(panel.hidden){
+    if(titleEl) titleEl.textContent = '';
+    if(noteEl) noteEl.textContent = '';
+    return;
+  }
   if(activeImg){
     var cur = panel.querySelector('.mm-row.is-current, .mm-gp[aria-current="page"]');
     if(cur){

@@ -204,7 +204,7 @@
     '<p class="modal-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     '<path d="M12 3.2 19 6v5.4c0 4.2-2.9 7.6-7 9.4-4.1-1.8-7-5.2-7-9.4V6l7-2.8Z"/>' +
     '<path d="m9.2 12 2 2 3.6-3.9"/></svg> By submitting you agree to our ' +
-    '<a href="/privacy">privacy policy</a>.</p>' +
+    '<a href="/privacy-policy">privacy policy</a>.</p>' +
     "</div></div>" +
     '<div class="modal-done" id="askModalDone" role="status">' +
     '<div class="ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>' +
