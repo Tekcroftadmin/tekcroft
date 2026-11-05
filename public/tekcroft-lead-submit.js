@@ -3,6 +3,9 @@
 (function () {
   if (window.__tekcroftLeadSubmit) return;
   window.__tekcroftLeadSubmit = true;
+  if (!window.__tekcroftFormStartedAt) {
+    window.__tekcroftFormStartedAt = Date.now();
+  }
 
   var EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
   var RULES = {
@@ -184,6 +187,7 @@
       time: sumTime ? sumTime.textContent.trim() : "",
       page: location.pathname,
       website_url: (form.querySelector('[name="website_url"]') || {}).value || "",
+      startedAt: window.__tekcroftFormStartedAt,
     };
   }
 
@@ -284,6 +288,7 @@
       website: fields.website || "",
       service: fields.service || fields.topic || "",
       message: fields.message || "",
+      startedAt: window.__tekcroftFormStartedAt,
     });
 
     setLoading(form, true);
@@ -413,6 +418,7 @@
           page: location.pathname,
           source: location.href,
           website_url: hp ? hp.value : "",
+          startedAt: window.__tekcroftFormStartedAt,
         };
 
         mGo.classList.add("sending");

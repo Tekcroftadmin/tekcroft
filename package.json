@@ -24,12 +24,13 @@
   },
   "dependencies": {
     "next": "^16.4.2",
+    "nodemailer": "^10.3.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "resend": "^6.37.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "critters": "^0.0.23",

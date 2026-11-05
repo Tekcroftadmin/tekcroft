@@ -3,6 +3,9 @@
 (function () {
   if (window.__tekcroftAskModal) return;
   window.__tekcroftAskModal = true;
+  if (!window.__tekcroftFormStartedAt) {
+    window.__tekcroftFormStartedAt = Date.now();
+  }
 
   var EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
   var calm =
@@ -501,6 +504,7 @@
           page: location.pathname,
           source: location.href,
           website_url: hp ? hp.value : "",
+          startedAt: window.__tekcroftFormStartedAt,
         };
 
         go.disabled = true;
