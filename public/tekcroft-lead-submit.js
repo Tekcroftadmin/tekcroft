@@ -243,7 +243,7 @@
     setStatus(
       form,
       "ok",
-      "Thanks — we received your message and will reply within one business day."
+      "Thanks. We received your message and will reply within one business day."
     );
     var btn = form.querySelector('button[type="submit"]');
     if (btn) {
@@ -301,7 +301,7 @@
         showContactSuccess(form);
       } else {
         form.setAttribute("data-sent", "true");
-        setStatus(form, "ok", "Thanks — we got your details and will be in touch soon.");
+        setStatus(form, "ok", "Thanks. We got your details and will be in touch soon.");
       }
     } catch (err) {
       setLoading(form, false);
