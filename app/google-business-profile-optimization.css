@@ -92,7 +92,7 @@ html[data-theme="dark"]{
 .hs-act{--d:290ms; margin:0; display:flex; flex-wrap:wrap; gap:12px;}
 
 /* Hero proof figures — three short stats under the lede */
-.hs-stats{--d:250ms; list-style:none; margin:0; padding:0;
+.hs-stats{--d:250ms; list-style:none; margin:0 0 clamp(22px,2.5vw,32px); padding:0;
   display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(12px,1.4vw,18px); max-width:52ch;}
 .hs-stats li{display:grid; gap:6px; min-width:0;
@@ -3459,6 +3459,13 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
    noticing the stock library instead of the offer */
 /* CTA band photo — desktop landscape / mobile portrait */
 #contact.cta{ --cta-shot:url("/images/gbp-cta-5422675aba.webp"); }
+/* Outer band white so it breaks from the tinted FAQ above (tekcroft #contact uses --bg-alt) */
+html body #contact.cta,
+html body #contact.sec.cta,
+html body #contact{
+  background:#fff !important;
+  --ground:#fff !important;
+}
 @media (max-width:960px){
   #contact.cta{ --cta-shot:url("/images/gbp-cta-m-ceb32a05e9.webp"); }
 }

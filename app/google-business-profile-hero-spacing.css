@@ -1,0 +1,31 @@
+/* GBP hero only — spacing fixes after service-hero-lock.
+   Do not reuse on other pages. */
+
+/* 1) Keep CTA button cleanly below the stat cards */
+#hero-1 .hs-stats{
+  margin:0 0 clamp(22px,2.5vw,32px) !important;
+}
+#hero-1 .hs-act{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  position:relative;
+  z-index:2;
+}
+
+/* 2) Drop forced full-viewport height + auto vertical centering so the
+   hero ends right after the logo carousel (no empty band under it). */
+#hero-1.hs,
+#hero-1.hs:has(> .ticker){
+  min-height:0 !important;
+  padding-bottom:12px !important;
+}
+#hero-1 .hs-in{
+  margin-block:0 !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+}
+#hero-1 > .ticker{
+  margin-top:clamp(20px,2.4vw,28px) !important;
+  margin-bottom:0 !important;
+  padding-block:8px 0 !important;
+}

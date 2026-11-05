@@ -12,6 +12,8 @@ import "@/app/google-business-profile-optimization.css";
 import "@/app/footer-lock.css";
 /* Shared service hero shell — same style/design on every /services page */
 import "@/app/service-hero-lock.css";
+/* GBP hero spacing only (stats↔CTA gap, tighten after logo ticker) */
+import "@/app/google-business-profile-hero-spacing.css";
 /* Expanding panels shell — shared intro line + centered CTA */
 import "@/app/tm-shell-lock.css";
 /* #fit Know the difference — page photo as full section background */
