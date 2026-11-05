@@ -1,7 +1,9 @@
 /* AI Agent Development Services — expanding panels (#agent-services)
    Sourced from ai-agent-services-section.html; selectors scoped to this section. */
 
-#agent-services{padding-block:clamp(36px,4vw,58px); background:var(--surface); overflow:visible;}
+#agent-services{padding-block:clamp(36px,4vw,58px); background:var(--ground, var(--bg-alt)); overflow:visible;}
+#agent-services[data-ground="tint"]{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+#agent-services[data-ground="white"]{--ground:var(--surface); background:var(--surface) !important;}
 #agent-services .wrap{overflow:visible;}
 #agent-services :is(p,h2,h3,ul,li,span,button,a,svg,b,em,small,i,dl,dt,dd){box-sizing:border-box;}
 #agent-services svg{position:static !important; inset:auto !important; max-width:none;}
@@ -30,7 +32,7 @@
    carries a photograph under a black wash with the service written on a
    white card; the rest stand closed with their number and name on edge.
    ══════════════════════════════════════════════════════════════════════ */
-#agent-services{padding-block:clamp(36px,4vw,58px); background:var(--surface);}
+#agent-services{padding-block:clamp(36px,4vw,58px); background:var(--ground, var(--bg-alt));}
 #agent-services .tm-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
 #agent-services .tm-head .smark{margin-bottom:10px;}

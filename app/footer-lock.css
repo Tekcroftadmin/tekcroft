@@ -61,7 +61,10 @@ html body .ft4-brand .logo{margin-bottom:16px; --logo:var(--logo-ink);}
 html[data-theme="dark"] body .ft4-brand .logo{--logo:var(--logo-white);}
 html body .ft4-brand p{font-size:13.8px; line-height:1.65; color:var(--muted); max-width:32ch;}
 html body .ft4-brand .ft-soc{margin-top:20px;}
-html body .ft-soc{display:flex; gap:9px;}
+html body .ft-soc{
+  display:flex; flex-wrap:wrap; gap:9px;
+  margin-top:20px;
+}
 html body .ft-soc a{
   display:grid; place-items:center;
   width:36px; height:36px; border-radius:10px;
@@ -69,7 +72,12 @@ html body .ft-soc a{
   color:var(--text-2); background:transparent;
   transition:border-color .18s var(--ease), color .18s var(--ease), background .18s var(--ease);
 }
-html body .ft-soc a:hover{border-color:var(--brand-text); color:var(--brand-text); background:var(--brand-soft);}
+html body .ft-soc a:hover,
+html body .ft-soc a:focus-visible{
+  border-color:#0096D5;
+  color:#0096D5;
+  background:rgba(0,150,213,.10);
+}
 html body .ft-soc svg{width:16px; height:16px;}
 html body .ft-col b{
   display:block; font-family:var(--font-display); font-size:13px; font-weight:700;

@@ -1057,7 +1057,7 @@ export const googleBusinessProfileOptimizationServicesSchema = {
       "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#webpage",
       "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services",
       "name": "Google Business Profile Optimization Services | Tekcroft",
-      "description": "Google Business Profile optimization services covering categories, services, photos, posts and review strategy to rank in the local map pack.",
+      "description": "Tekcroft’s Google Business Profile optimization services help you rank in the local 3-pack, which means more calls and visits. Get your free audit now.",
       "isPartOf": {
         "@id": "https://www.tekcroft.com/#website"
       },
@@ -1077,7 +1077,7 @@ export const googleBusinessProfileOptimizationServicesSchema = {
       "@id": "https://www.tekcroft.com/services/google-business-profile-optimization-services#service",
       "name": "Google Business Profile Optimization Services",
       "serviceType": "Google Business Profile Optimization",
-      "description": "Google Business Profile optimization services covering categories, services, photos, posts and review strategy to rank in the local map pack.",
+      "description": "Tekcroft’s Google Business Profile optimization services help you rank in the local 3-pack, which means more calls and visits. Get your free audit now.",
       "url": "https://www.tekcroft.com/services/google-business-profile-optimization-services",
       "provider": {
         "@id": "https://www.tekcroft.com/#organization"
@@ -1210,7 +1210,7 @@ export const aiDevelopmentServicesSchema = {
       "@type": "WebPage",
       "@id": "https://www.tekcroft.com/services/ai-development-services#webpage",
       "url": "https://www.tekcroft.com/services/ai-development-services",
-      "name": "AI Development Services | Tekcroft",
+      "name": "Custom AI Development Services: From Idea to Product",
       "description": "AI development services that design and build custom AI solutions, including AI chatbots, AI agents and business automation.",
       "isPartOf": {
         "@id": "https://www.tekcroft.com/#website"

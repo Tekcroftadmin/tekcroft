@@ -8,6 +8,7 @@ import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/local-seo-meta.json";
 import lcp from "@/lib/local-seo-lcp.json";
 import { localSeoServicesSchema } from "@/lib/schema";
+import { stampFooterYear } from "@/lib/stamp-footer-year";
 /* Tiny above-the-fold hero paint (LCP) — full page CSS loads deferred */
 import "@/app/local-seo-critical.css";
 /* Shared service hero shell — same style/design on every /services page */
@@ -36,9 +37,11 @@ export const metadata: Metadata = {
 };
 
 export default function LocalSeoPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "local-seo-body.html"),
-    "utf8"
+  const html = stampFooterYear(
+    fs.readFileSync(
+      path.join(process.cwd(), "lib", "local-seo-body.html"),
+      "utf8"
+    )
   );
 
   return (

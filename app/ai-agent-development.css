@@ -1173,7 +1173,11 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
    was drawn for the near-white. Those three fix the parity of the other
    nine, which is why this is one block rather than a rule beside each
    section: a run cannot be decided a section at a time. */
-#industries,#ai-search,#faq{
+#ai-search{
+  --ground:var(--bg-alt);  --panel:var(--surface); }
+#industries,#tech-stack,#why,#problem{
+  --ground:var(--surface);  --panel:var(--bg-alt); }
+#faq,#agent-services,#process,#reviews{
   --ground:var(--bg-alt);  --panel:var(--surface); }
 #services-2,#contact{
   --ground:var(--surface); --panel:var(--bg-alt); }
@@ -6803,22 +6807,23 @@ html[data-theme="dark"] .ts-lg{background:hsl(var(--brand-h) 20% 22%);}
 /* === rhythm-app === */
 /* Strict white / tint alternation after the dark hero (DOM order).
    white = --surface, tint = --bg-alt
-   proof(w) → problem(t) → agent-services(w) → industries(t) → process(w)
-   → why(t) → reviews(w) → work(t) → tech-stack(w) → faq(t)
+   proof(t/stats) → problem(w) → agent-services(t) → industries(w) → process(t)
+   → why(w) → reviews(t) → tech-stack(w) → faq(t)
    #contact keeps its own CTA plate */
 
-#proof,
-#services-2,
-#process,
-#reviews,
+#problem,
+#problem-v2,
+#industries,
+#why,
 #tech-stack{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt);
 }
-#problem,
-  #problem-v2,
-#industries,
-#why,
+#proof,
+#proof-v2,
+#agent-services,
+#process,
+#reviews,
 #work,
 #faq,
 #pricing{
@@ -6837,18 +6842,34 @@ html[data-theme="dark"] #pricing .pr-row{
 
 
 #proof,
+#proof-v2,
 #problem,
 #problem-v2,
-#services-2,
+#agent-services,
 #industries,
 #process,
 #why,
 #reviews,
+#tech-stack,
 #pricing,
 #work,
 #faq{
   background:var(--ground) !important;
   border-block:0 !important;
+}
+#contact.cta,
+#contact.sec.cta{
+  background:transparent !important;
+}
+/* AAG CTA shot carrier + band photo — img is SEO-only; visual is wrap::before */
+#contact.cta > .wrap::before,
+#contact.sec.cta > .wrap::before{
+  background:var(--cta-shot, var(--cta-pic)) 58% 45% / cover no-repeat !important;
+}
+#contact .cta-shot{
+  position:absolute !important; width:1px !important; height:1px !important;
+  padding:0 !important; margin:-1px !important; overflow:hidden !important;
+  clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important;
 }
 #services-2.svc-cn{ border-block:0; }
 /* Keep the plate photograph visible — translucent wash (not opaque #0b1220) */
@@ -8920,6 +8941,26 @@ html body .sec.is-white{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
+}
+/* Agent page ID lock — beats older inverted fills */
+#problem[data-ground="white"],
+#industries[data-ground="white"],
+#why[data-ground="white"],
+#tech-stack[data-ground="white"]{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
+#agent-services[data-ground="tint"],
+#process[data-ground="tint"],
+#reviews[data-ground="tint"],
+#faq[data-ground="tint"]{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+#contact.cta{
+  background:transparent !important;
 }
 
 /* In-page hash targets clear the fixed nav */

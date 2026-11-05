@@ -2,6 +2,7 @@
 
 import { useEffect, type ReactNode } from "react";
 import assets from "@/lib/asset-manifest.json";
+import { stampFooterYear } from "@/lib/stamp-footer-year";
 
 type HomepageProps = {
   html: string;
@@ -211,10 +212,12 @@ export default function Homepage({
     };
   }, [rawDesign]);
 
-  if (slot && children != null && html.includes(slot)) {
-    const at = html.indexOf(slot);
-    const before = html.slice(0, at);
-    const after = html.slice(at + slot.length);
+  const stamped = stampFooterYear(html);
+
+  if (slot && children != null && stamped.includes(slot)) {
+    const at = stamped.indexOf(slot);
+    const before = stamped.slice(0, at);
+    const after = stamped.slice(at + slot.length);
     return (
       <div id="tekcroft-root" suppressHydrationWarning>
         <div
@@ -234,7 +237,7 @@ export default function Homepage({
     <div
       id="tekcroft-root"
       suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: stamped }}
     />
   );
 }
