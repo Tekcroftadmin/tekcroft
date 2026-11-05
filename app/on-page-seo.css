@@ -384,7 +384,7 @@ html[data-theme="dark"]{
    that must not break either way is the blue phrase, which is two words
    and reads as a unit — that is the nowrap.
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-.hs-h1 em{white-space:nowrap;}
+.hs-h1 em{white-space:normal;}
 
 /* The claim runs to two paragraphs here. They read as one block, so the
    first sits closer to the second than the block does to the buttons.
