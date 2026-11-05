@@ -19,6 +19,12 @@ import "@/app/service-hero-lock.css";
 import "@/app/tm-shell-lock.css";
 /* Page hero tweaks (form vertical center, no stat divider) — after shared lock */
 import "@/app/mobile-app-hero-fix.css";
+/* #app-journey — From First Sketch to Long-Term Support (section only) */
+import "@/app/app-journey.css";
+/* #develop-apps — Develop Apps With Us (section only) */
+import "@/app/develop-apps.css";
+/* #engagement-models — Our Engagement Models inside #process */
+import "@/app/engagement-models.css";
 
 const caveat = Caveat({
   subsets: ["latin"],
