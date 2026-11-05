@@ -1187,7 +1187,7 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
    move — its cells are written white — so #process takes the tint, where
    its white cards read off a change of colour instead of an edge. */
 #clients{ --ground:var(--bg); --panel:var(--surface); }
-#process{ --ground:var(--bg-alt); --panel:var(--surface); }
+#process{ --ground:var(--surface); --panel:var(--bg-alt); }
 
 /* and the closing band takes a different photograph from the one the FAQ
    aside already uses — the same picture twice on one page is the reader
@@ -5773,7 +5773,7 @@ html[data-theme="dark"] .cm-bub{fill:hsl(var(--brand-h) 35% 18%); stroke:var(--b
    inventory, orders and accounts and the actions it takes; on the right
    four numbered rows; one CTA banner across the foot. Compact on purpose.
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-#systems{--ground:var(--bg-alt); padding-block:clamp(36px,4vw,56px);}
+#systems{--ground:var(--surface); padding-block:clamp(36px,4vw,56px);}
 .pw-head{max-width:900px;}
 .pw-head .smark{margin-bottom:clamp(10px,1.1vw,14px);}
 .pw-head h2{margin:0; font-size:var(--h2); line-height:1.06;}
@@ -6566,21 +6566,21 @@ html[data-theme="dark"] .m-logrow{fill:hsl(var(--brand-h) 25% 14%);}
 
 /* === rhythm-app === */
 /* Strict white/tint alternation (no two whites or two tints in a row):
-   proof(w) → services(t) → types(w) → systems(t) → stack(photo)
-   → industries(w) → process(t) → reviews(w) → work(t) → why(w) → faq(t)
+   proof(t/stats) → services(w) → types(t) → systems(w) → stack(photo)
+   → industries(t) → process(w) → reviews(t) → why(w) → faq(t)
    → contact(photo CTA) */
-#proof-v2,
-#chatbot-types,
-#industries,
-#reviews,
+#chatbot-services,
+#systems,
+#process,
 #why{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt);
 }
 
-#chatbot-services,
-#systems,
-#process,
+#proof-v2,
+#chatbot-types,
+#industries,
+#reviews,
 #work,
 #faq{
   --ground:var(--bg-alt) !important;
@@ -8655,6 +8655,27 @@ html body .sec.is-white{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
+}
+/* Chatbot page ID lock — beats defer/#why surface fills */
+#chatbot-services[data-ground="white"],
+#systems[data-ground="white"],
+#process[data-ground="white"],
+#why[data-ground="white"]{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
+#chatbot-types[data-ground="tint"],
+#industries[data-ground="tint"],
+#reviews[data-ground="tint"],
+#faq[data-ground="tint"]{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+#stack,
+#contact.cta{
+  background:transparent !important;
 }
 
 /* In-page hash targets clear the fixed nav */

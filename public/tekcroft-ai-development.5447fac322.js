@@ -1,1 +1,1287 @@
-!function(){var e=document.getElementById("guide");if(e){var t=e.querySelector(".sy-board"),n=[].slice.call(e.querySelectorAll(".sy-hs")),r=[].slice.call(e.querySelectorAll(".sy-it[data-k]")),i=-1,a=null,o=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;r.forEach((function(e,t){e.addEventListener("mouseenter",(function(){d(),s(t)}))})),n.forEach((function(e,t){e.addEventListener("mouseenter",(function(){d(),s(t)})),e.addEventListener("click",(function(){d(),s(t)}))})),[t,e.querySelector(".sy-list")].forEach((function(e){e.addEventListener("mouseleave",l)}));var c=!1;"IntersectionObserver"in window?new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting?u():d()}))}),{threshold:.35}).observe(t):u()}function s(e){i=e,n.forEach((function(t,n){t.classList.toggle("on",n===e)})),r.forEach((function(t,n){t.classList.toggle("on",n===e)})),t.classList.toggle("focus",e>-1)}function l(){o||(d(),a=setInterval((function(){s((i+1)%r.length)}),3200))}function d(){clearInterval(a)}function u(){c||(c=!0,e.classList.add("sy-run"),setTimeout((function(){e.classList.add("sy-guarded")}),o?0:1300),setTimeout((function(){s(0),l()}),o?0:2600))}}(),function(){var e=document.getElementById("guide-v3");if(e){var t=e.querySelector(".v3-map"),n=e.querySelector(".v3-links"),r=e.querySelector(".v3-hub .r1"),i=[].slice.call(e.querySelectorAll(".v3-card")),a="http://www.w3.org/2000/svg";i.forEach((function(e,t){e.addEventListener("mouseenter",(function(){[].forEach.call(n.querySelectorAll('[data-k="'+t+'"]'),(function(e){e.classList.add("on")}))})),e.addEventListener("mouseleave",(function(){[].forEach.call(n.querySelectorAll(".on"),(function(e){e.classList.remove("on")}))}))})),window.addEventListener("resize",o),document.fonts&&document.fonts.ready&&document.fonts.ready.then(o),o(),setTimeout(o,700),setTimeout(o,1600),new MutationObserver((function(){setTimeout(o,50)})).observe(e,{attributes:!0,attributeFilter:["hidden"]})}function o(){if(!e.hidden&&"none"!==getComputedStyle(n).display){var o=t.getBoundingClientRect(),c=r.getBoundingClientRect();n.setAttribute("viewBox","0 0 "+o.width+" "+o.height),n.innerHTML="";var s=c.left+c.width/2-o.left,l=c.top+c.height/2-o.top,d=c.width/2;i.forEach((function(e,t){var r,i,c,u,f=e.getBoundingClientRect(),h=!1,v=f.left+f.width/2-o.left,m=f.top+f.height/2-o.top,p=f.left-o.left,g=f.right-o.left,y=f.top-o.top,w=f.bottom-o.top;w<l-.6*d?(h=!0,u=w,c=Math.max(p+40,Math.min(g-40,s+.35*(v-s)))):y>l+.6*d?(h=!0,u=y,c=Math.max(p+40,Math.min(g-40,s+.35*(v-s)))):(c=v<s?g:p,u=m);var E=Math.atan2(u-l,c-s),L=((r=s+Math.cos(E)*d)+c)/2,b=((i=l+Math.sin(E)*d)+u)/2,A=h?"M"+r+" "+i+" C"+r+" "+b+" "+c+" "+b+" "+c+" "+u:"M"+r+" "+i+" C"+L+" "+i+" "+L+" "+u+" "+c+" "+u,x=document.createElementNS(a,"path");x.setAttribute("d",A),x.setAttribute("class","ln"),x.dataset.k=t,n.appendChild(x);var k=document.createElementNS(a,"path");k.setAttribute("d",A),k.setAttribute("class","fl"),k.dataset.k=t,n.appendChild(k),[[r,i],[c,u]].forEach((function(e){var t=document.createElementNS(a,"circle");t.setAttribute("cx",e[0]),t.setAttribute("cy",e[1]),t.setAttribute("r",4.5),n.appendChild(t)}))}))}}}(),function(){const e=[["db","Unprepared data","Disparate or untagged records get audited before building begins, not found halfway into the project."],["flag","Pilot projects that never reach production","Each build is run against real-world systems and real-world loads, not sample data."],["undo","Writeback issues","Any write to your CRM or database gets tracked and rolled back should it fail partway through."],["gauge","Latency under load","Latency is tested using your real traffic, not a quiet environment designed for demos."],["coin","Uncontrolled costs post-launch","Usage costs and retries are limited and watched from day one, not open-ended."],["layers","Model version drift","Model versions are locked and validated before any provider updates your system."],["shield","Security issues around access","Retrieval adheres to your permissions, so nothing can be returned that a user is not authorized to view."]],t=e=>`<svg viewBox="0 0 24 24"><use href="#v4-${e}"/></svg>`;e.forEach(((e,n)=>{document.getElementById(n<3?"v4L":n<6?"v4R":"v4B").insertAdjacentHTML("beforeend",`<div class="card" style="--i:${n}"><div class="ic">${t(e[0])}</div><div><h3>${e[1]}</h3><p>${e[2]}</p></div></div>`)})),e.forEach(((e,n)=>document.getElementById("v4T").insertAdjacentHTML("beforeend",`<div class="tile" style="--i:${n}">${t(e[0])}<span>${e[1]}</span><u>!</u></div>`)))}(),function(){var e={1:document.getElementById("guide"),2:document.getElementById("guide-v2"),3:document.getElementById("guide-v3"),4:document.getElementById("guide-v4")},t=document.querySelector(".vsw");if(t){var n=[].slice.call(t.querySelectorAll("button")),r="tk-guide-variant",i="4";try{i=localStorage.getItem(r)||"4"}catch(e){}n.forEach((function(t){t.addEventListener("click",(function(){a(t.dataset.v),e[t.dataset.v].scrollIntoView({behavior:"smooth",block:"start"})}))})),a(i)}function a(t){Object.keys(e).forEach((function(n){e[n]&&(e[n].hidden=n!==t)})),n.forEach((function(e){e.classList.toggle("on",e.dataset.v===t),e.setAttribute("aria-pressed",e.dataset.v===t?"true":"false")}));try{localStorage.setItem(r,t)}catch(e){}window.dispatchEvent(new Event("resize"))}}(),function(){var e=document.getElementById("security");if(e){var t=[].slice.call(e.querySelectorAll(".sc3-req li")),n=e.querySelector(".sc3-sign"),r=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches,i=[].slice.call(e.querySelectorAll(".sc3-b")),a=e.querySelector(".sc3-steps"),o=[].slice.call(e.querySelectorAll(".sc3-steps li.carry")),c=-1,s=null;i.forEach((function(e,t){e.addEventListener("mouseenter",(function(){h(),d(t)})),e.addEventListener("click",(function(){h(),d(t)}))})),t.forEach((function(e,t){e.addEventListener("mouseenter",(function(){h(),d(t)}))})),[e.querySelector(".sc3-badges"),e.querySelector(".sc3-req")].forEach((function(e){e.addEventListener("mouseleave",f)}));var l=!1;"IntersectionObserver"in window?new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting?l?f():(l=!0,u()):h()}))}),{threshold:.35}).observe(e):u()}function d(e){c=e,i.forEach((function(t,n){t.classList.toggle("on",n===e)})),t.forEach((function(t,n){t.classList.toggle("on",n===e)}))}function u(){t.forEach((function(e){e.classList.remove("done")})),n.classList.remove("ok"),a.classList.remove("go"),o.forEach((function(e){e.classList.remove("lit")})),t.forEach((function(e,t){setTimeout((function(){e.classList.add("done")}),r?0:400+380*t)}));var e=r?0:400+380*t.length+200;setTimeout((function(){n.classList.add("ok"),a.classList.add("go")}),e),o.forEach((function(t,n){setTimeout((function(){t.classList.add("lit")}),r?0:e+500+500*n)})),setTimeout((function(){d(0),f()}),r?0:e+1600)}function f(){r||(clearInterval(s),s=setInterval((function(){d((c+1)%t.length)}),3200))}function h(){clearInterval(s)}}(),function(){"use strict";var e=function(e,t){return(t||document).querySelector(e)},t=function(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))},n=document.documentElement;t(".js-theme").forEach((function(e){e.addEventListener("click",(function(){n.setAttribute("data-theme","dark"===n.getAttribute("data-theme")?"light":"dark"),e.classList.toggle("spin")}))})),t(".btn").forEach((function(e){e.querySelector(".btn-label")||Array.prototype.slice.call(e.childNodes).forEach((function(t){if(3===t.nodeType){var n=t.nodeValue.replace(/\s+/g," ").trim();if(n){var r=document.createElement("span");r.className="btn-label",r.textContent=n,e.replaceChild(r,t)}}}))}));var r=e("#nav"),i=e(".js-burger"),a=e(".js-mnav");function o(){if(r){var e=r.querySelector(".nav-in"),t=getComputedStyle(r),i=(e?e.offsetHeight:64)+(parseFloat(t.paddingTop)||0)+(parseFloat(t.paddingBottom)||0);n.style.setProperty("--nav-h",Math.round(i)+"px")}}o(),window.addEventListener("resize",o);var c=!1;function s(){c=!1,r&&r.classList.toggle("stuck",window.scrollY>12)}function l(){a&&(a.classList.remove("open"),i&&(i.classList.remove("open"),i.setAttribute("aria-expanded","false")),o())}window.addEventListener("scroll",(function(){c||(c=!0,requestAnimationFrame(s))}),{passive:!0}),s(),i&&a&&(i.addEventListener("click",(function(){var e=a.classList.toggle("open");i.classList.toggle("open",e),i.setAttribute("aria-expanded",e?"true":"false"),o()})),a.addEventListener("click",(function(e){e.target.closest(".mm-acc")||e.target.closest("a[href],[data-jump]")&&l()}))),t("[data-jump]").forEach((function(t){t.addEventListener("click",(function(){var t=e(".hs:not([hidden]) form[data-lead]");if(t){l(),t.scrollIntoView({behavior:"smooth",block:"center"});var n=t.querySelector("input,select,textarea");n&&setTimeout((function(){n.focus({preventScroll:!0})}),420)}}))})),requestAnimationFrame((function(){requestAnimationFrame((function(){var t;(t=e(".hs:not([hidden])"))&&(t.classList.remove("play"),t.classList.add("play"))}))}));var d=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i,u={name:function(e){return e.length>=2?"":"Please tell us your name."},email:function(e){return e?d.test(e)?"":"That email does not look right.":"Please add an email we can reply to."},phone:function(e){return e.replace(/\D/g,"").length>=7?"":"Please add a number we can reach you on."},service:function(e){return e?"":"Pick the service you are after."}};t("form[data-lead]").forEach((function(e){var n=!1,r=t("[data-rule]",e);function i(e){var t=e.dataset.rule,n=e.closest(".hs-field"),r=u[t]?u[t](e.value.trim()):"";return n.setAttribute("data-bad",r?"true":"false"),e.setAttribute("aria-invalid",r?"true":"false"),n.querySelector(".hs-err").textContent=r,!r}r.forEach((function(e){["input","change","blur"].forEach((function(t){e.addEventListener(t,(function(){n&&i(e)}))}))})),e.addEventListener("submit",(function(t){t.preventDefault(),n=!0;var a=null;r.forEach((function(e){i(e)||a||(a=e)})),a?a.focus():(e.setAttribute("data-sent","true"),e.scrollIntoView({behavior:"smooth",block:"center"}))}))}))}(),function(){"use strict";var e=function(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))},t=window.matchMedia("(prefers-reduced-motion: reduce)").matches,n=new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting&&(e.target.classList.add("in"),n.unobserve(e.target))}))}),{threshold:0,rootMargin:"0px 0px -70px 0px"});e(".rv").forEach((function(e){n.observe(e)})),requestAnimationFrame((function(){e(".rv").forEach((function(e){e.getBoundingClientRect().top<window.innerHeight&&e.classList.add("in")}))}));var r=document.getElementById("tbMarq");r&&!t&&(r.innerHTML+=r.innerHTML);var i=new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting&&(!function(e){var n=parseFloat(e.getAttribute("data-count"));if(!isNaN(n)){var r=e.getAttribute("data-prefix")||"",i=e.getAttribute("data-suffix")||"";if(t)e.innerHTML=c(n);else{var a=null;requestAnimationFrame((function t(r){null===a&&(a=r);var i=Math.min((r-a)/1400,1),o=1-Math.pow(1-i,3);e.innerHTML=c(Math.round(n*o)),i<1&&requestAnimationFrame(t)}))}}function o(e){return e?'<i class="fig-af">'+e+"</i>":""}function c(e){return o(r)+(e>=1e3?e.toLocaleString("en-US"):e)+o(i)}}(e.target),i.unobserve(e.target))}))}),{threshold:.4});e("[data-count]").forEach((function(e){i.observe(e)}))}(),function(){"use strict";var e=document.getElementById("ftMarq");if(e){var t=["AI development","Generative AI","AI chatbots","AI agents","Machine learning","Computer vision","MLOps","AI integration","AI consulting","Model monitoring","Data audits","Proof of concept"].map((function(e){return"<span>"+e+"</span><i></i>"})).join("");e.innerHTML=t+t}}(),function(){function e(e){var t=e.getAttribute("aria-controls");return t?document.getElementById(t):null}document.addEventListener("click",(function(t){var n=t.target;if(n&&3===n.nodeType&&(n=n.parentElement),n&&"function"==typeof n.closest){var r=n.closest(".faq-q");if(r){var i=r.closest(".faq-list");if(i){var a=e(r);if(a){var o="true"===r.getAttribute("aria-expanded");if(function(t){t.querySelectorAll(".faq-q").forEach((function(t){t.setAttribute("aria-expanded","false");var n=e(t);n&&(n.setAttribute("data-open","false"),n.classList.remove("is-open"))}))}(i),!o){r.setAttribute("aria-expanded","true"),a.setAttribute("data-open","true"),a.classList.add("is-open");var c=i.closest(".faq-wrap");if(c){var s=Array.prototype.slice.call(i.querySelectorAll(".faq-q"));c.dataset.at=String(s.indexOf(r)+1)}}}}}}}))}(),function(){"use strict";var e=function(e,t){return(t||document).querySelector(e)},t=function(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))},n=window.matchMedia("(prefers-reduced-motion: reduce)").matches;t("[data-console]").forEach((function(r){var i=t(".cn-tab",r),a=t(".cn-card",r),o=e(".cn-sheet",r),c=e(".cn-lift",r),s=window.matchMedia("(max-width:1040px)"),l=0,d=!1,u=0;function f(e,t){if(c)if(s.matches||e<0)c.classList.remove("on");else{var n=i[e];if(n)if(n.offsetHeight){u=0;var r=parseFloat(getComputedStyle(n).marginRight)||0;t||(c.style.transition="none"),c.style.top=n.offsetTop+"px",c.style.left=n.offsetLeft+"px",c.style.height=n.offsetHeight+"px",c.style.width=n.offsetWidth+r+"px",c.classList.add("on"),t||(c.style.transition="")}else u++<20&&requestAnimationFrame((function(){f(l,!1)}))}}function h(e){var t=s.matches?i[e]:o;if(t){var r,a=(parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"))||74)+(s.matches?10:14);if(s.matches){var c=t.style.position;t.style.position="static",r=t.getBoundingClientRect().top,t.style.position=c}else r=t.getBoundingClientRect().top;var l=s.matches?a+90:.42*window.innerHeight;r>=a-2&&r<=l||window.scrollTo({top:r+window.pageYOffset-a,behavior:n?"auto":"smooth"})}}function v(e,t){l=e,i.forEach((function(t,n){t.classList.toggle("on",n===e),t.setAttribute("aria-selected",n===e?"true":"false")})),a.forEach((function(t,n){t.classList.toggle("on",n===e)})),function(e){s.matches?a.forEach((function(t,n){n===e?t.previousElementSibling!==i[n]&&i[n].insertAdjacentElement("afterend",t):t.parentNode!==o&&o.appendChild(t)})):a.some((function(e){return e.parentNode!==o}))&&a.forEach((function(e){o.appendChild(e)}))}(e),f(e,d&&!n),d=!0,t&&e>=0&&h(e)}function m(){v(l<0&&!s.matches?0:l,!1)}i.forEach((function(e,t){e.addEventListener("click",(function(){if(s.matches&&l===t)return v(-1,!1),void h(t);v(t,!0)})),e.addEventListener("keydown",(function(e){var n="ArrowDown"===e.key?1:"ArrowUp"===e.key?-1:0;if(n){e.preventDefault();var r=(t+n+i.length)%i.length;i[r].focus(),v(r,!1)}}))})),s.addEventListener?s.addEventListener("change",m):s.addListener&&s.addListener(m),window.addEventListener("resize",(function(){f(l,!1)})),document.fonts&&document.fonts.ready&&document.fonts.ready.then((function(){f(l,!1)})),v(0,!1)}))}(),function(){if(window.matchMedia("(hover:hover) and (pointer:fine)").matches&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.querySelectorAll(".ws-item").forEach((function(e){var t=null,n=null;e.addEventListener("pointerenter",(function(){n=e.getBoundingClientRect()})),e.addEventListener("pointermove",(function(r){if(n&&!t){var i=(r.clientX-n.left)/n.width-.5,a=(r.clientY-n.top)/n.height-.5;t=requestAnimationFrame((function(){e.style.setProperty("--ry",(4*i*2).toFixed(2)+"deg"),e.style.setProperty("--rx",(-4*a*2).toFixed(2)+"deg"),t=null}))}})),e.addEventListener("pointerleave",(function(){t&&(cancelAnimationFrame(t),t=null),e.style.setProperty("--ry","0deg"),e.style.setProperty("--rx","0deg"),n=null}))}))}}(),function(){"use strict";if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){var e=document.querySelector(".pf-track");if(e){var t=window.matchMedia("(min-width: 901px)"),n=Array.prototype.slice.call(e.children);r(),t.addEventListener?t.addEventListener("change",r):t.addListener(r)}}function r(){var r=!!e.querySelector("[data-copy]");t.matches&&!r?n.forEach((function(t){var n=t.cloneNode(!0);n.classList.remove("rv"),n.removeAttribute("style"),n.setAttribute("aria-hidden","true"),n.setAttribute("tabindex","-1"),n.setAttribute("data-copy",""),e.appendChild(n)})):!t.matches&&r&&Array.prototype.slice.call(e.querySelectorAll("[data-copy]")).forEach((function(e){e.remove()}))}}(),function(){"use strict";var e=function(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))},t=window.matchMedia("(prefers-reduced-motion: reduce)").matches;e("[data-walk]").forEach((function(n){var r=e(".walk-step",n),i=-1,a=null;function o(){var e=t?null:r.map((function(e){return e.getBoundingClientRect().top}));i=(i+1)%r.length,r.forEach((function(e,t){e.classList.toggle("on",t===i)})),n.setAttribute("data-at",i),e&&function(e){var t=r.map((function(t,n){return e[n]-t.getBoundingClientRect().top})),n=[];r.forEach((function(e,r){t[r]&&(e.style.transition="none",e.style.transform="translateY("+t[r]+"px)",n.push(e))})),n.length&&n.forEach((function(e){e.style.transition="transform .52s cubic-bezier(.16,1,.3,1)",e.style.transform="",e.addEventListener("transitionend",(function t(){e.style.transition="",e.removeEventListener("transitionend",t)}))}))}(e)}var c=window.matchMedia("(max-width: 1000px)");function s(){a&&(clearInterval(a),a=null)}function l(e){e!==i&&(i=e,r.forEach((function(t,n){t.classList.toggle("on",n===e)})),n.setAttribute("data-at",e))}function d(){a||(a=setInterval((function(){l((i+1)%r.length)}),7e3))}var u=!1;function f(){if(!u){u=!0;var e=n.querySelector(".eg-list");if(e){var o=null,c=null;e.addEventListener("touchstart",(function(e){var t=e.changedTouches[0];s(t.clientX,t.clientY)}),{passive:!0}),e.addEventListener("touchend",(function(e){var t=e.changedTouches[0];f(t.clientX,t.clientY)}),{passive:!0}),e.addEventListener("touchcancel",(function(){o=null}),{passive:!0}),e.addEventListener("pointerdown",(function(e){"mouse"===e.pointerType&&s(e.clientX,e.clientY)}),{passive:!0}),e.addEventListener("pointerup",(function(e){"mouse"===e.pointerType&&f(e.clientX,e.clientY)}),{passive:!0})}}function s(e,t){o=e,c=t}function f(e,n){if(null!==o){var s=e-o,u=n-c;o=null,Math.abs(s)>40&&Math.abs(s)>1.2*Math.abs(u)&&(l((i+(s<0?1:-1)+r.length)%r.length),a&&(clearInterval(a),a=null),t||d())}}}var h=new IntersectionObserver((function(e){if(e[0].isIntersecting)if(r.forEach((function(e){e.classList.add("seen")})),c.matches){if(f(),i<0&&l(0),t)return;d()}else t||a||(o(),a=setInterval(o,1600));else s()}),{threshold:.25});h.observe(n);var v=function(){s(),h.unobserve(n),h.observe(n)};c.addEventListener?c.addEventListener("change",v):c.addListener(v)}))}(),document.querySelectorAll(".dv-card").forEach((function(e){e.addEventListener("pointermove",(function(t){var n=e.getBoundingClientRect();e.style.setProperty("--mx",t.clientX-n.left+"px"),e.style.setProperty("--my",t.clientY-n.top+"px")}))})),function(){"use strict";var e=function(e,t){return(t||document).querySelector(e)},t=function(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))};!function(){var n=e("#wkDeck"),r=e("#wkRail");if(n&&r){var i=t(".wk-card",r),a=e("#wkAt"),o=e("#wkBar"),c=t(".wk-arw",n);if(!(i.length<2)){var s,l,d=i.length,u=i;s=document.createDocumentFragment(),l=document.createDocumentFragment(),i.forEach((function(e){[s,l].forEach((function(t){var n=e.cloneNode(!0);n.setAttribute("aria-hidden","true"),n.setAttribute("data-clone",""),t.appendChild(n)}))})),r.appendChild(l),r.insertBefore(s,r.firstChild),u=t(".wk-card",r);var f,h=0;c.forEach((function(e){e.addEventListener("click",(function(){r.scrollLeft+=E()*Number(e.getAttribute("data-wk"))}))})),r.addEventListener("scroll",(function(){window.requestAnimationFrame(b),clearTimeout(f),f=setTimeout(L,150)}),{passive:!0}),window.addEventListener("resize",A);var v=!1,m=0,p=0,g=!1;r.addEventListener("pointerdown",(function(e){"touch"!==e.pointerType&&(v=!0,g=!1,m=e.clientX,p=r.scrollLeft,r.classList.add("dragging"),r.setPointerCapture(e.pointerId),S())})),r.addEventListener("pointermove",(function(e){if(v){var t=e.clientX-m;Math.abs(t)>3&&(g=!0),r.scrollLeft=p-t}})),r.addEventListener("pointerup",x),r.addEventListener("pointercancel",x),r.addEventListener("click",(function(e){g&&(e.preventDefault(),e.stopPropagation())}),!0);var y=3400,w=null;n.addEventListener("pointerenter",S),n.addEventListener("pointerleave",(function(){v||k()})),r.addEventListener("focusin",S),r.addEventListener("focusout",k),document.addEventListener("visibilitychange",(function(){document.hidden?S():v||k()})),n.classList.add("wired"),A(),k()}}function E(){return u[1].offsetLeft-u[0].offsetLeft}function L(){var e=E()*d;if(e){var t=r.scrollLeft,n=t;if(t<.5*e?n=t+e:t>1.5*e&&(n=t-e),n!==t){var i=r.style.scrollBehavior;r.style.scrollBehavior="auto",r.scrollLeft=n,r.style.scrollBehavior=i,b()}}}function b(){var e=r.scrollLeft+r.clientWidth/2,t=0,n=1/0;u.forEach((function(r,i){var a=Math.abs(r.offsetLeft+r.offsetWidth/2-e);a<n&&(n=a,t=i)})),u.forEach((function(e,n){e.classList.toggle("on",n===t)}));var i=(t%d+d)%d;a.textContent=("0"+(i+1)).slice(-2),o.style.width=(i+1)/d*100+"%"}function A(){var e=r.clientWidth;e&&!h?function(){if(r.clientWidth){var e=r.style.scrollBehavior,t=u[d+1];r.style.scrollBehavior="auto",r.scrollLeft=t.offsetLeft+t.offsetWidth/2-r.clientWidth/2,r.style.scrollBehavior=e,b()}}():b(),h=e}function x(){v&&(v=!1,r.classList.remove("dragging"),L(),k())}function k(){S(),w=setInterval((function(){r.scrollLeft+=E()}),y)}function S(){w&&(clearInterval(w),w=null)}}(),function(){var e=document.getElementById("grTrack");if(e){e.innerHTML=[{name:"Client Name",initials:"CN",guide:!0,meta:"24 reviews · 6 photos",when:"2 weeks ago",text:"Placeholder review. Replace with a real Google review from a client whose AI project you shipped.",tags:["AI Agents","CRM Integration"],helpful:24},{name:"Client Name",initials:"CN",guide:!1,meta:"8 reviews · 2 photos",when:"1 month ago",text:"Placeholder review. Paste the review exactly as the client wrote it, including the result they mention.",tags:["AI Chatbot","Support"],helpful:18},{name:"Client Name",initials:"CN",guide:!1,meta:"11 reviews",when:"2 months ago",text:"Placeholder review. A good one names the problem, what was built and what changed afterwards.",tags:["Machine Learning","Forecasting"],helpful:32},{name:"Client Name",initials:"CN",guide:!0,meta:"31 reviews · 4 photos",when:"3 months ago",text:"Placeholder review. Replace with a real Google review before this goes live.",tags:["Computer Vision","Quality Control"],helpful:15},{name:"Client Name",initials:"CN",guide:!1,meta:"6 reviews",when:"4 months ago",text:"Placeholder review. Replace with a real Google review before this goes live.",tags:["MLOps","Deployment"],helpful:9},{name:"Client Name",initials:"CN",guide:!1,meta:"17 reviews · 1 photo",when:"5 months ago",text:"Placeholder review. Replace with a real Google review before this goes live.",tags:["Enterprise AI","Integration"],helpful:21}].map((function(e){return'<article class="gr-card"><div class="gr-top"><span class="gr-av" aria-hidden="true">'+c(e.initials)+'</span><span class="gr-who"><b>'+c(e.name)+(e.guide?'<span class="gr-guide">Local Guide</span>':"")+"</b><span>"+c(e.meta)+'</span></span><span class="gr-kebab" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></svg></span></div><div class="gr-meta">'+o(5)+'<span class="gr-when">'+c(e.when)+'</span></div><p class="gr-text">'+c(e.text)+'</p><div class="gr-tags">'+e.tags.map((function(e){return'<span class="gr-tag">'+c(e)+"</span>"})).join("")+'</div><div class="gr-foot"><button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10.5v9H4.5v-9Z"/><path d="M7 10.5 11 3a2 2 0 0 1 2 2v4h5.4a1.6 1.6 0 0 1 1.6 2l-1.5 7a2 2 0 0 1-2 1.5H7Z"/></svg>Helpful ('+e.helpful+')</button><button type="button">Share</button></div></article>'})).join("");var t=document.getElementById("grBarStars");t&&(t.innerHTML=o(4.8));var n=document.getElementById("grPrev"),r=document.getElementById("grNext"),i=document.getElementById("grDots");if(n&&r&&i){var a=i.parentElement;n.addEventListener("click",(function(){u(-1)})),r.addEventListener("click",(function(){u(1)})),i.addEventListener("click",(function(t){var n=t.target.closest(".gr-dot");n&&e.scrollTo({left:n.dataset.i*s(),behavior:"smooth"})})),e.addEventListener("scroll",d,{passive:!0}),window.addEventListener("resize",d),d()}}function o(e){for(var t="",n=0;n<5;n++)t+='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.6 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17.42 6.62 20.25l1.03-6L3.3 10l6-.9z"/></svg>';return'<span class="gr-stars" role="img" aria-label="Rated '+e+' out of 5">'+t+"</span>"}function c(e){return String(e).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}function s(){var t=e.firstElementChild;if(!t)return 1;var n=parseFloat(getComputedStyle(e).columnGap||getComputedStyle(e).gap)||0;return Math.max(1,t.offsetWidth+n)}function l(){return Math.max(1,e.children.length-Math.max(1,Math.round(e.clientWidth/s()))+1)}function d(){var t=e.scrollWidth-e.clientWidth>4;if(a.style.display=t?"flex":"none",t){var o=l(),c=Math.min(Math.round(e.scrollLeft/s()),o-1);if(i.children.length!==o){i.innerHTML="";for(var d=0;d<o;d++){var u=document.createElement("button");u.className="gr-dot",u.type="button",u.setAttribute("aria-label","Go to review "+(d+1)),u.dataset.i=d,i.appendChild(u)}}[].slice.call(i.children).forEach((function(e,t){e.setAttribute("aria-current",t===c?"true":"false")})),n.disabled=c<=0,r.disabled=c>=o-1}}function u(t){e.scrollBy({left:t*s(),behavior:"smooth"})}}()}(),function(){var e=window.matchMedia("(prefers-reduced-motion: reduce)").matches;document.querySelectorAll(".cn-motion[data-steps]").forEach((function(t){var n=+t.dataset.steps,r=0,i=null,a=[].slice.call(t.querySelectorAll("[data-at]"));function o(){t.setAttribute("data-s",r),a.forEach((function(e){e.classList.toggle("is-on",r>=+e.dataset.at&&r<=(e.dataset.until?+e.dataset.until:99))}))}function c(){r=r>=n?0:r+1,o(),i=setTimeout(c,0===r?500:r===n?2800:950)}if(e)return r=n,void o();o(),new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting&&e.intersectionRect.height>0?i||(r=0,c()):i&&(clearTimeout(i),i=null,r=0,o())}))}),{threshold:.2}).observe(t)}))}(),function(){var e=document.getElementById("ax");if(e){var t=[].slice.call(e.querySelectorAll(".ax-p")),n=window.matchMedia("(prefers-reduced-motion: reduce)").matches;t.forEach((function(e){var t=document.querySelector('.mm-stack img[data-key="'+e.dataset.img+'"]');t&&e.style.setProperty("--bgimg","url("+t.src+")")}));var r=null;t.forEach((function(e,r){e.addEventListener("click",(function(){o(r)})),e.addEventListener("keydown",(function(e){"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),o(r)),"ArrowRight"!==e.key&&"ArrowDown"!==e.key||(e.preventDefault(),t[(r+1)%t.length].focus(),o((r+1)%t.length)),"ArrowLeft"!==e.key&&"ArrowUp"!==e.key||(e.preventDefault(),t[(r+t.length-1)%t.length].focus(),o((r+t.length-1)%t.length))}));var i=e.querySelector(".ax-prog");i&&!n&&i.addEventListener("animationend",(function(){e.classList.contains("on")&&o((r+1)%t.length)}))})),i(),window.addEventListener("resize",a),document.fonts&&document.fonts.ready&&document.fonts.ready.then(a).catch((function(){})),window.addEventListener("load",a)}function i(){if(window.matchMedia("(max-width:980px)").matches)e.style.minHeight="";else{var n=e.querySelector(".ax-p.on")||t[0],r=n?n.querySelector(".ax-body"):null,i=n?n.querySelector(".ax-card"):null,a=56;if(r){var o=window.getComputedStyle(r);a=(parseFloat(o.paddingTop)||0)+(parseFloat(o.paddingBottom)||0)||56}var c=i&&i.clientWidth?i.clientWidth:460,s=document.createElement("div");s.setAttribute("aria-hidden","true"),s.style.cssText="position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;width:0;height:0;overflow:hidden;",document.body.appendChild(s);var l=0;t.forEach((function(e){var t=e.querySelector(".ax-card");if(t){var n=t.cloneNode(!0);n.style.cssText="box-sizing:border-box;width:"+c+"px;max-width:460px;height:auto;max-height:none;overflow:visible;position:static;display:block;",s.appendChild(n),l=Math.max(l,n.scrollHeight||n.offsetHeight||0),s.removeChild(n)}})),document.body.removeChild(s),l>0&&(e.style.minHeight=Math.ceil(Math.max(560,l+a))+"px")}}function a(){clearTimeout(r),r=setTimeout(i,40)}function o(e){t.forEach((function(t,n){var r=n===e;t.classList.toggle("on",r),t.setAttribute("aria-selected",r?"true":"false");var i=t.querySelector(".ax-prog");i&&(i.style.animation="none",i.style.animation="")}))}}(),function(){var e=document.querySelector("#services-2 [data-tm]");if(e){var t=[].slice.call(e.querySelectorAll(".tm-item"));t.forEach((function(e){var t=document.createElement("span");t.className="tm-prog",t.setAttribute("aria-hidden","true"),e.appendChild(t)}));var n=0,r=null,i=!1,a=window.matchMedia("(prefers-reduced-motion: reduce)").matches;t.forEach((function(r,i){r.addEventListener("mouseenter",(function(){clearTimeout(e._hi),e._hi=setTimeout((function(){n!==i&&o(i)}),220)})),r.addEventListener("mouseleave",(function(){clearTimeout(e._hi)})),r.addEventListener("click",(function(){l(),o(i)})),r.addEventListener("keydown",(function(e){if("Enter"===e.key||" "===e.key)return e.preventDefault(),l(),void o(i);var n="ArrowRight"===e.key||"ArrowDown"===e.key?i+1:"ArrowLeft"===e.key||"ArrowUp"===e.key?i-1:-1;n<0||n>=t.length||(e.preventDefault(),t[n].focus(),l(),o(n))}))})),e.addEventListener("mouseenter",(function(){s(),e.classList.add("paused")})),e.addEventListener("mouseleave",(function(){e.classList.remove("paused"),i||c()})),o(0),new IntersectionObserver((function(e){e.forEach((function(e){e.isIntersecting?c():s()}))}),{threshold:.25}).observe(e)}function o(e){n=(e+t.length)%t.length,t.forEach((function(e,t){var r=t===n;if(e.classList.toggle("on",r),e.setAttribute("aria-selected",String(r)),r){var i=e.querySelector(".tm-prog");i&&(i.style.animation="none",i.style.animation="")}}))}function c(){s(),e.classList.remove("paused"),i||a||(r=setInterval((function(){o(n+1)}),6e3))}function s(){clearInterval(r)}function l(){i=!0,s(),e.classList.add("paused"),clearTimeout(l._t),l._t=setTimeout((function(){i=!1,c()}),12e3)}}();
+/* === v4-script === */
+(function(){
+const P=[["db","Unprepared data","Disparate or untagged records get audited before building begins, not found halfway into the project."],["flag","Pilot projects that never reach production","Each build is run against real-world systems and real-world loads, not sample data."],["undo","Writeback issues","Any write to your CRM or database gets tracked and rolled back should it fail partway through."],["gauge","Latency under load","Latency is tested using your real traffic, not a quiet environment designed for demos."],["coin","Uncontrolled costs post-launch","Usage costs and retries are limited and watched from day one, not open-ended."],["layers","Model version drift","Model versions are locked and validated before any provider updates your system."],["shield","Security issues around access","Retrieval adheres to your permissions, so nothing can be returned that a user is not authorized to view."]];
+const ic=k=>`<svg viewBox="0 0 24 24"><use href="#v4-${k}"/></svg>`;
+P.forEach((p,i)=>{document.getElementById(i<3?"v4L":i<6?"v4R":"v4B").insertAdjacentHTML("beforeend",`<div class="card" style="--i:${i}"><div class="ic">${ic(p[0])}</div><div><h3>${p[1]}</h3><p>${p[2]}</p></div></div>`)});
+P.forEach((t,i)=>document.getElementById("v4T").insertAdjacentHTML("beforeend",`<div class="tile" style="--i:${i}">${ic(t[0])}<span>${t[1]}</span><u>!</u></div>`));
+})();
+
+/* === sc3-script === */
+
+(function(){
+  var root=document.getElementById('security'); if(!root) return;
+  var rows=[].slice.call(root.querySelectorAll('.sc3-req li')), sign=root.querySelector('.sc3-sign'), timer=null, ran=false,
+      reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tiles=[].slice.call(root.querySelectorAll('.sc3-b')), steps=root.querySelector('.sc3-steps'), carry=[].slice.call(root.querySelectorAll('.sc3-steps li.carry')), cur=-1, cyc=null;
+  function pick(k){ cur=k; tiles.forEach(function(t,i){t.classList.toggle('on',i===k);}); rows.forEach(function(r,i){r.classList.toggle('on',i===k);}); }
+  function run(){ rows.forEach(function(r){r.classList.remove('done');}); sign.classList.remove('ok'); steps.classList.remove('go'); carry.forEach(function(c){c.classList.remove('lit');});
+    rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('done'); },reduce?0:400+i*380); });
+    var t=reduce?0:400+rows.length*380+200;
+    setTimeout(function(){ sign.classList.add('ok'); steps.classList.add('go'); },t);
+    carry.forEach(function(c,i){ setTimeout(function(){ c.classList.add('lit'); },reduce?0:t+500+i*500); });
+    setTimeout(function(){ pick(0); play(); },reduce?0:t+1600); }
+  function play(){ if(reduce) return; clearInterval(cyc); cyc=setInterval(function(){ pick((cur+1)%rows.length); },3200); }
+  function stop(){ clearInterval(cyc); }
+  tiles.forEach(function(t,i){ t.addEventListener('mouseenter',function(){stop(); pick(i);}); t.addEventListener('click',function(){stop(); pick(i);}); });
+  rows.forEach(function(r,i){ r.addEventListener('mouseenter',function(){stop(); pick(i);}); });
+  [root.querySelector('.sc3-badges'), root.querySelector('.sc3-req')].forEach(function(el){ el.addEventListener('mouseleave',play); });
+  var started=false;
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ if(!started){ started=true; run(); } else play(); } else stop(); }); },{threshold:.35}).observe(root); } else run();
+})();
+
+
+/* === chrome === */
+
+(function(){
+  "use strict";
+  var $  = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---------------- theme ---------------- */
+  var root = document.documentElement;
+  $$(".js-theme").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      root.setAttribute("data-theme",
+        root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+      btn.classList.toggle("spin");
+    });
+  });
+
+  /* ---------------- button labels ----------------
+     The ink wipe is a positioned ::before and would paint over a loose text
+     node, so every button's own words get wrapped once, here. */
+  $$(".btn").forEach(function(btn){
+    if (btn.querySelector(".btn-label")) return;
+    Array.prototype.slice.call(btn.childNodes).forEach(function(node){
+      if (node.nodeType !== 3) return;
+      var text = node.nodeValue.replace(/\s+/g, " ").trim();
+      if (!text) return;
+      var label = document.createElement("span");
+      label.className = "btn-label";
+      label.textContent = text;
+      btn.replaceChild(label, node);
+    });
+  });
+
+  /* ---------------- nav ---------------- */
+  var nav = $("#nav"), burger = $(".js-burger"), mnav = $(".js-mnav");
+
+  function navHeight(){
+    if (nav){
+    var __bar = nav.querySelector(".nav-in");
+    var __cs = getComputedStyle(nav);
+    var __h = (__bar ? __bar.offsetHeight : 64)
+      + (parseFloat(__cs.paddingTop) || 0)
+      + (parseFloat(__cs.paddingBottom) || 0);
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+  }
+  }
+  navHeight();
+  window.addEventListener("resize", navHeight);
+
+  var queued = false;
+  function onScroll(){
+    queued = false;
+    if (nav) nav.classList.toggle("stuck", window.scrollY > 12);
+  }
+  window.addEventListener("scroll", function(){
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(onScroll);
+  }, { passive:true });
+  onScroll();
+
+  function closeMenu(){
+    if (!mnav) return;
+    mnav.classList.remove("open");
+    if (burger){
+      burger.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+    }
+    navHeight();
+  }
+  if (burger && mnav){
+    burger.addEventListener("click", function(){
+      var open = mnav.classList.toggle("open");
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      navHeight();
+    });
+    mnav.addEventListener("click", function(e){ if (e.target.closest(".mm-acc")) return; if (e.target.closest("a[href],[data-jump]")) closeMenu(); });
+  }
+
+  /* every "Get a Free Proposal" points at whichever form is on screen */
+  $$("[data-jump]").forEach(function(el){
+    el.addEventListener("click", function(){
+      var form = $(".hs:not([hidden]) form[data-lead]");
+      if (!form) return;
+      closeMenu();
+      form.scrollIntoView({ behavior:"smooth", block:"center" });
+      var first = form.querySelector("input,select,textarea");
+      if (first) setTimeout(function(){ first.focus({ preventScroll:true }); }, 420);
+    });
+  });
+
+  /* ---------------- the hero's one entrance ---------------- */
+  function play(sec){
+    if (!sec) return;
+    sec.classList.remove("play");
+    void sec.offsetWidth;              /* let the removal land before it replays */
+    sec.classList.add("play");
+  }
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ play($(".hs:not([hidden])")); });
+  });
+
+  /* ---------------- the forms ----------------
+     The rules hang off each field's own data-rule rather than an id, so the
+     form can be moved or duplicated without touching the script. Nothing is
+     checked until a person has tried to send once; after that every field
+     re-checks itself as it is corrected. */
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+
+  var RULES = {
+    name   : function(v){ return v.length >= 2 ? "" : "Please tell us your name."; },
+    email  : function(v){ return !v ? "Please add an email we can reply to."
+                                    : EMAIL.test(v) ? "" : "That email does not look right."; },
+    phone  : function(v){ return v.replace(/\D/g, "").length >= 7 ? ""
+                                    : "Please add a number we can reach you on."; },
+    service: function(v){ return v ? "" : "Pick the service you are after."; }
+  };
+
+  $$("form[data-lead]").forEach(function(form){
+    var live = false;
+    var fields = $$("[data-rule]", form);
+
+    function check(el){
+      var key = el.dataset.rule;
+      var box = el.closest(".hs-field");
+      var msg = RULES[key] ? RULES[key](el.value.trim()) : "";
+      box.setAttribute("data-bad", msg ? "true" : "false");
+      el.setAttribute("aria-invalid", msg ? "true" : "false");
+      box.querySelector(".hs-err").textContent = msg;
+      return !msg;
+    }
+
+    fields.forEach(function(el){
+      ["input", "change", "blur"].forEach(function(ev){
+        el.addEventListener(ev, function(){ if (live) check(el); });
+      });
+    });
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+      live = true;
+      var bad = null;
+      fields.forEach(function(el){ if (!check(el) && !bad) bad = el; });
+      if (bad){ bad.focus(); return; }
+      form.setAttribute("data-sent", "true");
+      form.scrollIntoView({ behavior:"smooth", block:"center" });
+    });
+  });
+})();
+
+
+/* === tb-script === */
+
+/* ══════════════════════════════════════════════════════════════════════
+   Two jobs the hero page did not need until now.
+
+   1. .rv reveals. The class and its transition were already in the
+      stylesheet, but nothing was adding .in, so anything marked .rv on
+      this page would have stayed at opacity 0. This is the homepage's
+      own observer, with the same safety sweep for anything scrolled
+      past before it fired.
+
+   2. The count-up, matching the homepage's figures: the number counts,
+      the prefix and suffix are wrapped so they can be set smaller, and
+      a reduced-motion preference gets the final value straight away.
+      Each figure's markup already holds its finished text, so with JS
+      off the panel still reads correctly.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  "use strict";
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- reveal on scroll ---------------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { threshold:0, rootMargin:"0px 0px -70px 0px" });
+  $$(".rv").forEach(function(el){ io.observe(el); });
+
+  /* safety net: anything already above the fold shows without waiting */
+  requestAnimationFrame(function(){
+    $$(".rv").forEach(function(el){
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
+    });
+  });
+
+  /* ---------------- the client carousel ----------------
+     The slide moves the track a flat -50%, so the second half has to be
+     an exact copy of the first for the loop to be invisible. Doing it
+     here rather than in the markup means the eight logos are written
+     once. Under a reduced-motion preference the track does not move and
+     is laid out as a static wrapped row, so the copy is skipped — it
+     would only show every client twice. */
+  var track = document.getElementById("tbMarq");
+  if (track && !calm) track.innerHTML += track.innerHTML;
+
+  /* ---------------- count-up ---------------- */
+  function countUp(el){
+    var target = parseFloat(el.getAttribute("data-count"));
+    if (isNaN(target)) return;
+    var prefix = el.getAttribute("data-prefix") || "";
+    var suffix = el.getAttribute("data-suffix") || "";
+    function affix(t){ return t ? '<i class="fig-af">' + t + '</i>' : ""; }
+    function show(n){
+      return affix(prefix) + (n >= 1000 ? n.toLocaleString("en-US") : n) + affix(suffix);
+    }
+    if (calm){ el.innerHTML = show(target); return; }
+    var t0 = null, dur = 1400;
+    function frame(t){
+      if (t0 === null) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.innerHTML = show(Math.round(target * e));
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var ioCount = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (!en.isIntersecting) return;
+      countUp(en.target);
+      ioCount.unobserve(en.target);
+    });
+  }, { threshold:.4 });
+  $$("[data-count]").forEach(function(el){ ioCount.observe(el); });
+})();
+
+
+/* === ft-script === */
+
+/* The footer's run of service names. One row written twice, because the
+   slide travels exactly half the track — so the copy arrives where the
+   original left and the loop has no seam. */
+(function(){
+  "use strict";
+  var el = document.getElementById("ftMarq");
+  if (!el) return;
+  var row = ["AI development","Generative AI","AI chatbots","AI agents","Machine learning","Computer vision","MLOps","AI integration","AI consulting","Model monitoring","Data audits","Proof of concept"]
+    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
+  el.innerHTML = row + row;
+})();
+
+
+/* === faq-script (hardened) === */
+(function(){
+  function panelFor(btn){
+    var id = btn.getAttribute("aria-controls");
+    return id ? document.getElementById(id) : null;
+  }
+  function closeAll(list){
+    list.querySelectorAll(".faq-q").forEach(function(b){
+      b.setAttribute("aria-expanded", "false");
+      var p = panelFor(b);
+      if (p){ p.setAttribute("data-open", "false"); p.classList.remove("is-open"); }
+    });
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target;
+    if (t && t.nodeType === 3) t = t.parentElement;
+    if (!t || typeof t.closest !== "function") return;
+    var btn = t.closest(".faq-q");
+    if (!btn) return;
+    var list = btn.closest(".faq-list");
+    if (!list) return;
+    var panel = panelFor(btn);
+    if (!panel) return;
+    var isOpen = btn.getAttribute("aria-expanded") === "true";
+    closeAll(list);
+    if (!isOpen){
+      btn.setAttribute("aria-expanded", "true");
+      panel.setAttribute("data-open", "true");
+      panel.classList.add("is-open");
+      var wrap = list.closest(".faq-wrap");
+      if (wrap){
+        var qs = Array.prototype.slice.call(list.querySelectorAll(".faq-q"));
+        wrap.dataset.at = String(qs.indexOf(btn) + 1);
+      }
+    }
+  });
+})();
+
+/* === cn-script === */
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE SERVICES CONSOLE — ported from the homepage, unchanged.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  "use strict";
+  var $  = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  $$("[data-console]").forEach(function(cn){
+    var cnTabs  = $$(".cn-tab", cn),
+        cnCards = $$(".cn-card", cn),
+        cnSheet = $(".cn-sheet", cn),
+        cnLift  = $(".cn-lift", cn),
+        cnFold  = window.matchMedia("(max-width:1040px)"),
+        cnAt    = 0,
+        cnSeated = false,
+        cnTries = 0;
+
+    /* ---- the travelling pane ----
+       The lit pill is one pane parked over the rail, and switching a
+       service moves it rather than repainting a row. Where it goes is the
+       only thing here that needs measuring, and it is read off the row it
+       is going to — four numbers set once, and the transition does the
+       carrying. Nothing is tracked frame by frame.
+
+       The width it is given is the row's own column: the row plus the
+       right margin the row keeps clear of the sheet. The overhang past
+       that is padding on the pane itself, so the reach never has to be
+       worked out twice.
+
+       The first placement is not animated. There is nowhere for a pane to
+       travel from before anything has been chosen, and a pane sliding in
+       from the corner of the block on load would say a switch had been
+       thrown when nobody had touched it. */
+    function cnPlaceLift(i, animate){
+      if (!cnLift) return;
+      if (cnFold.matches || i < 0){ cnLift.classList.remove("on"); return; }
+      var t = cnTabs[i];
+      if (!t) return;
+      /* A row with no height has not been laid out yet — the block can be
+         reached before the webfont has settled its lines. Measuring it now
+         would park the pane on nothing, so the frame is given back and the
+         measurement retried, a bounded number of times so a row that is
+         genuinely never laid out cannot spin. */
+      if (!t.offsetHeight){
+        if (cnTries++ < 20) requestAnimationFrame(function(){ cnPlaceLift(cnAt, false); });
+        return;
+      }
+      cnTries = 0;
+      var gap = parseFloat(getComputedStyle(t).marginRight) || 0;
+      if (!animate) cnLift.style.transition = "none";
+      cnLift.style.top    = t.offsetTop + "px";
+      cnLift.style.left   = t.offsetLeft + "px";
+      cnLift.style.height = t.offsetHeight + "px";
+      cnLift.style.width  = (t.offsetWidth + gap) + "px";
+      cnLift.classList.add("on");
+      if (!animate){ void cnLift.offsetWidth; cnLift.style.transition = ""; }
+    }
+
+    /* Where a card lives depends on the shape of the block. Beside a rail
+       it belongs to the sheet, stacked with its siblings. Once the rail
+       has nothing to stand beside, the open card is lifted out and put
+       directly after the row that called for it — that is the accordion.
+       The rest go back to the sheet, which is out of the paint there. */
+    function cnHouse(i){
+      if (!cnFold.matches){
+        var strayed = cnCards.some(function(c){ return c.parentNode !== cnSheet; });
+        if (strayed) cnCards.forEach(function(c){ cnSheet.appendChild(c); });
+        return;
+      }
+      cnCards.forEach(function(c, k){
+        if (k === i){
+          if (c.previousElementSibling !== cnTabs[k]){
+            cnTabs[k].insertAdjacentElement("afterend", c);
+          }
+        } else if (c.parentNode !== cnSheet){
+          cnSheet.appendChild(c);
+        }
+      });
+    }
+
+    /* Whichever service is chosen, its answer should already be under the
+       eye. On the wide layout that means the sheet's top edge; on the
+       accordion it means the row itself, since the card opens beneath it.
+       Not done on every click — if the thing already sits somewhere
+       readable the page is left still, because jogging it for no reason
+       is worse than not moving at all. */
+    function cnReveal(i){
+      var mark = cnFold.matches ? cnTabs[i] : cnSheet;
+      if (!mark) return;
+
+      var navH = parseFloat(getComputedStyle(document.documentElement)
+                  .getPropertyValue("--nav-h")) || 74,
+          rest = navH + (cnFold.matches ? 10 : 14),
+          top;
+
+      /* a pinned row reports where it is pinned, not where it sits, and
+         aiming at that would open the card above the fold — so the pin is
+         lifted for the length of one measurement */
+      if (cnFold.matches){
+        var held = mark.style.position;
+        mark.style.position = "static";
+        top = mark.getBoundingClientRect().top;
+        mark.style.position = held;
+      } else {
+        top = mark.getBoundingClientRect().top;
+      }
+
+      var slack = cnFold.matches ? rest + 90 : window.innerHeight * 0.42;
+      if (top >= rest - 2 && top <= slack) return;
+
+      window.scrollTo({
+        top: top + window.pageYOffset - rest,
+        behavior: calm ? "auto" : "smooth"
+      });
+    }
+
+    /* i of -1 is a shut accordion — reachable only on the folded layout */
+    function cnShow(i, move){
+      cnAt = i;
+      cnTabs.forEach(function(t, k){
+        t.classList.toggle("on", k === i);
+        t.setAttribute("aria-selected", k === i ? "true" : "false");
+      });
+      cnCards.forEach(function(c, k){ c.classList.toggle("on", k === i); });
+      cnHouse(i);
+      cnPlaceLift(i, cnSeated && !calm);
+      cnSeated = true;
+      if (move && i >= 0) cnReveal(i);
+    }
+
+    cnTabs.forEach(function(t, i){
+      t.addEventListener("click", function(){
+        /* a second tap on the open row shuts it, and walks the page back
+           to that row, so the index resumes where the reader left it
+           rather than wherever the vanished card dropped the scroll */
+        if (cnFold.matches && cnAt === i){ cnShow(-1, false); cnReveal(i); return; }
+        cnShow(i, true);
+      });
+      t.addEventListener("keydown", function(e){
+        var step = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        var next = (i + step + cnTabs.length) % cnTabs.length;
+        cnTabs[next].focus();
+        /* arrowing the list is browsing, not choosing — the page is held
+           still so the rail does not slide out from under the keys */
+        cnShow(next, false);
+      });
+    });
+
+    /* crossing the width re-houses the cards, and a block left shut on
+       the accordion cannot arrive on the wide layout empty */
+    function cnRehouse(){ cnShow(cnAt < 0 && !cnFold.matches ? 0 : cnAt, false); }
+    if (cnFold.addEventListener) cnFold.addEventListener("change", cnRehouse);
+    else if (cnFold.addListener) cnFold.addListener(cnRehouse);
+
+    /* The rail changes width with the column and its rows change height
+       when the webfont lands, and the pane is parked at pixel positions
+       that were true before either happened. Both are re-measured, and
+       neither is animated: this is the pane being put back where it
+       already was, not being sent anywhere. */
+    window.addEventListener("resize", function(){ cnPlaceLift(cnAt, false); });
+    if (document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ cnPlaceLift(cnAt, false); });
+    }
+
+    cnShow(0, false);   /* seat the opening card in whichever layout is live */
+  });
+})();
+
+
+/* === ws-script === */
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE TILT
+
+   The pointer's position inside a card, as a fraction from its centre,
+   written back as two angles the stylesheet turns into a rotation. Four
+   degrees each way: enough to read as a solid thing being turned,
+   little enough that the type stays square to the eye.
+
+   Read on pointermove and written on the next frame rather than
+   immediately — a rect read and a style write in the same handler makes
+   the browser lay out the section again on every pixel of movement.
+
+   pointerenter/leave rather than mouseenter/leave, and the whole thing is
+   skipped where a pointer cannot hover, so a tap on a phone does not
+   leave a card stuck at an angle nobody asked for.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  if (!window.matchMedia("(hover:hover) and (pointer:fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var MAX = 4;                                   /* degrees, each way */
+  document.querySelectorAll(".ws-item").forEach(function(card){
+    var frame = null, box = null;
+
+    card.addEventListener("pointerenter", function(){
+      box = card.getBoundingClientRect();        /* once, on the way in */
+    });
+
+    card.addEventListener("pointermove", function(e){
+      if (!box || frame) return;
+      var x = (e.clientX - box.left) / box.width  - .5;
+      var y = (e.clientY - box.top)  / box.height - .5;
+      frame = requestAnimationFrame(function(){
+        card.style.setProperty("--ry", (x *  MAX * 2).toFixed(2) + "deg");
+        card.style.setProperty("--rx", (y * -MAX * 2).toFixed(2) + "deg");
+        frame = null;
+      });
+    });
+
+    card.addEventListener("pointerleave", function(){
+      if (frame) { cancelAnimationFrame(frame); frame = null; }
+      card.style.setProperty("--ry", "0deg");
+      card.style.setProperty("--rx", "0deg");
+      box = null;
+    });
+  });
+})();
+
+
+/* === pf-script === */
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE PLATFORM RUN
+
+   The track holds the seven cards twice, because the slide travels a flat
+   half of it and the second half has to be an exact copy for the loop to
+   have no seam. Doing it here rather than in the markup means each
+   platform is written once.
+
+   ── the copy only exists while the run does ────────────────────────
+   Below 600px the run is switched off in the stylesheet and the cards go
+   back to a stack the page scrolls through. The copy was still being made
+   there, so the stack was fourteen cards long: the seven read through,
+   and then the same seven again. That is the repeat.
+
+   So the copy follows the layout rather than being made once at load. The
+   same query the stylesheet uses is asked here, and it is listened to —
+   turn a phone on its side, or drag a window across the breakpoint, and
+   the copies are added or taken away to match. Each one is marked so it
+   can be found again; nothing else in the track is touched.
+
+   None of it happens under a reduced-motion preference either: there the
+   track does not move and the rail is an ordinary scroller, where a
+   second copy would just be the same seven cards twice.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  "use strict";
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var track = document.querySelector(".pf-track");
+  if (!track) return;
+
+  /* the breakpoint the stylesheet stacks at, asked the same way here */
+  var running = window.matchMedia("(min-width: 901px)");
+
+  /* The list is snapshotted before anything is appended. track.children
+     is a live collection: appending one of its members back into the
+     track removes it from the collection at the same time, so walking it
+     while appending would skip every other card and leave the second run
+     short. */
+  var cards = Array.prototype.slice.call(track.children);
+
+  function add(){
+    cards.forEach(function(card){
+      var copy = card.cloneNode(true);
+      /* The originals are marked .rv, which holds an element at opacity 0
+         until the reveal observer gives it .in. That observer collected
+         its list before these copies existed, so nothing would ever light
+         them — the second half of the track would be there, travelling,
+         and invisible the whole way. The copies do not need revealing:
+         the cards they duplicate have already been seen. */
+      copy.classList.remove("rv");
+      copy.removeAttribute("style");
+      copy.setAttribute("aria-hidden", "true");
+      copy.setAttribute("tabindex", "-1");
+      copy.setAttribute("data-copy", "");
+      track.appendChild(copy);
+    });
+  }
+
+  function drop(){
+    Array.prototype.slice.call(track.querySelectorAll("[data-copy]"))
+      .forEach(function(el){ el.remove(); });
+  }
+
+  function sync(){
+    var has = !!track.querySelector("[data-copy]");
+    if (running.matches && !has) add();
+    else if (!running.matches && has) drop();
+  }
+
+  sync();
+  if (running.addEventListener) running.addEventListener("change", sync);
+  else running.addListener(sync);          /* older Safari */
+})();
+
+
+/* === eg-script === */
+
+/* ══════════════════════════════════════════════════════════════════════
+   THE WALK — ported from the homepage
+
+   Any layout marked data-walk steps a light along its .walk-step
+   children and publishes the index on the container as data-at, so a
+   progress arc or a row of pips can be drawn from it without needing a
+   script of its own. Each keeps its own timer, and the timer runs only
+   while that layout is on screen.
+
+   Everything the section has to say is readable before the light starts
+   moving: the cards are all revealed on first sight, and the stepping is
+   decoration on top of that.
+   ══════════════════════════════════════════════════════════════════════ */
+(function(){
+  "use strict";
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  $$("[data-walk]").forEach(function(pw){
+    var steps = $$(".walk-step", pw), at = -1, tick = null;
+
+    /* On the narrow layout the lit step is pulled to the head of the list
+       with `order`, and order cannot be transitioned — the card is simply
+       somewhere else on the next frame. So the move is played back: the
+       tops are read before the class changes and again after, each card is
+       put back where it was with a transform, and then the transform is
+       released. The browser animates the release, which looks like the
+       card travelling to its new place.
+
+       On the wide layout nothing reorders, every delta is zero, and this
+       costs one rect read per step. */
+    function tops(){
+      return steps.map(function(s){ return s.getBoundingClientRect().top; });
+    }
+    function play(before){
+      /* Every read first, then every write — otherwise reading a rect,
+         writing a style and forcing a commit inside one loop pass makes
+         the browser lay the page out again on every card. */
+      var deltas = steps.map(function(s, k){
+        return before[k] - s.getBoundingClientRect().top;
+      });
+      var moved = [];
+      steps.forEach(function(s, k){
+        if (!deltas[k]) return;
+        s.style.transition = "none";
+        s.style.transform = "translateY(" + deltas[k] + "px)";
+        moved.push(s);
+      });
+      if (!moved.length) return;
+      void moved[0].offsetHeight;                 /* one commit for them all */
+      moved.forEach(function(s){
+        s.style.transition = "transform .52s cubic-bezier(.16,1,.3,1)";
+        s.style.transform = "";
+        s.addEventListener("transitionend", function done(){
+          s.style.transition = "";
+          s.removeEventListener("transitionend", done);
+        });
+      });
+    }
+
+    function go(){
+      var before = calm ? null : tops();
+      at = (at + 1) % steps.length;
+      steps.forEach(function(s, k){ s.classList.toggle("on", k === at); });
+      pw.setAttribute("data-at", at);
+      if (before) play(before);
+    }
+
+    /* ── narrow: the reader walks it, not the timer ───────────────────
+       On one column the light stepping every 1.6s is unreadable — five
+       cards is more than anyone can catch at that rate, and the layout
+       used to reorder them under the thumb as well. Here each card lights
+       as it is scrolled to and stays lit until the next one is reached,
+       so the section is read at the reader's own pace and the disc still
+       counts the stage being looked at.
+
+       The rootMargin pins the trigger to a band across the middle of the
+       screen rather than the edge: a card lights when it is where the eye
+       is, not when a corner of it appears. */
+    var narrow = window.matchMedia("(max-width: 1000px)");
+
+    function stop(){
+      if (tick){ clearInterval(tick); tick = null; }
+    }
+
+    function light(k){
+      if (k === at) return;
+      at = k;
+      steps.forEach(function(s, i){ s.classList.toggle("on", i === k); });
+      pw.setAttribute("data-at", k);
+    }
+
+    /* 1.6s is the wide layout's pace, where all five cards are readable
+       already and the light is only pointing at one of them. Here the
+       light IS the card, so the interval is what a stage takes to read
+       rather than what a pointer takes to move. */
+    function run(){
+      if (tick) return;
+      tick = setInterval(function(){ light((at + 1) % steps.length); }, 7000);
+    }
+
+    var wired = false;
+
+    /* Moving a stage by hand restarts the clock rather than stopping it.
+       Killing the timer outright meant one drag left the carousel dead
+       for the rest of the visit; resetting it gives the stage just landed
+       on a full read before anything moves on its own again. */
+    function move(d){
+      light((at + d + steps.length) % steps.length);
+      if (tick){ clearInterval(tick); tick = null; }
+      if (!calm) run();
+    }
+
+    /* ── narrow: the drag ─────────────────────────────────────────────
+       Wired once, not per entry into view, or every scroll back would
+       add another set of listeners and one drag would move two stages.
+
+       Touch events for fingers and pointer events for a mouse, rather
+       than pointer events for both. A pointer sequence on a phone is
+       taken over by the browser the moment it decides the gesture might
+       be a scroll: it fires pointercancel and no pointerup ever arrives,
+       so a swipe that started even slightly off the horizontal was
+       simply never seen. touchend always arrives. The pointer path is
+       kept for a mouse only, so a drag is never counted twice.
+
+       Vertical drags are left alone; the page still has to scroll. A
+       drag only counts when it is clearly sideways and long enough to
+       have been meant. */
+    function wire(){
+      if (wired) return;
+      wired = true;
+      var list = pw.querySelector(".eg-list");
+      if (!list) return;
+      var x0 = null, y0 = null;
+
+      function start(x, y){ x0 = x; y0 = y; }
+      function end(x, y){
+        if (x0 === null) return;
+        var dx = x - x0, dy = y - y0;
+        x0 = null;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) move(dx < 0 ? 1 : -1);
+      }
+
+      list.addEventListener("touchstart", function(e){
+        var t = e.changedTouches[0]; start(t.clientX, t.clientY);
+      }, { passive: true });
+      list.addEventListener("touchend", function(e){
+        var t = e.changedTouches[0]; end(t.clientX, t.clientY);
+      }, { passive: true });
+      list.addEventListener("touchcancel", function(){ x0 = null; }, { passive: true });
+
+      list.addEventListener("pointerdown", function(e){
+        if (e.pointerType === "mouse") start(e.clientX, e.clientY);
+      }, { passive: true });
+      list.addEventListener("pointerup", function(e){
+        if (e.pointerType === "mouse") end(e.clientX, e.clientY);
+      }, { passive: true });
+    }
+
+    var io = new IntersectionObserver(function(entries){
+      var here = entries[0].isIntersecting;
+      if (!here){ stop(); return; }
+      steps.forEach(function(s){ s.classList.add("seen"); });
+
+      /* Narrow shows one stage at a time, so a stage has to be lit for
+         anything to be on screen at all — even when the reader has asked
+         for no motion, where the first one is simply shown and left. */
+      if (narrow.matches){
+        wire();
+        if (at < 0) light(0);
+        if (calm) return;
+        run();
+        return;
+      }
+
+      if (calm) return;                            /* drawn, and left still */
+      if (!tick){
+        go();
+        tick = setInterval(go, 1600);
+      }
+    }, { threshold:0.25 });
+    io.observe(pw);
+
+    /* turn a phone on its side, or drag a window across the breakpoint,
+       and the section swaps which of the two it is running */
+    var swap = function(){ stop(); io.unobserve(pw); io.observe(pw); };
+    if (narrow.addEventListener) narrow.addEventListener("change", swap);
+    else narrow.addListener(swap);
+  });
+})();
+
+
+/* === dv-script === */
+
+/* Develop apps: the build cards' glow follows the pointer */
+(function(){
+  document.querySelectorAll(".dv-card").forEach(function(c){
+    c.addEventListener("pointermove", function(e){
+      var r=c.getBoundingClientRect();
+      c.style.setProperty("--mx", (e.clientX-r.left)+"px");
+      c.style.setProperty("--my", (e.clientY-r.top)+"px");
+    });
+  });
+})();
+
+
+/* === wk-script === */
+
+/* Both of these came across from the homepage unchanged. The deck's was
+   an inner block of one long IIFE there, so the two helpers it read off
+   the enclosing scope are declared here instead — inside a wrapper,
+   because `var` at the top of a classic <script> is a global, and five
+   other scripts on this page declare helpers by the same two names. */
+(function(){
+"use strict";
+var $  = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){
+  return Array.prototype.slice.call((r || document).querySelectorAll(s));
+};
+
+/* ---------------- selected work ----------------
+     The rail already scrolls, snaps and takes the arrow keys on its own.
+     This adds the two buttons, keeps the counter honest — position is
+     read back off scrollLeft rather than held in a variable, so a swipe,
+     a key and a button all report the same place — and closes the run
+     into a ring so it never reaches an end.
+  --------------------------------------------------------------- */
+  (function(){
+    var deck = $("#wkDeck"), rail = $("#wkRail");
+    if (!deck || !rail) return;
+
+    var cards = $$(".wk-card", rail),
+        at    = $("#wkAt"),
+        bar   = $("#wkBar"),
+        arws  = $$(".wk-arw", deck);
+    if (cards.length < 2) return;
+
+    /* Three copies of the set, and the reader is kept in the middle one.
+       Running off either end lands on an identical sheet in the copy next
+       door, so the scroll position can be moved by exactly one set without
+       anything appearing to move — which is the whole trick. The clones
+       are hidden from assistive tech; the seven real sheets are read once. */
+    var n = cards.length, all = cards;
+    (function ring(){
+      var before = document.createDocumentFragment(),
+          after  = document.createDocumentFragment();
+      cards.forEach(function(c){
+        [before, after].forEach(function(f){
+          var d = c.cloneNode(true);
+          d.setAttribute("aria-hidden", "true");
+          d.setAttribute("data-clone", "");
+          f.appendChild(d);
+        });
+      });
+      rail.appendChild(after);
+      rail.insertBefore(before, rail.firstChild);
+      all = $$(".wk-card", rail);
+    })();
+
+    function step(){ return all[1].offsetLeft - all[0].offsetLeft; }
+    function setW(){ return step() * n; }
+
+    /* Called once the scroll has settled, never mid-glide: moving the
+       position while a smooth scroll is in flight would fight its target. */
+    function ringWrap(){
+      var w = setW(); if (!w) return;
+      var x = rail.scrollLeft, y = x;
+      if (x < w * 0.5) y = x + w;
+      else if (x > w * 1.5) y = x - w;
+      if (y === x) return;
+      var held = rail.style.scrollBehavior;
+      rail.style.scrollBehavior = "auto";
+      rail.scrollLeft = y;
+      rail.style.scrollBehavior = held;
+      sync();
+    }
+
+    /* Which sheet is being looked at is whichever one is nearest the middle
+       of the rail — measured, not counted, so the counter can never drift
+       from what is actually on screen. Nothing is dimmed: the middle sheet
+       is lifted and grown, and the six around it are left as they are. */
+    function sync(){
+      var mid = rail.scrollLeft + rail.clientWidth / 2, i = 0, near = Infinity;
+
+      all.forEach(function(c, k){
+        var d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid);
+        if (d < near){ near = d; i = k; }
+      });
+      all.forEach(function(c, k){ c.classList.toggle("on", k === i); });
+      /* the copies report the number of the sheet they are a copy of */
+      var real = ((i % n) + n) % n;
+      at.textContent = ("0" + (real + 1)).slice(-2);
+      bar.style.width = ((real + 1) / n * 100) + "%";
+    }
+
+    /* The rail opens on the second sheet rather than the first, because at
+       scrollLeft 0 the first one rests against the edge with nothing to its
+       left. Seated on the second, there is a sheet cut off on both sides and
+       one whole sheet in the middle — which is the shape the set is meant to
+       be read in. Done with smooth scrolling switched off, so it is a
+       starting position rather than an animation nobody asked for. */
+    function seat(){
+      if (!rail.clientWidth) return;              /* the panel is hidden */
+      var held = rail.style.scrollBehavior, c = all[n + 1];
+      rail.style.scrollBehavior = "auto";
+      rail.scrollLeft = c.offsetLeft + c.offsetWidth / 2 - rail.clientWidth / 2;
+      rail.style.scrollBehavior = held;
+      sync();
+    }
+
+    /* A hidden rail measures zero and loses its scroll position, so the width
+       going from nothing to something is the signal that the panel has just
+       been shown — and it gets seated again. A real window resize never
+       crosses zero, so it only re-reads position and leaves the reader where
+       they were. */
+    var wide = 0;
+    function relayout(){
+      var w = rail.clientWidth;
+      if (w && !wide) seat(); else sync();
+      wide = w;
+    }
+
+    arws.forEach(function(b){
+      b.addEventListener("click", function(){
+        rail.scrollLeft += step() * Number(b.getAttribute("data-wk"));
+      });
+    });
+    var settle;
+    rail.addEventListener("scroll", function(){
+      window.requestAnimationFrame(sync);
+      clearTimeout(settle);
+      settle = setTimeout(ringWrap, 150);
+    }, { passive:true });
+    window.addEventListener("resize", relayout);
+
+    /* ---- mouse drag ----
+       The rail already scrolls on touch and on a trackpad; a mouse has
+       neither, so a plain pointer-drag is added on top of the same
+       scrollLeft the rest of the deck already reads and writes. Snap and
+       smoothing are both switched off for the length of the drag — snap
+       would fight the pointer every frame, and smoothing would lag it. */
+    var dragging = false, dragX = 0, dragStart = 0, dragMoved = false;
+    rail.addEventListener("pointerdown", function(e){
+      if (e.pointerType === "touch") return; /* touch already scrolls natively */
+      dragging = true; dragMoved = false;
+      dragX = e.clientX; dragStart = rail.scrollLeft;
+      rail.classList.add("dragging");
+      rail.setPointerCapture(e.pointerId);
+      stopAuto();
+    });
+    rail.addEventListener("pointermove", function(e){
+      if (!dragging) return;
+      var dx = e.clientX - dragX;
+      if (Math.abs(dx) > 3) dragMoved = true;
+      rail.scrollLeft = dragStart - dx;
+    });
+    function endDrag(){
+      if (!dragging) return;
+      dragging = false;
+      rail.classList.remove("dragging");
+      ringWrap();
+      startAuto();
+    }
+    rail.addEventListener("pointerup", endDrag);
+    rail.addEventListener("pointercancel", endDrag);
+    /* a drag that moved the rail should not also fire the sheet's own
+       link/button underneath the pointer */
+    rail.addEventListener("click", function(e){
+      if (dragMoved){ e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    /* ---- autoplay ----
+       Advances one sheet at a time on the same step() the arrows use, so
+       it lands on exactly the positions a click would. Paused for as long
+       as a pointer is over the deck or the rail has keyboard focus, and
+       restarted once both are clear — never fights a drag or a manual
+       read of the row. */
+    var AUTO_MS = 3400, autoTimer = null;
+    function startAuto(){
+      stopAuto();
+      autoTimer = setInterval(function(){
+        rail.scrollLeft += step();
+      }, AUTO_MS);
+    }
+    function stopAuto(){
+      if (autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    }
+    deck.addEventListener("pointerenter", stopAuto);
+    deck.addEventListener("pointerleave", function(){ if (!dragging) startAuto(); });
+    rail.addEventListener("focusin", stopAuto);
+    rail.addEventListener("focusout", startAuto);
+    document.addEventListener("visibilitychange", function(){
+      if (document.hidden) stopAuto(); else if (!dragging) startAuto();
+    });
+
+    deck.classList.add("wired");
+    relayout();
+    startAuto();
+  })();
+
+/* ---------------- reviews ----------------
+   The same three reviews the rotating quote used, shown together. The row
+   is a grid at full width and a snap track below that; the arrows and dots
+   only appear where it actually scrolls. */
+(function(){
+  var track = document.getElementById('grTrack');
+  if(!track) return;
+
+  /* PLACEHOLDER REVIEWS — same status as the three the rotating quote
+     carried: written for layout, not collected from clients. Replace every
+     one of these with the real Google review before this goes live. */
+  var GR = [
+    { name:"Client Name", initials:"CN", guide:true,
+      meta:"24 reviews \u00b7 6 photos", when:"2 weeks ago",
+      text:"Placeholder review. Replace with a real Google review from a client whose AI project you shipped.",
+      tags:["AI Agents","CRM Integration"], helpful:24 },
+    { name:"Client Name", initials:"CN", guide:false,
+      meta:"8 reviews \u00b7 2 photos", when:"1 month ago",
+      text:"Placeholder review. Paste the review exactly as the client wrote it, including the result they mention.",
+      tags:["AI Chatbot","Support"], helpful:18 },
+    { name:"Client Name", initials:"CN", guide:false,
+      meta:"11 reviews", when:"2 months ago",
+      text:"Placeholder review. A good one names the problem, what was built and what changed afterwards.",
+      tags:["Machine Learning","Forecasting"], helpful:32 },
+    { name:"Client Name", initials:"CN", guide:true,
+      meta:"31 reviews \u00b7 4 photos", when:"3 months ago",
+      text:"Placeholder review. Replace with a real Google review before this goes live.",
+      tags:["Computer Vision","Quality Control"], helpful:15 },
+    { name:"Client Name", initials:"CN", guide:false,
+      meta:"6 reviews", when:"4 months ago",
+      text:"Placeholder review. Replace with a real Google review before this goes live.",
+      tags:["MLOps","Deployment"], helpful:9 },
+    { name:"Client Name", initials:"CN", guide:false,
+      meta:"17 reviews \u00b7 1 photo", when:"5 months ago",
+      text:"Placeholder review. Replace with a real Google review before this goes live.",
+      tags:["Enterprise AI","Integration"], helpful:21 }
+  ];
+
+  var STAR = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.6 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17.42 6.62 20.25l1.03-6L3.3 10l6-.9z"/></svg>';
+  function stars(n){
+    var out = '';
+    for (var i = 0; i < 5; i++) out += STAR;
+    return '<span class="gr-stars" role="img" aria-label="Rated ' + n + ' out of 5">' + out + '</span>';
+  }
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  track.innerHTML = GR.map(function(r){
+    return '<article class="gr-card">'
+      + '<div class="gr-top">'
+      +   '<span class="gr-av" aria-hidden="true">' + esc(r.initials) + '</span>'
+      +   '<span class="gr-who"><b>' + esc(r.name)
+      +     (r.guide ? '<span class="gr-guide">Local Guide</span>' : '') + '</b>'
+      +     '<span>' + esc(r.meta) + '</span></span>'
+      +   '<span class="gr-kebab" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="12" cy="19" r="1.7"/></svg></span>'
+      + '</div>'
+      + '<div class="gr-meta">' + stars(5) + '<span class="gr-when">' + esc(r.when) + '</span></div>'
+      + '<p class="gr-text">' + esc(r.text) + '</p>'
+      + '<div class="gr-tags">' + r.tags.map(function(t){
+            return '<span class="gr-tag">' + esc(t) + '</span>'; }).join('') + '</div>'
+      + '<div class="gr-foot">'
+      +   '<button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10.5v9H4.5v-9Z"/><path d="M7 10.5 11 3a2 2 0 0 1 2 2v4h5.4a1.6 1.6 0 0 1 1.6 2l-1.5 7a2 2 0 0 1-2 1.5H7Z"/></svg>Helpful (' + r.helpful + ')</button>'
+      +   '<button type="button">Share</button>'
+      + '</div></article>';
+  }).join('');
+
+  /* the rating shown in the bar */
+  var starSlot = document.getElementById('grBarStars');
+  if (starSlot) starSlot.innerHTML = stars(4.8);
+
+  /* arrows and dots — one page per card's worth of scroll */
+  var prev = document.getElementById('grPrev'),
+      next = document.getElementById('grNext'),
+      dots = document.getElementById('grDots');
+  if(!prev || !next || !dots) return;
+
+  /* The controls belong to the content, not to the breakpoint: they show
+     whenever there is more than one page of cards and hide when the row
+     fits, at any width. */
+  var nav = dots.parentElement;
+
+  /* The gap is read off the track rather than hard-coded, so the step stays
+     right as the layout's clamp() resolves differently at each width. */
+  function step(){
+    var card = track.firstElementChild;
+    if(!card) return 1;
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+    return Math.max(1, card.offsetWidth + gap);
+  }
+  function perView(){ return Math.max(1, Math.round(track.clientWidth / step())); }
+  function pages(){ return Math.max(1, track.children.length - perView() + 1); }
+  function at(){ return Math.round(track.scrollLeft / step()); }
+
+  function paint(){
+    /* the row overflows, or it does not — that single fact decides whether
+       there is anything to drive */
+    var scrolls = track.scrollWidth - track.clientWidth > 4;
+    nav.style.display = scrolls ? 'flex' : 'none';
+    if(!scrolls) return;
+
+    var n = pages(), i = Math.min(at(), n - 1);
+    if (dots.children.length !== n){
+      dots.innerHTML = '';
+      for (var k = 0; k < n; k++){
+        var b = document.createElement('button');
+        b.className = 'gr-dot'; b.type = 'button';
+        b.setAttribute('aria-label', 'Go to review ' + (k + 1));
+        b.dataset.i = k;
+        dots.appendChild(b);
+      }
+    }
+    [].slice.call(dots.children).forEach(function(b, k){
+      b.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+    prev.disabled = i <= 0;
+    next.disabled = i >= n - 1;
+  }
+  function go(dir){ track.scrollBy({ left: dir * step(), behavior:'smooth' }); }
+
+  prev.addEventListener('click', function(){ go(-1); });
+  next.addEventListener('click', function(){ go(1); });
+  dots.addEventListener('click', function(e){
+    var b = e.target.closest('.gr-dot'); if(!b) return;
+    track.scrollTo({ left: b.dataset.i * step(), behavior:'smooth' });
+  });
+  track.addEventListener('scroll', paint, { passive:true });
+  window.addEventListener('resize', paint);
+  paint();
+})();
+
+})();
+
+
+/* === cm2-script === */
+
+/* the diagram under each service plays its workflow a step at a time
+   (parts carry data-at / data-until). It runs only while its card is
+   open and on screen, and starts over whenever the card is reopened. */
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.cn-motion[data-steps]').forEach(function(box){
+    var n=+box.dataset.steps, s=0, t=null, parts=[].slice.call(box.querySelectorAll('[data-at]'));
+    function paint(){ box.setAttribute('data-s',s); parts.forEach(function(p){ var a=+p.dataset.at, u=p.dataset.until?+p.dataset.until:99; p.classList.toggle('is-on', s>=a && s<=u); }); }
+    function tick(){ s = s>=n ? 0 : s+1; paint(); t=setTimeout(tick, s===0 ? 500 : (s===n ? 2800 : 950)); }
+    function stop(){ clearTimeout(t); t=null; s=0; paint(); }
+    if(reduce){ s=n; paint(); return; }
+    paint();
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && e.intersectionRect.height>0){ if(!t){ s=0; tick(); } } else if(t){ stop(); } }); },{threshold:.2}).observe(box);
+  });
+})();
+
+
+/* === ax-script === */
+
+(function(){
+  var box=document.getElementById('ax'); if(!box) return; /* ax accordion retired — services-2 uses tm-rail */
+  var ps = [].slice.call(box.querySelectorAll(".ax-p"));
+  var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* photographs come from the mega menu's image stack, so no picture is carried twice */
+  ps.forEach(function(p){
+    var im = document.querySelector('.mm-stack img[data-key="' + p.dataset.img + '"]');
+    if (im) p.style.setProperty("--bgimg", "url(" + im.src + ")");
+  });
+  function fitRail(){
+    if (window.matchMedia("(max-width:980px)").matches){
+      box.style.minHeight = "";
+      return;
+    }
+    var onP = box.querySelector(".ax-p.on") || ps[0];
+    var body = onP ? onP.querySelector(".ax-body") : null;
+    var liveCard = onP ? onP.querySelector(".ax-card") : null;
+    var pad = 56;
+    if (body){
+      var cs = window.getComputedStyle(body);
+      pad = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0) || 56;
+    }
+    var measureW = liveCard && liveCard.clientWidth ? liveCard.clientWidth : 460;
+    var probe = document.createElement("div");
+    probe.setAttribute("aria-hidden", "true");
+    probe.style.cssText = "position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;width:0;height:0;overflow:hidden;";
+    document.body.appendChild(probe);
+    var tallest = 0;
+    ps.forEach(function(p){
+      var card = p.querySelector(".ax-card");
+      if (!card) return;
+      var clone = card.cloneNode(true);
+      clone.style.cssText = "box-sizing:border-box;width:" + measureW + "px;max-width:460px;height:auto;max-height:none;overflow:visible;position:static;display:block;";
+      probe.appendChild(clone);
+      tallest = Math.max(tallest, clone.scrollHeight || clone.offsetHeight || 0);
+      probe.removeChild(clone);
+    });
+    document.body.removeChild(probe);
+    if (tallest > 0){
+      box.style.minHeight = Math.ceil(Math.max(560, tallest + pad)) + "px";
+    }
+  }
+  var fitTimer = null;
+  function scheduleFit(){
+    clearTimeout(fitTimer);
+    fitTimer = setTimeout(fitRail, 40);
+  }
+  function show(i){
+    ps.forEach(function(p, k){
+      var on = k === i;
+      p.classList.toggle("on", on);
+      p.setAttribute("aria-selected", on ? "true" : "false");
+      var bar = p.querySelector(".ax-prog");
+      if (bar){ bar.style.animation = "none"; bar.offsetWidth; bar.style.animation = ""; }
+    });
+  }
+  ps.forEach(function(p, k){
+    p.addEventListener("click", function(){ show(k); });
+    p.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(k); }
+      if (e.key === "ArrowRight" || e.key === "ArrowDown"){ e.preventDefault(); ps[(k + 1) % ps.length].focus(); show((k + 1) % ps.length); }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp"){ e.preventDefault(); ps[(k + ps.length - 1) % ps.length].focus(); show((k + ps.length - 1) % ps.length); }
+    });
+    var bar = p.querySelector(".ax-prog");
+    if (bar && !calm) bar.addEventListener("animationend", function(){ if (p.classList.contains("on")) show((k + 1) % ps.length); });
+  });
+  fitRail();
+  window.addEventListener("resize", scheduleFit);
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(scheduleFit).catch(function(){});
+  }
+  window.addEventListener("load", scheduleFit);
+})();
+
+
+/* === aid-services-tm-script === */
+(function(){
+  var rail=document.querySelector('#services-2 [data-tm]'); if(!rail) return;
+  var items=[].slice.call(rail.querySelectorAll('.tm-item'));
+  items.forEach(function(el){ var b=document.createElement('span'); b.className='tm-prog';
+    b.setAttribute('aria-hidden','true'); el.appendChild(b); });
+  var at=0, timer=null, held=false;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(i){
+    at=(i+items.length)%items.length;
+    items.forEach(function(el,k){ var on=k===at; el.classList.toggle('on',on);
+      el.setAttribute('aria-selected',String(on));
+      if(on){ var b=el.querySelector('.tm-prog'); if(b){ b.style.animation='none'; void b.offsetWidth; b.style.animation=''; } }
+    });
+  }
+  function play(){ stop(); rail.classList.remove('paused'); if(!held && !reduce) timer=setInterval(function(){ show(at+1); },6000); }
+  function stop(){ clearInterval(timer); }
+  function hold(){ held=true; stop(); rail.classList.add('paused'); clearTimeout(hold._t);
+    hold._t=setTimeout(function(){ held=false; play(); },12000); }
+  items.forEach(function(el,i){
+    el.addEventListener('mouseenter',function(){ clearTimeout(rail._hi); rail._hi=setTimeout(function(){ if(at!==i) show(i); },220); }); el.addEventListener('mouseleave',function(){ clearTimeout(rail._hi); });
+    el.addEventListener('click',function(){ hold(); show(i); });
+    el.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); hold(); show(i); return; }
+      var to = e.key==='ArrowRight'||e.key==='ArrowDown' ? i+1 : e.key==='ArrowLeft'||e.key==='ArrowUp' ? i-1 : -1;
+      if(to<0||to>=items.length) return;
+      e.preventDefault(); items[to].focus(); hold(); show(to);
+    });
+  });
+  rail.addEventListener('mouseenter',function(){ stop(); rail.classList.add('paused'); });
+  rail.addEventListener('mouseleave',function(){ rail.classList.remove('paused'); if(!held) play(); });
+  show(0);
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
+  io.observe(rail);
+})();

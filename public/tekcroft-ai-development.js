@@ -1,54 +1,3 @@
-/* === sy-script === */
-
-(function(){
-  var root=document.getElementById('guide'); if(!root) return;
-  var board=root.querySelector('.sy-board'), hs=[].slice.call(root.querySelectorAll('.sy-hs')), its=[].slice.call(root.querySelectorAll('.sy-it[data-k]')),
-      cur=-1, timer=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function set(k){ cur=k; hs.forEach(function(h,i){ h.classList.toggle('on',i===k); }); its.forEach(function(t,i){ t.classList.toggle('on',i===k); }); board.classList.toggle('focus',k>-1); }
-  function play(){ if(reduce) return; stop(); timer=setInterval(function(){ set((cur+1)%its.length); },3200); }
-  function stop(){ clearInterval(timer); }
-  its.forEach(function(t,i){ t.addEventListener('mouseenter',function(){ stop(); set(i); }); });
-  hs.forEach(function(h,i){ h.addEventListener('mouseenter',function(){ stop(); set(i); }); h.addEventListener('click',function(){ stop(); set(i); }); });
-  [board, root.querySelector('.sy-list')].forEach(function(el){ el.addEventListener('mouseleave',play); });
-  var started=false;
-  function start(){ if(started) return; started=true; root.classList.add('sy-run');
-    setTimeout(function(){ root.classList.add('sy-guarded'); }, reduce?0:1300);
-    setTimeout(function(){ set(0); play(); }, reduce?0:2600); }
-  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) start(); else stop(); }); },{threshold:.35}).observe(board); } else start();
-})();
-
-
-/* === v3-script === */
-
-(function(){
-  var root=document.getElementById('guide-v3'); if(!root) return;
-  var map=root.querySelector('.v3-map'), svg=root.querySelector('.v3-links'), hub=root.querySelector('.v3-hub .r1'), cards=[].slice.call(root.querySelectorAll('.v3-card')), NS='http://www.w3.org/2000/svg';
-  function draw(){
-    if(root.hidden || getComputedStyle(svg).display==='none') return;
-    var m=map.getBoundingClientRect(), h=hub.getBoundingClientRect(); svg.setAttribute('viewBox','0 0 '+m.width+' '+m.height); svg.innerHTML='';
-    var cx=h.left+h.width/2-m.left, cy=h.top+h.height/2-m.top, R=h.width/2;
-    cards.forEach(function(c,i){
-      var r=c.getBoundingClientRect(), x1, y1, tx, ty, vert=false;
-      var ccx=r.left+r.width/2-m.left, ccy=r.top+r.height/2-m.top, L=r.left-m.left, Rr=r.right-m.left, T=r.top-m.top, Bm=r.bottom-m.top;
-      if(Bm < cy-R*0.6){ vert=true; ty=Bm; tx=Math.max(L+40,Math.min(Rr-40,cx+(ccx-cx)*0.35)); }
-      else if(T > cy+R*0.6){ vert=true; ty=T; tx=Math.max(L+40,Math.min(Rr-40,cx+(ccx-cx)*0.35)); }
-      else { tx=(ccx<cx? Rr : L); ty=ccy; }
-      var ang=Math.atan2(ty-cy,tx-cx); x1=cx+Math.cos(ang)*R; y1=cy+Math.sin(ang)*R;
-      var mx=(x1+tx)/2, my=(y1+ty)/2;
-      var d=vert? ('M'+x1+' '+y1+' C'+x1+' '+my+' '+tx+' '+my+' '+tx+' '+ty) : ('M'+x1+' '+y1+' C'+mx+' '+y1+' '+mx+' '+ty+' '+tx+' '+ty);
-      var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); p.setAttribute('class','ln'); p.dataset.k=i; svg.appendChild(p);
-      var p2=document.createElementNS(NS,'path'); p2.setAttribute('d',d); p2.setAttribute('class','fl'); p2.dataset.k=i; svg.appendChild(p2);
-      [[x1,y1],[tx,ty]].forEach(function(pt){ var c2=document.createElementNS(NS,'circle'); c2.setAttribute('cx',pt[0]); c2.setAttribute('cy',pt[1]); c2.setAttribute('r',4.5); svg.appendChild(c2); });
-    });
-  }
-  cards.forEach(function(c,i){ c.addEventListener('mouseenter',function(){ [].forEach.call(svg.querySelectorAll('[data-k="'+i+'"]'),function(p){p.classList.add('on');}); });
-    c.addEventListener('mouseleave',function(){ [].forEach.call(svg.querySelectorAll('.on'),function(p){p.classList.remove('on');}); }); });
-  window.addEventListener('resize',draw); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(draw);
-  draw(); setTimeout(draw,700); setTimeout(draw,1600);
-  new MutationObserver(function(){ setTimeout(draw,50); }).observe(root,{attributes:true,attributeFilter:['hidden']});
-})();
-
-
 /* === v4-script === */
 (function(){
 const P=[["db","Unprepared data","Disparate or untagged records get audited before building begins, not found halfway into the project."],["flag","Pilot projects that never reach production","Each build is run against real-world systems and real-world loads, not sample data."],["undo","Writeback issues","Any write to your CRM or database gets tracked and rolled back should it fail partway through."],["gauge","Latency under load","Latency is tested using your real traffic, not a quiet environment designed for demos."],["coin","Uncontrolled costs post-launch","Usage costs and retries are limited and watched from day one, not open-ended."],["layers","Model version drift","Model versions are locked and validated before any provider updates your system."],["shield","Security issues around access","Retrieval adheres to your permissions, so nothing can be returned that a user is not authorized to view."]];
@@ -56,19 +5,6 @@ const ic=k=>`<svg viewBox="0 0 24 24"><use href="#v4-${k}"/></svg>`;
 P.forEach((p,i)=>{document.getElementById(i<3?"v4L":i<6?"v4R":"v4B").insertAdjacentHTML("beforeend",`<div class="card" style="--i:${i}"><div class="ic">${ic(p[0])}</div><div><h3>${p[1]}</h3><p>${p[2]}</p></div></div>`)});
 P.forEach((t,i)=>document.getElementById("v4T").insertAdjacentHTML("beforeend",`<div class="tile" style="--i:${i}">${ic(t[0])}<span>${t[1]}</span><u>!</u></div>`));
 })();
-
-/* === vsw-script === */
-
-(function(){
-  var vs={'1':document.getElementById('guide'),'2':document.getElementById('guide-v2'),'3':document.getElementById('guide-v3'),'4':document.getElementById('guide-v4')}, sw=document.querySelector('.vsw'); if(!sw) return;
-  var btns=[].slice.call(sw.querySelectorAll('button')), key='tk-guide-variant';
-  function pick(v){ Object.keys(vs).forEach(function(k){ if(vs[k]) vs[k].hidden=k!==v; }); btns.forEach(function(b){ b.classList.toggle('on',b.dataset.v===v); b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'); });
-    try{localStorage.setItem(key,v);}catch(e){} window.dispatchEvent(new Event('resize')); }
-  var saved='4'; try{ saved=localStorage.getItem(key)||'4'; }catch(e){}
-  btns.forEach(function(b){ b.addEventListener('click',function(){ pick(b.dataset.v); vs[b.dataset.v].scrollIntoView({behavior:'smooth',block:'start'}); }); });
-  pick(saved);
-})();
-
 
 /* === sc3-script === */
 

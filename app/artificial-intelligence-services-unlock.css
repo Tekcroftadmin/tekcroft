@@ -4205,8 +4205,8 @@ html[data-design="raw"] #model .tm-viz{align-self:center !important;}
 
 /* === ai-delivers === */
 /* WHAT TEKCROFT DELIVERS — the tm panels, three services */
-html[data-design="raw"] #model{background:#DAEEF6 !important;}
-html[data-design="raw"][data-theme="dark"] #model{background:var(--bg-alt) !important;}
+html[data-design="raw"] #model{background:var(--surface) !important;}
+html[data-design="raw"][data-theme="dark"] #model{background:var(--surface) !important;}
 html[data-design="raw"] #model .tm-item:not(.on){background:#fff !important;}
 html[data-design="raw"][data-theme="dark"] #model .tm-item:not(.on){background:var(--surface) !important;}
 html[data-design="raw"] #model .tm-item:not(.on){/* slim width via --tm-slim / global open-anim */}
@@ -4272,7 +4272,7 @@ html[data-design="raw"] #model .tm-card p{margin-bottom:0 !important;}
 /* === b5-styles === */
 /* WHAT YOU CAN BUILD WITH AI — v3 (after the supplied reference): centred head, 4 + 3 cards,
    each with an icon disc, title, short rule, copy, and a small product UI at the foot. */
-html[data-design="raw"] #build-v3.b5{position:relative !important; padding-block:clamp(52px,5.4vw,84px) !important; background:var(--surface) !important; overflow:hidden !important;}
+html[data-design="raw"] #build-v3.b5{position:relative !important; padding-block:clamp(52px,5.4vw,84px) !important; background:#DAEEF6 !important; overflow:hidden !important;}
 html[data-design="raw"] #build-v3.b5::before,html[data-design="raw"] #build-v3.b5::after{content:"" !important; position:absolute !important; top:40px !important; width:220px !important; height:320px !important; pointer-events:none !important;
   background-image:radial-gradient(hsl(var(--brand-h) 60% 70% / .35) 1.2px, transparent 1.4px) !important; background-size:16px 16px !important;
   -webkit-mask-image:radial-gradient(closest-side,#000,transparent) !important; mask-image:radial-gradient(closest-side,#000,transparent) !important;}
@@ -4670,7 +4670,7 @@ html[data-design="raw"] .ai-tx:has(#ax6:focus-visible) .ax-tab.t6{outline:2px so
 
 /* Tekcroft branding for the supplied Technologies section: brand blue only, site fonts, section rhythm, dark mode */
 html[data-design="raw"] #tech-v4.ai-tx{--ax-navy:var(--text); --ax-text:var(--text-2); --ax-blue:var(--primary); --ax-line:hsl(var(--brand-h) 40% 30% / .12);
-  background:#DAEEF6 !important; color:var(--text) !important;}
+  background:var(--surface) !important; color:var(--text) !important;}
 html[data-design="raw"] #tech-v4.ai-tx::before{background:radial-gradient(40% 50% at 8% 0%,rgba(255,255,255,.7),transparent 70%),radial-gradient(35% 45% at 100% 100%,hsl(var(--brand-h) 90% 60% / .12),transparent 70%) !important;}
 html[data-design="raw"] #tech-v4 .ax-gen,html[data-design="raw"] #tech-v4 .ax-nlp,html[data-design="raw"] #tech-v4 .ax-ml,html[data-design="raw"] #tech-v4 .ax-rag,html[data-design="raw"] #tech-v4 .ax-cv,html[data-design="raw"] #tech-v4 .ax-agt{--c:var(--primary); --c2:#4CC6F6;}
 html[data-design="raw"] #tech-v4 .ax-wrap{max-width:var(--maxw) !important; padding:clamp(56px,5.6vw,90px) 26px !important;}
@@ -4713,7 +4713,7 @@ html[data-design="raw"] #tech-v4 .vz-scene{background:linear-gradient(180deg,#CD
 html[data-design="raw"] #tech-v4 .vz-ped,html[data-design="raw"] #tech-v4 .vz-ped::before{background:#2B5D7A !important;}
 html[data-design="raw"] #tech-v4 .ax-pane::before{background:radial-gradient(50% 60% at 100% 0%,hsl(var(--brand-h) 95% 50% / .07),transparent 70%) !important;}
 /* dark */
-html[data-design="raw"][data-theme="dark"] #tech-v4.ai-tx{background:var(--bg-alt) !important; --ax-line:var(--border);}
+html[data-design="raw"][data-theme="dark"] #tech-v4.ai-tx{background:var(--surface) !important; --ax-line:var(--border);}
 html[data-design="raw"][data-theme="dark"] #tech-v4.ai-tx::before{opacity:.25 !important;}
 html[data-design="raw"][data-theme="dark"] #tech-v4 .ax-eye{background:var(--surface) !important;}
 html[data-design="raw"][data-theme="dark"] #tech-v4 .ax-tab{background:rgba(255,255,255,.03) !important;}
@@ -4875,7 +4875,7 @@ html[data-design="raw"] #tech-v4 .g4-txt sup{font-size:8px !important; font-weig
 html[data-design="raw"] .ai-tx h2,html[data-design="raw"] .ai-tx h2 span,html[data-design="raw"] .ai-tx h3{text-transform:none !important;}
 html[data-design="raw"] .ai-tx[data-tvar]:not(.bv-show){display:none !important;}
 
-html[data-design="raw"] #integ.ig{padding-block:clamp(56px,5.6vw,90px) !important; background:var(--surface) !important;}
+html[data-design="raw"] #integ.ig{padding-block:clamp(56px,5.6vw,90px) !important; background:#DAEEF6 !important;}
 html[data-design="raw"] .ig-wrap{display:grid !important; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr) !important; gap:clamp(28px,4.4vw,72px) !important; align-items:center !important;}
 html[data-design="raw"] .ig-copy h2{margin:0 !important; font-family:var(--font-display) !important; font-size:clamp(30px,3.2vw,50px) !important; font-weight:800 !important; letter-spacing:-.045em !important; line-height:1.05 !important; color:var(--text) !important; text-transform:none !important;}
 html[data-design="raw"] .ig-copy h2 em{display:block !important; font-style:normal !important; color:var(--primary) !important;}
@@ -4992,8 +4992,8 @@ html[data-design="raw"] .ig-app.b .ig-ai{animation-delay:1s !important;} html[da
 /* AI SECURITY, GOVERNANCE AND RELIABILITY — the five safeguards as checkpoints an AI action passes through,
    in the order the copy gives them (data → access → evaluation → human sign-off → monitoring after launch).
    A pulse travels the rail; each gate it reaches turns to a check and lights its column. */
-html[data-design="raw"] #govern.gv{padding-block:clamp(56px,5.6vw,90px) !important; background:#DAEEF6 !important;}
-html[data-design="raw"][data-theme="dark"] #govern.gv{background:var(--bg-alt) !important;}
+html[data-design="raw"] #govern.gv{padding-block:clamp(56px,5.6vw,90px) !important; background:var(--surface) !important;}
+html[data-design="raw"][data-theme="dark"] #govern.gv{background:var(--surface) !important;}
 html[data-design="raw"] .gv-head{display:grid !important; grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important; gap:clamp(18px,3vw,48px) !important; align-items:end !important; margin-bottom:clamp(26px,3vw,42px) !important;}
 html[data-design="raw"] .gv-head h2{margin:0 !important; font-family:var(--font-display) !important; font-size:clamp(30px,3.2vw,50px) !important; font-weight:800 !important; letter-spacing:-.045em !important; line-height:1.05 !important; color:var(--text) !important; text-transform:none !important;}
 html[data-design="raw"] .gv-head h2 em{font-style:normal !important; color:var(--primary) !important;}
@@ -5286,14 +5286,14 @@ html[data-design="raw"] #industries .pf-o6 .pf-face{color:hsl(205 90% 38%) !impo
 html[data-design="raw"] #industries .pf-card{background:#fff !important; border-left-color:#fff !important; border-right-color:#fff !important; border-bottom-color:#fff !important;}
 html[data-design="raw"][data-theme="dark"] #industries .pf-card{background:var(--surface) !important; border-color:var(--border) !important;}
 html[data-design="raw"] .pf-c6 .pf-mk,html[data-design="raw"] .pf-o6 .pf-face .pf-mk{-webkit-mask:var(--mk) center / contain no-repeat !important; mask:var(--mk) center / contain no-repeat !important; background:currentColor !important; width:54% !important; height:54% !important;}
-html[data-design="raw"] #industries{--ground:#DAEEF6; background:#DAEEF6 !important;}
-html[data-design="raw"][data-theme="dark"] #industries{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+html[data-design="raw"] #industries{--ground:var(--surface); background:var(--surface) !important;}
+html[data-design="raw"][data-theme="dark"] #industries{--ground:var(--surface); background:var(--surface) !important;}
 html[data-design="raw"] #industries h2,html[data-design="raw"] #industries h2 span,html[data-design="raw"] #industries h2 em,html[data-design="raw"] #industries .pf-card h3,html[data-design="raw"] #industries .pf-card h3 em{text-transform:none !important;}
 
 /* === wy-styles === */
 /* WHY CHOOSE TEKCROFT — tab bar of differentiators over one panel (copy left, proof card right).
    Placeholder text until the differentiators are supplied. */
-html[data-design="raw"] #why.wy{padding-block:clamp(56px,5.6vw,90px) !important; background:var(--surface) !important;}
+html[data-design="raw"] #why.wy{padding-block:clamp(56px,5.6vw,90px) !important; background:#DAEEF6 !important;}
 html[data-design="raw"] .wy-head{text-align:center !important; max-width:860px !important; margin:0 auto clamp(22px,2.4vw,32px) !important;}
 html[data-design="raw"] .wy-head .smark{margin-bottom:16px !important;}
 html[data-design="raw"] .wy-head h2{margin:0 !important; font-family:var(--font-display) !important; font-size:clamp(30px,3.4vw,52px) !important; font-weight:800 !important; letter-spacing:-.045em !important; line-height:1.06 !important; color:var(--text) !important; text-transform:none !important;}
@@ -5401,7 +5401,17 @@ html[data-design="raw"][data-theme="dark"] .em-plan.feat .em-go .btn:hover{backg
 html[data-design="raw"][data-theme="dark"] .em-tag{background:hsl(var(--brand-h) 70% 22%) !important; color:#B8E6FA !important;}
 
 /* === faq-ai === */
-html[data-design="raw"] #faq{--ground:var(--surface); background:var(--surface) !important;} html[data-design="raw"] #faq h2,html[data-design="raw"] #faq h2 em,html[data-design="raw"] #faq .faq-t{text-transform:none !important;} html[data-design="raw"] #faq .faq-aside .btn{align-self:flex-start !important; margin-top:auto !important;}
+html[data-design="raw"] #faq{--ground:var(--surface); --panel:var(--bg-alt); background:var(--surface) !important;} html[data-design="raw"][data-theme="dark"] #faq{--ground:var(--surface); --panel:var(--bg-alt); background:var(--surface) !important;} html[data-design="raw"] #faq h2,html[data-design="raw"] #faq h2 em,html[data-design="raw"] #faq .faq-t{text-transform:none !important;} html[data-design="raw"] #faq .faq-aside .btn{align-self:flex-start !important; margin-top:auto !important;}
+html[data-design="raw"] #faq .faq-list{background:var(--surface) !important; border:1px solid var(--border) !important; border-radius:clamp(16px,1.6vw,20px) !important; overflow:hidden !important;}
+html[data-design="raw"][data-theme="light"] #faq .faq-list{background:#FFFFFF !important;}
+html[data-design="raw"] #faq .faq-item + .faq-item{border-top:1px solid var(--border-soft) !important;}
+html[data-design="raw"] #faq .faq-q{background:transparent !important; color:var(--text) !important;}
+html[data-design="raw"] #faq .faq-q:hover{background:var(--mm-hover) !important;}
+html[data-design="raw"] #faq .faq-n,html[data-design="raw"] #faq .faq-sign{color:var(--brand-text) !important; background:var(--brand-soft) !important;}
+html[data-design="raw"] #faq .faq-q[aria-expanded="true"]{background:var(--brand-soft) !important;}
+html[data-design="raw"] #faq .faq-q[aria-expanded="true"] .faq-t{color:var(--primary) !important;}
+html[data-design="raw"] #faq .faq-q[aria-expanded="true"] .faq-n,
+html[data-design="raw"] #faq .faq-q[aria-expanded="true"] .faq-sign{background:var(--primary) !important; color:#fff !important;}
 
 /* === cta-ai === */
 html[data-design="raw"] #contact{--ground:#DAEEF6; background:#DAEEF6 !important;} html[data-design="raw"][data-theme="dark"] #contact{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
@@ -5521,3 +5531,20 @@ html[data-design="raw"] .hs-logos-track li i{width:6px !important; height:6px !i
 
 /* === ais-eyebrow === */
 html[data-design="raw"] #hero-1 .hs-copy .tag{text-transform:none !important; letter-spacing:0 !important; font-family:var(--font-display) !important; font-size:14.5px !important; font-weight:700 !important;} html[data-design="raw"] #proof .tb-figs{background:var(--surface) !important;} html[data-design="raw"] #hero-1 .hs-h1,html[data-design="raw"] #hero-1 .hs-h1 span,html[data-design="raw"] #hero-1 .hs-h1 em{text-transform:none !important;}
+
+/* === ZEBRA GROUND LOCK (raw wins) — white ↔ tint after stats === */
+html[data-design="raw"] body .sec[data-ground="white"],
+html[data-design="raw"] body section[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+html[data-design="raw"] body .sec[data-ground="tint"],
+html[data-design="raw"] body section[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+html[data-design="raw"] #proof-v2[data-ground="tint"],
+html[data-design="raw"] #build-v3[data-ground="tint"],
+html[data-design="raw"] #integ[data-ground="tint"],
+html[data-design="raw"] #process[data-ground="tint"],
+html[data-design="raw"] #models[data-ground="tint"],
+html[data-design="raw"] #contact[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+html[data-design="raw"] #model[data-ground="white"],
+html[data-design="raw"] #tech-v4[data-ground="white"],
+html[data-design="raw"] #govern[data-ground="white"],
+html[data-design="raw"] #industries[data-ground="white"],
+html[data-design="raw"] #faq[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}

@@ -756,7 +756,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 
 /* Tekcroft branding for the supplied Technologies section: brand blue only, site fonts, section rhythm, dark mode */
 #tech-v4.ai-tx{--ax-navy:var(--text); --ax-text:var(--text-2); --ax-blue:var(--primary); --ax-line:hsl(var(--brand-h) 40% 30% / .12);
-  background:#DAEEF6; color:var(--text);}
+  background:var(--surface); color:var(--text);}
 #tech-v4.ai-tx::before{background:radial-gradient(40% 50% at 8% 0%,rgba(255,255,255,.7),transparent 70%),radial-gradient(35% 45% at 100% 100%,hsl(var(--brand-h) 90% 60% / .12),transparent 70%);}
 #tech-v4 .ax-gen,#tech-v4 .ax-nlp,#tech-v4 .ax-ml,#tech-v4 .ax-rag,#tech-v4 .ax-cv,#tech-v4 .ax-agt{--c:var(--primary); --c2:#4CC6F6;}
 #tech-v4 .ax-wrap{max-width:var(--maxw); padding:clamp(56px,5.6vw,90px) 26px;}
@@ -782,7 +782,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 #tech-v4 .vz-ped,#tech-v4 .vz-ped::before{background:#2B5D7A;}
 #tech-v4 .ax-pane::before{background:radial-gradient(50% 60% at 100% 0%,hsl(var(--brand-h) 95% 50% / .07),transparent 70%);}
 /* dark */
-html[data-theme="dark"] #tech-v4.ai-tx{background:var(--bg-alt); --ax-line:var(--border);}
+html[data-theme="dark"] #tech-v4.ai-tx{background:var(--surface); --ax-line:var(--border);}
 html[data-theme="dark"] #tech-v4.ai-tx::before{opacity:.25;}
 html[data-theme="dark"] #tech-v4 .ax-eye{background:var(--surface);}
 html[data-theme="dark"] #tech-v4 .ax-tab{background:rgba(255,255,255,.03);}
@@ -1042,4 +1042,13 @@ html[data-design="raw"] #hero-1 .ticker .marq span::before{
   border-radius:50% !important;
   background:var(--primary) !important;
   flex-shrink:0 !important;
+}
+
+/* Keep #tech-v4 on the white zebra step (after tint #build-v3) */
+html[data-design="raw"] #tech-v4.ai-tx,
+html[data-design="raw"] #tech-v4[data-ground="white"],
+#tech-v4[data-ground="white"]{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
 }

@@ -5359,8 +5359,8 @@ html[data-theme="dark"] .wy-row u{background:rgba(255,255,255,.1);}
 /* === em-styles === */
 /* ENGAGEMENT MODELS — plan columns. Three tall plans side by side, the middle one (the ongoing team) raised
    on deep navy; each carries the situation it suits as a tag, a large glyph, the copy, and the page CTA. */
-#models.em{padding-block:clamp(56px,5.6vw,90px); background:var(--surface) !important;}
-html[data-theme="dark"] #models.em{background:var(--surface) !important;}
+#models.em{padding-block:clamp(56px,5.6vw,90px); background:#DAEEF6 !important;}
+html[data-theme="dark"] #models.em{background:var(--bg-alt) !important;}
 .em-head{text-align:center; max-width:820px; margin:0 auto clamp(28px,3.2vw,46px);}
 .em-head h2{margin:0; font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); font-weight:800; letter-spacing:-.045em; line-height:1.06; color:var(--text); text-transform:none;}
 .em-head h2 em{font-style:normal; color:var(--primary);}
@@ -5422,7 +5422,17 @@ html[data-theme="dark"] .em-tag{background:hsl(var(--brand-h) 70% 22%); color:#B
 html[data-theme="dark"] #process.eg-sec{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
 
 /* === faq-ai === */
-#faq{--ground:#DAEEF6; background:#DAEEF6 !important;} html[data-theme="dark"] #faq{--ground:var(--bg-alt); background:var(--bg-alt) !important;} #faq h2,#faq h2 em,#faq .faq-t{text-transform:none !important;} #faq .faq-aside .btn{align-self:flex-start; margin-top:auto;}
+#faq{--ground:var(--surface); --panel:var(--bg-alt); background:var(--surface) !important;} html[data-theme="dark"] #faq{--ground:var(--surface); --panel:var(--bg-alt); background:var(--surface) !important;} #faq h2,#faq h2 em,#faq .faq-t{text-transform:none !important;} #faq .faq-aside .btn{align-self:flex-start; margin-top:auto;}
+#faq .faq-list{background:var(--surface) !important; border:1px solid var(--border); border-radius:clamp(16px,1.6vw,20px); overflow:hidden;}
+html[data-theme="light"] #faq .faq-list{background:#FFFFFF !important;}
+#faq .faq-item + .faq-item{border-top:1px solid var(--border-soft);}
+#faq .faq-q{background:transparent; color:var(--text);}
+#faq .faq-q:hover{background:var(--mm-hover);}
+#faq .faq-n,#faq .faq-sign{color:var(--brand-text); background:var(--brand-soft);}
+#faq .faq-q[aria-expanded="true"]{background:var(--brand-soft);}
+#faq .faq-q[aria-expanded="true"] .faq-t{color:var(--primary);}
+#faq .faq-q[aria-expanded="true"] .faq-n,
+#faq .faq-q[aria-expanded="true"] .faq-sign{background:var(--primary); color:#fff;}
 
 /* === cta-ai === */
 #contact{--ground:#DAEEF6; background:#DAEEF6 !important;} html[data-theme="dark"] #contact{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
@@ -5554,6 +5564,6 @@ html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var
 #govern[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
 #process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
 #industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#why[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#models[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#models[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#faq[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#contact[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}

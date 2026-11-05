@@ -5,6 +5,8 @@
    white card; the rest stand closed with their number and name on edge.
    ══════════════════════════════════════════════════════════════════════ */
 #chatbot-services{padding-block:clamp(36px,4vw,58px); background:var(--ground, var(--bg-alt));}
+#chatbot-services[data-ground="tint"]{--ground:var(--bg-alt); background:var(--bg-alt) !important;}
+#chatbot-services[data-ground="white"]{--ground:var(--surface); background:var(--surface) !important;}
 .tm-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
 .tm-head .smark{margin-bottom:10px;}
