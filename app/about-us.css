@@ -3893,5 +3893,10 @@ html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var
 #what-we-do-h[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
 #rp-sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
 #how-we-work[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#ppl-sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#ppl-sec[data-ground="tint"]{--ground:transparent !important;--panel:var(--surface) !important;background:transparent !important;}
+#pplw .pplx,
+#pplw #ppl-sec,
+#pplw .sp-why{
+  background:transparent !important;
+}
 #wg[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
