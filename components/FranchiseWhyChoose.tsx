@@ -206,7 +206,7 @@ export default function FranchiseWhyChoose() {
   };
 
   return (
-    <section className="sec wy" id="why" data-ground="white">
+    <section className="sec wy" id="why" data-ground="tint">
       <div className="wrap wy-in">
         <div className="wy-say rv in">
           <span className="smark">
@@ -301,10 +301,10 @@ export default function FranchiseWhyChoose() {
         </div>
 
         <div className="wy-cta rv in" style={{ ["--d" as string]: "200ms" }}>
-          <button type="button" className="btn btn-primary btn-lg" data-jump>
+          <a className="btn btn-primary btn-lg" href="/book-a-free-evaluation">
             Request Your Free Franchise SEO Proposal{" "}
             <span className="arw">↑</span>
-          </button>
+          </a>
         </div>
       </div>
     </section>

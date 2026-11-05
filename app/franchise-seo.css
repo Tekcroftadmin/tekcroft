@@ -1176,10 +1176,10 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
 /* Grounds are owned by the rhythm-app block further down (white↔tint).
    Keep these out of the way so ID rules cannot invert neighbours. */
 #faq{
-  --ground:var(--bg-alt);  --panel:var(--surface); }
+  --ground:var(--surface);  --panel:var(--bg-alt); }
 #contact{
-  --ground:var(--surface); --panel:var(--bg-alt);
-  background:var(--surface) !important; }
+  --ground:var(--bg-alt); --panel:var(--surface);
+  background:var(--bg-alt) !important; }
 /* White cards need somewhere to be white against, so the process joins
    the pair #scope and #clients use: the page's own near-white under
    them, and each card read off its own edge rather than off a change of
@@ -4032,7 +4032,7 @@ html[data-theme="dark"] #gbp-what{
 
 /* === wc-app === */
 /* Why choose us on the app page: white ground between two tinted sections */
-#why{--ground:var(--bg); --panel:var(--surface);}
+#why{--ground:var(--bg-alt); --panel:var(--surface);}
 
 /* Why Choose Us — keep tabs/panel/CTA inside the same centered .wrap
    column as every other section (max-width + margin auto). */
@@ -7350,22 +7350,22 @@ html[data-theme="dark"] .gv-c{background:hsl(var(--brand-h) 40% 18%);}
 /* Strict white / tint alternation after the dark hero + tint proof strip.
    white = --surface, tint = --bg-alt
    proof(t) → what-is(w) → franchise-signs(t) → covers(w) → industries(t)
-   → governance(w) → duplicate(t) → compare(w) → faq(t) → contact(w/cta) */
-#proof-v2,
+   → governance(w) → duplicate(t) → compare(w) → why(t) → faq(w) → contact(t/cta) */
+#what-is,
 #franchise-covers,
-#industries,
-#duplicate,
-#why,
-#contact{
+#governance,
+#compare,
+#faq{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt);
 }
 
-#what-is,
+#proof-v2,
 #franchise-signs,
-#governance,
-#compare,
-#faq{
+#industries,
+#duplicate,
+#why,
+#contact{
   --ground:var(--bg-alt) !important;
   --panel:var(--surface);
 }
