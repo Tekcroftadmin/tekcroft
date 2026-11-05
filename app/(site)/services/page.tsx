@@ -40,7 +40,7 @@ export default function ServicesPage() {
         rel="preload"
         as="image"
         href={lcp.preload}
-        type="image/jpeg"
+        type="image/webp"
         fetchPriority="high"
       />
       <Homepage html={html} />

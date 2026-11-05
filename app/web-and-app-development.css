@@ -1336,12 +1336,13 @@ html[data-theme="dark"] #web-and-app-development-page .theme-btn .sun{display:no
   content:""; width:6px; height:6px; border-radius:50%;
   background:var(--primary); flex:none;}
 
-#web-and-app-development-page .faq-aside h3{
+#web-and-app-development-page .faq-aside > .faq-aside-lead{
   margin:12px 0 0; font-family:var(--font-display);
-  font-size:clamp(19px,1.9vw,23px); font-weight:800; letter-spacing:-.03em;
-  line-height:1.22; color:#fff; text-transform:none;}
+  font-size:var(--h3) !important; font-weight:800 !important; letter-spacing:-.03em;
+  line-height:1.25 !important; color:#fff !important; text-transform:none;}
+#web-and-app-development-page .faq-aside > .faq-aside-lead b{font-weight:800;}
 
-#web-and-app-development-page .faq-aside p{
+#web-and-app-development-page .faq-aside > p:not(.faq-aside-lead){
   margin:10px 0 0; font-size:13.5px; line-height:1.6;
   color:rgba(255,255,255,.78);}
 

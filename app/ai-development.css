@@ -7980,14 +7980,14 @@ html body .hs-done-title b{font-weight:700;}
 #faq .faq-aside-lead{
   margin:10px 0 0;
   font-family:var(--font-display);
-  font-size:var(--body) !important;
-  font-weight:700 !important;
-  letter-spacing:-0.02em;
-  line-height:1.35 !important;
+  font-size:var(--h3) !important;
+  font-weight:800 !important;
+  letter-spacing:-0.03em;
+  line-height:1.25 !important;
   color:#fff !important;
   text-transform:none;
 }
-#faq .faq-aside-lead b{font-weight:700;}
+#faq .faq-aside-lead b{font-weight:800;}
 
 /* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
 /* ══════════════════════════════════════════════════════════════════════
