@@ -5159,6 +5159,15 @@ html[data-theme="dark"] .nsr-check p b{color:var(--text);}
 .fz-lede{margin:16px 0 0; font-size:clamp(14.8px,1.15vw,16.2px); line-height:1.75; color:var(--text-2);}
 .fz-lede b{color:var(--brand-text); font-weight:700;}
 .fz-lede cite{font-style:normal; color:var(--brand-text);}
+/* Built to Rank — intro lede + 3 points (scoped to this section only) */
+#framework-v2 .fz-points{list-style:none; margin:12px 0 0; padding:0;
+  display:flex; flex-direction:column; gap:10px;
+  font-family:var(--font); font-size:clamp(14.8px,1.15vw,16.2px); line-height:1.75; color:var(--text-2);}
+#framework-v2 .fz-points li{position:relative; padding-inline-start:1.15em;}
+#framework-v2 .fz-points li::before{content:""; position:absolute; left:0; top:0.72em;
+  width:6px; height:6px; border-radius:50%; background:var(--brand-text);}
+#framework-v2 .fz-points b{color:var(--brand-text); font-weight:700;}
+#framework-v2 .fz-points cite{font-style:normal; color:var(--brand-text);}
 .fz-h3{margin:clamp(20px,2.4vw,30px) 0 0; font-family:var(--font-display); font-size:clamp(18px,1.7vw,22px);
   font-weight:800; letter-spacing:-.025em; color:var(--text); text-transform:none;}
 
