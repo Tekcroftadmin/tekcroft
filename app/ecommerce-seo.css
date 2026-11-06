@@ -651,7 +651,17 @@ html[data-theme="dark"] .mp-arch{fill:rgba(255,255,255,.05);}
 }
 @media (max-width:560px){
   .mp-panel{padding:26px 20px; border-radius:22px;}
-  .mp-say .btn{width:100%;}
+  /* Long CTA label + arrow must stay inside the full-width pill on phones. */
+  .mp-say .btn{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    white-space:normal;
+    line-height:1.35;
+    padding-inline:18px;
+    font-size:14px;
+  }
+  .mp-say .btn .arw{flex-shrink:0; margin-right:0;}
 }
 
 /* === pf-styles === */
@@ -1693,6 +1703,18 @@ body:has(#why.wy.beam-zone),
   #process .eg-card::after{display:none;}
   #process .eg-cta{justify-content:stretch;}
   #process .eg-cta .btn{width:100%;}
+}
+@media (max-width:560px){
+  /* Same long-label fix as .mp-say — wrap copy, keep the arrow inside. */
+  #process .eg-cta .btn{
+    max-width:100%;
+    box-sizing:border-box;
+    white-space:normal;
+    line-height:1.35;
+    padding-inline:18px;
+    font-size:14px;
+  }
+  #process .eg-cta .btn .arw{flex-shrink:0; margin-right:0;}
 }
 @media (max-width:1000px) and (prefers-reduced-motion:reduce){
   /* Keep one card lit ? global reduce-motion opacity:1 would stack all five. */
