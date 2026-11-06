@@ -6927,9 +6927,72 @@ html[data-theme="dark"] #services-2 .ac-card,html[data-theme="dark"] #services-2
 #why .wy-cta p{margin:0; font-size:clamp(15px,1.2vw,17px); color:var(--text);}
 #why .wy-cta p b{font-family:var(--font-display); font-weight:700; letter-spacing:-.02em;}
 @media (max-width:980px){
-  #why .wy-rail{grid-auto-flow:row; grid-auto-columns:auto;}
-  #why .wy-tab{text-align:left;}
   #why .wy-cta{flex-direction:column;}
+}
+
+/* Mobile: Why Choose tabs + panel stay inside the viewport (no horizontal overflow) */
+@media (max-width:900px){
+  html body #why.wy,
+  html body #why{
+    overflow-x:clip;
+    max-width:100%;
+  }
+  html body #why > .wrap.wy-in,
+  html body #why .wy-box,
+  html body #why .wy-rail,
+  html body #why .wy-panes,
+  html body #why .wy-pane,
+  html body #why .wy-txt,
+  html body #why .wy-fig{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  html body #why .wy-rail{
+    display:flex;
+    flex-wrap:wrap;
+    grid-auto-flow:unset;
+    grid-auto-columns:unset;
+    gap:6px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  html body #why .wy-tab{
+    flex:1 1 calc(50% - 6px);
+    min-width:0;
+    max-width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    text-align:center;
+    box-sizing:border-box;
+  }
+  html body #why .wy-panes{
+    overflow:hidden;
+  }
+  html body #why .wy-pane{
+    grid-template-columns:1fr !important;
+    gap:clamp(16px,2.4vw,24px);
+  }
+  html body #why .wy-txt,
+  html body #why .wy-fig{
+    grid-column:1;
+  }
+  html body #why .wy-pane h3,
+  html body #why .wy-pane p,
+  html body #why .wy-title,
+  html body #why .br-top span{
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+}
+@media (max-width:560px){
+  html body #why .wy-tab{
+    flex:1 1 100%;
+    text-align:left;
+    padding:12px 16px;
+  }
 }
 
 /* === web-design tm (GBP process design) === */

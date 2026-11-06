@@ -6780,6 +6780,13 @@ html[data-theme="dark"] .ts-lg{background:hsl(var(--brand-h) 20% 22%);}
 #industries .pf-go{display:flex; align-items:center; justify-content:space-between; gap:12px; width:auto; height:auto; align-self:stretch;}
 #industries .pf-go b{font-size:13.5px; font-weight:700; color:var(--pf); letter-spacing:-.005em;}
 @media (max-width:600px){ #industries .pf-card:nth-child(7){--stop:6;} #industries .pf-card:nth-child(8){--stop:7;} }
+/* Mobile: drop sticky-stack min-height so each card is only as tall as its content */
+@media (max-width:900px){
+  #industries .pf-card{
+    min-height:0 !important;
+    height:auto !important;
+  }
+}
 
 /* === svc-franchise === */
 /* franchise SEO process: nine steps in the rail instead of six, so the
@@ -8781,4 +8788,158 @@ html body .sec.is-white{
 /* In-page hash targets clear the fixed nav */
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* ── Mobile-only: Why Choose tabs + CTA card fit (desktop unchanged) ─ */
+@media (max-width:900px){
+  /* Why Choose — stop horizontal overflow from the 5-column tab rail */
+  html body #why.wy,
+  html body #why{
+    overflow-x:clip;
+    max-width:100%;
+  }
+  html body #why > .wrap.wy-in,
+  html body #why .wy-box,
+  html body #why .wy-rail,
+  html body #why .wy-panes,
+  html body #why .wy-pane,
+  html body #why .wy-txt,
+  html body #why .wy-fig{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  html body #why .wy-rail{
+    display:flex;
+    flex-wrap:wrap;
+    grid-auto-flow:unset;
+    grid-auto-columns:unset;
+    gap:6px;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  html body #why .wy-tab{
+    flex:1 1 calc(50% - 6px);
+    min-width:0;
+    max-width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    text-align:center;
+    box-sizing:border-box;
+  }
+  html body #why .wy-panes{
+    overflow:hidden;
+  }
+  html body #why .wy-pane{
+    grid-template-columns:1fr !important;
+    gap:clamp(16px,2.4vw,24px);
+  }
+  html body #why .wy-txt,
+  html body #why .wy-fig{
+    grid-column:1;
+  }
+  html body #why .wy-pane h3,
+  html body #why .wy-pane p,
+  html body #why .br-top span{
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+
+  /* CTA Let's Talk card — contain heading, copy, and button */
+  html body #contact.cta > .wrap{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding-inline:clamp(12px,3.5vw,20px);
+  }
+  html body #contact.cta .cta3,
+  html body #contact .cta3{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding:var(--cta-pad-y, 28px) clamp(14px,4vw,22px) !important;
+    overflow:hidden;
+  }
+  html body #contact .cta3-eyebrow,
+  html body #contact .cta3 h2,
+  html body #contact .cta3 > p,
+  html body #contact .cta3-actions{
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  html body #contact .cta3 h2{
+    width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    hyphens:auto;
+    text-wrap:balance;
+  }
+  html body #contact .cta3 h2 em{
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  html body #contact .cta3 > p{
+    width:100%;
+    max-width:100%;
+    margin-inline:0;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+  html body #contact .cta3-actions{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  html body #contact .cta3-actions .btn{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    height:auto;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    line-height:1.35;
+    text-align:center;
+    padding:15px 16px;
+    font-size:14px;
+  }
+  html body #contact .cta3-actions .btn .btn-label,
+  html body #contact .cta3-actions .btn .btn-roll{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    height:auto;
+  }
+  html body #contact .cta3-actions .btn .arw{
+    flex-shrink:0;
+    margin:0;
+  }
+}
+@media (max-width:560px){
+  html body #why .wy-tab{
+    flex:1 1 100%;
+    text-align:left;
+    padding:12px 16px;
+  }
+  html body #contact .cta3-actions .btn{
+    padding:14px 14px;
+    font-size:13.5px;
+  }
 }

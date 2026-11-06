@@ -388,14 +388,43 @@ html[data-theme="dark"] .ct-field :is(input,select,textarea):focus{
   border-color:var(--primary);
   box-shadow:0 0 0 4px hsl(var(--brand-h) 100% 50% / .16);}
 
-/* The send: full width, label centred, and the disc pinned to the right
-   edge rather than sitting beside the words — which is what .btn
-   normally does. */
-.ct-send{position:relative; width:100%; justify-content:center;
-  margin-top:clamp(4px,.6vw,8px);}
-.ct-send .arw{position:absolute; right:8px; top:50%; margin:0;
-  transform:translateY(-50%) rotate(45deg);}
-.ct-send:hover .arw{transform:translateY(-50%) rotate(90deg);}
+/* The send: full width, label centred, arrow pinned inside the right
+   end of the pill — clear of the rounded corner on every width. */
+html body .ct-form .ct-send.btn{
+  position:relative;
+  width:100%;
+  justify-content:center;
+  margin-top:clamp(4px,.6vw,8px);
+  /* Keep label optically centered; reserve room for the 32px arrow + inset */
+  padding-left:clamp(28px,4vw,36px);
+  padding-right:clamp(56px,7vw,64px);
+  box-sizing:border-box;
+  overflow:hidden;
+}
+html body .ct-form .ct-send.btn .arw{
+  position:absolute;
+  top:50%;
+  right:20px !important;
+  left:auto !important;
+  margin:0 !important;
+  width:32px;
+  height:32px;
+  flex-shrink:0;
+  transform:translateY(-50%) rotate(45deg);
+  z-index:2;
+}
+html body .ct-form .ct-send.btn:hover .arw{
+  transform:translateY(-50%) rotate(90deg);
+}
+@media (max-width:560px){
+  html body .ct-form .ct-send.btn{
+    padding-left:24px;
+    padding-right:56px;
+  }
+  html body .ct-form .ct-send.btn .arw{
+    right:18px !important;
+  }
+}
 
 .ct-note{grid-column:1 / -1; display:flex; align-items:center;
   justify-content:center; gap:8px; margin-top:2px;

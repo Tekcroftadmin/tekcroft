@@ -12600,13 +12600,42 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 #web-and-app-development-page .wy-ways li.pick i::after{transform:scale(1);}
 
 /* ── tablet and phone ── */
+/* Tabs match franchise #why Why Choose: wrap / stack on mobile — no horizontal scroll cut-off */
 
 @media (max-width:1100px){
-#web-and-app-development-page .wy-tabs{display:flex; overflow-x:auto; scrollbar-width:none; scroll-behavior:smooth;}
+#web-and-app-development-page #why{
+  overflow-x:clip;
+  max-width:100%;
+}
 
-#web-and-app-development-page .wy-tabs::-webkit-scrollbar{display:none;}
+#web-and-app-development-page #why .wy-box,
+#web-and-app-development-page #why .wy-tabs,
+#web-and-app-development-page #why .wy-body{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
 
-#web-and-app-development-page .wy-tab{flex:0 0 auto; min-height:48px; padding:10px 16px; white-space:nowrap;}
+#web-and-app-development-page .wy-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  grid-template-columns:unset;
+  gap:6px;
+  overflow-x:visible;
+}
+
+#web-and-app-development-page .wy-tab{
+  flex:1 1 calc(50% - 6px);
+  min-width:0;
+  max-width:100%;
+  min-height:48px;
+  padding:10px 16px;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-align:center;
+  box-sizing:border-box;
+}
 }
 
 @media (max-width:860px){
@@ -12616,7 +12645,12 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 }
 
 @media (max-width:560px){
-#web-and-app-development-page .wy-tab{font-size:12.8px; padding:9px 14px;}
+#web-and-app-development-page .wy-tab{
+  flex:1 1 100%;
+  text-align:left;
+  padding:12px 16px;
+  font-size:12.8px;
+}
 
 #web-and-app-development-page .wy-same{grid-template-columns:minmax(0,1fr);}
 
