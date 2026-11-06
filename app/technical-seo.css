@@ -2748,12 +2748,12 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
 
      proof(white) â†’ signs(tint) â†’ services(white) â†’ why(tint) â†’
      process(white) â†’ get(tint) â†’ platforms(white) â†’ ai(tint) â†’
-     work(white) â†’ reviews(tint) â†’ faq(white) â†’ contact(tint).
+     work(white) â†’ reviews(tint) â†’ faq(white) â†’ contact(white).
 
    Cards read --panel (the opposite of --ground). */
-#proof,#model,#process,#platforms,#work,#faq{
+#proof,#model,#process,#platforms,#work,#faq,#contact{
   --ground:var(--surface); --panel:var(--bg-alt); }
-#signs,#why,#get,#ai,#reviews,#contact{
+#signs,#why,#get,#ai,#reviews{
   --ground:var(--bg-alt);  --panel:var(--surface); }
 
 /* Process / reviews cards stay white on their ground. */
@@ -4758,6 +4758,13 @@ html body #get .yg-captext{
 @media (max-width:960px){
   #contact.cta{ --cta-shot:url("/images/tech-cta-m-54ef971e87.webp"); }
 }
+/* Outer section band only — white ground; dark .cta3 card stays as-is */
+html body #contact.cta,
+html body #contact.sec{
+  --ground:var(--surface);
+  --panel:var(--bg-alt);
+  background:var(--surface) !important;
+}
 /* SEO alt/title carrier — visual comes from wrap::before */
 #contact .cta-shot{
   position:absolute !important; width:1px !important; height:1px !important;
@@ -5612,4 +5619,91 @@ html body .sec.is-white{
 /* In-page hash targets clear the fixed nav */
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* Platforms section — mobile stack + CTA/ask fit (beats carousel leftovers) */
+@media (max-width:900px){
+  html body #platforms.pf,
+  html body #platforms.beam-zone,
+  html body #platforms{
+    overflow:visible !important;
+  }
+  html body #platforms .pf-rail{
+    overflow:visible !important;
+    padding:0 !important;
+    margin:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    -webkit-mask-image:none !important;
+    mask-image:none !important;
+  }
+  html body #platforms .pf-track{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    animation:none !important;
+    transform:none !important;
+  }
+  html body #platforms .pf-card{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    flex:none !important;
+    box-sizing:border-box !important;
+    position:sticky !important;
+    margin:0 0 16px !important;
+    top:calc(var(--nav-h) + 14px + var(--stop, 0) * 10px) !important;
+    transform:none !important;
+  }
+  html body #platforms .pf-card:nth-child(1){--stop:0;}
+  html body #platforms .pf-card:nth-child(2){--stop:1;}
+  html body #platforms .pf-card:nth-child(3){--stop:2;}
+  html body #platforms .pf-card:last-child{margin-bottom:0 !important;}
+  html body #platforms .pf-card[data-copy]{display:none !important;}
+  html body #platforms .pf-card:hover{transform:none !important;}
+
+  html body #platforms .pf-cta{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding-inline:0;
+    align-items:stretch;
+  }
+  html body #platforms .pf-ask{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    padding-inline:4px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    line-height:1.35;
+  }
+  html body #platforms .pf-cta .btn{
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    white-space:normal;
+    line-height:1.35;
+    padding-inline:18px;
+    font-size:14px;
+    justify-content:center;
+  }
+  html body #platforms .pf-cta .btn .arw{
+    flex-shrink:0;
+    margin-right:0;
+  }
+}
+@media (max-width:560px){
+  html body #platforms .pf-cta .btn{
+    padding-inline:16px;
+    font-size:13.5px;
+  }
+  html body #platforms .pf-ask{
+    font-size:clamp(15px,4.2vw,18px);
+  }
 }

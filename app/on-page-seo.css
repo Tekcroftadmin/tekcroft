@@ -6338,3 +6338,50 @@ html body .sec.is-white{
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
 }
+
+/* Industries cards — mobile stack (must beat earlier carousel rules) */
+@media (max-width:900px){
+  html body #industries.pf,
+  html body #industries{
+    overflow:visible !important;
+  }
+  html body #industries .pf-rail{
+    overflow:visible !important;
+    padding:0 !important;
+    margin:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    -webkit-mask-image:none !important;
+    mask-image:none !important;
+  }
+  html body #industries .pf-track{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    animation:none !important;
+    transform:none !important;
+  }
+  html body #industries .pf-card{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    flex:none !important;
+    box-sizing:border-box !important;
+    position:sticky !important;
+    margin:0 0 16px !important;
+    top:calc(var(--nav-h) + 14px + var(--stop, 0) * 10px) !important;
+    transform:none !important;
+    cursor:default;
+  }
+  html body #industries .pf-card:nth-child(1){--stop:0;}
+  html body #industries .pf-card:nth-child(2){--stop:1;}
+  html body #industries .pf-card:nth-child(3){--stop:2;}
+  html body #industries .pf-card:nth-child(4){--stop:3;}
+  html body #industries .pf-card:nth-child(5){--stop:4;}
+  html body #industries .pf-card:last-child{margin-bottom:0 !important;}
+  html body #industries .pf-card[data-copy]{display:none !important;}
+  html body #industries .pf-card:hover{transform:none !important;}
+}
