@@ -5621,50 +5621,69 @@ html body .sec.is-white{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
 }
 
-/* Platforms section — mobile stack + CTA/ask fit (beats carousel leftovers) */
-@media (max-width:900px){
-  html body #platforms.pf,
-  html body #platforms.beam-zone,
-  html body #platforms{
-    overflow:visible !important;
-  }
-  html body #platforms .pf-rail{
-    overflow:visible !important;
-    padding:0 !important;
-    margin:0 !important;
-    width:100% !important;
-    max-width:100% !important;
-    -webkit-mask-image:none !important;
-    mask-image:none !important;
-  }
-  html body #platforms .pf-track{
-    display:block !important;
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0 !important;
-    animation:none !important;
-    transform:none !important;
-  }
-  html body #platforms .pf-card{
-    display:flex !important;
-    flex-direction:column !important;
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0 !important;
-    flex:none !important;
-    box-sizing:border-box !important;
-    position:sticky !important;
-    margin:0 0 16px !important;
-    top:calc(var(--nav-h) + 14px + var(--stop, 0) * 10px) !important;
-    transform:none !important;
-  }
-  html body #platforms .pf-card:nth-child(1){--stop:0;}
-  html body #platforms .pf-card:nth-child(2){--stop:1;}
-  html body #platforms .pf-card:nth-child(3){--stop:2;}
-  html body #platforms .pf-card:last-child{margin-bottom:0 !important;}
-  html body #platforms .pf-card[data-copy]{display:none !important;}
-  html body #platforms .pf-card:hover{transform:none !important;}
+/* Platforms — sticky scroll-stack on every breakpoint (no carousel) */
+html body #platforms.pf,
+html body #platforms.beam-zone,
+html body #platforms{
+  overflow:visible !important;
+}
+html body #platforms .pf-carousel{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin-top:clamp(28px,3.2vw,44px);
+  /* Extra travel so sticky cards can pile as the page scrolls */
+  padding-bottom:clamp(48px,8vh,96px);
+}
+html body #platforms .pf-rail{
+  overflow:visible !important;
+  padding:0 !important;
+  margin:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  container-type:normal !important;
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+}
+html body #platforms .pf-track{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  animation:none !important;
+  transform:none !important;
+}
+html body #platforms .pf-card{
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  flex:none !important;
+  box-sizing:border-box !important;
+  position:sticky !important;
+  top:calc(var(--nav-h) + 18px + var(--stop, 0) * 22px) !important;
+  margin:0 0 clamp(28px,5vh,56px) !important;
+  background:var(--surface) !important;
+  transform:none !important;
+  cursor:default;
+  z-index:calc(1 + var(--stop, 0));
+  box-shadow:0 -8px 26px -16px rgba(var(--ink-rgb),.45);
+}
+html body #platforms .pf-card:nth-child(1){--stop:0;}
+html body #platforms .pf-card:nth-child(2){--stop:1;}
+html body #platforms .pf-card:nth-child(3){--stop:2;}
+html body #platforms .pf-card:last-child{
+  margin-bottom:0 !important;
+}
+html body #platforms .pf-card[data-copy]{display:none !important;}
+html body #platforms .pf-card:hover{
+  transform:none !important;
+}
 
+/* CTA wrap on small screens */
+@media (max-width:900px){
   html body #platforms .pf-cta{
     width:100%;
     max-width:100%;
@@ -5686,24 +5705,136 @@ html body .sec.is-white{
   html body #platforms .pf-cta .btn{
     width:100%;
     max-width:100%;
+    min-width:0;
     box-sizing:border-box;
-    white-space:normal;
-    line-height:1.35;
-    padding-inline:18px;
-    font-size:14px;
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
     justify-content:center;
+    gap:10px;
+    height:auto;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    line-height:1.35;
+    padding:16px 18px;
+    font-size:14px;
+    text-align:center;
+  }
+  html body #platforms .pf-cta .btn .btn-label,
+  html body #platforms .pf-cta .btn .btn-roll{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    height:auto;
   }
   html body #platforms .pf-cta .btn .arw{
     flex-shrink:0;
-    margin-right:0;
+    margin:0;
   }
 }
 @media (max-width:560px){
   html body #platforms .pf-cta .btn{
-    padding-inline:16px;
+    padding:15px 16px;
     font-size:13.5px;
   }
   html body #platforms .pf-ask{
     font-size:clamp(15px,4.2vw,18px);
+  }
+}
+
+/* #contact Free Technical Audit card — mobile fit only (desktop unchanged) */
+@media (max-width:900px){
+  html body #contact.cta > .wrap{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding-inline:clamp(12px,3.5vw,20px);
+  }
+  html body #contact.cta .cta3,
+  html body #contact .cta3{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    padding:var(--cta-pad-y, 28px) clamp(14px,4vw,22px) !important;
+    overflow:hidden;
+  }
+  html body #contact .cta3-eyebrow,
+  html body #contact .cta3 h2,
+  html body #contact .cta3 > p,
+  html body #contact .cta3-actions{
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  html body #contact .cta3 h2{
+    width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    hyphens:auto;
+    text-wrap:balance;
+  }
+  html body #contact .cta3 h2 em{
+    white-space:normal;
+    overflow-wrap:anywhere;
+  }
+  html body #contact .cta3 > p{
+    width:100%;
+    max-width:100%;
+    margin-inline:0;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+  html body #contact .cta3-actions{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  html body #contact .cta3-actions .btn{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    height:auto;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    line-height:1.35;
+    text-align:center;
+    padding:15px 16px;
+    font-size:14px;
+  }
+  html body #contact .cta3-actions .btn .btn-label,
+  html body #contact .cta3-actions .btn .btn-roll{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:100%;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:normal;
+    height:auto;
+  }
+  html body #contact .cta3-actions .btn .arw{
+    flex-shrink:0;
+    margin:0;
+  }
+}
+@media (max-width:560px){
+  html body #contact .cta3-actions .btn{
+    padding:14px 14px;
+    font-size:13.5px;
   }
 }

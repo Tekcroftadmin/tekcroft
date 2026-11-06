@@ -1096,52 +1096,13 @@ var $$ = function(s, r){
    ══════════════════════════════════════════════════════════════════════ */
 (function(){
   "use strict";
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var track = document.querySelector(".pf-track");
+  /* Platforms cards use a sticky scroll-stack on every breakpoint now —
+     no carousel clones, no horizontal track. Drop any leftover copies. */
+  var track = document.querySelector("#platforms .pf-track") ||
+              document.querySelector(".pf-track");
   if (!track) return;
-
-  /* the breakpoint the stylesheet stacks at, asked the same way here */
-  var running = window.matchMedia("(min-width: 901px)");
-
-  /* The list is snapshotted before anything is appended. track.children
-     is a live collection: appending one of its members back into the
-     track removes it from the collection at the same time, so walking it
-     while appending would skip every other card and leave the second run
-     short. */
-  var cards = Array.prototype.slice.call(track.children);
-
-  function add(){
-    cards.forEach(function(card){
-      var copy = card.cloneNode(true);
-      /* The originals are marked .rv, which holds an element at opacity 0
-         until the reveal observer gives it .in. That observer collected
-         its list before these copies existed, so nothing would ever light
-         them — the second half of the track would be there, travelling,
-         and invisible the whole way. The copies do not need revealing:
-         the cards they duplicate have already been seen. */
-      copy.classList.remove("rv");
-      copy.removeAttribute("style");
-      copy.setAttribute("aria-hidden", "true");
-      copy.setAttribute("tabindex", "-1");
-      copy.setAttribute("data-copy", "");
-      track.appendChild(copy);
-    });
-  }
-
-  function drop(){
-    Array.prototype.slice.call(track.querySelectorAll("[data-copy]"))
-      .forEach(function(el){ el.remove(); });
-  }
-
-  function sync(){
-    var has = !!track.querySelector("[data-copy]");
-    if (running.matches && !has) add();
-    else if (!running.matches && has) drop();
-  }
-
-  sync();
-  if (running.addEventListener) running.addEventListener("change", sync);
-  else running.addListener(sync);          /* older Safari */
+  Array.prototype.slice.call(track.querySelectorAll("[data-copy]"))
+    .forEach(function(el){ el.remove(); });
 })();
 
 

@@ -635,8 +635,10 @@ h2 em{font-style:normal; color:var(--brand-text);}
 .hero-rail .nm{display:block; font-family:var(--font-display); font-size:15px; font-weight:700;
   letter-spacing:-0.02em; color:#fff;}
 
-.hero-in{position:relative; z-index:3; text-align:center; width:100%; margin-block:auto;}
-.hero .tag{margin-bottom:26px;}
+.hero-in{position:relative; z-index:3; text-align:center; width:100%; margin-block:auto;
+  display:flex; flex-direction:column; align-items:center;}
+.hero .tag{margin-bottom:26px; max-width:min(100%, 36rem); justify-content:center;
+  white-space:normal; text-align:center; flex-wrap:wrap;}
 
 .lamp{position:relative; display:block; width:fit-content; max-width:100%;
   margin:0 auto 24px;}
