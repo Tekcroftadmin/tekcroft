@@ -1587,13 +1587,14 @@ html[data-theme="dark"] .sec{ background:var(--ground); }
    section to the tint. They read --panel now, so the section is free and
    the offer had a middle slot to move into. */
 /* Strict white / tint after the dark hero.
-   Order: model(W) > process(T) > measure(W) > results(T) >
-   why(W) > industries(T) > reviews(W) > faq(T) > contact(W). */
-#model,#measure,#why,#reviews,#contact{
+   Order: proof(T) > model(W) > process(T) > measure(W) >
+   why(T) > industries(W) > faq(T) > contact(W). */
+#model,#measure,#industries,#reviews,#contact{
   --ground:var(--surface); --panel:var(--bg-alt); }
-#process,#results,#industries,#faq{
+#process,#results,#why,#faq{
   --ground:var(--bg-alt);  --panel:var(--surface); }
 #process .smark{ background:var(--surface); }
+#why .smark{ background:var(--surface); }
 #reviews .smark{ background:var(--bg-alt); }
 
 /* #reviews takes the same pair for the same reason. A Google card is
@@ -2171,10 +2172,13 @@ html[data-theme="dark"] .tv{background:rgba(10,22,34,.92); border-color:rgba(255
 .hs-points + .hs-act{margin-top:clamp(20px,2.2vw,28px);}
 @media (max-width:980px){ .hs-points{width:max-content; max-width:100%; margin-inline:auto;} }
 
-/* AI SEO #hero-1 only — lede ↔ points (20px) and points ↔ CTAs (28px).
-   Beats service-hero-lock + site-consistency !important without touching shared CSS. */
+/* AI SEO #hero-1 only — breathing room between lede and CTA
+   (points list removed; beats service-hero-lock + site-consistency). */
 html body #hero-1.hs .hs-lede{
   margin-bottom:0 !important;
+}
+html body #hero-1.hs .hs-lede + .hs-act{
+  margin-top:clamp(28px,3.2vw,40px) !important;
 }
 html body #hero-1.hs .hs-points{
   margin-top:20px;
@@ -2184,6 +2188,9 @@ html body #hero-1.hs .hs-points + .hs-act{
   margin-top:28px !important;
 }
 @media (max-width:600px){
+  html body #hero-1.hs .hs-lede + .hs-act{
+    margin-top:clamp(28px,7vw,36px) !important;
+  }
   html body #hero-1.hs .hs-points{
     margin-top:16px;
   }
@@ -2291,8 +2298,8 @@ html body #hero-1.hs .hs-points + .hs-act{
 .eg-when::before{content:""; width:5px; height:5px; border-radius:50%; background:currentColor;}
 
 /* MEASURE — six metrics, one sample report. Same order on both sides; nothing dims. */
-#measure.mr{padding-block:clamp(44px,4.6vw,72px); background:#fff;}
-html[data-theme="dark"] #measure.mr{background:var(--bg);}
+#measure.mr{padding-block:clamp(44px,4.6vw,72px); background:var(--ground);}
+html[data-theme="dark"] #measure.mr{background:var(--ground);}
 .mr-head{display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:clamp(24px,5vw,90px); align-items:end;}
 .mr-head .smark{margin-bottom:10px;}
 .mr h2{margin:0; font-family:var(--font-display); font-size:clamp(28px,2.9vw,44px); font-weight:800; letter-spacing:-.04em; line-height:1.06; color:var(--text);}
@@ -2637,7 +2644,7 @@ html[data-theme="dark"] .wy-card{background:hsl(var(--brand-h) 40% 14%);}
 .pf-c4,.pf-o4 .pf-face{--pf-h:348 76% 52%; --mk:var(--mk-shield);}
 .pf-c5,.pf-o5 .pf-face{--pf-h:198 100% 42%; --mk:var(--mk-saas);}
 .pf-c6,.pf-o6 .pf-face{--pf-h:142 58% 36%; --mk:var(--mk-factory);}
-#industries .pf-card{cursor:default; background:#fff !important; border:1px solid hsl(var(--brand-h) 40% 88%) !important; border-top:2px solid var(--primary) !important; box-shadow:0 18px 40px -34px hsl(var(--brand-h) 60% 25% / .5);}
+#industries .pf-card{cursor:default; background:var(--panel) !important; border:1px solid hsl(var(--brand-h) 40% 88%) !important; border-top:2px solid var(--primary) !important; box-shadow:0 18px 40px -34px hsl(var(--brand-h) 60% 25% / .5);}
 #industries .pf-card h3 em{color:hsl(var(--pf-h)) !important;}
 #industries .pf-card h3{padding-bottom:14px; border-bottom:1px solid #E6EAEE;}
 #industries .pf-card .pf-ic{background:hsl(var(--pf-h) / .12) !important; color:hsl(var(--pf-h)) !important;}
@@ -2662,10 +2669,11 @@ html[data-theme="dark"] #industries .pf-card{background:var(--surface) !importan
 }
 
 /* alternating section grounds — white / #DAEEF6 beat (wins over global #industries etc.) */
-/* alternating section grounds — white / #DAEEF6 beat */
+/* Matches data-ground on the page: proof(T) model(W) process(T) measure(W)
+   why(T) industries(W) faq(T) contact(W). */
 html:not([data-theme="dark"]) #model,
 html:not([data-theme="dark"]) #measure,
-html:not([data-theme="dark"]) #why,
+html:not([data-theme="dark"]) #industries,
 html:not([data-theme="dark"]) #reviews,
 html:not([data-theme="dark"]) #contact,
 html:not([data-theme="dark"]) .sec[data-ground="white"]{
@@ -2675,7 +2683,7 @@ html:not([data-theme="dark"]) .sec[data-ground="white"]{
 }
 html:not([data-theme="dark"]) #process,
 html:not([data-theme="dark"]) #results,
-html:not([data-theme="dark"]) #industries,
+html:not([data-theme="dark"]) #why,
 html:not([data-theme="dark"]) #faq,
 html:not([data-theme="dark"]) .sec[data-ground="tint"]{
   background:#DAEEF6 !important;

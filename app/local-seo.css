@@ -388,8 +388,16 @@ html[data-theme="dark"]{
 .hs-h1 em{white-space:nowrap;}
 
 /* The claim runs to two paragraphs here. They read as one block, so the
-   first sits closer to the second than the block does to the buttons. */
+   first sits closer to the second than the block does to the buttons.
+   Beats #hero-1 .hs-lede + service-hero-lock + site-consistency. */
 .hs-lede-1{margin-bottom:clamp(12px,1.2vw,16px);}
+html body #hero-1.hs .hs-lede.hs-lede-1,
+html body #hero-1.hs .hs-lede:has(+ .hs-lede){
+  margin-bottom:clamp(10px,1.1vw,14px) !important;
+}
+html body #hero-1.hs .hs-lede + .hs-lede{
+  margin-top:0 !important;
+}
 
 /* Below the full column, and on every screen in variant 02 ? where the
    headline shares its row with two more columns and never has the width

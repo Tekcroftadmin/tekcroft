@@ -70,6 +70,13 @@
   line-height:1.65;
   color:rgba(255,255,255,.86);
 }
+#hero-1 .hs-lede.hs-lede-1,
+#hero-1 .hs-lede:has(+ .hs-lede){
+  margin-bottom:12px;
+}
+#hero-1 .hs-lede + .hs-lede{
+  margin-top:0;
+}
 @media (min-width:961px){
   #hero-1 .hs-in{
     grid-template-columns:minmax(0,1fr) minmax(344px,412px);
