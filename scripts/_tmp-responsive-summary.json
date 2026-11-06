@@ -1,0 +1,4035 @@
+{
+  "report": {
+    "/": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-320",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 263,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-375",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 263,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-390",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 263,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-414",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 263,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-768",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 170,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-834",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 170,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        }
+      ],
+      "missingBurger": []
+    },
+    "/about-us": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/contact-us": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-320",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 219,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-375",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 219,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-390",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 219,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-414",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 219,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-768",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 170,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-834",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 170,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        }
+      ],
+      "missingBurger": []
+    },
+    "/book-a-free-evaluation": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": [
+        "mobile-320",
+        "mobile-375",
+        "mobile-390",
+        "mobile-414",
+        "tablet-768",
+        "tablet-834",
+        "tablet-1024"
+      ]
+    },
+    "/services/seo-services": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/ecommerce-seo-services": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/seo-audit-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 10
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 33,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1897
+            },
+            {
+              "el": "h3.",
+              "text": "No Strings Attached",
+              "overflowPx": 1897
+            },
+            {
+              "el": "p.",
+              "text": "No forced retainer contract required. The audit is a one-tim",
+              "overflowPx": 1897
+            },
+            {
+              "el": "em.",
+              "text": "No Strings Attached",
+              "overflowPx": 1624
+            },
+            {
+              "el": "span.pf-ic",
+              "text": "",
+              "overflowPx": 1488
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 42,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 502
+            },
+            {
+              "el": "h3.",
+              "text": "No Strings Attached",
+              "overflowPx": 502
+            },
+            {
+              "el": "p.",
+              "text": "No forced retainer contract required. The audit is a one-tim",
+              "overflowPx": 502
+            },
+            {
+              "el": "em.",
+              "text": "No Strings Attached",
+              "overflowPx": 481
+            },
+            {
+              "el": "span.pf-ic",
+              "text": "",
+              "overflowPx": 307
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 47,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 416
+            },
+            {
+              "el": "h3.",
+              "text": "No Strings Attached",
+              "overflowPx": 416
+            },
+            {
+              "el": "p.",
+              "text": "No forced retainer contract required. The audit is a one-tim",
+              "overflowPx": 416
+            },
+            {
+              "el": "em.",
+              "text": "No Strings Attached",
+              "overflowPx": 400
+            },
+            {
+              "el": "span.pf-ic",
+              "text": "",
+              "overflowPx": 226
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 60,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 178
+            },
+            {
+              "el": "h3.",
+              "text": "No Strings Attached",
+              "overflowPx": 178
+            },
+            {
+              "el": "p.",
+              "text": "No forced retainer contract required. The audit is a one-tim",
+              "overflowPx": 178
+            },
+            {
+              "el": "em.",
+              "text": "No Strings Attached",
+              "overflowPx": 162
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 68
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/on-page-seo-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 932
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 932
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 1124
+            },
+            {
+              "el": "sup.",
+              "text": "",
+              "overflowPx": 1124
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 1124
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 1165
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 1165
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 1141
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 1141
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 101
+            },
+            {
+              "el": "b.",
+              "text": "",
+              "overflowPx": 101
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 101
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "header.",
+              "text": "",
+              "overflowPx": 46
+            },
+            {
+              "el": "b.",
+              "text": "",
+              "overflowPx": 46
+            },
+            {
+              "el": "header.",
+              "text": "Gemini & Perplexity",
+              "overflowPx": 46
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 36,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 1431
+            },
+            {
+              "el": "p.",
+              "text": "Listing page optimization, structured data for property deta",
+              "overflowPx": 1431
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 44,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 709
+            },
+            {
+              "el": "p.",
+              "text": "Listing page optimization, structured data for property deta",
+              "overflowPx": 709
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 631
+            },
+            {
+              "el": "p.",
+              "text": "Listing page optimization, structured data for property deta",
+              "overflowPx": 631
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 63,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 391
+            },
+            {
+              "el": "p.",
+              "text": "Listing page optimization, structured data for property deta",
+              "overflowPx": 391
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/technical-seo-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 96
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 96
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 96
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 96
+            },
+            {
+              "el": "h2.",
+              "text": "Find And Fix What’s Holding Your Website Back",
+              "overflowPx": 96
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 41
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 41
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 41
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 41
+            },
+            {
+              "el": "h2.",
+              "text": "Find And Fix What’s Holding Your Website Back",
+              "overflowPx": 41
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 26
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 26
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 26
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 26
+            },
+            {
+              "el": "h2.",
+              "text": "Find And Fix What’s Holding Your Website Back",
+              "overflowPx": 26
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 454
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 454
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 454
+            },
+            {
+              "el": "h3.",
+              "text": "JavaScript Frameworks (React, Next.Js, Vue, Angular)",
+              "overflowPx": 448
+            },
+            {
+              "el": "p.",
+              "text": "rendering parity between what users see and what Googlebot i",
+              "overflowPx": 448
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 43,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 511
+            },
+            {
+              "el": "div.tv.tv-ai",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 511
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI crawlers",
+              "overflowPx": 494
+            },
+            {
+              "el": "div.tv-ais",
+              "text": "ChatGPT Perplexity AI Overviews",
+              "overflowPx": 494
+            },
+            {
+              "el": "span.",
+              "text": "AI Overviews",
+              "overflowPx": 494
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 431
+            },
+            {
+              "el": "div.tv.tv-ai",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 431
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI crawlers",
+              "overflowPx": 414
+            },
+            {
+              "el": "div.tv-ais",
+              "text": "ChatGPT Perplexity AI Overviews",
+              "overflowPx": 414
+            },
+            {
+              "el": "span.",
+              "text": "AI Overviews",
+              "overflowPx": 414
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 65,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 191
+            },
+            {
+              "el": "div.tv.tv-ai",
+              "text": "AI crawlers ChatGPT Perplexity AI Overviews your page",
+              "overflowPx": 191
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI crawlers",
+              "overflowPx": 174
+            },
+            {
+              "el": "div.tv-ais",
+              "text": "ChatGPT Perplexity AI Overviews",
+              "overflowPx": 174
+            },
+            {
+              "el": "span.",
+              "text": "AI Overviews",
+              "overflowPx": 174
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/local-seo-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 37
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 37
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 37
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 37
+            },
+            {
+              "el": "h2.",
+              "text": "Get A Free Local Visibility Audit. See Exactly Where You Sta",
+              "overflowPx": 37
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 34,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 616
+            },
+            {
+              "el": "div.tv.tv-audit",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 616
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI signals",
+              "overflowPx": 599
+            },
+            {
+              "el": "ul.tv-rows",
+              "text": "Accurate listing Consistent citations Q&A content Built in f",
+              "overflowPx": 599
+            },
+            {
+              "el": "li.",
+              "text": "Accurate listing",
+              "overflowPx": 599
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 41,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 776
+            },
+            {
+              "el": "div.tv.tv-audit",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 743
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI signals",
+              "overflowPx": 726
+            },
+            {
+              "el": "ul.tv-rows",
+              "text": "Accurate listing Consistent citations Q&A content Built in f",
+              "overflowPx": 726
+            },
+            {
+              "el": "li.",
+              "text": "Accurate listing",
+              "overflowPx": 726
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 48,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 696
+            },
+            {
+              "el": "div.tv.tv-audit",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 665
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI signals",
+              "overflowPx": 648
+            },
+            {
+              "el": "ul.tv-rows",
+              "text": "Accurate listing Consistent citations Q&A content Built in f",
+              "overflowPx": 648
+            },
+            {
+              "el": "li.",
+              "text": "Accurate listing",
+              "overflowPx": 648
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 64,
+          "offenders": [
+            {
+              "el": "div.tm-viz",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 456
+            },
+            {
+              "el": "div.tv.tv-audit",
+              "text": "AI signals Accurate listing Consistent citations Q&A content",
+              "overflowPx": 425
+            },
+            {
+              "el": "span.tv-h",
+              "text": "AI signals",
+              "overflowPx": 408
+            },
+            {
+              "el": "ul.tv-rows",
+              "text": "Accurate listing Consistent citations Q&A content Built in f",
+              "overflowPx": 408
+            },
+            {
+              "el": "li.",
+              "text": "Accurate listing",
+              "overflowPx": 408
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/google-business-profile-optimization-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 172
+            },
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 127
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 127
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 127
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 127
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 117
+            },
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 72
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 72
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 72
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 72
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 102
+            },
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 57
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 57
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 57
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 57
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 78
+            },
+            {
+              "el": "span.dc-halo",
+              "text": "",
+              "overflowPx": 41
+            },
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 33
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 33
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 33
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "span.dc-halo",
+              "text": "",
+              "overflowPx": 81
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            },
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 8
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "span.dc-halo",
+              "text": "",
+              "overflowPx": 91
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            },
+            {
+              "el": "span.gwx-route",
+              "text": "",
+              "overflowPx": 8
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "Multi-Location & Franchise Brands",
+              "overflowPx": 1920
+            },
+            {
+              "el": "p.",
+              "text": "Bulk NAP management, brand-consistent descriptions with loca",
+              "overflowPx": 1920
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 45,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "Multi-Location & Franchise Brands",
+              "overflowPx": 1100
+            },
+            {
+              "el": "p.",
+              "text": "Bulk NAP management, brand-consistent descriptions with loca",
+              "overflowPx": 1100
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 50,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "Multi-Location & Franchise Brands",
+              "overflowPx": 1027
+            },
+            {
+              "el": "p.",
+              "text": "Bulk NAP management, brand-consistent descriptions with loca",
+              "overflowPx": 1027
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 66,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "Multi-Location & Franchise Brands",
+              "overflowPx": 786
+            },
+            {
+              "el": "p.",
+              "text": "Bulk NAP management, brand-consistent descriptions with loca",
+              "overflowPx": 786
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/franchise-seo-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 163
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 163
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 163
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 163
+            },
+            {
+              "el": "h2.",
+              "text": "Ready To Put Every Location On The Map?",
+              "overflowPx": 163
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 108
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 108
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 108
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 108
+            },
+            {
+              "el": "h2.",
+              "text": "Ready To Put Every Location On The Map?",
+              "overflowPx": 108
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 93
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 93
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 93
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 93
+            },
+            {
+              "el": "h2.",
+              "text": "Ready To Put Every Location On The Map?",
+              "overflowPx": 93
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 69
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 69
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 69
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 69
+            },
+            {
+              "el": "h2.",
+              "text": "Ready To Put Every Location On The Map?",
+              "overflowPx": 69
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 2927
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 2927
+            },
+            {
+              "el": "h3.",
+              "text": "Childcare Franchise SEO",
+              "overflowPx": 2914
+            },
+            {
+              "el": "em.",
+              "text": "",
+              "overflowPx": 2564
+            },
+            {
+              "el": "em.",
+              "text": "Childcare",
+              "overflowPx": 2550
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 44,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1908
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1908
+            },
+            {
+              "el": "h3.",
+              "text": "Childcare Franchise SEO",
+              "overflowPx": 1896
+            },
+            {
+              "el": "em.",
+              "text": "",
+              "overflowPx": 1675
+            },
+            {
+              "el": "em.",
+              "text": "Childcare",
+              "overflowPx": 1663
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 50,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1832
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1832
+            },
+            {
+              "el": "h3.",
+              "text": "Childcare Franchise SEO",
+              "overflowPx": 1821
+            },
+            {
+              "el": "em.",
+              "text": "",
+              "overflowPx": 1602
+            },
+            {
+              "el": "em.",
+              "text": "Childcare",
+              "overflowPx": 1592
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 67,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1592
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1592
+            },
+            {
+              "el": "h3.",
+              "text": "Childcare Franchise SEO",
+              "overflowPx": 1581
+            },
+            {
+              "el": "em.",
+              "text": "",
+              "overflowPx": 1362
+            },
+            {
+              "el": "em.",
+              "text": "Childcare",
+              "overflowPx": 1352
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/ai-seo-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 2182
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 2084
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 10
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 2116
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 2018
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 2106
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 2008
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 2085
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 1986
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 1727
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 1629
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 1661
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 1563
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 34,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "div.in-ai",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1927
+            },
+            {
+              "el": "div.in-ai",
+              "text": "\"reliable CNC machining supplier in the US\" Recommended",
+              "overflowPx": 1927
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 44,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 1467
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 1369
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "div.in-ai",
+              "text": "",
+              "overflowPx": 1115
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 1425
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 1327
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "div.in-ai",
+              "text": "",
+              "overflowPx": 1037
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 65,
+          "offenders": [
+            {
+              "el": "li.",
+              "text": "GrowPilot",
+              "overflowPx": 1044
+            },
+            {
+              "el": "i.",
+              "text": "",
+              "overflowPx": 945
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "div.in-ai",
+              "text": "",
+              "overflowPx": 797
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/web-and-app-development-services": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/web-design-and-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2630
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2616
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2601
+            },
+            {
+              "el": "h2.",
+              "text": "Why Businesses Choose Tekcroft For Their Web Design And Deve",
+              "overflowPx": 104
+            },
+            {
+              "el": "p.",
+              "text": "You work with a professional website designer and dev team f",
+              "overflowPx": 104
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2572
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2558
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2543
+            },
+            {
+              "el": "h2.",
+              "text": "Why Businesses Choose Tekcroft For Their Web Design And Deve",
+              "overflowPx": 49
+            },
+            {
+              "el": "p.",
+              "text": "You work with a professional website designer and dev team f",
+              "overflowPx": 49
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2564
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2550
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2535
+            },
+            {
+              "el": "h2.",
+              "text": "Why Businesses Choose Tekcroft For Their Web Design And Deve",
+              "overflowPx": 34
+            },
+            {
+              "el": "p.",
+              "text": "You work with a professional website designer and dev team f",
+              "overflowPx": 34
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2538
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2524
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2509
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2438
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2424
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2409
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2362
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2348
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 2333
+            },
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 2432
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 2432
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 2432
+            },
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 2200
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 2186
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 43,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 1987
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 1973
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 1958
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1512
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1512
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 1908
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 1894
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 1879
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1434
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1434
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 64,
+          "offenders": [
+            {
+              "el": "ul.",
+              "text": "WordPress Shopify Webflow WooCommerce React Next.js Laravel ",
+              "overflowPx": 1664
+            },
+            {
+              "el": "li.",
+              "text": "Vercel",
+              "overflowPx": 1650
+            },
+            {
+              "el": "span.",
+              "text": "Vercel",
+              "overflowPx": 1635
+            },
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1165
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/custom-software-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "",
+              "overflowPx": 28
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 28
+            },
+            {
+              "el": "div.cta3-actions",
+              "text": "",
+              "overflowPx": 28
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "",
+              "overflowPx": 28
+            },
+            {
+              "el": "span.cta3-div",
+              "text": "",
+              "overflowPx": 28
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 34,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 3422
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 3422
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 3422
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 3405
+            },
+            {
+              "el": "p.",
+              "text": "Real estate software development services for Property manag",
+              "overflowPx": 3405
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 43,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 2305
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 2305
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 2305
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 2291
+            },
+            {
+              "el": "p.",
+              "text": "Real estate software development services for Property manag",
+              "overflowPx": 2291
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 2229
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 2229
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 2229
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 2217
+            },
+            {
+              "el": "p.",
+              "text": "Real estate software development services for Property manag",
+              "overflowPx": 2217
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 64,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1989
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1989
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1989
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 1978
+            },
+            {
+              "el": "p.",
+              "text": "Real estate software development services for Property manag",
+              "overflowPx": 1978
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-320",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 315,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-375",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 315,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-390",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 315,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-414",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 315,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-768",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 172,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-834",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 172,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        }
+      ],
+      "missingBurger": []
+    },
+    "/services/mobile-app-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "h2.",
+              "text": "What Tekcroft Does Differently For Apps?",
+              "overflowPx": 45
+            },
+            {
+              "el": "div.wy-rail",
+              "text": "Transparent, Milestone-Based Pricing Real Compliance Experie",
+              "overflowPx": 45
+            },
+            {
+              "el": "div.wy-panes",
+              "text": "Transparent, Milestone-Based Pricing You pay for what got bu",
+              "overflowPx": 45
+            },
+            {
+              "el": "a.btn.btn-primary",
+              "text": "Talk to our team to see if we’re a fit ↑",
+              "overflowPx": 45
+            },
+            {
+              "el": "button.wy-tab.on",
+              "text": "Transparent, Milestone-Based Pricing",
+              "overflowPx": 38
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "Logistics & Field Services",
+              "overflowPx": 1923
+            },
+            {
+              "el": "p.",
+              "text": "The developed apps have real-time tracking, offline-first fu",
+              "overflowPx": 1923
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 44,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "Logistics & Field Services",
+              "overflowPx": 1104
+            },
+            {
+              "el": "p.",
+              "text": "The developed apps have real-time tracking, offline-first fu",
+              "overflowPx": 1104
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "Logistics & Field Services",
+              "overflowPx": 1026
+            },
+            {
+              "el": "p.",
+              "text": "The developed apps have real-time tracking, offline-first fu",
+              "overflowPx": 1026
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 65,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "Logistics & Field Services",
+              "overflowPx": 787
+            },
+            {
+              "el": "p.",
+              "text": "The developed apps have real-time tracking, offline-first fu",
+              "overflowPx": 787
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/artificial-intelligence-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "span.ax-tn",
+              "text": "AI Agents",
+              "overflowPx": 983
+            },
+            {
+              "el": "span.ax-num",
+              "text": "06",
+              "overflowPx": 901
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "span.ax-tn",
+              "text": "AI Agents",
+              "overflowPx": 928
+            },
+            {
+              "el": "span.ax-num",
+              "text": "06",
+              "overflowPx": 846
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "span.ax-tn",
+              "text": "AI Agents",
+              "overflowPx": 913
+            },
+            {
+              "el": "span.ax-num",
+              "text": "06",
+              "overflowPx": 831
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "span.ax-tn",
+              "text": "AI Agents",
+              "overflowPx": 889
+            },
+            {
+              "el": "span.ax-num",
+              "text": "06",
+              "overflowPx": 807
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 31,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1932
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1932
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1932
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 1917
+            },
+            {
+              "el": "p.",
+              "text": "From responding to property enquiries to helping teams asses",
+              "overflowPx": 1917
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 38,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1108
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1108
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1108
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 1097
+            },
+            {
+              "el": "p.",
+              "text": "From responding to property enquiries to helping teams asses",
+              "overflowPx": 1097
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 43,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1029
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1029
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1029
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 1016
+            },
+            {
+              "el": "p.",
+              "text": "From responding to property enquiries to helping teams asses",
+              "overflowPx": 1016
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 58,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 789
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 789
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 789
+            },
+            {
+              "el": "h3.",
+              "text": "Real Estate",
+              "overflowPx": 777
+            },
+            {
+              "el": "p.",
+              "text": "From responding to property enquiries to helping teams asses",
+              "overflowPx": 777
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/ai-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 10
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1928
+            },
+            {
+              "el": "p.",
+              "text": "Data analysis of production processes, predictive maintenanc",
+              "overflowPx": 1928
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 43,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1107
+            },
+            {
+              "el": "p.",
+              "text": "Data analysis of production processes, predictive maintenanc",
+              "overflowPx": 1107
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 49,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1029
+            },
+            {
+              "el": "p.",
+              "text": "Data analysis of production processes, predictive maintenanc",
+              "overflowPx": 1029
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 64,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 791
+            },
+            {
+              "el": "p.",
+              "text": "Data analysis of production processes, predictive maintenanc",
+              "overflowPx": 791
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/services/ai-chatbot-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "thead.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 336
+            },
+            {
+              "el": "tr.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 336
+            },
+            {
+              "el": "th.",
+              "text": "WHY IT MATTERS",
+              "overflowPx": 336
+            },
+            {
+              "el": "tbody.",
+              "text": "AI Models GPT-5 Claude Sonnet 5 Gemini 3 Llama 4 Current mod",
+              "overflowPx": 336
+            },
+            {
+              "el": "td.",
+              "text": "Current models mean stronger accuracy and lower cost per que",
+              "overflowPx": 336
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "thead.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 281
+            },
+            {
+              "el": "tr.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 281
+            },
+            {
+              "el": "th.",
+              "text": "WHY IT MATTERS",
+              "overflowPx": 281
+            },
+            {
+              "el": "tbody.",
+              "text": "AI Models GPT-5 Claude Sonnet 5 Gemini 3 Llama 4 Current mod",
+              "overflowPx": 281
+            },
+            {
+              "el": "td.",
+              "text": "Current models mean stronger accuracy and lower cost per que",
+              "overflowPx": 281
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "thead.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 266
+            },
+            {
+              "el": "tr.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 266
+            },
+            {
+              "el": "th.",
+              "text": "WHY IT MATTERS",
+              "overflowPx": 266
+            },
+            {
+              "el": "tbody.",
+              "text": "AI Models GPT-5 Claude Sonnet 5 Gemini 3 Llama 4 Current mod",
+              "overflowPx": 266
+            },
+            {
+              "el": "td.",
+              "text": "Current models mean stronger accuracy and lower cost per que",
+              "overflowPx": 266
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "thead.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 242
+            },
+            {
+              "el": "tr.",
+              "text": "CATEGORY WE WORK WITH WHY IT MATTERS",
+              "overflowPx": 242
+            },
+            {
+              "el": "th.",
+              "text": "WHY IT MATTERS",
+              "overflowPx": 242
+            },
+            {
+              "el": "tbody.",
+              "text": "AI Models GPT-5 Claude Sonnet 5 Gemini 3 Llama 4 Current mod",
+              "overflowPx": 242
+            },
+            {
+              "el": "td.",
+              "text": "Current models mean stronger accuracy and lower cost per que",
+              "overflowPx": 242
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 35,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1443
+            },
+            {
+              "el": "h3.",
+              "text": "Website and SaaS Chatbots",
+              "overflowPx": 1433
+            },
+            {
+              "el": "p.",
+              "text": "Our chatbot development services for websites include onboar",
+              "overflowPx": 1433
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 44,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 719
+            },
+            {
+              "el": "h3.",
+              "text": "Website and SaaS Chatbots",
+              "overflowPx": 710
+            },
+            {
+              "el": "p.",
+              "text": "Our chatbot development services for websites include onboar",
+              "overflowPx": 710
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 48,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 640
+            },
+            {
+              "el": "h3.",
+              "text": "Website and SaaS Chatbots",
+              "overflowPx": 632
+            },
+            {
+              "el": "p.",
+              "text": "Our chatbot development services for websites include onboar",
+              "overflowPx": 632
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 65,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 400
+            },
+            {
+              "el": "h3.",
+              "text": "Website and SaaS Chatbots",
+              "overflowPx": 393
+            },
+            {
+              "el": "p.",
+              "text": "Our chatbot development services for websites include onboar",
+              "overflowPx": 393
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-320",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 279,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-375",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 279,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-390",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 279,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "mobile-414",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 279,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-768",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 175,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        },
+        {
+          "type": "tiny-tap",
+          "bp": "tablet-834",
+          "samples": [
+            {
+              "tag": "a",
+              "text": "",
+              "w": 175,
+              "h": 23,
+              "cls": "cta3-mail"
+            }
+          ]
+        }
+      ],
+      "missingBurger": []
+    },
+    "/services/ai-agent-development-services": {
+      "realHscroll": [
+        {
+          "type": "hscroll",
+          "bp": "mobile-320",
+          "w": 320,
+          "delta": 10,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 10
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-375",
+          "w": 375,
+          "delta": 11,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 11
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-390",
+          "w": 390,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "mobile-414",
+          "w": 414,
+          "delta": 12,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 12
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-768",
+          "w": 768,
+          "delta": 23,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 23
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-834",
+          "w": 834,
+          "delta": 25,
+          "offenders": [
+            {
+              "el": "img.",
+              "text": "",
+              "overflowPx": 25
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "tablet-1024",
+          "w": 1024,
+          "delta": 34,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1938
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1929
+            },
+            {
+              "el": "p.",
+              "text": "Agents that analyze production data and detect maintenance r",
+              "overflowPx": 1929
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1280",
+          "w": 1280,
+          "delta": 42,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1115
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1108
+            },
+            {
+              "el": "p.",
+              "text": "Agents that analyze production data and detect maintenance r",
+              "overflowPx": 1108
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1440",
+          "w": 1440,
+          "delta": 48,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 1037
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 1030
+            },
+            {
+              "el": "p.",
+              "text": "Agents that analyze production data and detect maintenance r",
+              "overflowPx": 1030
+            }
+          ]
+        },
+        {
+          "type": "hscroll",
+          "bp": "desktop-1920",
+          "w": 1920,
+          "delta": 63,
+          "offenders": [
+            {
+              "el": "span.pf-top",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "p.",
+              "text": "",
+              "overflowPx": 797
+            },
+            {
+              "el": "h3.",
+              "text": "Manufacturing",
+              "overflowPx": 789
+            },
+            {
+              "el": "p.",
+              "text": "Agents that analyze production data and detect maintenance r",
+              "overflowPx": 789
+            }
+          ]
+        }
+      ],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": []
+    },
+    "/accessibility": {
+      "realHscroll": [],
+      "carouselBleedBps": [],
+      "tinyTaps": [],
+      "missingBurger": [
+        "mobile-375"
+      ]
+    }
+  },
+  "heroDistortPages": [
+    "/",
+    "/services/seo-services",
+    "/services/ecommerce-seo-services",
+    "/services/seo-audit-services",
+    "/services/on-page-seo-services",
+    "/services/technical-seo-services",
+    "/services/local-seo-services",
+    "/services/google-business-profile-optimization-services",
+    "/services/franchise-seo-services",
+    "/services/ai-seo-services",
+    "/services/web-and-app-development-services",
+    "/services/web-design-and-development-services",
+    "/services/custom-software-development-services",
+    "/services/mobile-app-development-services",
+    "/services/ai-development-services",
+    "/services/ai-chatbot-development-services",
+    "/services/ai-agent-development-services"
+  ]
+}
