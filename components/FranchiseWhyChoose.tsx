@@ -213,7 +213,7 @@ export default function FranchiseWhyChoose() {
             <b>Why choose us</b>
           </span>
           <h2>
-            Why Choose Tekcroft for <em>Franchise SEO</em>
+            Why Choose Tekcroft for <em>Franchise SEO Services</em>
           </h2>
         </div>
 

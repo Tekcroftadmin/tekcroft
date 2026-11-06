@@ -133,31 +133,8 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     return { show:show, restart:restart, pause:pause, root:root };
   }
 
-  var variants = {};
-  [].slice.call(document.querySelectorAll('#wwb .variant')).forEach(function(v){ variants[v.dataset.v] = initStage(v); });
-
-  function setVariant(v){
-    [].slice.call(document.querySelectorAll('#wwb .variant')).forEach(function(el){ el.hidden = el.dataset.v !== v; });
-    Object.keys(variants).forEach(function(k){ variants[k].pause(); });
-    variants[v].show(0);
-    [].slice.call(document.querySelectorAll('#wwb .vsw button')).forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); });
-  }
-  [].slice.call(document.querySelectorAll('#wwb .vsw button')).forEach(function(b){ b.addEventListener('click', function(){ setVariant(b.dataset.v); }); });
-
-  setVariant('c');
-})();
-
-(function(){
-  /* Rich Picture variant switcher (Orbit / Scan / Living map / Business map) */
-  var sw=document.getElementById('rp-switch');
-  if(sw){
-    sw.addEventListener('click',function(e){
-      var b=e.target.closest('button'); if(!b) return;
-      var v=b.dataset.rv;
-      [].forEach.call(document.querySelectorAll('.rp-variant'),function(el){ el.hidden=el.dataset.rv!==v; });
-      [].forEach.call(sw.querySelectorAll('button'),function(x){ x.classList.toggle('on',x===b); });
-    });
-  }
+  var stage = WWB && WWB.querySelector('.variant');
+  if (stage) initStage(stage);
 })();
 
 /* =================== OPTION A SCRIPT (mouse parallax) =================== */

@@ -1551,15 +1551,15 @@ html[data-theme="light"] #wwb .stat{box-shadow:0 10px 26px -22px rgba(24,24,26,.
 #wwb .rail{display:flex; flex-direction:column; gap:10px;}
 #wwb .era{position:relative; text-align:left; cursor:pointer; color:inherit; font-family:var(--font);
   overflow:hidden; transition:border-color .35s var(--ease), background .35s var(--ease), transform .35s var(--ease);}
-#wwb .era-card{width:100%; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-md);
-  padding:16px 18px;}
+#wwb .era-card{width:100%; flex:0 0 auto; align-self:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-md);
+  padding:14px 16px;}
 #wwb .era-card:hover{transform:translateX(3px); border-color:var(--line-2);}
 #wwb .era-card[aria-selected="true"]{border-color:var(--primary); background:var(--panel-2);}
-#wwb .era .no{font-size:10.5px; font-weight:600; letter-spacing:.12em; color:var(--muted);
+#wwb .era .no{display:block; font-size:10.5px; font-weight:600; letter-spacing:.12em; color:var(--muted);
   transition:color .35s var(--ease);}
 #wwb .era[aria-selected="true"] .no{color:var(--primary);}
 #wwb .era-card .nm{display:block; font-size:15.5px; font-weight:600; letter-spacing:-0.015em; margin-top:5px;
-  color:var(--text-2); transition:color .35s var(--ease);}
+  color:var(--text-2); transition:color .35s var(--ease); line-height:1.3;}
 #wwb .era-card[aria-selected="true"] .nm{color:var(--text);}
 #wwb .era .bar{position:absolute; left:0; bottom:0; height:2px; width:100%; background:var(--primary);
   transform:scaleX(0); transform-origin:left; opacity:0;}
@@ -1577,10 +1577,12 @@ html[data-theme="light"] #wwb .stat{box-shadow:0 10px 26px -22px rgba(24,24,26,.
   opacity:0; visibility:hidden; transform:translateY(14px);
   transition:opacity .5s var(--ease), transform .5s var(--ease), visibility .5s;}
 #wwb .pane.on{opacity:1; visibility:visible; transform:none;}
+#wwb .pane-copy{min-width:0;}
 #wwb .kicker{font-family:var(--font); font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase;
-  color:var(--primary); display:block; margin-bottom:9px;}
-#wwb .pane h3{font-size:clamp(19px,2.1vw,26px); font-weight:600; letter-spacing:-0.022em; line-height:1.18;}
+  color:var(--primary); display:block; margin:0 0 10px; line-height:1.35;}
+#wwb .pane h3{font-size:clamp(19px,2.1vw,26px); font-weight:600; letter-spacing:-0.022em; line-height:1.18; margin:0;}
 #wwb .pane p{font-size:14.5px; line-height:1.72; color:var(--text-2); margin-top:14px;}
+#wwb .pane .kicker + h3{margin-top:0;}
 #wwb .pane .pattern-in{font-family:var(--font-display); font-weight:600; font-size:14.5px;
   letter-spacing:-0.012em; color:var(--text); margin-top:16px; padding-left:14px;
   border-left:3px solid var(--primary);}
@@ -1821,19 +1823,10 @@ html[data-theme="light"] #wwb .mk-win{box-shadow:0 16px 32px -22px rgba(24,24,26
   #wwb .mk-chart i{transform:scaleY(1) !important;}
 }
 
-/* preview-only controls */
-#wwb .tgl, #wwb .vsw{position:fixed; bottom:16px; z-index:60; display:flex; gap:4px; padding:5px;
-  background:var(--panel); border:1px solid var(--line); border-radius:100px;
-  box-shadow:0 10px 26px -14px rgba(0,0,0,.4); font-family:var(--font);}
-#wwb .tgl{right:16px;} #wwb .vsw{left:16px;}
-#wwb .tgl button, #wwb .vsw button{border:none; background:transparent; color:var(--muted); font-size:12px; font-weight:600;
-  padding:6px 13px; border-radius:100px; cursor:pointer;}
-#wwb .tgl button.on, #wwb .vsw button.on{background:var(--primary); color:#fff;}
-
-
-#wwb .vsw{left:50%; right:auto; transform:translateX(-50%); bottom:114px;}
+/* preview switchers removed from production markup */
+#wwb .tgl, #wwb .vsw{display:none !important;}
 #wwb .built{min-height:auto;}
-#wwb .pane h3,#wwb .pane p,#wwb .kicker,#wwb .voice,#wwb .stat span{text-transform:none;}
+#wwb .pane h3,#wwb .pane p:not(.kicker),#wwb .voice,#wwb .stat span{text-transform:none;}
 #wwb .kicker{text-transform:uppercase;}
 
 #rpw{
@@ -1873,19 +1866,9 @@ html[data-theme="dark"] #rpw{
 #rpw h2{margin:0; font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; line-height:1.12;}
 #rpw p{margin:0;}
 
-/* ============ variant switcher ============ */
 #rpw .rpx{position:relative;}
-#rpw .rp-switch{display:flex; justify-content:center; padding:clamp(44px,5.5vw,78px) 24px 0;}
-#rpw .rp-seg{display:inline-flex; gap:4px; padding:5px; border-radius:100px; background:var(--surface);
-  border:1px solid var(--line); box-shadow:var(--shadow);}
-#rpw .rp-seg button{border:none; background:transparent; color:var(--muted); font-family:var(--font);
-  font-size:12.5px; font-weight:600; letter-spacing:.005em; padding:8px 18px; border-radius:100px;
-  cursor:pointer; transition:color .25s var(--ease), background .25s var(--ease);}
-#rpw .rp-seg button.on{background:var(--primary); color:#fff;}
-#rpw .rp-seg button:not(.on):hover{color:var(--text);}
-#rpw .rp-variant[hidden]{display:none;}
 /* ================================================================
-   RICH PICTURE · VARIANT F (Living map) — ported from rich-picture-section.html
+   RICH PICTURE · Business map · fit (production)
    ================================================================ */
 #rpw .hgra{position:relative;overflow:hidden;box-sizing:border-box;padding:clamp(36px,6.5vh,80px) 24px;background:var(--hg-card);font-family:var(--font);color:var(--hg-ink)}
 #rpw .hgra *,#rpw .hgra *::before,#rpw .hgra *::after{box-sizing:border-box}
@@ -3635,13 +3618,9 @@ html[data-theme="dark"] .mp-panel{
   border-top:0; border-bottom:0; }
 
 
-/* === what-we-do-h mobile gutter === */
-
-/* mobile: same 20px side gutter as the other card sections, so the tiles are the same width */
-@media (max-width:640px){
-  #what-we-do-h.does{padding-left:20px; padding-right:20px;}
-  #what-we-do-h.does > .wrap{padding-left:0; padding-right:0;}
-}
+/* === what-we-do-h gutter ===
+   Section no longer owns side padding — the inner .wrap uses the site
+   --wrap-x gutter like every other page. */
 
 
 /* === why-exact === */
@@ -3810,25 +3789,40 @@ section.built,
   padding-block:var(--sec-y) !important;
   min-height:0 !important;
 }
-#rpw .rp,
-#wgw .wg,
-#ctaw .cta,
+/* About page gutters — match site --wrap-x (same as .wrap on other pages).
+   Sections that already contain .wrap must NOT also pad horizontally or the
+   gutter doubles. Custom-wrap sections take --wrap-x once on the section. */
+#what-we-do-h.does,
+#what-we-do-h.sec,
+#wwb .built,
+section.built,
 #hwww .sec,
+#how-we-work.sec{
+  padding-inline:0 !important;
+}
+#rpw .rp,
+#rp.rp,
+#rpw .rpm,
+#wgw .wg,
+#wg.wg,
 #ppl-sec.pplx,
 #why-exact .wx-why,
-#wwb .built{
-  padding-inline:24px;
+.wx-why,
+#ctaw .cta,
+#cta.cta{
+  padding-inline:var(--wrap-x) !important;
 }
-@media (max-width:720px){
-  #rpw .rp,
-  #wgw .wg,
-  #ctaw .cta,
-  #hwww .sec,
-  #ppl-sec.pplx,
-  #why-exact .wx-why,
-  #wwb .built{
-    padding-inline:20px;
-  }
+/* People: one horizontal gutter only (was on both #ppl-sec and .sp-why). */
+#pplw .sp-why{
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+/* Rich picture mobile overrides previously used 20px/14px — keep --wrap-x. */
+@media (max-width:1023px){
+  #rpw .rpm{padding-inline:var(--wrap-x) !important;}
+}
+@media (max-width:640px){
+  #rpw .rpm{padding-inline:var(--wrap-x) !important;}
 }
 
 /* About #how-we-work per-step disc photos */
@@ -3893,10 +3887,25 @@ html body .sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var
 #what-we-do-h[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
 #rp-sec[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
 #how-we-work[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#ppl-sec[data-ground="tint"]{--ground:transparent !important;--panel:var(--surface) !important;background:transparent !important;}
+/* People: one flat section background only.
+   Wrapper #pplw used to paint #DAEEF6 while the section/aura stacked a
+   second tone on top — keep paint on #ppl-sec alone, kill the aura wash. */
+#pplw,
+html[data-theme="light"] #pplw,
+html[data-theme="dark"] #pplw{
+  background:transparent !important;
+}
+#ppl-sec[data-ground="tint"],
 #pplw .pplx,
-#pplw #ppl-sec,
+#pplw #ppl-sec{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
 #pplw .sp-why{
   background:transparent !important;
+}
+#pplw .sp-aura{
+  display:none !important;
 }
 #wg[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}

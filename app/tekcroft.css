@@ -1828,8 +1828,6 @@ html[data-theme="dark"] .cn .cn-stat{
   box-shadow:0 44px 90px -46px rgba(var(--ink-rgb),.55),
              0 0 0 1px hsl(0 0% 100% / .10);}
 
-@media (max-width:1040px){ .cn-plate{display:none;} }
-
 /* Under 1040px the rail cannot stand beside the sheet. Stacking the two
    put the whole index above a single panel, so every choice sent the
    reader looking for its answer further down. Instead the two fold into
@@ -1837,6 +1835,13 @@ html[data-theme="dark"] .cn .cn-stat{
    chosen card out of the sheet and sets it directly under the row that
    asked for it. One open at a time; a second tap shuts it. */
 @media (max-width:1040px){
+  /* Keep the service photograph visible behind the accordion (previously
+     display:none). Cover the full plate — desktop's left/height-fit sizing
+     is for the rail column, not a stacked mobile block. */
+  .cn-plate{
+    background-size:cover, auto, auto, auto;
+    background-position:center, 4% -8%, 108% 106%, center;
+  }
   .cn{grid-template-columns:1fr; border-radius:26px; padding:10px;
     /* every child carries its own radius here, so the block can keep
        clipping its corners as it does on the wide layout */
@@ -1860,10 +1865,9 @@ html[data-theme="dark"] .cn .cn-stat{
      read as something stuck rather than something chosen. */
   .cn-tab.on{margin-right:0; padding:15px 12px 15px 16px; border-radius:18px;}
   /* the halo the wide pill throws is a lot of light for a row in a list,
-     so here the lit row keeps the fill and takes an ordinary drop shadow */
-  /* The plate stands down under 1040, so there is no photograph left
-     behind the pill to look through ? glass over flat ink only reads as
-     a faded blue. Here the fill goes solid. */
+     so here the lit row keeps the fill and takes an ordinary drop shadow.
+     Solid brand fill stays — glass over the photo reads poorly on a
+     stacked accordion row. */
   .cn .cn-tab.on{
     background:var(--primary);
     backdrop-filter:none; -webkit-backdrop-filter:none;

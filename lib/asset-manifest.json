@@ -21,8 +21,9 @@
   "franchiseSeo": "/tekcroft-franchise-seo.cbfc78ccfc.js",
   "aiSeo": "/tekcroft-ai-seo.fea6d8a99e.js",
   "contact": "/tekcroft-contact.eb69f6ca9a.js",
-  "aboutUs": "/tekcroft-about-us.ef4fe8a84a.js",
+  "aboutUs": "/tekcroft-about-us.d36e9235f0.js",
   "services": "/tekcroft-services.4f08a68e44.js",
   "bookAFreeEvaluation": "/tekcroft-book-a-free-evaluation.d959c38cf0.js",
-  "leadSubmit": "/tekcroft-lead-submit.88bcc1bb2b.js"
+  "leadSubmit": "/tekcroft-lead-submit.88bcc1bb2b.js",
+  "notFound": "/tekcroft-404.a4dc1230ca.js"
 }
