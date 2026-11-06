@@ -1649,6 +1649,20 @@ html[data-theme="dark"] .pf-card:hover::after{opacity:.24;}
   .pf-cta .btn{width:100%; justify-content:center;}
   /* a lift under a finger is a hover that never ends */
   .pf-card:hover{transform:none;}
+
+  /* Industries: force a single full-width column (beats flex-basis leftovers). */
+  #industries{overflow:visible;}
+  #industries .pf-rail,
+  #industries .pf-carousel{width:100%; max-width:100%;}
+  #industries .pf-track{
+    display:flex; flex-direction:column; align-items:stretch;
+    width:100%; max-width:100%; gap:16px; animation:none;
+  }
+  #industries .pf-card{
+    width:100%; max-width:100%; flex:none; box-sizing:border-box;
+    cursor:default;
+  }
+  #industries .pf-card[data-copy]{display:none;}
 }
 
 /* evenly round the ring rather than the spacing it inherited.
@@ -5139,6 +5153,89 @@ html[data-theme="dark"] .nsr-check p b{color:var(--text);}
 @media (prefers-reduced-motion:reduce){
   #ai-search .nsr-deck::before{animation:none;}
   #ai-search .nsr-deck::after{display:none;}
+}
+
+/* --- nsr-mobile-fit ---
+   Later desktop polish (fixed flow height, nowrap pill, zero rail pad)
+   was winning over the earlier 620px rules and clipping the stage on
+   phones. This block is last so chips, pill and cards stay inside. */
+@media (max-width:620px){
+  #ai-search .nsr-stage,
+  #ai-search .nsr-flow,
+  #ai-search .nsr-deck,
+  #ai-search .nsr-rail{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+  #ai-search .nsr-nodes{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+  }
+  #ai-search .nsr-node{
+    min-width:0;
+    padding:9px 4px 8px;
+  }
+  #ai-search .nsr-node b{
+    font-size:9.8px;
+    line-height:1.25;
+    white-space:normal;
+  }
+  #ai-search .nsr-flow{
+    height:auto;
+    margin:12px 0 18px;
+    display:grid;
+    place-items:center;
+  }
+  #ai-search .nsr-bus{display:none;}
+  #ai-search .nsr-pill{
+    position:relative;
+    left:auto;
+    top:auto;
+    inset:auto;
+    transform:none;
+    display:block;
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    padding:10px 14px;
+    border-radius:18px;
+    white-space:normal;
+    text-align:center;
+    font-size:12px;
+    line-height:1.35;
+    letter-spacing:0;
+  }
+  #ai-search .nsr-deck{
+    padding:6px 0 0;
+    gap:0;
+    overflow:visible;
+  }
+  #ai-search .nsr-deck::before,
+  #ai-search .nsr-deck::after{display:none;}
+  #ai-search .nsr-arw{display:none;}
+  #ai-search .nsr-rail{
+    padding:10px 0 12px !important;
+    gap:10px;
+    overflow-x:auto;
+  }
+  #ai-search .nsr-card{
+    flex:0 0 calc(100% - 20px);
+    width:auto;
+    max-width:100%;
+    min-width:0;
+    box-sizing:border-box;
+  }
+}
+@media (max-width:430px){
+  #ai-search .nsr-pill{
+    padding:9px 12px;
+    font-size:11.4px;
+  }
+  #ai-search .nsr-card{
+    flex-basis:calc(100% - 12px);
+  }
 }
 
 

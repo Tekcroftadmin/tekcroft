@@ -1046,6 +1046,8 @@
 #who .wn-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr); width:100%;}
 #who .wn-card,
 #who .wn-close{background:var(--n0);}
+html[data-theme="dark"] #who .wn-card,
+html[data-theme="dark"] #who .wn-close{background:var(--surface);}
 /* the number came out of these cards, so the row is two columns now */
 .wn-card{grid-template-columns:auto minmax(0,1fr); padding:clamp(13px,1.4vw,17px) clamp(15px,1.6vw,22px); margin-top:0;}
 .wn-list{grid-auto-rows:auto; align-content:center; gap:clamp(10px,1vw,13px);}
@@ -1054,6 +1056,10 @@
 .wn-say .sec-lede{margin-top:clamp(12px,1.3vw,16px);}
 .wn-art{padding-top:clamp(18px,2vw,26px);}
 .wn-close{margin-top:clamp(22px,2.4vw,32px);}
+@media (max-width:1000px){
+  /* Compact two-column rule above must not keep phones cramped — stack. */
+  #who .wn-grid{grid-template-columns:1fr; gap:clamp(28px,4vw,42px);}
+}
 @media (max-width:900px){ .wn-list{align-content:start; gap:12px;} }
 </style>
 
