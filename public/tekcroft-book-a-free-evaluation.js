@@ -1,8 +1,8 @@
 /* Book a Free Evaluation */
 (function(){
-  /* theme: respect system first, allow toggle */
+  /* theme: always open in light; toggle still switches */
   var root=document.documentElement;
-  try{ if(matchMedia('(prefers-color-scheme:dark)').matches) root.setAttribute('data-theme','dark'); }catch(e){}
+  root.setAttribute('data-theme','light');
   document.getElementById('themeBtn').addEventListener('click',function(){
     root.setAttribute('data-theme', root.getAttribute('data-theme')==='dark'?'light':'dark');
   });
