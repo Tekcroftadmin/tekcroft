@@ -5,8 +5,18 @@
 
 /* Desktop (>900): min-height 100svh, height auto, logos in flow at base.
    Mobile (≤900): height auto, min-height 0 — form then logos, never overlap. */
-#hero-1.hs{
+/* Exclude About us (#hero-1.a3-center) — it keeps its own centered hero. */
+#hero-1.hs:not(.a3-center){
   --hs-veil:rgba(0,0,0,.78) !important;
+  /* Shared left claim width (H1 + paragraph + button) + rhythm */
+  --hero-content-max-width:780px;
+  --hero-form-gap:190px;
+  /* Equal air above + below the hero content row (nav→content / content→strip).
+     Desktop/laptop value = current correct top spacing token. */
+  --hero-space-y:64px;
+  --hero-pad-y:var(--hero-space-y);
+  /* Fixed logo-strip height — never vh/%/flex-grow (desktop/laptop) */
+  --hero-strip-height:72px;
   position:relative;
   isolation:isolate;
   /* visible so form/logos are never clipped into each other */
@@ -20,10 +30,18 @@
   flex-direction:column !important;
   justify-content:flex-start !important;
   align-items:stretch !important;
-  padding:calc(var(--nav-h) + clamp(30px,3.4vw,62px)) 0 20px !important;
+  /* Top clearance: live nav height + --hero-space-y.
+     Page stylesheets often re-pin --nav-h:74px on wrappers; --nav-h-live is
+     written on <html> by the nav script so top/bottom mins stay equal. */
+  padding:calc(var(--nav-h-live, var(--nav-h)) + var(--hero-space-y)) 0 0 !important;
+}
+/* About us still shares the fixed strip-height token (height only). */
+#hero-1.hs.a3-center{
+  --hero-strip-height:72px;
 }
 #top.hero,
 header.hero{
+  --hero-strip-height:72px;
   height:auto !important;
   max-height:none !important;
   min-height:100vh !important;
@@ -32,7 +50,7 @@ header.hero{
   flex-direction:column !important;
   justify-content:flex-start !important;
   overflow:visible !important;
-  padding-bottom:20px !important;
+  padding-bottom:0 !important;
 }
 #hero-1.hs:has(> .ticker),
 #hero-1.hs:has(> .hs-logos),
@@ -40,11 +58,31 @@ header.hero{
 header.hero:has(> .ticker),
 .hs:has(> .ticker),
 .hs:has(> .hs-logos){
-  padding-bottom:20px !important;
+  padding-bottom:0 !important;
+}
+/* Tablet: fixed strip 64px */
+@media (max-width:1023px){
+  #hero-1.hs,
+  #top.hero,
+  header.hero,
+  .hs:has(> .ticker),
+  .hs:has(> .hs-logos){
+    --hero-strip-height:64px;
+  }
+}
+/* Mobile: fixed strip 56px */
+@media (max-width:767px){
+  #hero-1.hs,
+  #top.hero,
+  header.hero,
+  .hs:has(> .ticker),
+  .hs:has(> .hs-logos){
+    --hero-strip-height:56px;
+  }
 }
 
 /* Form card: always in normal flow (never absolute / sticky over logos) */
-#hero-1 .hs-form-wrap{
+#hero-1:not(.a3-center) .hs-form-wrap{
   position:relative !important;
   top:auto !important;
   left:auto !important;
@@ -52,12 +90,15 @@ header.hero:has(> .ticker),
   bottom:auto !important;
   inset:auto !important;
   transform:none !important;
+  margin-top:0 !important;
   margin-bottom:0 !important;
+  align-self:center !important;
   flex-shrink:0 !important;
   z-index:4;
 }
 
-/* Client logos / ticker: normal flow under form+copy — never absolute */
+/* Client logos / ticker: fixed px height at hero bottom — never absolute.
+   Extra hero height goes into .hs-in / .hero-in above; strip stays fixed. */
 #hero-1 .hs-logos,
 #hero-1 > .ticker,
 #top.hero > .ticker,
@@ -71,11 +112,43 @@ header.hero > .ticker,
   bottom:auto !important;
   inset:auto !important;
   width:100% !important;
-  margin-top:32px !important;
+  height:var(--hero-strip-height, 72px) !important;
+  min-height:var(--hero-strip-height, 72px) !important;
+  max-height:var(--hero-strip-height, 72px) !important;
+  margin-top:0 !important;
   margin-bottom:0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  border-top:1px solid rgba(255,255,255,.16) !important;
+  display:flex !important;
+  align-items:center !important;
+  flex-grow:0 !important;
   flex-shrink:0 !important;
+  flex-basis:var(--hero-strip-height, 72px) !important;
+  overflow:hidden !important;
   z-index:2;
-  padding-block:14px 16px !important;
+}
+#hero-1 .hs-logos > .wrap,
+#hero-1 > .ticker > .wrap,
+#top.hero > .ticker > .wrap,
+header.hero > .ticker > .wrap,
+.hs > .ticker > .wrap,
+.hs > .hs-logos > .wrap,
+#hero-1 .hs-logos .marq,
+#hero-1 > .ticker .marq,
+#top.hero > .ticker .marq,
+header.hero > .ticker .marq,
+.hs > .ticker .marq{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  margin:0;
+  padding:0;
+}
+#hero-1 .hs-logos-track,
+.hs > .hs-logos .hs-logos-track{
+  align-items:center;
 }
 #hero-1.hs[hidden]{
   display:none;
@@ -121,61 +194,120 @@ header.hero > .ticker,
   background:var(--hs-veil) !important;
 }
 
-#hero-1 .hs-in{
+/* Shared hero layout: left claim + form, ≥190px gap.
+   align-items:center — form midpoint matches left content midpoint.
+   Not applied to About us (.a3-center). */
+#hero-1:not(.a3-center) .hs-in{
   position:relative;
   z-index:3;
-  display:grid;
-  align-items:start;
-  grid-template-columns:minmax(0,1fr) minmax(344px,412px);
-  gap:clamp(24px,2.6vw,46px);
-  /* Center claim+form in leftover viewport; logos strip stays at hero base */
-  margin-block:auto !important;
-  flex:0 0 auto !important;
-  width:100%;
+  display:grid !important;
+  align-items:center !important;
+  align-content:center !important;
+  grid-template-columns:minmax(0,1fr) 340px !important;
+  column-gap:var(--hero-form-gap, 190px) !important;
+  row-gap:0 !important;
+  gap:var(--hero-form-gap, 190px) !important;
+  margin-block:0 !important;
+  /* Absorb leftover min-height ABOVE the strip (never under it).
+     Equal min air below content → strip; extra height splits via align-content.
+     Bottom padding = --hero-space-y (same token as the top air after the nav). */
+  flex:1 1 auto !important;
+  width:100% !important;
   min-height:0;
+  box-sizing:border-box !important;
+  justify-content:stretch !important;
+  padding-top:0 !important;
+  padding-bottom:var(--hero-space-y, var(--hero-pad-y, 64px)) !important;
 }
 #top.hero .hero-in,
 header.hero .hero-in{
-  margin-block:auto !important;
-  flex:0 0 auto !important;
+  margin-block:0 !important;
+  flex:1 1 auto !important;
   width:100%;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
 }
 
-#hero-1 .hs-copy{min-width:0;}
+/* One shared max-width for H1 + paragraph + button (same right edge) */
+#hero-1:not(.a3-center) .hs-copy{
+  min-width:0 !important;
+  max-width:var(--hero-content-max-width, 780px) !important;
+  width:100% !important;
+  justify-self:start !important;
+  align-self:center !important;
+  text-align:left !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  margin-inline:0 !important;
+  padding-inline:0 !important;
+}
+#hero-1:not(.a3-center) .hs-copy > .tag,
+#hero-1:not(.a3-center) .hs-copy .tag,
+#hero-1:not(.a3-center) .hs-h1,
+#hero-1:not(.a3-center) .hs-lede,
+#hero-1:not(.a3-center) .hs-act{
+  text-align:left !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+/* No separate max-width on H1 or paragraph — both fill .hs-copy only */
+#hero-1:not(.a3-center) .hs-h1,
+#hero-1:not(.a3-center) .hs-lede,
+#hero-1:not(.a3-center) .hs-act{
+  max-width:none !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+}
 /* LCP: paint hero copy immediately — do not wait on JS `.play` (same end look) */
-#hero-1 .hs-copy > *{
+#hero-1:not(.a3-center) .hs-copy > *{
   opacity:1;
   transform:none;
 }
 
-#hero-1 .hs .tag,
-#hero-1 .tag{
+#hero-1:not(.a3-center) .hs .tag,
+#hero-1:not(.a3-center) .tag{
   --d:40ms;
   margin-bottom:clamp(18px,2vw,26px);
 }
 
-#hero-1 .hs-h1{
+#hero-1:not(.a3-center) .hs-h1{
   --d:130ms;
   margin:0 0 clamp(18px,2vw,26px);
   font-family:var(--font-display);
   font-weight:800;
-  letter-spacing:-0.04em;
-  line-height:1.08;
   font-size:var(--h1);
   color:#fff;
+  /* Natural wrap only — balance/pretty cause early breaks (e.g. "in AI and" / "Traditional") */
+  white-space:normal !important;
+  text-wrap:wrap !important;
+  word-break:normal !important;
+  overflow-wrap:normal !important;
+  max-width:none !important;
+  width:100% !important;
 }
-#hero-1 .hs-h1 em{font-style:normal; color:var(--primary);}
-#hero-1 .hs-h1 span{display:inline;}
+/* Blue highlight stays inline — no forced line breaks / nowrap units */
+#hero-1:not(.a3-center) .hs-h1 em,
+#hero-1:not(.a3-center) .hs-h1 span,
+#hero-1:not(.a3-center) .hs-h1 .hs-h1-keep{
+  display:inline !important;
+  white-space:normal !important;
+  float:none !important;
+  text-wrap:wrap !important;
+  max-width:none !important;
+}
+#hero-1:not(.a3-center) .hs-h1 em{font-style:normal; color:var(--primary);}
 
-#hero-1 .hs-lede{
+#hero-1:not(.a3-center) .hs-lede{
   --d:210ms;
   margin:0 0 clamp(26px,2.8vw,36px);
-  max-width:48ch;
+  max-width:none !important; /* same column width as H1 — no 48ch/ch limits */
+  width:100% !important;
   font-size:var(--body);
   line-height:1.65;
   color:rgba(255,255,255,.76);
 }
-#hero-1 .hs-act{
+#hero-1:not(.a3-center) .hs-act{
   --d:290ms;
   margin:0;
   display:flex;
@@ -183,152 +315,261 @@ header.hero .hero-in{
   gap:12px;
 }
 
+/* Shared compact form card — sized to match Digital Marketing Agency London reference */
 #hero-1 .hs-form-wrap{
   position:relative !important;
   min-width:0;
-  width:auto;
-  padding:clamp(10px,1vw,14px);
+  width:100% !important;
+  max-width:340px !important;
+  box-sizing:border-box !important;
+  justify-self:end !important;
+  align-self:center !important;
+  padding:8px !important;
   border:1px solid rgba(255,255,255,.22);
-  border-radius:clamp(24px,2.2vw,34px);
+  border-radius:20px !important;
   opacity:1;
   transform:none !important;
+  margin-top:0 !important;
   margin-bottom:0 !important;
 }
 
-#hero-1 .hs-form{
-  border-radius:clamp(16px,1.6vw,22px);
+/* Glass card — same as /services/seo-services hero form */
+#hero-1 .hs-form,
+#hero-1 .hs-form.hs-form-short{
+  width:100% !important;
+  box-sizing:border-box !important;
+  height:auto !important;
+  min-height:340px !important;
+  max-height:none !important;
+  border-radius:14px !important;
   text-align:center;
-  padding:clamp(24px,2.1vw,32px) clamp(20px,1.8vw,28px);
-  background:rgba(8,8,8,.60) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.25) !important;
-          backdrop-filter:blur(18px) saturate(1.25) !important;
-  box-shadow:0 34px 80px -34px rgba(0,0,0,.9) !important;
+  padding:29px 14px !important;
+  background:linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.08) 100%) !important;
+  border:1px solid rgba(255,255,255,.45) !important;
+  -webkit-backdrop-filter:blur(3px) saturate(1.2) !important;
+          backdrop-filter:blur(3px) saturate(1.3) !important;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5) !important;
 }
+
+/* Success / thank-you state: never visible until submit sets data-sent */
+#hero-1 .hs-done{
+  display:none !important;
+  padding:12px 4px 6px;
+}
+#hero-1 .hs-form[data-sent="true"] .hs-done{
+  display:block !important;
+}
+#hero-1 .hs-form[data-sent="true"] > :not(.hs-done){
+  display:none !important;
+}
+#hero-1 .hs-done i{
+  display:grid;
+  place-items:center;
+  width:52px;
+  height:52px;
+  margin:0 auto 16px;
+  border-radius:50%;
+  background:hsl(var(--brand-h) 100% 45% / .18);
+  color:var(--primary);
+}
+#hero-1 .hs-done i svg{width:24px; height:24px;}
+
+#hero-1 .hs-form > h2,
 #hero-1 .hs-form > h3,
 #hero-1 .hs-form > .hs-form-title{
   margin:0;
   font-family:var(--font-display);
-  font-size:clamp(17px,1.5vw,19px) !important;
+  font-size:16px !important;
+  line-height:1.25 !important;
   font-weight:700;
-  letter-spacing:-0.035em;
-  line-height:1.22;
-  color:#fff;
+  color:#fff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
 #hero-1 .hs-rule{
   display:block;
-  width:52px;
-  height:3px;
-  margin:14px auto 0;
-  border-radius:3px;
+  width:40px;
+  height:2px;
+  margin:8px auto 0;
+  border-radius:2px;
   background:var(--primary);
 }
 #hero-1 .hs-sub{
-  margin:14px auto clamp(20px,1.8vw,26px);
+  margin:6px auto 10px !important;
   max-width:34ch;
-  font-size:14px;
-  line-height:1.55;
-  color:rgba(255,255,255,.74);
+  font-size:12.5px !important;
+  line-height:1.4 !important;
+  color:rgba(255,255,255,.88) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
 #hero-1 .hs-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:13px 14px;
+  gap:8px 8px !important;
   text-align:left;
 }
 #hero-1 .hs-field{min-width:0;}
 #hero-1 .hs-field label{
   display:block;
-  margin-bottom:8px;
-  font-size:13.5px;
+  margin-bottom:4px !important;
+  font-size:12px !important;
   font-weight:600;
-  color:#fff;
+  color:#fff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
-#hero-1 .hs-field:focus-within label{color:var(--primary);}
+#hero-1 .hs-field:focus-within label{color:var(--primary) !important;}
 #hero-1 .hs-field input,
 #hero-1 .hs-field select{
   width:100%;
-  height:50px;
-  padding:0 15px;
-  border-radius:12px;
+  height:36px !important;
+  padding:0 11px !important;
+  border-radius:8px !important;
   font-family:var(--font);
-  font-size:14.5px;
+  font-size:13px !important;
   color:var(--n900, #101010);
-  background:#fff;
+  background-color:#fff !important;
   border:1px solid transparent;
+  box-sizing:border-box !important;
 }
 #hero-1 .hs-field select{
-  appearance:none;
-  -webkit-appearance:none;
-  padding-right:40px;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  padding-right:28px !important;
   cursor:pointer;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  background-color:#fff !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23545F6D' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right 9px center !important;
+  background-size:14px !important;
 }
-#hero-1 .hs-form .btn{width:100%; margin:clamp(20px,1.8vw,26px) 0 0;}
+/* Full-width — same shared .btn / .btn-primary look (pill, type, hover, arrow).
+   Undo button.btn{font:inherit} so submit matches <a class="btn"> links. */
+#hero-1 .hs-form .btn,
+#hero-1 .hs-form button.btn{
+  width:100%;
+  margin:10px 0 0 !important;
+  box-sizing:border-box !important;
+  border-radius:var(--r-btn) !important;
+  font-family:var(--font) !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+  line-height:1.2 !important;
+  letter-spacing:-0.005em !important;
+  padding:16px 26px !important;
+  height:auto !important;
+  min-height:0 !important;
+}
 #hero-1 .hs-note{
-  margin:15px 0 0;
-  font-size:12.5px;
-  line-height:1.5;
-  color:rgba(255,255,255,.72);
+  margin:8px 0 0 !important;
+  font-size:11.5px !important;
+  line-height:1.4 !important;
+  color:rgba(255,255,255,.88) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
 }
-#hero-1 .hs-note a{color:#fff; font-weight:700;}
+#hero-1 .hs-note a{
+  color:#fff !important;
+  font-weight:700;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
 
-/* Light theme — frosted glass form (same on every service page) */
-html[data-theme="light"] #hero-1 .hs-form-wrap{
-  border-color:rgba(255,255,255,.42) !important;
+/* Same /services/seo-services glass card in light AND dark — never the pale frosted card */
+html[data-theme="light"] #hero-1 .hs-form-wrap,
+html[data-theme="dark"] #hero-1 .hs-form-wrap,
+html[data-design="raw"] #hero-1 .hs-form-wrap,
+html[data-design="raw"][data-theme="light"] #hero-1 .hs-form-wrap{
+  border-color:rgba(255,255,255,.22) !important;
 }
 html[data-theme="light"] #hero-1 .hs-form,
-html[data-design="raw"][data-theme="light"] #hero-1 .hs-form{
-  background:linear-gradient(180deg, rgba(255,255,255,.80) 0%, rgba(255,255,255,.66) 100%) !important;
-  border-color:rgba(255,255,255,.66) !important;
-  -webkit-backdrop-filter:blur(26px) saturate(1.7) !important;
-          backdrop-filter:blur(26px) saturate(1.7) !important;
-  box-shadow:0 34px 80px -34px rgba(var(--ink-rgb, 4, 40, 70),.55),
-             inset 0 1px 0 rgba(255,255,255,.9) !important;
+html[data-theme="light"] #hero-1 .hs-form.hs-form-short,
+html[data-theme="dark"] #hero-1 .hs-form,
+html[data-theme="dark"] #hero-1 .hs-form.hs-form-short,
+html[data-design="raw"] #hero-1 .hs-form,
+html[data-design="raw"] #hero-1 .hs-form.hs-form-short,
+html[data-design="raw"][data-theme="light"] #hero-1 .hs-form,
+html[data-design="raw"][data-theme="light"] #hero-1 .hs-form.hs-form-short{
+  background:linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.08) 100%) !important;
+  border:1px solid rgba(255,255,255,.45) !important;
+  -webkit-backdrop-filter:blur(3px) saturate(1.2) !important;
+          backdrop-filter:blur(3px) saturate(1.3) !important;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5) !important;
 }
-/* Beat leftover AIS page overrides with equal/higher specificity */
-html[data-design="raw"] #hero-1 .hs-form{
-  background:rgba(8,8,8,.60) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.25) !important;
-          backdrop-filter:blur(18px) saturate(1.25) !important;
-  box-shadow:0 34px 80px -34px rgba(0,0,0,.9) !important;
-}
-html[data-design="raw"][data-theme="light"] #hero-1 .hs-form{
-  background:linear-gradient(180deg, rgba(255,255,255,.80) 0%, rgba(255,255,255,.66) 100%) !important;
-  border-color:rgba(255,255,255,.66) !important;
-  -webkit-backdrop-filter:blur(26px) saturate(1.7) !important;
-          backdrop-filter:blur(26px) saturate(1.7) !important;
-  box-shadow:0 34px 80px -34px rgba(var(--ink-rgb, 4, 40, 70),.55),
-             inset 0 1px 0 rgba(255,255,255,.9) !important;
-}
+html[data-theme="light"] #hero-1 .hs-form > h2,
 html[data-theme="light"] #hero-1 .hs-form > h3,
-html[data-theme="light"] #hero-1 .hs-form > .hs-form-title{color:var(--text);}
-html[data-theme="light"] #hero-1 .hs-sub{color:var(--text-2);}
-html[data-theme="light"] #hero-1 .hs-field label{color:var(--text);}
-html[data-theme="light"] #hero-1 .hs-field:focus-within label{color:var(--brand-text, var(--primary));}
-html[data-theme="light"] #hero-1 .hs-note{color:var(--text-2);}
-html[data-theme="light"] #hero-1 .hs-note a{color:var(--text);}
+html[data-theme="light"] #hero-1 .hs-form > .hs-form-title,
+html[data-theme="light"] #hero-1 .hs-done-title,
+html[data-theme="light"] #hero-1 .hs-done h3{
+  color:#fff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+html[data-theme="light"] #hero-1 .hs-sub,
+html[data-theme="light"] #hero-1 .hs-note,
+html[data-theme="light"] #hero-1 .hs-done p{
+  color:rgba(255,255,255,.88) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+html[data-theme="light"] #hero-1 .hs-field label{
+  color:#fff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+html[data-theme="light"] #hero-1 .hs-field:focus-within label{color:var(--primary) !important;}
+html[data-theme="light"] #hero-1 .hs-note a{color:#fff !important;}
 html[data-theme="light"] #hero-1 .hs-field input,
 html[data-theme="light"] #hero-1 .hs-field select{
-  background:#fff;
-  border-color:var(--border);
+  background-color:#fff !important;
+  border-color:transparent !important;
+  color:var(--n900, #101010) !important;
+}
+html[data-theme="light"] #hero-1 .hs-field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23545F6D' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right 9px center !important;
+  background-size:14px !important;
+}
+
+/* Laptop: same shared content width + ≥190px form gap as desktop */
+@media (max-width:1200px){
+  #hero-1:not(.a3-center) .hs-in{
+    column-gap:var(--hero-form-gap, 190px) !important;
+    gap:var(--hero-form-gap, 190px) !important;
+  }
+  #hero-1:not(.a3-center) .hs-copy{max-width:var(--hero-content-max-width, 780px) !important;}
+}
+
+/* Tablet (≤1023): same measured top token as prior tablet/mobile pad */
+@media (max-width:1023px){
+  #hero-1.hs:not(.a3-center){
+    --hero-space-y:40px;
+    --hero-pad-y:var(--hero-space-y);
+  }
 }
 
 /* ≤960px: single column — badge → copy → buttons → form → logos */
 @media (max-width:960px){
-  #hero-1 .hs-in{
+  #hero-1.hs:not(.a3-center){
+    --hero-space-y:40px;
+    --hero-pad-y:var(--hero-space-y);
+  }
+  #hero-1:not(.a3-center) .hs-in{
     display:flex !important;
     flex-direction:column !important;
     grid-template-columns:none !important;
     align-items:stretch !important;
+    column-gap:0 !important;
+    row-gap:0 !important;
     gap:0 !important;
     margin-block:0 !important;
   }
-  #hero-1 .hs-copy{
+  #hero-1:not(.a3-center) .hs-copy{
     order:1;
-    width:100%;
+    width:100% !important;
+    max-width:none !important; /* full available width when stacked */
+    text-align:left !important;
+    justify-self:stretch !important;
   }
-  #hero-1 .hs-form-wrap{
+  #hero-1:not(.a3-center) .hs-form-wrap{
     order:2;
     position:relative !important;
     width:100% !important;
@@ -344,20 +585,27 @@ html[data-theme="light"] #hero-1 .hs-field select{
     bottom:auto !important;
     inset:auto !important;
   }
-  #hero-1 .hs-lede{max-width:60ch;}
+  /* Same width as H1 — no wider paragraph on tablet */
+  #hero-1:not(.a3-center) .hs-lede{max-width:none !important;}
 }
 
 /* ≤900px: content-height hero — no 100vh/100svh; logos under form */
 @media (max-width:900px){
-  #hero-1.hs,
+  #hero-1.hs:not(.a3-center),
   #top.hero,
   header.hero{
+    --hero-space-y:40px;
+    --hero-pad-y:var(--hero-space-y);
     height:auto !important;
     max-height:none !important;
     min-height:0 !important;
     overflow:visible !important;
     justify-content:flex-start !important;
-    padding-bottom:20px !important;
+    /* Hero shell still ends at the strip; equal bottom air is on .hs-in */
+    padding-bottom:0 !important;
+  }
+  #hero-1.hs.a3-center{
+    --hero-strip-height:56px;
   }
   #hero-1.hs:has(> .ticker),
   #hero-1.hs:has(> .hs-logos),
@@ -365,20 +613,23 @@ html[data-theme="light"] #hero-1 .hs-field select{
   header.hero:has(> .ticker),
   .hs:has(> .ticker),
   .hs:has(> .hs-logos){
-    padding-bottom:20px !important;
+    padding-bottom:0 !important;
   }
 
-  #hero-1 .hs-in,
+  #hero-1:not(.a3-center) .hs-in,
   #top.hero .hero-in,
   header.hero .hero-in{
     display:flex !important;
     flex-direction:column !important;
     margin-block:0 !important;
+    /* No viewport min-height on mobile — do not grow under/above strip */
     flex:0 0 auto !important;
     width:100%;
+    padding-top:0 !important;
+    padding-bottom:var(--hero-space-y, 40px) !important;
   }
 
-  #hero-1 .hs-form-wrap{
+  #hero-1:not(.a3-center) .hs-form-wrap{
     position:relative !important;
     width:100% !important;
     margin-top:24px !important;
@@ -399,11 +650,21 @@ html[data-theme="light"] #hero-1 .hs-field select{
     bottom:auto !important;
     inset:auto !important;
     width:100% !important;
-    margin-top:28px !important;
+    height:var(--hero-strip-height, 56px) !important;
+    min-height:var(--hero-strip-height, 56px) !important;
+    max-height:var(--hero-strip-height, 56px) !important;
+    margin-top:0 !important;
     margin-bottom:0 !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+    border-top:1px solid rgba(255,255,255,.16) !important;
+    display:flex !important;
+    align-items:center !important;
+    flex-grow:0 !important;
     flex-shrink:0 !important;
+    flex-basis:var(--hero-strip-height, 56px) !important;
+    overflow:hidden !important;
     z-index:2;
-    padding-block:14px 16px !important;
   }
 
   /* Background / veil / slider cover the full grown hero (incl. form + logos) */
@@ -442,7 +703,9 @@ html[data-theme="light"] #hero-1 .hs-field select{
   #hero-1 .hs-lede{margin-inline:auto;}
   #hero-1 .hs-act{flex-direction:column; align-items:stretch;}
   #hero-1 .hs-act .btn{width:100%;}
-  #hero-1 .hs-form-wrap{border-radius:22px; padding:9px;}
+  #hero-1 .hs-form-wrap{border-radius:18px !important; padding:7px !important;}
+  #hero-1 .hs-form,
+  #hero-1 .hs-form.hs-form-short{border-radius:12px !important; padding:29px 12px !important;}
 }
 @media (max-width:420px){
   #hero-1 .hs-grid{grid-template-columns:minmax(0,1fr);}

@@ -41,7 +41,7 @@
     var __h = (__bar ? __bar.offsetHeight : 64)
       + (parseFloat(__cs.paddingTop) || 0)
       + (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
   }
   }
   navHeight();
@@ -266,26 +266,6 @@
   }, { threshold:.4 });
   $$("[data-count]").forEach(function(el){ ioCount.observe(el); });
 })();
-
-
-/* === ft-script === */
-
-/* The footer's run of service names. One row written twice, because the
-   slide travels exactly half the track — so the copy arrives where the
-   original left and the loop has no seam. */
-(function(){
-  "use strict";
-  var el = document.getElementById("ftMarq");
-  if (!el) return;
-  var row = ["SEO","Ecommerce SEO","Technical SEO","Product page SEO",
-             "Category page SEO","Content optimization","Local SEO",
-             "Answer engine visibility","Link building","CRO",
-             "Analytics","Reporting"]
-    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
-  el.innerHTML = row + row;
-})();
-
-
 /* === ct-hero-script === */
 
 /* Publishes the pointer's place in the band as two numbers between -1 and

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { seoServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/seo-services-meta.json";
 import lcp from "@/lib/seo-services-lcp.json";
@@ -35,10 +34,7 @@ export const metadata: Metadata = {
 };
 
 export default function SeoServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "seo-services-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("seo-services-body.html");
 
   return (
     <>
@@ -58,9 +54,9 @@ export default function SeoServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.seoServices} strategy="afterInteractive" />
-      <Script src="/tekcroft-ecommerce-seo-vx.js" strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.seoServices} strategy="lazyOnload" />
+      <Script src="/tekcroft-ecommerce-seo-vx.js" strategy="lazyOnload" />
       <JsonLd data={seoServicesSchema} />
     </>
   );

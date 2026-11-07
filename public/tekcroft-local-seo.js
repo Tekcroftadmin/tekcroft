@@ -45,7 +45,7 @@
       var __h = (__bar ? __bar.offsetHeight : 64)
         + (parseFloat(__cs.paddingTop) || 0)
         + (parseFloat(__cs.paddingBottom) || 0);
-      root.style.setProperty("--nav-h", Math.round(__h) + "px");
+      root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
     });
   }
   /* Defer first measure — avoid forced reflow on boot before first paint */
@@ -236,31 +236,13 @@
 /* Hero client ticker (was Homepage.tsx fillHeroMarq) */
 (function(){
   var el = document.getElementById("marqTrack");
-  if (!el || el.childElementCount > 0) return;
+  if (!el) return;
   var names = ["MedVital","CarePoint","ServiClean","FixMaster","BrightWay",
     "CloudScale","DataDrive","ShopSphere","PeakCart","GrowPilot"];
   var row = names.map(function(t){ return "<span>" + t + "</span>"; }).join("");
-  el.innerHTML = row + row;
+  var half = row + row + row;
+  el.innerHTML = half + half;
 })();
-
-/* === ft-script === */
-
-/* The footer's run of service names. One row written twice, because the
-   slide travels exactly half the track — so the copy arrives where the
-   original left and the loop has no seam. */
-(function(){
-  "use strict";
-  var el = document.getElementById("ftMarq");
-  if (!el) return;
-  var row = ["SEO","On-page SEO","Title tags","Meta descriptions",
-             "Content optimization","Internal linking","Schema markup",
-             "Keyword mapping","Heading structure","Technical SEO",
-             "Analytics","Reporting"]
-    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
-  el.innerHTML = row + row;
-})();
-
-
 /* === faq-script (hardened) === */
 (function(){
   function panelFor(btn){

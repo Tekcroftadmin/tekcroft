@@ -32,7 +32,7 @@
     "letter-spacing:-.035em;line-height:1.06}" +
     "#askModal .modal-intro{font-size:calc(13 * var(--u));line-height:1.42;" +
     "margin:calc(6 * var(--u)) 0 0}" +
-    "#askModal .modal-eyebrow{margin-bottom:calc(8 * var(--u))}" +
+    "" +
     "#askModal .modal-hero{gap:calc(10 * var(--u));align-items:center}" +
     "#askModal .modal-art{justify-self:end;width:100%;max-width:calc(170 * var(--u))}" +
     "#askModal .modal-art svg{width:100%;height:auto;display:block}" +
@@ -95,7 +95,7 @@
     "#askModal .modal-card{padding:calc(18 * var(--u)) calc(14 * var(--u)) calc(14 * var(--u));" +
     "max-height:none;overflow:hidden !important}" +
     "#askModal .modal-form{margin-top:calc(10 * var(--u));padding:calc(10 * var(--u))}" +
-    "#askModal .modal-eyebrow{margin-bottom:calc(6 * var(--u))}" +
+    "" +
     "#askModal #askModalGo{margin-top:16px !important}" +
     "#askModal .field textarea{min-height:48px;height:48px}" +
     "#askModal .field input,#askModal .field select{font-size:16px}" +
@@ -118,7 +118,7 @@
     "</button>" +
     '<div id="askModalBody">' +
     '<div class="modal-hero"><div>' +
-    '<span class="tag modal-eyebrow"><i></i>Ask a question</span>' +
+    '' +
     '<h2 id="askModalTitle">Ask us <em>anything</em></h2>' +
     '<p class="modal-intro">Send your question and a specialist will reply within one business day.</p>' +
     "</div>" +

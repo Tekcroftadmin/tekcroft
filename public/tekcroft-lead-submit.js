@@ -444,6 +444,9 @@
     );
   }
 
+  /* Home invite mounts #modalGo lazily — expose a hook for that script */
+  window.__tekcroftWireLeadModal = wireModal;
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", wireModal);
   } else {

@@ -3,7 +3,7 @@
 #chatbot-types{padding-block:clamp(48px,4.6vw,72px); background:var(--ground, var(--surface)); text-transform:none;}
 html[data-theme="dark"] #chatbot-types{background:var(--ground, var(--surface));}
 #chatbot-types .ct-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(24px,4vw,64px); margin-bottom:clamp(24px,2.6vw,36px);}
-#chatbot-types .ct-head h2{margin:0; font-family:var(--font-display); font-size:clamp(28px,3vw,44px); font-weight:800; letter-spacing:-.045em; line-height:1.08; color:var(--text); text-transform:none;}
+#chatbot-types .ct-head h2{margin:0; font-family:var(--font-display); font-size:clamp(28px,3vw,44px); font-weight:800; color:var(--text); text-transform:none;}
 #chatbot-types .ct-head h2 em{display:block; font-style:normal; color:var(--primary);}
 #chatbot-types .ct-head p{margin:0; padding-left:20px; border-left:2px solid var(--primary); font-size:clamp(15px,1.15vw,17px); line-height:1.6; color:var(--text-2);}
 /* box */
@@ -30,7 +30,7 @@ html[data-theme="dark"] #chatbot-types .ti{background:rgba(255,255,255,.05); bor
 #chatbot-types .pt{display:flex; flex-direction:column; align-items:flex-start; gap:12px;}
 #chatbot-types .pi{display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:#E3F3FB; color:var(--primary);}
 html[data-theme="dark"] #chatbot-types .pi{background:rgba(0,150,213,.14); color:#7FD6FA;}
-#chatbot-types .pt h3{margin:0; font-family:var(--font-display); font-size:clamp(20px,1.7vw,25px); font-weight:800; letter-spacing:-.03em; line-height:1.2; color:var(--text); text-transform:none;}
+#chatbot-types .pt h3{margin:0; font-family:var(--font-display); font-size:clamp(20px,1.7vw,25px); font-weight:800; color:var(--text); text-transform:none;}
 #chatbot-types .pt p{margin:0; font-size:clamp(15px,1.1vw,16px); line-height:1.65; color:var(--text-2);}
 #chatbot-types .pv{position:relative; min-height:330px; display:flex; align-items:center; justify-content:center; padding:22px; border-radius:20px; background:radial-gradient(circle at 50% 30%,#fff 0 22%,transparent 64%),linear-gradient(180deg,#EAF6FC,#DAEEF6);}
 #chatbot-types .pv::before{content:""; position:absolute; inset:0; border-radius:inherit; background-image:radial-gradient(rgba(0,150,213,.16) 1px,transparent 1.2px); background-size:16px 16px;}

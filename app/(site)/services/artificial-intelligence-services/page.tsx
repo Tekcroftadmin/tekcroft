@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/artificial-intelligence-services-meta.json";
 import lcp from "@/lib/artificial-intelligence-services-lcp.json";
@@ -38,10 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function ArtificialIntelligenceServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "artificial-intelligence-services-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("artificial-intelligence-services-body.html");
 
   return (
     <>
@@ -66,10 +62,10 @@ export default function ArtificialIntelligenceServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} rawDesign />
+      <SitePage html={html} rawDesign prepared />
       <Script
         src={assets.artificialIntelligenceServices}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     </>
   );

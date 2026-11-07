@@ -81,8 +81,7 @@ html[data-theme="dark"]{
 .hs .tag{--d:40ms; margin-bottom:clamp(18px,2vw,26px);}
 
 .hs-h1{--d:130ms; margin:0 0 clamp(18px,2vw,26px);
-  font-family:var(--font-display); font-weight:800; letter-spacing:-0.04em;
-  line-height:1.08; font-size:var(--h1); color:#fff;}
+  font-family:var(--font-display); font-weight:800; font-size:var(--h1); color:#fff;}
 .hs-h1 em{font-style:normal; color:var(--primary);}
 .hs-h1 span{display:inline;}
 
@@ -131,7 +130,7 @@ html[data-theme="dark"]{
  /* the homepage sizes a heading inside its own form dialog at 26px rather
     than at --h2, which is a section's size; this is that heading. */
 .hs-form > h3, .hs-form > .hs-form-title{margin:0; font-family:var(--font-display); font-size:clamp(17px,1.5vw,19px) !important;
-  font-weight:700; letter-spacing:-0.035em; line-height:1.22; color:#fff;}
+  font-weight:700; color:#fff;}
 .hs-rule{display:block; width:52px; height:3px; margin:14px auto 0; border-radius:3px;
   background:var(--primary);}
 .hs-sub{margin:14px auto clamp(20px,1.8vw,26px); max-width:34ch;
@@ -174,8 +173,7 @@ html[data-theme="dark"]{
 .hs-done i{display:grid; place-items:center; width:52px; height:52px; margin:0 auto 16px;
   border-radius:50%; background:hsl(var(--brand-h) 100% 45% / .18); color:var(--primary);}
 .hs-done i svg{width:24px; height:24px;}
-.hs-done h3,.hs-done-title{margin:0 0 8px; font-family:var(--font-display); font-size:var(--h3); font-weight:700;
-  letter-spacing:-0.03em; color:#fff;}
+.hs-done h3,.hs-done-title{margin:0 0 8px; font-family:var(--font-display); font-size:var(--h3); font-weight:700; color:#fff;}
 .hs-done p{margin:0; font-size:14px; line-height:1.6; color:rgba(255,255,255,.74);}
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -730,7 +728,7 @@ html[data-theme="dark"]{
    reads as a mistake. The short ones lose nothing by matching them. */
 .ws-item h3{margin-top:clamp(14px,1.7vw,22px);
   font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-0.028em; line-height:1.22;
+  font-weight:800;
   text-transform:none; color:#12181F;}
 /* the short rule under the heading, which is what separates the claim
    from the sentence explaining it */
@@ -917,7 +915,7 @@ html[data-theme="dark"]{
 .pf-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
   gap:clamp(30px,4%,64px); align-items:center;}
 .pf-head .sec-head{max-width:none;}
-.pf-head h2{font-size:var(--h2); line-height:1.16; letter-spacing:-0.038em;}
+.pf-head h2{font-size:var(--h2);}
 .pf-head h2 span{display:block;}
 .pf-head h2 em{font-style:normal; color:var(--brand-text);}
 .pf-head .sec-lede{max-width:44ch;}
@@ -1104,7 +1102,7 @@ html[data-theme="dark"]{
 .pf-n{font-size:13px; font-weight:700; letter-spacing:.12em;
   color:var(--brand-text); font-variant-numeric:tabular-nums;}
 
-.pf-card h3{font-size:var(--h3); letter-spacing:-0.032em; line-height:1.25;}
+.pf-card h3{font-size:var(--h3);}
 .pf-card h3 em{font-style:normal;}
 /* the rule under the name, and the description under that */
 .pf-card > p{margin-top:clamp(14px,1.4vw,18px);
@@ -2375,7 +2373,7 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
 .eg-card.on .eg-ico{background:var(--primary); transform:translateY(-2px);}
 .eg-ico svg{width:46%; height:46%;}
 .eg-card h3{font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-0.032em; line-height:1.2;}
+  font-weight:800;}
 .eg-card h3 i{font-style:normal; color:var(--subtle); margin-right:9px;
   font-variant-numeric:tabular-nums; transition:color .4s var(--ease);}
 .eg-card.on h3 i{color:var(--brand-text);}
@@ -2915,7 +2913,7 @@ html[data-theme="dark"] .eg-exp-note{
 .wc-card:hover .wc-n{transform:scale(1.08);}
 .wc-card h3{margin-top:clamp(14px,1.7vw,22px);
   font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-0.028em; line-height:1.24;
+  font-weight:800;
   text-transform:none; color:var(--text);}
 .wc-card p{margin-top:clamp(10px,1.2vw,15px);
   font-size:var(--body); line-height:1.56; color:var(--text-2);}
@@ -3100,7 +3098,7 @@ html[data-theme="dark"] #gbp-what{
   background:var(--gw-accent);}
 .gw-say h2{margin-top:clamp(11px,1.3vw,17px); max-width:17ch;
   font-family:var(--font-display); font-size:var(--h2);
-  font-weight:800; letter-spacing:-0.04em; line-height:1.06;
+  font-weight:800;
   text-transform:none; color:var(--gw-ink);}
 .gw-say h2 em{font-style:normal; color:var(--gw-accent);}
 .gw-say > p{margin-top:clamp(13px,1.5vw,20px); max-width:48ch;
@@ -3173,7 +3171,7 @@ html[data-theme="dark"] #gbp-what{
   color:var(--gw-accent);}
 .gw-block h3{margin-top:clamp(13px,1.5vw,19px);
   font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-0.03em; line-height:1.2;
+  font-weight:800;
   text-transform:none; color:var(--gw-ink);}
 .gw-block p{margin-top:clamp(12px,1.4vw,18px);
   font-size:var(--body); line-height:1.62; color:var(--gw-ink-2);}
@@ -3225,7 +3223,7 @@ html[data-theme="dark"] #gbp-what{
   background:var(--gw-accent);}
 .gw-cta-say h3{margin-top:clamp(7px,.9vw,11px); max-width:24ch;
   font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-0.035em; line-height:1.16;
+  font-weight:800;
   text-transform:none; color:var(--gw-ink);}
 .gw-cta-say p{margin-top:clamp(7px,.9vw,11px); max-width:54ch;
   font-size:var(--body); line-height:1.6; color:var(--gw-ink-2);}
@@ -3781,7 +3779,7 @@ html[data-theme="dark"] .cn-sheet{background:var(--n875);}
    lines beside three columns of empty panel. */
 .cn-lead{
   font-size:var(--body);
-  font-weight:700; letter-spacing:-0.012em; line-height:1.55; color:var(--text);
+  font-weight:700; color:var(--text);
   max-width:60ch;}
 
 .cn-list{margin-top:24px; display:grid; gap:16px;}
@@ -4182,7 +4180,7 @@ html[data-theme="dark"] .cn .cn-stat{
 
 /* the process heading joins the scale */
 /* and the three that restated the tracking give it back */
-h2{ letter-spacing:-0.04em; }
+h2{ }
 
 /* the badge sits the same distance above every heading it introduces */
 .smark{ margin-bottom:clamp(16px,1.8vw,22px); }
@@ -4520,7 +4518,6 @@ h1, h2, h3, h4, h5, h6{
 .cta3 h2{
   font-family:var(--font-display);
   font-size:var(--h2);
-  letter-spacing:-0.04em;
 }
 .ct-hero h1{
   font-family:var(--font-display);
@@ -4617,7 +4614,7 @@ html[data-theme="dark"] #process .eg-exp-note{
 .gwx-head h2{
   margin:0; flex:1 1 0; min-width:0;
   font-family:var(--font-display); font-weight:600;
-  font-size:clamp(28px,3.2vw,46px); line-height:1.1; letter-spacing:-0.02em;
+  font-size:clamp(28px,3.2vw,46px);
   color:var(--gwx-ink); max-width:none;
 }
 .gwx-head p{
@@ -4711,8 +4708,7 @@ html[data-theme="dark"] #process .eg-exp-note{
 
 .gwx-copy{padding:20px 24px 24px; display:flex; flex-direction:column; gap:8px;}
 .gwx-copy h3{
-  margin:0; font-family:var(--font-display); font-size:19px; font-weight:600;
-  line-height:1.3; color:var(--gwx-ink);
+  margin:0; font-family:var(--font-display); font-size:19px; font-weight:600; color:var(--gwx-ink);
 }
 .gwx-n{font-family:var(--font-display); color:var(--gwx-brand);}
 .gwx-copy p{margin:0; font-family:var(--font); font-size:15.5px; line-height:1.6; color:var(--gwx-muted);}
@@ -4753,7 +4749,7 @@ html body #gbp-what.gwx .gwx-copy p{
 .ac-head{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
 .ac-head .smark{margin-bottom:10px;}
-.acv h2{margin:0; font-size:var(--h2); line-height:1.06; letter-spacing:-.04em; text-transform:none;}
+.acv h2{margin:0; font-size:var(--h2); text-transform:none;}
 .acv h2 em{font-style:normal; color:var(--brand-text);}
 .ac-aside{display:flex; align-items:flex-end; justify-content:space-between; gap:clamp(16px,2vw,28px);}
 .ac-lede{margin:0; font-size:var(--body); line-height:1.6; color:var(--text-2); max-width:46ch;}
@@ -4807,7 +4803,7 @@ html body #gbp-what.gwx .gwx-copy p{
 .ac-ico{display:grid; place-items:center; width:46px; height:46px; border-radius:13px; margin:auto 0 16px;
   background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28); color:#fff;}
 .ac-ico svg{width:22px; height:22px;}
-.ac-open h3{margin:0 0 10px; font-size:var(--h3); letter-spacing:-.04em; line-height:1.15;
+.ac-open h3{margin:0 0 10px; font-size:var(--h3);
   color:#fff; text-transform:none; max-width:20ch;}
 .ac-open p{margin:0 0 16px; font-size:var(--body); line-height:1.65;
   color:rgba(255,255,255,.78); max-width:52ch;}
@@ -5668,8 +5664,7 @@ html[data-theme="dark"] #faq .faq-list{background:var(--surface);}
 }
 #faq .faq-aside h3{
   margin:10px 0 0; font-family:var(--font-display);
-  font-size:clamp(22px,2.2vw,28px); font-weight:800;
-  letter-spacing:-.03em; line-height:1.22; color:#fff;
+  font-size:clamp(22px,2.2vw,28px); font-weight:800; color:#fff;
   text-transform:none;
 }
 @media (max-width:940px){
@@ -5688,7 +5683,7 @@ html[data-theme="dark"] #faq .faq-list{background:var(--surface);}
 .tm-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
 .tm-head .smark{margin-bottom:10px;}
-#gbp-process h2{margin:0; font-size:clamp(26px,2.8vw,40px); line-height:1.06; letter-spacing:-.04em; text-transform:none;}
+#gbp-process h2{margin:0; font-size:clamp(26px,2.8vw,40px); text-transform:none;}
 #gbp-process h2 em{font-style:normal; color:var(--brand-text);}
 .tm-aside{display:flex; align-items:flex-end; justify-content:space-between; gap:clamp(16px,2vw,28px);}
 .tm-aside p{margin:0; font-size:clamp(13.4px,1.04vw,14.8px); line-height:1.6; color:var(--text-2); max-width:42ch;}
@@ -5738,7 +5733,7 @@ html[data-theme="dark"] .tm-card{background:var(--surface); border-color:var(--b
 .tm-num{font-family:var(--font-display); font-size:12.5px; font-weight:800; letter-spacing:.1em;
   color:var(--brand-text);}
 #gbp-process .tm-card h3{margin:0 0 8px; font-family:var(--font-display); font-size:clamp(17px,1.6vw,21px);
-  font-weight:800; letter-spacing:-.03em; line-height:1.25; color:var(--text); text-transform:none;}
+  font-weight:800; color:var(--text); text-transform:none;}
 .tm-card p{margin:0 0 14px; font-size:clamp(12.8px,1.02vw,14px); line-height:1.6; color:var(--text-2);
   max-height:11.5em; overflow:hidden;}
 .tm-chip{display:inline-flex; align-items:center; gap:8px; padding:6px 13px; border-radius:99px;
@@ -6061,7 +6056,7 @@ html[data-theme="dark"] .dc{background:var(--bg);}
 #apart.dc{padding-block:clamp(36px,3.6vw,52px);}
 .dc-side{display:flex; flex-direction:column; gap:16px; min-width:0; align-self:stretch; justify-content:center;}
 .dc-head .smark{margin-bottom:10px;}
-.dc-head h2{margin:0; font-family:var(--font-display); font-size:clamp(26px,2.4vw,36px); font-weight:800; letter-spacing:-.04em; line-height:1.08; color:var(--text); text-transform:none;}
+.dc-head h2{margin:0; font-family:var(--font-display); font-size:clamp(26px,2.4vw,36px); font-weight:800; color:var(--text); text-transform:none;}
 .dc-head h2 em{font-style:normal; color:var(--primary);}
 .dc-lede{margin:0; font-size:clamp(14px,1vw,15.5px); line-height:1.6; color:var(--text-2);}
 .dc-stage{margin-top:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:clamp(20px,3vw,48px); align-items:center;}
@@ -6171,10 +6166,11 @@ html[data-theme="dark"] #apart.dc{--ground:var(--bg-alt); background:var(--bg-al
   --lede:16px;
   --body-lh:1.7;
 
-  /* Spacing scale — desktop defaults; mobile/tablet override below */
-  --sec-y:clamp(56px,5.4vw,84px);          /* standard sections */
-  --sec-y-tight:clamp(36px,4vw,56px);      /* proof strips / compact bands */
-  --sec-y-feat:clamp(64px,6vw,88px);       /* large / featured bands */
+  /* Spacing scale — equal outer section rhythm (exact values per breakpoint) */
+  --section-padding-y:80px;                /* desktop ≥1024 — source of truth */
+  --sec-y:var(--section-padding-y);        /* alias used by existing rules */
+  --sec-y-tight:var(--section-padding-y);  /* same outer rhythm (no specials) */
+  --sec-y-feat:var(--section-padding-y);
   --head-gap:clamp(12px,1.2vw,16px);       /* eyebrow → title */
   --lede-gap:clamp(14px,1.4vw,20px);       /* title → lede */
   --block-gap:clamp(22px,2.4vw,36px);      /* head block → content */
@@ -6196,9 +6192,22 @@ html[data-theme="dark"] #apart.dc{--ground:var(--bg-alt); background:var(--bg-al
 .stack-cards{gap:var(--card-gap);}
 .stack-grid{gap:var(--grid-gap);}
 
-/* ── Equal vertical padding on every content section ───────────────── */
+/* ── Equal vertical padding on every content section ─────────────────
+   One shared --section-padding-y. Heroes / footer keep their own spacing. */
+main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#tekcroft-root main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
 .sec,
 section.sec,
+section.wx-why,
+section.built,
+section.rpx,
+section.pplx,
+section.wg,
+section.vx,
+section.lp-s,
+section.sg,
+section.book,
 .sec.acv,
 .sec.ax,
 .sec.bl-sec,
@@ -6246,16 +6255,20 @@ section.sec,
 #apart.sec,
 #clients.sec,
 #fit.sec,
-#industries.sec{
-  padding-block:var(--sec-y) !important;
+#industries.sec,
+#proof-v2.sec,
+#proof-v2{
+  padding-block:var(--section-padding-y) !important;
+  margin-block:0 !important;
 }
 
-/* Under-hero stats strip — rhythm owned by stats-strip.css (#proof-v2) */
-/* Legacy #ai.tb (different section) stays tighter */
-.sec.tb,
-html body #ai.tb,
-html body #ai.tb.sec{
-  padding-block:var(--sec-y-tight) !important;
+/* Heroes keep their own vertical rhythm */
+section.hs,
+section.ct-hero,
+section#hero-1,
+header.hero,
+#top.hero{
+  /* do not apply --section-padding-y */
 }
 
 /* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
@@ -6270,11 +6283,11 @@ html body .lamp h1{
 }
 
 /* ── Headings: one size per level — beat page-local clamps ──────────── */
+/* letter-spacing + line-height owned by the global lock at file end */
 html body :is(h1, .hs-h1, .ct-hero h1),
 html body .hs .hs-h1{
   font-size:var(--h1) !important;
-  line-height:1.08 !important;
-  /* Negative letter-spacing on display type leaves an optical left gap — pull flush */
+  /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
 html body :is(h2),
@@ -6316,8 +6329,6 @@ html body #duplicate-v2 h2 span,
 html body #duplicate-v2 h2 em,
 html body #duplicate-v2 h2 small{
   font-size:var(--h2) !important;
-  line-height:1.12 !important;
-  letter-spacing:-0.04em !important;
 }
 html body :is(h3),
 html body .ac-card h3,
@@ -6334,13 +6345,10 @@ html body .fw-step h3,
 html body .em-card h3,
 html body .faq-aside h3{
   font-size:var(--h3) !important;
-  line-height:1.25 !important;
 }
 /* What-we-do console tabs keep rail size (h3 is semantic only) */
 html body .cn-tab h3{
   font-size:inherit !important;
-  line-height:inherit !important;
-  letter-spacing:inherit !important;
   font-weight:inherit !important;
   margin:0 !important;
   color:inherit !important;
@@ -6351,14 +6359,12 @@ html body .hs-form > .hs-form-title,
 html body .hs-done h3{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
-html body :is(h4){ font-size:var(--h4) !important; line-height:1.3 !important; }
-html body :is(h5){ font-size:var(--h5) !important; line-height:1.35 !important; }
-html body :is(h6){ font-size:var(--h6) !important; line-height:1.35 !important; }
+html body :is(h4){ font-size:var(--h4) !important; }
+html body :is(h5){ font-size:var(--h5) !important; }
+html body :is(h6){ font-size:var(--h6) !important; }
 
 /* ── H2 ≤ 2 lines: give titles enough measure — never shrink the type ─ */
 html body .sec-head{
@@ -6425,13 +6431,11 @@ html body .hs-sub{
   font-size:13px !important;
   line-height:1.45 !important;
 }
-/* Hero form title is a label (p.hs-form-title), not body copy — keep compact */
+/* Hero form title is a label (p.hs-form-title), not body copy — keep compact size */
 html body .hs-form > h3,
 html body .hs-form > .hs-form-title{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
@@ -6458,67 +6462,7 @@ html body .gw-say > p{
   margin-top:var(--lede-gap) !important;
 }
 
-/* ── Section eyebrows: one pill + blue dot ───────────────────────────── */
-.smark,
-.wy-eyebrow,
-.gw-eyebrow,
-.nsr-eyebrow,
-.vs-rule{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  margin-bottom:var(--head-gap) !important;
-  padding:8px 18px !important;
-  border:1px solid var(--border) !important;
-  border-radius:30px !important;
-  background:var(--surface) !important;
-  white-space:nowrap !important;
-  box-shadow:none !important;
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-  line-height:1.2 !important;
-  width:fit-content !important;
-  max-width:100% !important;
-  flex:none !important;
-  justify-content:flex-start !important;
-}
-.smark b,
-.vs-rule b{
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-}
-.smark::before,
-.gw-eyebrow::before,
-.vs-rule::before{
-  content:"" !important;
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  box-shadow:none !important;
-  background-image:none !important;
-}
-.vs-rule::after{
-  content:none !important;
-  display:none !important;
-  width:0 !important;
-  height:0 !important;
-  background:none !important;
-}
-/* Eyebrows never get flanking rules ? pill + blue dot only */
+/* Eyebrow HTML removed sitewide — keep mark helper so process heads stay clean */
 .fw-mark{
   display:inline-flex !important;
   align-items:center !important;
@@ -6533,58 +6477,26 @@ html body .gw-say > p{
   background:none !important;
   margin:0 !important;
 }
-.wy-eyebrow > i,
-.nsr-eyebrow > i{
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  color:transparent !important;
-  overflow:hidden !important;
-}
-.wy-eyebrow > i svg,
-.nsr-eyebrow > i svg{
-  display:none !important;
-}
-.on-dark .smark,
-.on-dark .wy-eyebrow,
-.on-dark .gw-eyebrow,
-.on-dark .nsr-eyebrow,
-.on-dark .vs-rule,
-.ws .smark,
-#fit .smark,
-#stack .smark{
-  background:rgba(255,255,255,.10) !important;
-  border-color:rgba(255,255,255,.20) !important;
-  color:#fff !important;
-}
-.on-dark .smark b,
-.on-dark .vs-rule b,
-.ws .smark b,
-#fit .smark b,
-#stack .smark b{
-  color:#fff !important;
-}
 
-/* ── Alternating grounds helper (pages set --ground / --panel) ──────── */
-.sec[data-ground="tint"],
-.sec.is-tint{
+/* ── Alternating grounds helper (pages set --ground / --panel) ────────
+   Includes .cta OUTER bands (not .cta3 / .wrap photo card). Excludes
+   photo shells #fit / .vs. */
+.sec[data-ground="tint"]:not(.vs):not(#fit),
+.sec.is-tint:not(.vs):not(#fit),
+section.cta[data-ground="tint"]{
   --ground:var(--bg-alt);
   --panel:var(--surface);
   background:var(--ground) !important;
 }
-.sec[data-ground="white"],
-.sec.is-white{
+.sec[data-ground="white"]:not(.vs):not(#fit),
+.sec.is-white:not(.vs):not(#fit),
+section.cta[data-ground="white"]{
   --ground:var(--surface);
   --panel:var(--bg-alt);
   background:var(--ground) !important;
 }
-.sec[data-ground="soft"],
-.sec.is-soft{
+.sec[data-ground="soft"]:not(.vs):not(#fit),
+.sec.is-soft:not(.vs):not(#fit){
   --ground:var(--bg);
   --panel:var(--surface);
   background:var(--ground) !important;
@@ -6600,12 +6512,13 @@ html body .gw-say > p{
    Tokens + component rhythm. Beats page-local clamps via cascade lock.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* Tablet — keep room, avoid desktop-sized empty bands */
+/* Tablet — equal outer section spacing */
 @media (max-width:1023px){
   :root{
-    --sec-y:clamp(52px,6.5vw,72px) !important;
-    --sec-y-tight:clamp(32px,4vw,48px) !important;
-    --sec-y-feat:clamp(60px,7vw,80px) !important;
+    --section-padding-y:64px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:12px !important;
     --lede-gap:14px !important;
     --block-gap:clamp(18px,2.6vw,28px) !important;
@@ -6620,12 +6533,13 @@ html body .gw-say > p{
   }
 }
 
-/* Mobile — compact + premium (avoid 100px+ section padding) */
+/* Mobile — equal outer section spacing */
 @media (max-width:767px){
   :root{
-    --sec-y:clamp(48px,11vw,64px) !important;
-    --sec-y-tight:clamp(28px,7vw,40px) !important;
-    --sec-y-feat:clamp(56px,12vw,72px) !important;
+    --section-padding-y:48px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:10px !important;
     --lede-gap:12px !important;
     --block-gap:clamp(16px,4.5vw,22px) !important;
@@ -6700,12 +6614,20 @@ html body .gw-say > p{
   html body #fit.sec,
   html body #industries.sec,
   html body .sec-pad,
-  html body .sec-pad-feat{
-    padding-block:var(--sec-y) !important;
-  }
-  html body .sec.tb,
-  html body .sec-pad-tight{
-    padding-block:var(--sec-y-tight) !important;
+  html body .sec-pad-feat,
+  html body .sec-pad-tight,
+  html body main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body #main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body section.wx-why,
+  html body section.built,
+  html body section.rpx,
+  html body section.pplx,
+  html body section.wg,
+  html body section.vx,
+  html body section.lp-s,
+  html body #proof-v2{
+    padding-block:var(--section-padding-y) !important;
+    margin-block:0 !important;
   }
 
   /* Hero — content-driven height, keep impact */
@@ -6958,29 +6880,39 @@ html body .gw-say > p{
   }
 }
 
-/* Desktop — preserve breathing room; lock tokens against page media overrides */
+/* Desktop — lock equal 80px outer rhythm against page media overrides */
 @media (min-width:1024px){
   :root{
-    --sec-y:clamp(56px,5.4vw,84px) !important;
-    --sec-y-tight:clamp(36px,4vw,56px) !important;
-    --sec-y-feat:clamp(64px,6vw,88px) !important;
+    --section-padding-y:80px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:clamp(12px,1.2vw,16px) !important;
     --lede-gap:clamp(14px,1.4vw,20px) !important;
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
 
-/* === ZEBRA GROUND LOCK (site) === */
-html body section[data-ground="tint"],
-html body .sec[data-ground="tint"],
-html body .sec.is-tint{
+/* === ZEBRA GROUND LOCK (site) ===
+   white = --surface, tint = --bg-alt (light + dark).
+   Paint CTA OUTER section bands too (FAQ→CTA must not share tint).
+   Keep photo shells (#fit, .vs) and heroes unpainted. Inner .cta3 card unchanged. */
+html body section[data-ground="tint"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="tint"]:not(.vs):not(#fit),
+html body .sec.is-tint:not(.vs):not(#fit),
+html body section.cta[data-ground="tint"],
+html body #contact.cta[data-ground="tint"],
+html body #contact.sec[data-ground="tint"]{
   --ground:var(--bg-alt) !important;
   --panel:var(--surface) !important;
   background:var(--bg-alt) !important;
 }
-html body section[data-ground="white"],
-html body .sec[data-ground="white"],
-html body .sec.is-white{
+html body section[data-ground="white"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="white"]:not(.vs):not(#fit),
+html body .sec.is-white:not(.vs):not(#fit),
+html body section.cta[data-ground="white"],
+html body #contact.cta[data-ground="white"],
+html body #contact.sec[data-ground="white"]{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
@@ -6989,4 +6921,17 @@ html body .sec.is-white{
 /* In-page hash targets clear the fixed nav */
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* ── Global heading letter-spacing + line-height (all pages / breakpoints) ─
+   Must win over page-local negative tracking and tight leading. */
+html body :is(h1, h2, h3, h4, h5, h6),
+html body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html body h1.hs-h1,
+html[data-design] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html[data-design="raw"] body h1.hs-h1{
+  letter-spacing:0.005em !important;
+  line-height:1.2 !important;
 }

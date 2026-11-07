@@ -68,7 +68,7 @@
 #franchise-covers .tm-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
 #franchise-covers .tm-head .smark{margin-bottom:10px;}
-#franchise-covers #model h2{margin:0; font-size:clamp(26px,2.8vw,40px); line-height:1.06; letter-spacing:-.04em; text-transform:none;}
+#franchise-covers #model h2{margin:0; font-size:clamp(26px,2.8vw,40px); text-transform:none;}
 #franchise-covers #model h2 em{font-style:normal; color:var(--brand-text);}
 #franchise-covers .tm-aside{display:flex; align-items:flex-end; justify-content:space-between; gap:clamp(16px,2vw,28px);}
 #franchise-covers .tm-aside p{margin:0; font-size:clamp(13.4px,1.04vw,14.8px); line-height:1.6; color:var(--text-2); max-width:42ch;}
@@ -112,7 +112,7 @@ html[data-theme="dark"] #franchise-covers .tm-card{background:var(--surface); bo
 #franchise-covers .tm-num{font-family:var(--font-display); font-size:12.5px; font-weight:800; letter-spacing:.1em;
   color:var(--brand-text);}
 #franchise-covers #model .tm-card h3{margin:0 0 8px; font-family:var(--font-display); font-size:clamp(17px,1.6vw,21px);
-  font-weight:800; letter-spacing:-.03em; line-height:1.25; color:var(--text); text-transform:none;}
+  font-weight:800; color:var(--text); text-transform:none;}
 #franchise-covers .tm-card p{margin:0 0 14px; font-size:clamp(12.8px,1.02vw,14px); line-height:1.6; color:var(--text-2);
   max-height:11.5em; overflow:hidden;}
 #franchise-covers .tm-chip{display:inline-flex; align-items:center; gap:8px; padding:6px 13px; border-radius:99px;

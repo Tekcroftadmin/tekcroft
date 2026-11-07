@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import meta from "@/lib/sitemap-meta.json";
 import "@/app/sitemap.css";
 import "@/app/footer-lock.css";
@@ -13,10 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function SitemapPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "sitemap-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("sitemap-body.html");
 
   return (
     <>
@@ -27,7 +23,7 @@ export default function SitemapPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
     </>
   );
 }

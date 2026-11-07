@@ -179,8 +179,7 @@ html{font-family:var(--font); -webkit-text-size-adjust:100%;
 body{margin:0; background:var(--bg); color:var(--text); font-size:var(--body); line-height:1.65;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
   transition:background .35s var(--ease), color .35s var(--ease);}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; line-height:1.14;
-  letter-spacing:-0.03em; font-weight:800;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; font-weight:800;}
 h1{font-size:var(--h1);} h3{font-size:var(--h3);}
 h4{font-size:var(--h4);} h5,h6{font-size:var(--h5);}
 p{margin:0;}
@@ -547,7 +546,7 @@ html[data-theme="dark"] .theme-btn .sun{display:none;}
   font-style:normal; flex-shrink:0;}
 .on-dark .tag{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.20); color:#fff;}
 
-h2{font-size:var(--h2); letter-spacing:-0.042em;}
+h2{font-size:var(--h2);}
 h2 em{font-style:normal; color:var(--brand-text);}
 .sec-lede{font-size:var(--body); color:var(--text-2); margin-top:16px; max-width:56ch;}
 .sec-head.mid .sec-lede{margin-left:auto; margin-right:auto;}
@@ -584,7 +583,8 @@ h2 em{font-style:normal; color:var(--brand-text);}
    ============================================================ */
 .hero{position:relative; min-height:100vh; min-height:100svh; height:auto; display:flex;
   flex-direction:column; justify-content:flex-start; color:#fff; overflow:hidden;
-  padding:calc(var(--nav-h) + 62px) 0 20px;
+  --hero-strip-height:72px;
+  padding:calc(var(--nav-h) + 62px) 0 0;}
   /* the floor the slider sits on. If every photo fails to load the hero is
      still a finished dark slab rather than a hole. */
   background:linear-gradient(160deg, var(--n900) 0%, var(--ink-plate) 55%, #050505 100%);}
@@ -646,8 +646,7 @@ h2 em{font-style:normal; color:var(--brand-text);}
    from the lowercase -0.05em, or the letters run into each other; the size
    comes down a step too, because caps read a good deal larger than the
    same words in mixed case and the longest line has to hold one line. */
-.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase;
-  letter-spacing:-0.012em; line-height:1.08; margin:0;}
+.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase; margin:0;}
 .lamp .ln{display:block; overflow:hidden; padding-bottom:.05em;}
 .lamp .ln > span{display:block; transform:translateY(110%);
   transition:transform 1s var(--ease) var(--d,0ms);}
@@ -680,12 +679,18 @@ h2 em{font-style:normal; color:var(--brand-text);}
 .hero-note b{color:#fff; font-weight:600;}
 .hero-note s{text-decoration:none; color:rgba(255,255,255,.35);}
 
-/* client ticker — in-flow under CTAs (homepage .hero + service .hs) */
-.ticker{position:relative; z-index:3; width:100%; margin-top:32px; margin-bottom:0;
-  padding:14px 0 16px; border-top:1px solid rgba(255,255,255,.16);}
+/* client ticker — fixed-height strip at hero bottom (homepage .hero + service .hs).
+   Height/centering owned by --hero-strip-height in service-hero-lock.css. */
+.ticker{position:relative; z-index:3; width:100%; margin-top:0; margin-bottom:0;
+  height:var(--hero-strip-height, 72px); min-height:var(--hero-strip-height, 72px);
+  max-height:var(--hero-strip-height, 72px); padding:0; box-sizing:border-box;
+  border-top:1px solid rgba(255,255,255,.16); display:flex; align-items:center;
+  flex-grow:0; flex-shrink:0; overflow:hidden;}
 .hs > .ticker{z-index:4;}
 .hs:has(> .ticker),
-.hero:has(> .ticker){padding-bottom:20px;}
+.hero:has(> .ticker){padding-bottom:0;}
+.ticker > .wrap,
+.ticker .marq{width:100%; height:100%; display:flex; align-items:center; margin:0; padding:0;}
 .marq{overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
@@ -934,7 +939,7 @@ html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);}
 
 .faq-card h3{grid-area:1 / 2; align-self:center;
-  font-size:var(--h3); letter-spacing:-0.02em; line-height:1.32;}
+  font-size:var(--h3);}
 /* the chevron is an affordance, not a control: the answer is already
    there. It leans toward the reader on hover and that is all it does. */
 .faq-card > .faq-arw{grid-area:1 / 3; align-self:center;
@@ -1141,7 +1146,7 @@ html[data-theme="dark"] .modal-x:hover{background:rgba(255,255,255,.2);
   gap:calc(22 * var(--u)); align-items:center;}
 .modal-card h2,
 .modal-card .modal-title{font-family:var(--font-display); font-size:var(--h2);
-  font-weight:800; text-transform:uppercase; letter-spacing:-0.035em; line-height:1.06;}
+  font-weight:800; text-transform:uppercase;}
 .modal-card h2 em,
 .modal-card .modal-title em{display:block; font-style:normal; color:var(--brand-text);}
 .modal-eyebrow{margin-bottom:calc(16 * var(--u));}
@@ -1399,8 +1404,7 @@ html[data-theme="dark"] .sel select option{background:var(--n825); color:#fff;}
 
 /* ---- the claim ---- */
 .cg-say h2{margin-top:4px; font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.042em;
-  line-height:1.1; text-transform:none; max-width:18ch;}
+  font-weight:800; text-transform:none; max-width:18ch;}
 .cg-say h2 em{font-style:normal; color:var(--brand-text);}
 .cg-say > p{margin-top:18px; font-size:15.2px; line-height:1.7; color:var(--text-2);
   max-width:46ch;}
@@ -1505,8 +1509,7 @@ html[data-theme="dark"] .cn{background:var(--n925); border:1px solid var(--borde
      with it */
   transition:color .26s var(--ease), background .3s var(--ease),
              box-shadow .3s var(--ease);}
-.cn-tab h3{margin:0; font:inherit; font-size:inherit; font-weight:inherit;
-  letter-spacing:inherit; line-height:inherit; color:inherit; text-transform:none;}
+.cn-tab h3{margin:0; font:inherit; font-size:inherit; font-weight:inherit; color:inherit; text-transform:none;}
 .cn-tab:focus-visible{outline:2px solid var(--primary); outline-offset:-3px;}
 
 /* The row itself never changes size now. It used to grow by the overhang
@@ -1618,7 +1621,7 @@ html[data-theme="dark"] .cn-sheet{background:var(--n875);}
    above it for the same job. */
 .cn-lead{
   font-size:var(--body);
-  font-weight:700; letter-spacing:-0.022em; line-height:1.5; color:var(--text);
+  font-weight:700; color:var(--text);
   max-width:38ch;}
 
 .cn-list{margin-top:24px; display:grid; gap:16px;}
@@ -2062,9 +2065,8 @@ html[data-theme="dark"] .wk-deck.wired .wk-card.on .wk-shot{
 .wk-say{padding-top:clamp(14px,1.6vw,20px);}
 .wk-say h3{display:flex; align-items:baseline; gap:12px;
   font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.035em; color:var(--text);}
-.wk-say h3 i{font-style:normal; font-size:var(--h3); font-weight:700;
-  letter-spacing:.1em; color:var(--subtle); font-variant-numeric:tabular-nums;}
+  font-weight:800; color:var(--text);}
+.wk-say h3 i{font-style:normal; font-size:var(--h3); font-weight:700; color:var(--subtle); font-variant-numeric:tabular-nums;}
 .wk-say p{margin-top:10px; font-size:14px; line-height:1.58; color:var(--text-2);
   max-width:46ch;}
 
@@ -2185,7 +2187,7 @@ html[data-theme="dark"] .wk-deck.wired .wk-card.on .wk-shot{
 .wn-panel[hidden]{display:none !important;}
 @keyframes wnIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
 .wn-panel h3{font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.035em; line-height:1.18; max-width:20ch;}
+  font-weight:800; max-width:20ch;}
 .wn-panel > p{margin-top:12px; font-size:var(--body); line-height:1.65; color:var(--text-2);
   max-width:46ch;}
 
@@ -2249,7 +2251,7 @@ html[data-theme="dark"] .wk-deck.wired .wk-card.on .wk-shot{
 .on .wn-bar i{transform:none; transition:transform 1.1s var(--ease) var(--d,0ms);}
 
 /* ---- the claim ---- */
-.wn-say h2{letter-spacing:-0.045em; line-height:1.04;}
+.wn-say h2{}
 .wn-say h2 em{font-style:normal; color:var(--brand-text);}
 .wn-say p{margin-top:20px; font-size:var(--body); line-height:1.7; color:var(--text-2);
   max-width:44ch;}
@@ -2410,7 +2412,7 @@ html[data-theme="dark"] .wl-cell:nth-child(3){background:hsl(var(--brand-h) 100%
   background:var(--primary); flex-shrink:0;}
 
 .cta3 h2{margin-top:14px; font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.045em; line-height:1.08;
+  font-weight:800;
   max-width:18ch; margin-inline:auto;}
 .cta3 > p{margin-top:14px; font-size:var(--lede); line-height:1.6;}
 
@@ -2533,7 +2535,7 @@ html[data-theme="dark"] .wl-cell:nth-child(3){background:hsl(var(--brand-h) 100%
 .bpx-stage:hover .bpx-ico{transform:scale(1.07); background:var(--primary); color:#fff;}
 
 .bpx-stage h3{margin-top:clamp(14px,1.6vw,20px); font-family:var(--font-display);
-  font-weight:700; letter-spacing:-0.03em;
+  font-weight:700;
   color:var(--text);}
 .bpx-rule{display:block; width:22px; height:2px; border-radius:2px; margin-top:10px;
   background:var(--border); transform-origin:50% 50%;
@@ -2875,7 +2877,7 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
 .eg-card.on .eg-ico{background:var(--primary); transform:translateY(-2px);}
 .eg-ico svg{width:46%; height:46%;}
 .eg-card h3{font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.032em; line-height:1.2;}
+  font-weight:800;}
 .eg-card h3 i{font-style:normal; color:var(--subtle); margin-right:9px;
   font-variant-numeric:tabular-nums; transition:color .4s var(--ease);}
 .eg-card.on h3 i{color:var(--brand-text);}
@@ -2982,8 +2984,7 @@ html[data-theme="dark"] .ax{
   text-transform:uppercase; color:var(--brand-text);}
 .ax-badge svg{width:13px; height:13px; flex-shrink:0;}
 .ax-head h2{margin-top:clamp(12px,1.8vh,20px);
-  font-size:var(--h2);
-  letter-spacing:-0.045em; line-height:1.1;}
+  font-size:var(--h2);}
 .ax-head h2 em{font-style:normal; color:var(--brand-text); display:block;}
 .ax-lede{margin:clamp(10px,1.6vh,18px) auto 0; max-width:62ch;
   font-size:clamp(14px,1.15vw,16px); line-height:1.55; color:var(--text-2);}
@@ -3765,7 +3766,7 @@ html[data-theme="dark"] .ax{
 /* ---- the claim ---- */
 .sh-close{margin-top:clamp(26px,3vw,40px); max-width:78ch;}
 .sh-close h3{font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.035em; color:var(--text);}
+  font-weight:800; color:var(--text);}
 .sh-close h3 em{font-style:normal; color:var(--brand-text);}
 .sh-close p{margin-top:12px; font-size:15.5px; line-height:1.68; color:var(--text-2);}
 
@@ -3885,8 +3886,7 @@ html[data-theme="dark"] .ax{
 /* ---- the columns and the socials ----
    These were the card footer's, and the plate borrowed them. The card is
    gone, so they belong to the footer that is left and are named for it. */
-.ft-col h4{font-family:var(--font-display); font-size:var(--h4); font-weight:800;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--text);
+.ft-col h4{font-family:var(--font-display); font-size:var(--h4); font-weight:800; text-transform:uppercase; color:var(--text);
   margin-bottom:16px;}
 .ft-col nav{display:grid; gap:11px;}
 .ft-col nav a{font-size:14.2px; color:var(--text-2);
@@ -3980,9 +3980,12 @@ html[data-theme="dark"] .ft4-brand .logo{--logo:var(--logo-white);}
   /* --sec-y / gutters: site-consistency responsive spacing system */
   .wrap{padding:0 var(--wrap-x, 16px);}
   .nav-right > .btn{display:none;}
-  .hero{height:auto; min-height:0; padding:calc(var(--nav-h) + var(--hero-pad-top, 26px)) 0 var(--hero-pad-bot, 20px);}
+  .hero{height:auto; min-height:0; padding:calc(var(--nav-h) + var(--hero-pad-top, 26px)) 0 0;
+    --hero-strip-height:56px;}
+  .hero:not(:has(> .ticker)){padding-bottom:var(--hero-pad-bot, 20px);}
   .hero-in{margin-block:0;}
-  .ticker{margin-top:28px;}
+  .ticker{margin-top:0; height:var(--hero-strip-height, 56px);
+    min-height:var(--hero-strip-height, 56px); max-height:var(--hero-strip-height, 56px);}
   .hero-actions .btn{flex:1 1 auto;}
   .ledger{grid-template-columns:1fr;}
   .col-them{order:2;}
@@ -4054,7 +4057,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
 @keyframes mm-in{from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:none;}}
 .mm-caret{position:absolute; top:-1px; left:var(--caret-x,50%); transform:translateX(-50%);
   width:46px; height:2px; background:var(--primary); border-radius:2px; z-index:5;}
-.mm h3{font-family:var(--font-display); letter-spacing:-.03em; font-weight:700;}
+.mm h3{font-family:var(--font-display); font-weight:700;}
 
 .mm-hero-grid{display:grid; grid-template-columns:1fr 252px; gap:18px; align-items:stretch;}
 
@@ -4390,8 +4393,11 @@ html[data-theme="dark"] .mm-svc-col .mm-row.is-current .mm-n,html[data-theme="da
 
 #services,
 #industries,
-#ai-ecosystem,
-#contact{ background:var(--bg-alt); }
+#ai-ecosystem{ background:var(--bg-alt); }
+/* CTA outer band follows data-ground zebra (must not stick on tint after FAQ) */
+#contact[data-ground="tint"],
+#contact:not([data-ground]){ background:var(--bg-alt); }
+#contact[data-ground="white"]{ background:var(--surface); }
 
 /* leftover / removed section classes ? keep them in the tint lane */
 .ax,html[data-theme="dark"] .ax,
@@ -5286,7 +5292,6 @@ h1, h2, h3, h4, h5, h6{
 .cta3 h2{
   font-family:var(--font-display);
   font-size:var(--h2);
-  letter-spacing:-0.04em;
 }
 .ct-hero h1{
   font-family:var(--font-display);
@@ -5386,7 +5391,6 @@ h1, h2, h3, h4, h5, h6{
   border-radius:11px !important;
 }
 #process .eg-card h3{
-  line-height:1.18 !important;
 }
 #process .eg-card h3 i{
   display:none !important;
@@ -5440,7 +5444,7 @@ h1, h2, h3, h4, h5, h6{
 
 #why .wy-say{text-align:center;}
 #why .wy-say h2{margin:clamp(16px,1.9vw,24px) auto 0; max-width:20ch;
-  font-size:var(--h2); line-height:1.1; letter-spacing:-0.045em;}
+  font-size:var(--h2);}
 #why .wy-say h2 em{font-style:normal; color:var(--brand-text);}
 
 
@@ -5486,7 +5490,7 @@ h1, h2, h3, h4, h5, h6{
 #why .wy-mark svg{width:50%; height:50%;}
 
 #why .wy-pane h3{font-family:var(--font-display); font-weight:800;
-  font-size:var(--h3); line-height:1.2; letter-spacing:-0.035em;
+  font-size:var(--h3);
   color:var(--text);}
 #why .wy-pane p{margin:clamp(9px,1vw,13px) 0 0;
   font-size:var(--body); line-height:1.7; color:var(--text-2);}
@@ -5591,7 +5595,7 @@ h1, h2, h3, h4, h5, h6{
   border:1px solid hsl(var(--brand-h) 75% 78%); color:var(--brand-text); font-size:12px; font-weight:700;
   letter-spacing:.06em; text-transform:uppercase; box-shadow:0 4px 12px -6px hsl(var(--brand-h) 90% 35% / .28);}
 .spl-badge svg{width:14px; height:14px;}
-#search-split h2{margin:16px 0 0; font-size:var(--h2); line-height:1.1; letter-spacing:-.035em; text-transform:none;}
+#search-split h2{margin:16px 0 0; font-size:var(--h2); text-transform:none;}
 #search-split h2 em{font-style:normal; color:var(--brand-text);}
 .spl-say p{margin:14px 0 0; font-size:clamp(14.8px,1.15vw,15.8px); line-height:1.68; color:var(--text-2); max-width:60ch;}
 
@@ -5849,7 +5853,7 @@ html[data-theme="dark"] #search-split .spl-r em{color:hsl(var(--brand-h) 70% 72%
 .bw-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(24px,3.4vw,56px);
   align-items:center;}
 .bw-say .smark{margin-bottom:12px;}
-#about-v2 h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em; text-transform:none;}
+#about-v2 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #about-v2 h2 em{font-style:normal; color:var(--brand-text);}
 .bw-say p{margin:16px 0 0; font-size:clamp(14.4px,1.12vw,15.8px); line-height:1.7; color:var(--text-2); max-width:56ch;}
 .bw-say .btn{margin-top:clamp(18px,2vw,26px);}
@@ -5857,7 +5861,7 @@ html[data-theme="dark"] #search-split .spl-r em{color:hsl(var(--brand-h) 70% 72%
 .bw-board{padding:clamp(20px,2.2vw,30px); border-radius:22px; background:var(--bg-alt);
   border:1px solid var(--border);}
 #about-v2 .bw-board h3{margin:0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-.025em; color:var(--text); text-transform:none;}
+  font-weight:800; color:var(--text); text-transform:none;}
 .bw-board > p{margin:10px 0 clamp(16px,1.8vw,22px); font-size:clamp(13.4px,1.05vw,14.6px); line-height:1.65;
   color:var(--text-2);}
 .bw-steps{list-style:none; margin:0; padding:0; display:grid; gap:9px;}
@@ -5907,7 +5911,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .bt-top{display:grid; grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr); gap:clamp(24px,3.4vw,56px);
   align-items:center;}
 .bt-say .smark{margin-bottom:12px;}
-#about-v3 h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em; text-transform:none;}
+#about-v3 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #about-v3 h2 em{font-style:normal; color:var(--brand-text);}
 .bt-say p{margin:16px 0 0; font-size:clamp(14.4px,1.12vw,15.8px); line-height:1.7; color:var(--text-2); max-width:56ch;}
 .bt-say .btn{margin-top:clamp(18px,2vw,26px);}
@@ -5927,8 +5931,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .bt-board{margin-top:clamp(26px,3vw,42px); padding:clamp(20px,2.2vw,30px); border-radius:22px;
   background:var(--bg-alt); border:1px solid var(--border);
   display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:clamp(20px,2.6vw,40px); align-items:center;}
-#about-v3 .bt-head h3{margin:0; font-family:var(--font-display); font-size:var(--h3); font-weight:800;
-  letter-spacing:-.025em; color:var(--text); text-transform:none;}
+#about-v3 .bt-head h3{margin:0; font-family:var(--font-display); font-size:var(--h3); font-weight:800; color:var(--text); text-transform:none;}
 .bt-head p{margin:9px 0 0; font-size:clamp(13.2px,1.05vw,14.4px); line-height:1.6; color:var(--text-2);}
 
 .bt-track{position:relative; padding-top:6px;}
@@ -5976,7 +5979,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .bp-grid{display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); gap:clamp(24px,3.4vw,56px);
   align-items:center;}
 .bp-say .smark{margin-bottom:12px;}
-#about-v4 h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em; text-transform:none;}
+#about-v4 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #about-v4 h2 em{font-style:normal; color:var(--brand-text);}
 .bp-say p{margin:16px 0 0; font-size:clamp(14.4px,1.12vw,15.8px); line-height:1.7; color:var(--text-2); max-width:56ch;}
 .bp-say .btn{margin-top:clamp(18px,2vw,26px);}
@@ -5992,7 +5995,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .bp-panel > *{position:relative; z-index:1;}
 .bp-panel-top{display:flex; align-items:center; justify-content:space-between; gap:14px;}
 #about-v4 .bp-panel-top h3{margin:0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-.025em; color:#fff; text-transform:none;}
+  font-weight:800; color:#fff; text-transform:none;}
 .bp-count{display:inline-flex; align-items:baseline; gap:2px; padding:5px 11px; border-radius:99px;
   background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3);}
 .bp-count b{font-family:var(--font-display); font-size:13px; font-weight:800;}
@@ -6057,7 +6060,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .st-grid{display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); gap:clamp(24px,3.4vw,56px);
   align-items:center;}
 .st-say .smark{margin-bottom:12px;}
-#about-v5 h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em; text-transform:none;}
+#about-v5 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #about-v5 h2 em{font-style:normal; color:var(--brand-text);}
 .st-say p{margin:14px 0 0; font-size:clamp(13.8px,1.06vw,15.2px); line-height:1.66; color:var(--text-2); max-width:54ch;}
 .st-say .btn{margin-top:18px;}
@@ -6065,7 +6068,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .st-board{padding:clamp(18px,2vw,26px); border-radius:22px; background:var(--bg-alt); border:1px solid var(--border);}
 .st-board-top{display:flex; align-items:center; justify-content:space-between; gap:12px;}
 #about-v5 .st-board-top h3{margin:0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-.025em; color:var(--text); text-transform:none;}
+  font-weight:800; color:var(--text); text-transform:none;}
 .st-count{display:inline-flex; align-items:baseline; gap:2px; padding:4px 10px; border-radius:99px;
   background:var(--surface); border:1px solid var(--border); color:var(--brand-text);}
 .st-count b{font-family:var(--font-display); font-size:12.5px; font-weight:800;}
@@ -6133,7 +6136,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .cv-head{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(20px,2.4vw,30px);}
 .cv-say .smark{margin-bottom:12px;}
-#about-v6 h2{margin:0; font-size:var(--h2); line-height:1.06; letter-spacing:-.04em; text-transform:none;}
+#about-v6 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #about-v6 h2 em{display:inline; font-style:normal; color:var(--brand-text);}
 .cv-copy p{margin:0 0 12px; font-size:clamp(13.4px,1.04vw,14.8px); line-height:1.62; color:var(--text-2);}
 .cv-copy p + p{margin-bottom:14px;}
@@ -6142,7 +6145,7 @@ html[data-theme="dark"] .bw-ic{background:hsl(var(--brand-h) 40% 18%);}
 .cv-board-top{display:grid; grid-template-columns:minmax(0,auto) minmax(0,1fr); gap:clamp(14px,2vw,30px);
   align-items:baseline; margin-bottom:clamp(14px,1.8vw,22px);}
 #about-v6 .cv-board-top h3{margin:0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-.025em; color:var(--text); text-transform:none; white-space:nowrap;}
+  font-weight:800; color:var(--text); text-transform:none; white-space:nowrap;}
 .cv-board-top p{margin:0; font-size:clamp(12.4px,1vw,13.6px); line-height:1.55; color:var(--text-2);}
 
 /* the ribbon */
@@ -6206,7 +6209,7 @@ html[data-theme="dark"] .cv-ic{background:hsl(var(--brand-h) 40% 18%);}
    ?????????????????????????????????????????????????????????????????????? */
 #industries{padding-block:var(--sec-y); background:var(--surface); overflow:hidden;}
 #industries .sec-head{margin-bottom:clamp(20px,2.4vw,32px);}
-#industries h2{text-transform:none; letter-spacing:-.035em;}
+#industries h2{text-transform:none;}
 #industries h2 em{font-style:normal; color:var(--brand-text);}
 
 .iw-lanes{display:grid; gap:clamp(10px,1.2vw,14px);
@@ -6251,7 +6254,7 @@ html[data-theme="dark"] .iw-chip i{background:hsl(var(--brand-h) 40% 18%);}
    ?????????????????????????????????????????????????????????????????????? */
 #industries-v2{padding-block:var(--sec-y); background:var(--surface);}
 #industries-v2 .sec-head{margin-bottom:clamp(20px,2.4vw,30px);}
-#industries-v2 h2{text-transform:none; letter-spacing:-.035em;}
+#industries-v2 h2{text-transform:none;}
 #industries-v2 h2 em{font-style:normal; color:var(--brand-text);}
 #industries-v2 .sec-lede b{color:var(--brand-text); font-weight:700;}
 
@@ -6275,7 +6278,7 @@ html[data-theme="dark"] .ig-ic{background:hsl(var(--brand-h) 40% 18%);}
 .ig-ic svg{width:50%; height:50%;}
 .ig-card:hover .ig-ic{background:var(--primary); color:#fff;}
 #industries-v2 .ig-card h3{margin:0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:700; letter-spacing:-.02em; line-height:1.3; color:var(--text); text-transform:none;}
+  font-weight:700; color:var(--text); text-transform:none;}
 
 .ig-foot{display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center;
   gap:clamp(14px,2vw,28px); margin-top:clamp(18px,2.2vw,28px); padding:clamp(16px,1.8vw,24px);
@@ -6318,7 +6321,7 @@ html[data-theme="dark"] .ig-ic{background:hsl(var(--brand-h) 40% 18%);}
   align-items:center;}
 .ix-say{min-width:0;}
 .ix-say .smark{margin-bottom:12px;}
-#industries h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em;
+#industries h2{margin:0; font-size:var(--h2);
   text-transform:none;}
 #industries h2 em{font-style:normal; color:var(--brand-text);}
 .ix-say p{margin:14px 0 0; font-size:clamp(13.6px,1.05vw,15px); line-height:1.65; color:var(--text-2); max-width:44ch;}
@@ -6413,7 +6416,7 @@ html[data-theme="dark"] .ix-chip i{background:hsl(var(--brand-h) 40% 18%);}
 .iy-grid{display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(24px,3.2vw,52px);
   align-items:center;}
 .iy-say .smark{margin-bottom:12px;}
-#industries-v4 h2{margin:0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em; text-transform:none;}
+#industries-v4 h2{margin:0; font-size:var(--h2); text-transform:none;}
 #industries-v4 h2 em{font-style:normal; color:var(--brand-text);}
 .iy-say p{margin:14px 0 0; font-size:clamp(13.6px,1.05vw,15px); line-height:1.65; color:var(--text-2); max-width:44ch;}
 .iy-meta{display:flex; align-items:center; gap:clamp(14px,1.8vw,24px); margin-top:clamp(16px,2vw,24px); flex-wrap:wrap;}
@@ -6479,7 +6482,7 @@ html[data-theme="dark"] .iy-card i{background:hsl(var(--brand-h) 40% 18%);}
   box-shadow:0 4px 12px -6px hsl(var(--brand-h) 90% 35% / .3);}
 .nsr-eyebrow i{display:grid; place-items:center; width:15px; height:15px;}
 .nsr-eyebrow svg{width:15px; height:15px;}
-#ai-ecosystem h2{margin:16px 0 0; font-size:var(--h2); line-height:1.08; letter-spacing:-.04em;
+#ai-ecosystem h2{margin:16px 0 0; font-size:var(--h2);
   text-transform:none; color:var(--text);}
 #ai-ecosystem h2 em{display:block; font-style:normal; color:var(--brand-text);}
 .nsr-lede{margin:16px 0 0; max-width:56ch; font-size:clamp(14.8px,1.15vw,16px); line-height:1.7; color:var(--text-2);}
@@ -7078,8 +7081,10 @@ html[data-theme="dark"] .iw-box{background:hsl(var(--brand-h) 45% 12%);}
 
 #services,
 #industries,
-#ai-ecosystem,
-#contact{ background:var(--bg-alt); }
+#ai-ecosystem{ background:var(--bg-alt); }
+#contact[data-ground="tint"],
+#contact:not([data-ground]){ background:var(--bg-alt); }
+#contact[data-ground="white"]{ background:var(--surface); }
 
 /* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
 /* ══════════════════════════════════════════════════════════════════════
@@ -7110,10 +7115,11 @@ html[data-theme="dark"] .iw-box{background:hsl(var(--brand-h) 45% 12%);}
   --lede:16px;
   --body-lh:1.7;
 
-  /* Spacing scale — desktop defaults; mobile/tablet override below */
-  --sec-y:clamp(56px,5.4vw,84px);          /* standard sections */
-  --sec-y-tight:clamp(36px,4vw,56px);      /* proof strips / compact bands */
-  --sec-y-feat:clamp(64px,6vw,88px);       /* large / featured bands */
+  /* Spacing scale — equal outer section rhythm (exact values per breakpoint) */
+  --section-padding-y:80px;                /* desktop ≥1024 — source of truth */
+  --sec-y:var(--section-padding-y);        /* alias used by existing rules */
+  --sec-y-tight:var(--section-padding-y);  /* same outer rhythm (no specials) */
+  --sec-y-feat:var(--section-padding-y);
   --head-gap:clamp(12px,1.2vw,16px);       /* eyebrow → title */
   --lede-gap:clamp(14px,1.4vw,20px);       /* title → lede */
   --block-gap:clamp(22px,2.4vw,36px);      /* head block → content */
@@ -7135,9 +7141,22 @@ html[data-theme="dark"] .iw-box{background:hsl(var(--brand-h) 45% 12%);}
 .stack-cards{gap:var(--card-gap);}
 .stack-grid{gap:var(--grid-gap);}
 
-/* ── Equal vertical padding on every content section ───────────────── */
+/* ── Equal vertical padding on every content section ─────────────────
+   One shared --section-padding-y. Heroes / footer keep their own spacing. */
+main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#tekcroft-root main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
 .sec,
 section.sec,
+section.wx-why,
+section.built,
+section.rpx,
+section.pplx,
+section.wg,
+section.vx,
+section.lp-s,
+section.sg,
+section.book,
 .sec.acv,
 .sec.ax,
 .sec.bl-sec,
@@ -7185,16 +7204,20 @@ section.sec,
 #apart.sec,
 #clients.sec,
 #fit.sec,
-#industries.sec{
-  padding-block:var(--sec-y) !important;
+#industries.sec,
+#proof-v2.sec,
+#proof-v2{
+  padding-block:var(--section-padding-y) !important;
+  margin-block:0 !important;
 }
 
-/* Under-hero stats strip — rhythm owned by stats-strip.css (#proof-v2) */
-/* Legacy #ai.tb (different section) stays tighter */
-.sec.tb,
-html body #ai.tb,
-html body #ai.tb.sec{
-  padding-block:var(--sec-y-tight) !important;
+/* Heroes keep their own vertical rhythm */
+section.hs,
+section.ct-hero,
+section#hero-1,
+header.hero,
+#top.hero{
+  /* do not apply --section-padding-y */
 }
 
 /* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
@@ -7209,11 +7232,11 @@ html body .lamp h1{
 }
 
 /* ── Headings: one size per level — beat page-local clamps ──────────── */
+/* letter-spacing + line-height owned by the global lock at file end */
 html body :is(h1, .hs-h1, .ct-hero h1),
 html body .hs .hs-h1{
   font-size:var(--h1) !important;
-  line-height:1.08 !important;
-  /* Negative letter-spacing on display type leaves an optical left gap — pull flush */
+  /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
 html body :is(h2),
@@ -7255,8 +7278,6 @@ html body #duplicate-v2 h2 span,
 html body #duplicate-v2 h2 em,
 html body #duplicate-v2 h2 small{
   font-size:var(--h2) !important;
-  line-height:1.12 !important;
-  letter-spacing:-0.04em !important;
 }
 html body :is(h3),
 html body .ac-card h3,
@@ -7273,13 +7294,10 @@ html body .fw-step h3,
 html body .em-card h3,
 html body .faq-aside h3{
   font-size:var(--h3) !important;
-  line-height:1.25 !important;
 }
 /* What-we-do console tabs keep rail size (h3 is semantic only) */
 html body .cn-tab h3{
   font-size:inherit !important;
-  line-height:inherit !important;
-  letter-spacing:inherit !important;
   font-weight:inherit !important;
   margin:0 !important;
   color:inherit !important;
@@ -7290,14 +7308,12 @@ html body .hs-form > .hs-form-title,
 html body .hs-done h3{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
-html body :is(h4){ font-size:var(--h4) !important; line-height:1.3 !important; }
-html body :is(h5){ font-size:var(--h5) !important; line-height:1.35 !important; }
-html body :is(h6){ font-size:var(--h6) !important; line-height:1.35 !important; }
+html body :is(h4){ font-size:var(--h4) !important; }
+html body :is(h5){ font-size:var(--h5) !important; }
+html body :is(h6){ font-size:var(--h6) !important; }
 
 /* ── H2 ≤ 2 lines: give titles enough measure — never shrink the type ─ */
 html body .sec-head{
@@ -7364,13 +7380,11 @@ html body .hs-sub{
   font-size:13px !important;
   line-height:1.45 !important;
 }
-/* Hero form title is a label (p.hs-form-title), not body copy — keep compact */
+/* Hero form title is a label (p.hs-form-title), not body copy — keep compact size */
 html body .hs-form > h3,
 html body .hs-form > .hs-form-title{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
@@ -7397,67 +7411,7 @@ html body .gw-say > p{
   margin-top:var(--lede-gap) !important;
 }
 
-/* ── Section eyebrows: one pill + blue dot ───────────────────────────── */
-.smark,
-.wy-eyebrow,
-.gw-eyebrow,
-.nsr-eyebrow,
-.vs-rule{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  margin-bottom:var(--head-gap) !important;
-  padding:8px 18px !important;
-  border:1px solid var(--border) !important;
-  border-radius:30px !important;
-  background:var(--surface) !important;
-  white-space:nowrap !important;
-  box-shadow:none !important;
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-  line-height:1.2 !important;
-  width:fit-content !important;
-  max-width:100% !important;
-  flex:none !important;
-  justify-content:flex-start !important;
-}
-.smark b,
-.vs-rule b{
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-}
-.smark::before,
-.gw-eyebrow::before,
-.vs-rule::before{
-  content:"" !important;
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  box-shadow:none !important;
-  background-image:none !important;
-}
-.vs-rule::after{
-  content:none !important;
-  display:none !important;
-  width:0 !important;
-  height:0 !important;
-  background:none !important;
-}
-/* Eyebrows never get flanking rules ? pill + blue dot only */
+/* Eyebrow HTML removed sitewide — keep mark helper so process heads stay clean */
 .fw-mark{
   display:inline-flex !important;
   align-items:center !important;
@@ -7472,58 +7426,26 @@ html body .gw-say > p{
   background:none !important;
   margin:0 !important;
 }
-.wy-eyebrow > i,
-.nsr-eyebrow > i{
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  color:transparent !important;
-  overflow:hidden !important;
-}
-.wy-eyebrow > i svg,
-.nsr-eyebrow > i svg{
-  display:none !important;
-}
-.on-dark .smark,
-.on-dark .wy-eyebrow,
-.on-dark .gw-eyebrow,
-.on-dark .nsr-eyebrow,
-.on-dark .vs-rule,
-.ws .smark,
-#fit .smark,
-#stack .smark{
-  background:rgba(255,255,255,.10) !important;
-  border-color:rgba(255,255,255,.20) !important;
-  color:#fff !important;
-}
-.on-dark .smark b,
-.on-dark .vs-rule b,
-.ws .smark b,
-#fit .smark b,
-#stack .smark b{
-  color:#fff !important;
-}
 
-/* ── Alternating grounds helper (pages set --ground / --panel) ──────── */
-.sec[data-ground="tint"],
-.sec.is-tint{
+/* ── Alternating grounds helper (pages set --ground / --panel) ────────
+   Includes .cta OUTER bands (not .cta3 / .wrap photo card). Excludes
+   photo shells #fit / .vs. */
+.sec[data-ground="tint"]:not(.vs):not(#fit),
+.sec.is-tint:not(.vs):not(#fit),
+section.cta[data-ground="tint"]{
   --ground:var(--bg-alt);
   --panel:var(--surface);
   background:var(--ground) !important;
 }
-.sec[data-ground="white"],
-.sec.is-white{
+.sec[data-ground="white"]:not(.vs):not(#fit),
+.sec.is-white:not(.vs):not(#fit),
+section.cta[data-ground="white"]{
   --ground:var(--surface);
   --panel:var(--bg-alt);
   background:var(--ground) !important;
 }
-.sec[data-ground="soft"],
-.sec.is-soft{
+.sec[data-ground="soft"]:not(.vs):not(#fit),
+.sec.is-soft:not(.vs):not(#fit){
   --ground:var(--bg);
   --panel:var(--surface);
   background:var(--ground) !important;
@@ -7539,12 +7461,13 @@ html body .gw-say > p{
    Tokens + component rhythm. Beats page-local clamps via cascade lock.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* Tablet — keep room, avoid desktop-sized empty bands */
+/* Tablet — equal outer section spacing */
 @media (max-width:1023px){
   :root{
-    --sec-y:clamp(52px,6.5vw,72px) !important;
-    --sec-y-tight:clamp(32px,4vw,48px) !important;
-    --sec-y-feat:clamp(60px,7vw,80px) !important;
+    --section-padding-y:64px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:12px !important;
     --lede-gap:14px !important;
     --block-gap:clamp(18px,2.6vw,28px) !important;
@@ -7556,15 +7479,21 @@ html body .gw-say > p{
     --cta-pad-y:clamp(26px,4vw,40px) !important;
     --hero-pad-top:clamp(26px,3vw,48px) !important;
     --hero-pad-bot:20px !important;
+    --hero-strip-height:64px;
+  }
+  .hero,
+  #hero-1.hs{
+    --hero-strip-height:64px;
   }
 }
 
-/* Mobile — compact + premium (avoid 100px+ section padding) */
+/* Mobile — equal outer section spacing */
 @media (max-width:767px){
   :root{
-    --sec-y:clamp(48px,11vw,64px) !important;
-    --sec-y-tight:clamp(28px,7vw,40px) !important;
-    --sec-y-feat:clamp(56px,12vw,72px) !important;
+    --section-padding-y:48px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:10px !important;
     --lede-gap:12px !important;
     --block-gap:clamp(16px,4.5vw,22px) !important;
@@ -7576,7 +7505,12 @@ html body .gw-say > p{
     --cta-pad-y:clamp(24px,6vw,36px) !important;
     --hero-pad-top:26px !important;
     --hero-pad-bot:20px !important;
+    --hero-strip-height:56px;
     --body-lh:1.65 !important;
+  }
+  .hero,
+  #hero-1.hs{
+    --hero-strip-height:56px;
   }
 
   /* Horizontal gutters */
@@ -7639,12 +7573,20 @@ html body .gw-say > p{
   html body #fit.sec,
   html body #industries.sec,
   html body .sec-pad,
-  html body .sec-pad-feat{
-    padding-block:var(--sec-y) !important;
-  }
-  html body .sec.tb,
-  html body .sec-pad-tight{
-    padding-block:var(--sec-y-tight) !important;
+  html body .sec-pad-feat,
+  html body .sec-pad-tight,
+  html body main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body #main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body section.wx-why,
+  html body section.built,
+  html body section.rpx,
+  html body section.pplx,
+  html body section.wg,
+  html body section.vx,
+  html body section.lp-s,
+  html body #proof-v2{
+    padding-block:var(--section-padding-y) !important;
+    margin-block:0 !important;
   }
 
   /* Hero — content-driven height, keep impact */
@@ -7654,6 +7596,16 @@ html body .gw-say > p{
     min-height:0 !important;
     padding-top:calc(var(--nav-h, 64px) + var(--hero-pad-top)) !important;
     padding-bottom:var(--hero-pad-bot) !important;
+  }
+  /* Logo strip is the hero floor — no padding under .ticker / .hs-logos */
+  html body .hs:has(> .ticker),
+  html body .hs:has(> .hs-logos),
+  html body .hero:has(> .ticker),
+  html body #hero-1.hs:has(> .ticker),
+  html body #hero-1.hs:has(> .hs-logos),
+  html body #top.hero:has(> .ticker),
+  html body header.hero:has(> .ticker){
+    padding-bottom:0 !important;
   }
   /* Full-height photo + veil behind entire mobile hero (not just the H1) */
   html body .hs-bg,
@@ -7897,29 +7849,39 @@ html body .gw-say > p{
   }
 }
 
-/* Desktop — preserve breathing room; lock tokens against page media overrides */
+/* Desktop — lock equal 80px outer rhythm against page media overrides */
 @media (min-width:1024px){
   :root{
-    --sec-y:clamp(56px,5.4vw,84px) !important;
-    --sec-y-tight:clamp(36px,4vw,56px) !important;
-    --sec-y-feat:clamp(64px,6vw,88px) !important;
+    --section-padding-y:80px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:clamp(12px,1.2vw,16px) !important;
     --lede-gap:clamp(14px,1.4vw,20px) !important;
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
 
-/* === ZEBRA GROUND LOCK (site) === */
-html body section[data-ground="tint"],
-html body .sec[data-ground="tint"],
-html body .sec.is-tint{
+/* === ZEBRA GROUND LOCK (site) ===
+   white = --surface, tint = --bg-alt (light + dark).
+   Paint CTA OUTER section bands too (FAQ→CTA must not share tint).
+   Keep photo shells (#fit, .vs) and heroes unpainted. Inner .cta3 card unchanged. */
+html body section[data-ground="tint"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="tint"]:not(.vs):not(#fit),
+html body .sec.is-tint:not(.vs):not(#fit),
+html body section.cta[data-ground="tint"],
+html body #contact.cta[data-ground="tint"],
+html body #contact.sec[data-ground="tint"]{
   --ground:var(--bg-alt) !important;
   --panel:var(--surface) !important;
   background:var(--bg-alt) !important;
 }
-html body section[data-ground="white"],
-html body .sec[data-ground="white"],
-html body .sec.is-white{
+html body section[data-ground="white"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="white"]:not(.vs):not(#fit),
+html body .sec.is-white:not(.vs):not(#fit),
+html body section.cta[data-ground="white"],
+html body #contact.cta[data-ground="white"],
+html body #contact.sec[data-ground="white"]{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
@@ -7928,4 +7890,17 @@ html body .sec.is-white{
 /* In-page hash targets clear the fixed nav */
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* ── Global heading letter-spacing + line-height (all pages / breakpoints) ─
+   Must win over page-local negative tracking and tight leading. */
+html body :is(h1, h2, h3, h4, h5, h6),
+html body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html body h1.hs-h1,
+html[data-design] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html[data-design="raw"] body h1.hs-h1{
+  letter-spacing:0.005em !important;
+  line-height:1.2 !important;
 }

@@ -70,8 +70,10 @@ async function hashFile(name) {
 const names = [
   "tekcroft-main.js",
   "tekcroft-home-defer.js",
+  "tekcroft-home-invite.js",
   "tekcroft-mm.js",
   "tekcroft-vs-halo.js",
+  "tekcroft-pf-marquee.js",
   "tekcroft-ecommerce-seo.js",
   "tekcroft-seo-services.js",
   "tekcroft-seo-audit-services.js",
@@ -100,8 +102,10 @@ const names = [
 const keys = [
   "main",
   "homeDefer",
+  "homeInvite",
   "mm",
   "vsHalo",
+  "pfMarquee",
   "ecommerceSeo",
   "seoServices",
   "seoAuditServices",
@@ -149,8 +153,9 @@ if (fs.existsSync(localSeoCss)) {
 const tekcroftCss = path.join(ROOT, "app", "tekcroft.css");
 if (fs.existsSync(tekcroftCss)) {
   const lines = fs.readFileSync(tekcroftCss, "utf8").split(/\n/);
-  /* Lines 0–719 = above-the-fold (tokens/nav/hero); remainder deferred */
-  const CRITICAL_END = 720;
+  /* Lines 0–726 = above-the-fold (tokens/nav/hero + dark #proof rules).
+     Must end on a closed rule — cutting mid-block drops stats-strip.css. */
+  const CRITICAL_END = 727;
   let critical = lines.slice(0, CRITICAL_END).join("\n") + "\n";
   for (const extra of ["stats-strip.css", "nav-pill.css", "perf.css"]) {
     const p = path.join(ROOT, "app", extra);

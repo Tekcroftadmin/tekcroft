@@ -41,7 +41,7 @@
     var __h = (__bar ? __bar.offsetHeight : 64)
       + (parseFloat(__cs.paddingTop) || 0)
       + (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
   }
   }
   navHeight();
@@ -418,26 +418,6 @@
     else narrow.addListener(swap);
   });
 })();
-
-
-/* === ft-script === */
-
-/* The footer's run of service names. One row written twice, because the
-   slide travels exactly half the track — so the copy arrives where the
-   original left and the loop has no seam. */
-(function(){
-  "use strict";
-  var el = document.getElementById("ftMarq");
-  if (!el) return;
-  var row = ["SEO","On-page SEO","Title tags","Meta descriptions",
-             "Content optimization","Internal linking","Schema markup",
-             "Keyword mapping","Heading structure","Technical SEO",
-             "Analytics","Reporting"]
-    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
-  el.innerHTML = row + row;
-})();
-
-
 /* === faq-script (hardened) === */
 (function(){
   function panelFor(btn){
@@ -831,7 +811,7 @@
   if (!track) return;
 
   /* the breakpoint the stylesheet stacks at, asked the same way here */
-  var running = window.matchMedia("(min-width: 901px)");
+  var running = window.matchMedia("(min-width: 768px)");
 
   /* The list is snapshotted before anything is appended. track.children
      is a live collection: appending one of its members back into the

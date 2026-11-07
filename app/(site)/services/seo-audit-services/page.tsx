@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { seoAuditServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/seo-audit-services-meta.json";
 import lcp from "@/lib/seo-audit-services-lcp.json";
@@ -34,10 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default function SeoAuditServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "seo-audit-services-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("seo-audit-services-body.html");
 
   return (
     <>
@@ -57,8 +53,8 @@ export default function SeoAuditServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.seoAuditServices} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.seoAuditServices} strategy="lazyOnload" />
       <JsonLd data={seoAuditServicesSchema} />
     </>
   );

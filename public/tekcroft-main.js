@@ -95,7 +95,10 @@
       var __h = (__bar ? __bar.offsetHeight : 64)
         + (parseFloat(__cs.paddingTop) || 0)
         + (parseFloat(__cs.paddingBottom) || 0);
-      document.documentElement.style.setProperty("--nav-h", Math.round(__h) + "px");
+      var __px = Math.round(__h) + "px";
+      document.documentElement.style.setProperty("--nav-h", __px);
+      /* Unshadowed twin for service heroes — page CSS often re-pins --nav-h:74px. */
+      document.documentElement.style.setProperty("--nav-h-live", __px);
     });
   }
   navHeight();
@@ -207,21 +210,16 @@
      travels exactly one row's width, so the copy arrives where the original
      left. Two tracks now use that, so it is written once. */
   function fillMarq(el, items, sep){
-    if (!el || el.childElementCount > 0) return; /* SSR/static markup already sized */
+    if (!el) return;
     var row = items.map(function(t){
       return "<span>" + t + "</span>" + (sep ? "<i></i>" : "");
     }).join("");
-    el.innerHTML = row + row;
+    /* 3 sets per half so half width exceeds ultra-wide viewports; loop -50% */
+    var half = row + row + row;
+    el.innerHTML = half + half;
   }
   fillMarq($("#marqTrack"), CLIENTS, false);
-  fillMarq($("#ftMarq"), [
-    "SEO", "AI development", "Automation", "Web development",
-    "Software development", "Digital marketing", "Local SEO",
-    "Answer engine visibility", "Paid search", "Content strategy",
-    "Conversion design", "Analytics"
-  ], true);
-
-  /* ---------------- reveal on scroll ---------------- */
+/* ---------------- reveal on scroll ---------------- */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
@@ -261,7 +259,7 @@
     navPlate();                       /* now that scrolling is allowed again */
     hero.classList.add("play");
     startReveals();
-    armAutoInvite();
+    /* Auto invite moved to tekcroft-home-invite.js (40% scroll, soft open) */
   }
 
   function skipBoot(){
@@ -271,7 +269,9 @@
 
   /* Boot logo intro — restored original fly-to-nav sequence.
      PERF: do not wait on webfonts; start on next frame; failsafe timeout. */
-  if (!boot || calm){
+  /* Soft-nav re-injects #boot without re-running this file — SiteShell marks
+     it .done so we must not restart the curtain (black screen until refresh). */
+  if (!boot || calm || boot.classList.contains("done")){
     skipBoot();
   } else {
     document.body.classList.add("booting");
@@ -498,7 +498,7 @@
      Opening animates opacity and transform only.
   --------------------------------------------------------------- */
   var modal   = $("#modal"),
-      frame   = $(".modal-frame", modal),
+      frame   = modal ? $(".modal-frame", modal) : null,
       lastFocus = null, closeTimer, lastTrigger = null;
 
   function lockScroll(on){
@@ -509,16 +509,22 @@
       var gap = window.innerWidth - document.documentElement.clientWidth;
       var pad = gap > 0 ? gap + "px" : "";
       document.body.style.paddingRight = pad;
-      nav.style.paddingRight = pad;
+      if (nav) nav.style.paddingRight = pad;
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.paddingRight = "";
-      nav.style.paddingRight = "";
+      if (nav) nav.style.paddingRight = "";
       document.body.style.overflow = "";
     }
   }
 
   var modalSeen = false;
+
+  /* Homepage invite markup is lazy-mounted by tekcroft-home-invite.js.
+     Skip the legacy fly-from-button auto-invite when #modal is absent. */
+  if (!modal) {
+    /* no-op: click handlers / auto invite for #modal are unused on home now */
+  } else {
 
   /* ---------------- where the dialog flies from ----------------
      The closed state of the frame is not a fixed offset: it is the trigger
@@ -772,6 +778,9 @@
     });
     grade(false);
   }
+
+  } /* end legacy #modal block */
+
   /* ---------------- services: the console ----------------
      One rail, one panel. The cards share a grid cell and cross over in
      place, so switching cannot change the height of the block.

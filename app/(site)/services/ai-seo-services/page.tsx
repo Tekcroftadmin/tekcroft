@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { aiSeoServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/ai-seo-meta.json";
 import lcp from "@/lib/ai-seo-lcp.json";
@@ -34,10 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default function AiSeoServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "ai-seo-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("ai-seo-body.html");
 
   return (
     <>
@@ -57,8 +53,8 @@ export default function AiSeoServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.aiSeo} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.aiSeo} strategy="lazyOnload" />
       <JsonLd data={aiSeoServicesSchema} />
     </>
   );

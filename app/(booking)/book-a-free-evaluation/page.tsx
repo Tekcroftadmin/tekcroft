@@ -37,7 +37,7 @@ export default function BookAFreeEvaluationPage() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      <Script src={assets.bookAFreeEvaluation} strategy="afterInteractive" />
+      <Script src={assets.bookAFreeEvaluation} strategy="lazyOnload" />
     </>
   );
 }

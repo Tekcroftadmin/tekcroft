@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { aiAgentDevelopmentServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/ai-agent-development-meta.json";
 import lcp from "@/lib/ai-agent-development-lcp.json";
@@ -38,10 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function AiAgentDevelopmentServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "ai-agent-development-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("ai-agent-development-body.html");
 
   return (
     <>
@@ -61,8 +57,8 @@ export default function AiAgentDevelopmentServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.aiAgentDevelopment} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.aiAgentDevelopment} strategy="lazyOnload" />
       <JsonLd data={aiAgentDevelopmentServicesSchema} />
     </>
   );

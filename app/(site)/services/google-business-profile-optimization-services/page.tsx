@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { googleBusinessProfileOptimizationServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/google-business-profile-optimization-meta.json";
 import lcp from "@/lib/google-business-profile-optimization-lcp.json";
@@ -38,17 +37,10 @@ export const metadata: Metadata = {
 };
 
 export default function GoogleBusinessProfileOptimizationPage() {
-  // Strip UTF-8 BOM — otherwise a U+FEFF text node leaves a white gap above the hero.
-  const html = fs
-    .readFileSync(
-      path.join(
-        process.cwd(),
-        "lib",
-        "google-business-profile-optimization-body.html"
-      ),
-      "utf8"
-    )
-    .replace(/^\uFEFF/, "");
+  // BOM stripped inside preparePageBody / readPreparedBody.
+  const html = readPreparedBody(
+    "google-business-profile-optimization-body.html"
+  );
 
   return (
     <>
@@ -68,10 +60,10 @@ export default function GoogleBusinessProfileOptimizationPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       <Script
         src={assets.googleBusinessProfileOptimization}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <JsonLd data={googleBusinessProfileOptimizationServicesSchema} />
     </>

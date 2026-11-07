@@ -1,0 +1,312 @@
+/* Shared lock for PLATFORM sections only (.sec.pf#platforms with .pf-orbit).
+   Default (Technical SEO): centered column head + orbit.
+   Opt-out (.pf-split, Ecommerce SEO): keep page 2-column text + orbit
+   (same layout as GBP / #industries). Marquee + sticky cards still apply.
+   Industries / other .sec.pf#industries sections keep their own page CSS.
+   Never target those here. */
+
+/* —— PART 0: contain wide marquee so it cannot widen / shift the section —— */
+html body .sec.pf#platforms:has(.pf-orbit){
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+  overflow-x:clip !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit) .wrap,
+html body .sec.pf#platforms:has(.pf-orbit) .pf-in{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  overflow-x:clip !important;
+  margin-inline:auto !important;
+}
+
+/* —— PART 1: centered head + orbit (NOT .pf-split — those keep page 2-col) —— */
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:48px !important;
+  text-align:center !important;
+  grid-template-columns:none !important;
+  grid-template-rows:none !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin-inline:0 !important;
+  transform:none !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head .sec-head{
+  width:100% !important;
+  max-width:46rem !important;
+  margin-inline:auto !important;
+  text-align:center !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head .sec-head h2,
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head .sec-lede{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  max-width:100% !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head .sec-lede{
+  margin-top:20px !important;
+  max-width:42rem !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-orbit,
+html body .sec.pf#platforms:has(.pf-orbit):not(.pf-split) .pf-head .sec-head + .pf-orbit{
+  width:min(100%,440px) !important;
+  max-width:440px !important;
+  margin:0 auto !important;
+  height:auto !important;
+  aspect-ratio:5 / 4 !important;
+  flex-shrink:0 !important;
+  overflow:clip !important;
+  transform:none !important;
+}
+
+/* Split (Ecommerce): reassert GBP-style 2-column head; kill site --block-gap
+   on .sec-head + .pf-orbit so the grid gap alone controls spacing. */
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,.82fr) !important;
+  gap:clamp(30px,4%,64px) !important;
+  align-items:center !important;
+  text-align:start !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin-inline:0 !important;
+  transform:none !important;
+}
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-head{
+  width:auto !important;
+  max-width:none !important;
+  margin-inline:0 !important;
+  text-align:start !important;
+}
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-head h2,
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-lede{
+  text-align:start !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-lede{
+  max-width:44ch !important;
+}
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-orbit,
+html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-head + .pf-orbit{
+  width:auto !important;
+  max-width:none !important;
+  margin:0 !important;
+  height:auto !important;
+  aspect-ratio:5 / 4 !important;
+  min-width:0 !important;
+  overflow:clip !important;
+  transform:none !important;
+}
+@media (max-width:900px){
+  html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:clamp(28px,4vw,40px) !important;
+  }
+  html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-lede{
+    max-width:none !important;
+  }
+  html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-orbit,
+  html body .sec.pf#platforms.pf-split:has(.pf-orbit) .pf-head .sec-head + .pf-orbit{
+    width:100% !important;
+    max-width:440px !important;
+    margin:0 auto !important;
+  }
+}
+
+html body .sec.pf#platforms:has(.pf-orbit) .pf-carousel{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  overflow-x:clip !important;
+  margin-top:34px !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit) .pf-rail{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit) .pf-cta{
+  width:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  text-align:center !important;
+  margin-top:32px !important;
+}
+html body .sec.pf#platforms:has(.pf-orbit) .pf-ask{
+  text-align:center !important;
+}
+
+/* —— PART 2: desktop / tablet / laptop marquee (≥768) —— */
+@keyframes pfSlideLock{
+  to{ transform:translateX(calc(-50% - var(--pf-gap, 20px) / 2)); }
+}
+
+@media (min-width:768px){
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail{
+    position:relative !important;
+    overflow-x:clip !important;
+    overflow-y:hidden !important;
+    /* No horizontal negative margin — that widened the section past the viewport */
+    padding:14px 0 22px !important;
+    margin:0 !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent) !important;
+            mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent) !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track{
+    display:flex !important;
+    flex-direction:row !important;
+    width:max-content !important;
+    max-width:none !important;
+    gap:var(--pf-gap, clamp(16px,1.7vw,24px)) !important;
+    animation:pfSlideLock 44s linear infinite !important;
+    transform:none;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail:hover .pf-track,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail:focus-within .pf-track{
+    animation-play-state:paused !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card,
+  html body .sec.pf#platforms:has(.pf-orbit) article.pf-card,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track > .pf-card{
+    position:relative !important;
+    top:auto !important;
+    z-index:auto !important;
+    margin-bottom:0 !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track [data-copy]{
+    display:flex !important;
+  }
+}
+
+@media (min-width:768px) and (prefers-reduced-motion:reduce){
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track{
+    animation:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail{
+    overflow-x:auto !important;
+    scroll-snap-type:x mandatory !important;
+    -webkit-mask-image:none !important;
+            mask-image:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card{
+    scroll-snap-align:start;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track [data-copy]{
+    display:none !important;
+  }
+}
+
+/* —— PART 3: plain non-link cards (platforms only) —— */
+html body .sec.pf#platforms .pf-card,
+html body .sec.pf#platforms article.pf-card,
+html body .sec.pf#platforms button.pf-card{
+  cursor:default !important;
+  text-decoration:none !important;
+  color:inherit !important;
+  -webkit-tap-highlight-color:transparent;
+  pointer-events:auto;
+}
+html body .sec.pf#platforms .pf-card:focus,
+html body .sec.pf#platforms .pf-card:focus-visible,
+html body .sec.pf#platforms .pf-card a:focus,
+html body .sec.pf#platforms .pf-card a:focus-visible{
+  outline:none !important;
+  box-shadow:none !important;
+}
+html body .sec.pf#platforms .pf-card a,
+html body .sec.pf#platforms .pf-card a:hover,
+html body .sec.pf#platforms .pf-card a:focus{
+  color:inherit !important;
+  text-decoration:none !important;
+  cursor:default !important;
+  pointer-events:none !important;
+}
+html body .sec.pf#platforms .pf-go{
+  display:none !important;
+}
+
+/* —— PART 4: mobile sticky stack (<768) —— */
+@media (max-width:767px){
+  html body .sec.pf#platforms:has(.pf-orbit),
+  html body .sec.pf#platforms:has(.pf-orbit).beam-zone{
+    overflow:visible !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .wrap,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-in,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-carousel{
+    overflow:visible !important;
+    transform:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail{
+    overflow:visible !important;
+    padding:0 !important;
+    margin:0 !important;
+    -webkit-mask-image:none !important;
+            mask-image:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:100% !important;
+    animation:none !important;
+    transform:none !important;
+    gap:0 !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track [data-copy]{
+    display:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card,
+  html body .sec.pf#platforms:has(.pf-orbit) article.pf-card,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-track > .pf-card{
+    position:sticky !important;
+    flex:none !important;
+    flex-basis:auto !important;
+    width:100% !important;
+    margin-bottom:16px !important;
+    top:calc(var(--nav-h, 64px) + 16px + (var(--stop, 0) * 12px)) !important;
+    background:#fff !important;
+    background-clip:border-box !important;
+    opacity:1 !important;
+    transform:none !important;
+    box-shadow:0 -8px 26px -16px rgba(var(--ink-rgb), .45) !important;
+  }
+  html[data-theme="dark"] body .sec.pf#platforms:has(.pf-orbit) .pf-card,
+  html[data-theme="dark"] body .sec.pf#platforms:has(.pf-orbit) article.pf-card{
+    background:var(--surface) !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:last-child{
+    margin-bottom:0 !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:hover{
+    transform:none !important;
+  }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(1){ --stop:0; z-index:1; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(2){ --stop:1; z-index:2; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(3){ --stop:2; z-index:3; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(4){ --stop:3; z-index:4; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(5){ --stop:4; z-index:5; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(6){ --stop:5; z-index:6; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(7){ --stop:6; z-index:7; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(8){ --stop:7; z-index:8; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(9){ --stop:8; z-index:9; }
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(10){ --stop:9; z-index:10; }
+
+  html body .sec.pf#platforms:has(.pf-orbit){
+    padding-bottom:calc(var(--section-padding-y, 48px) + 48px) !important;
+  }
+}

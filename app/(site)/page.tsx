@@ -2,13 +2,22 @@ import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import JsonLd from "@/components/JsonLd";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/homepage-meta.json";
 import { homeSchema } from "@/lib/schema";
 /* Shared mobile hero logos/ticker flow (≤900px) — same as /services pages */
 import "@/app/service-hero-lock.css";
+import "@/app/home-invite.css";
+
+const homeInviteBoot = fs
+  .readFileSync(path.join(process.cwd(), "lib", "home-invite-boot.js"), "utf8")
+  .replaceAll(
+    "__HOME_INVITE_SRC__",
+    JSON.stringify(assets.homeInvite || "/tekcroft-home-invite.js")
+  );
 
 export const metadata: Metadata = {
   title: meta.title,
@@ -39,10 +48,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "homepage-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("homepage-body.html");
 
   return (
     <>
@@ -55,13 +61,19 @@ export default function HomePage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       {/* afterInteractive: body markup exists; boot can measure nav logo */}
-      <Script src={assets.main} strategy="afterInteractive" />
+      <Script src={assets.main} strategy="lazyOnload" />
       {/* Below-fold widgets (NSR / AI ecosystem / carousels) — idle load */}
       <Script
         src={assets.homeDefer || "/tekcroft-home-defer.js"}
         strategy="lazyOnload"
+      />
+      {/* Invite popup: tiny boot → idle/scroll preload of hashed invite JS */}
+      <Script
+        id="home-invite-boot"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{ __html: homeInviteBoot }}
       />
       <JsonLd data={homeSchema} />
     </>

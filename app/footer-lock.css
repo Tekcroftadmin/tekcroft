@@ -1,7 +1,23 @@
-/* Footer lock — same plate as AI Development, every page. */
-html body #tekcroft-root > .ftm,
+/* Footer lock — same plate as AI Development, every page.
+   Corners: footer overlaps the last section by --ft-radius so the last
+   section’s own background fills the two rounded wedges (no body/white flash).
+   Shadow: soft upward edge on .ft4-plate, above the last section. */
+html body #tekcroft-root{
+  --ft-radius:clamp(20px,2.2vw,28px);
+  overflow:visible !important;
+}
+html body #tekcroft-root > .tekcroft-page,
+html body #tekcroft-root > [data-site-footer]{
+  overflow:visible !important;
+}
+/* Pull footer up over the last section’s bottom padding by the top radius */
+html body #tekcroft-root > [data-site-footer]{
+  position:relative !important;
+  z-index:5 !important;
+  margin-top:calc(-1 * var(--ft-radius)) !important;
+  background:transparent !important;
+}
 html body #tekcroft-root > .ft4,
-html body .ftm,
 html body footer.ft4{
   width:100% !important;
   max-width:none !important;
@@ -9,38 +25,38 @@ html body footer.ft4{
   margin-right:0 !important;
   box-sizing:border-box !important;
 }
-html body .ftm{
-  background:var(--surface) !important;
-  border-block:0 !important;
-  border-top:0 !important;
-  border-bottom:0 !important;
-  border-radius:clamp(20px,2.2vw,28px) clamp(20px,2.2vw,28px) 0 0 !important;
-  margin-bottom:0 !important;
-  position:relative;
-  z-index:2;
-  box-shadow:0 -16px 40px -22px rgba(var(--ink-rgb),.30);
-  padding:clamp(24px,2.8vw,36px) 0 !important;
-}
-html[data-theme="dark"] body .ftm{
-  box-shadow:0 -16px 40px -20px rgba(0,0,0,.75);
-}
 html body footer.ft4,
 html body .ft4{
   display:block !important;
+  position:relative !important;
+  z-index:5 !important;
   background:transparent !important;
   padding:0 !important;
   padding-top:0 !important;
+  /* When footer is not wrapped, still overlap the last section */
+  margin-top:0 !important;
+}
+html body #tekcroft-root > footer.ft4{
+  margin-top:calc(-1 * var(--ft-radius)) !important;
 }
 html body .ft4-plate{
   display:block !important;
+  position:relative !important;
+  z-index:1 !important;
   width:100% !important;
   max-width:none !important;
   margin:0 !important;
   box-sizing:border-box !important;
   background:var(--surface) !important;
-  border-radius:0 !important;
-  border-top:1px solid var(--border-soft) !important;
+  /* Keep the existing top-corner radius (same expression as before). */
+  border-radius:var(--ft-radius) var(--ft-radius) 0 0 !important;
+  border-top:0 !important;
+  /* Soft upward shadow — follows the rounded top edge */
+  box-shadow:0 -8px 24px rgba(15,23,42,.08) !important;
   padding:clamp(34px,4vw,56px) 0 clamp(20px,2.2vw,28px) !important;
+}
+html[data-theme="dark"] body .ft4-plate{
+  box-shadow:0 -8px 24px rgba(0,0,0,.35) !important;
 }
 html body .ft4-plate > .wrap{
   width:100%;

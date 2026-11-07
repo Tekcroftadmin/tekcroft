@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { customSoftwareDevelopmentServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/custom-software-development-meta.json";
 import lcp from "@/lib/custom-software-development-lcp.json";
@@ -32,10 +31,7 @@ export const metadata: Metadata = {
 };
 
 export default function CustomSoftwareDevelopmentServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "custom-software-development-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("custom-software-development-body.html");
 
   return (
     <>
@@ -46,8 +42,8 @@ export default function CustomSoftwareDevelopmentServicesPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.customSoftwareDevelopment} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.customSoftwareDevelopment} strategy="lazyOnload" />
       <JsonLd data={customSoftwareDevelopmentServicesSchema} />
     </>
   );

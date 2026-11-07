@@ -47,7 +47,7 @@
       (__bar ? __bar.offsetHeight : 64) +
       (parseFloat(__cs.paddingTop) || 0) +
       (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
   }
   navHeight();
   window.addEventListener("resize", navHeight);
@@ -89,33 +89,7 @@
       if (e.target.closest("a[href],[data-jump]")) closeMenu();
     });
   }
-
-  /* ---------------- footer marquee ---------------- */
-  var ft = $("#ftMarq");
-  if (ft && ft.childElementCount === 0) {
-    var items = [
-      "SEO",
-      "AI development",
-      "Automation",
-      "Web development",
-      "Software development",
-      "Digital marketing",
-      "Local SEO",
-      "Answer engine visibility",
-      "Paid search",
-      "Content strategy",
-      "Conversion design",
-      "Analytics",
-    ];
-    var row = items
-      .map(function (t) {
-        return "<span>" + t + "</span><i></i>";
-      })
-      .join("");
-    ft.innerHTML = row + row;
-  }
-
-  /* ---------------- 404 mouse-parallax tilt ---------------- */
+/* ---------------- 404 mouse-parallax tilt ---------------- */
   var big = document.getElementById("nfBig");
   var reduce = false;
   try {

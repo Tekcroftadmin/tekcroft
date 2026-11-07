@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import LegalPageScript from "@/components/LegalPageScript";
 import { SITE_URL } from "@/lib/site-url";
 import meta from "@/lib/terms-of-use-meta.json";
@@ -15,11 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function TermsOfUsePage() {
-  const html = fs
-    .readFileSync(
-      path.join(process.cwd(), "lib", "terms-of-use-body.html"),
-      "utf8"
-    )
+  const html = readPreparedBody("terms-of-use-body.html")
     .split("__SITE_URL__")
     .join(SITE_URL);
 
@@ -32,7 +27,7 @@ export default function TermsOfUsePage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       <LegalPageScript rootId="terms-of-use" />
     </>
   );

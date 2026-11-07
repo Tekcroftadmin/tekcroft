@@ -1,0 +1,216 @@
+/* Home invite only — soft open/close, no layout shift.
+   Does not change the card’s resting design (size/colors/fonts).
+   Scrollbar jump is handled in JS (padding-right = scrollbar width)
+   when the overlay opens — avoid html scrollbar-gutter here so first
+   paint / CLS stay unchanged vs the previous home page. */
+
+/* Soft motion: opacity + transform only (no clip-path morph / fly-from-button) */
+#modal.soft-invite .modal-veil {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(8, 13, 20, 0.52);
+  transition: opacity 0.28s ease-out;
+}
+
+#modal.soft-invite .modal-frame {
+  --tx: 0px;
+  --ty: 0px;
+  --cx: 0px;
+  --cy: 0px;
+  --crad: 22px;
+  opacity: 0;
+  transform: translate3d(0, 14px, 0) scale(0.985);
+  clip-path: none;
+  will-change: opacity, transform;
+  transition: opacity 0.28s ease-out, transform 0.28s ease-out;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+#modal.soft-invite.on .modal-frame {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  clip-path: none;
+  transition: opacity 0.28s ease-out, transform 0.28s ease-out;
+}
+
+/* No blue “arm” flash sheet */
+#modal.soft-invite .modal-frame::before {
+  display: none;
+}
+
+/* Content ready on first frame — no staggered pop-ins */
+#modal.soft-invite.on .modal-eyebrow,
+#modal.soft-invite.on #modalTitle,
+#modal.soft-invite.on .modal-intro,
+#modal.soft-invite.on .modal-art,
+#modal.soft-invite.on .modal-form,
+#modal.soft-invite.on .mf .field,
+#modal.soft-invite.on .field,
+#modal.soft-invite.on #modalGo,
+#modal.soft-invite.on .modal-note {
+  animation: none !important;
+}
+
+#modal.soft-invite .modal-x {
+  opacity: 1;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+    transform 0.18s ease;
+}
+
+#modal.soft-invite .modal-art svg {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  aspect-ratio: 240 / 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #modal.soft-invite .modal-veil,
+  #modal.soft-invite .modal-frame,
+  #modal.soft-invite.no-motion .modal-veil,
+  #modal.soft-invite.no-motion .modal-frame {
+    transition: none !important;
+  }
+
+  #modal.soft-invite .modal-frame {
+    transform: none;
+  }
+}
+
+/* ── Compact proposal popup only (#modal.soft-invite) ─────────────────
+   Heading: 2 lines (“GET YOUR” / “FREE PROPOSAL”). Shorter card height.
+   Does not change width, copy, form behavior, or any other modal. */
+
+/* Keep centered with visible margin; never fill the viewport */
+#modal.soft-invite{
+  padding:clamp(12px,2.5vh,28px) 16px;
+  align-items:center;
+  justify-items:center;
+  overflow:auto;
+}
+#modal.soft-invite .modal-frame{
+  max-height:min(90vh, 90dvh);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  width:min(calc(720 * var(--u)), calc(100% - 0px));
+  margin-inline:auto;
+}
+#modal.soft-invite .modal-card{
+  padding:clamp(18px,2.4vh,26px) clamp(22px,3vw,32px) clamp(14px,1.8vh,20px);
+  max-height:none;
+}
+
+/* Title: enough width + tight leading so em stays one blue line */
+#modal.soft-invite .modal-hero{
+  gap:clamp(10px,1.6vw,18px);
+  align-items:center;
+}
+#modal.soft-invite .modal-hero > div:first-child{
+  min-width:0;
+  max-width:none;
+  width:auto;
+}
+#modal.soft-invite .modal-title,
+#modal.soft-invite #modalTitle{
+  max-width:none !important;
+  width:auto !important;
+  margin:0 !important;
+  line-height:1.1 !important;
+  text-wrap:balance;
+}
+#modal.soft-invite .modal-title em,
+#modal.soft-invite #modalTitle em{
+  display:block !important;
+  font-style:normal !important;
+  color:var(--brand-text) !important;
+  white-space:nowrap;
+  max-width:none;
+  width:auto;
+}
+#modal.soft-invite .modal-intro{
+  margin-top:clamp(6px,1vh,10px) !important;
+  margin-bottom:0 !important;
+}
+#modal.soft-invite .modal-art{
+  max-width:clamp(120px,16vw,168px);
+}
+#modal.soft-invite .modal-art svg{
+  max-width:100%;
+}
+
+/* Form card: tighter vertical rhythm */
+#modal.soft-invite .modal-form{
+  margin-top:clamp(10px,1.6vh,14px) !important;
+  padding:clamp(12px,1.8vh,16px) clamp(14px,2vw,18px) !important;
+}
+#modal.soft-invite .mf-prog{
+  margin-bottom:clamp(8px,1.2vh,12px) !important;
+  gap:10px !important;
+}
+#modal.soft-invite .mf{
+  gap:clamp(8px,1.2vh,12px) clamp(12px,1.6vw,16px) !important;
+}
+#modal.soft-invite .field{
+  gap:clamp(4px,0.8vh,7px) !important;
+}
+#modal.soft-invite #modalGo{
+  margin-top:clamp(8px,1.2vh,12px) !important;
+}
+#modal.soft-invite .modal-note{
+  margin-top:clamp(6px,1vh,9px) !important;
+}
+
+/* Mobile / short laptop: shrink title just enough to keep 2 lines */
+@media (max-width:760px){
+  #modal.soft-invite{
+    padding:10px;
+  }
+  #modal.soft-invite .modal-frame{
+    max-height:min(90vh, 90dvh);
+    width:100%;
+  }
+  #modal.soft-invite .modal-card{
+    padding:clamp(16px,3.2vh,28px) 16px clamp(12px,2vh,16px);
+  }
+  #modal.soft-invite .modal-title,
+  #modal.soft-invite #modalTitle{
+    font-size:clamp(22px,7.2vw,var(--h2)) !important;
+    line-height:1.1 !important;
+  }
+  #modal.soft-invite .modal-title em,
+  #modal.soft-invite #modalTitle em{
+    white-space:nowrap;
+  }
+  #modal.soft-invite .modal-hero{
+    gap:8px;
+  }
+  #modal.soft-invite .modal-form{
+    margin-top:10px !important;
+    padding:12px 12px !important;
+  }
+  #modal.soft-invite .mf{
+    gap:8px 8px !important;
+  }
+  #modal.soft-invite .mf-prog{
+    margin-bottom:8px !important;
+  }
+}
+
+/* Short laptop (e.g. 1366×768): keep centered margins + compact stack */
+@media (min-width:761px) and (max-height:820px){
+  #modal.soft-invite .modal-card{
+    padding:16px 26px 12px;
+  }
+  #modal.soft-invite .modal-form{
+    margin-top:10px !important;
+    padding:12px 14px !important;
+  }
+  #modal.soft-invite .modal-art{
+    max-width:140px;
+  }
+  #modal.soft-invite .modal-title,
+  #modal.soft-invite #modalTitle{
+    line-height:1.08 !important;
+  }
+}

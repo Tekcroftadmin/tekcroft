@@ -39,7 +39,7 @@
     var __h = (__bar ? __bar.offsetHeight : 64)
       + (parseFloat(__cs.paddingTop) || 0)
       + (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
   }
   }
   navHeight();
@@ -431,26 +431,6 @@
     else narrow.addListener(swap);
   });
 })();
-
-
-/* === ft-script === */
-
-/* The footer's run of service names. One row written twice, because the
-   slide travels exactly half the track — so the copy arrives where the
-   original left and the loop has no seam. */
-(function(){
-  "use strict";
-  var el = document.getElementById("ftMarq");
-  if (!el) return;
-  var row = ["SEO audit","Technical audit","Crawl analysis","Indexation review",
-             "Content audit","Site architecture","Internal links","Backlink audit",
-             "Competitor gap analysis","Core Web Vitals","Tracking audit",
-             "Migration review","Prioritised roadmap"]
-    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
-  el.innerHTML = row + row;
-})();
-
-
 /* === faq-script === */
 
 /* One question open at a time. The panel is a grid row moving between 0fr

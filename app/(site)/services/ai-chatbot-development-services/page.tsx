@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { aiChatbotDevelopmentServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import ChatbotTypesScript from "@/components/ChatbotTypesScript";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/ai-chatbot-development-meta.json";
@@ -38,10 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function AiChatbotDevelopmentServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "ai-chatbot-development-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("ai-chatbot-development-body.html");
 
   return (
     <>
@@ -52,9 +48,9 @@ export default function AiChatbotDevelopmentServicesPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       <ChatbotTypesScript />
-      <Script src={assets.aiChatbotDevelopment} strategy="afterInteractive" />
+      <Script src={assets.aiChatbotDevelopment} strategy="lazyOnload" />
       <JsonLd data={aiChatbotDevelopmentServicesSchema} />
     </>
   );

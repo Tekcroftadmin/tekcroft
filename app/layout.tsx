@@ -75,6 +75,7 @@ export default function RootLayout({
         <Script src="/tekcroft-ask-modal.js" strategy="afterInteractive" />
         <Script src={assets.vsHalo} strategy="lazyOnload" />
         <Script src={assets.mm} strategy="lazyOnload" />
+        <Script src={assets.pfMarquee || "/tekcroft-pf-marquee.js"} strategy="lazyOnload" />
       </body>
     </html>
   );

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { mobileAppDevelopmentServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
 import { Caveat } from "next/font/google";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import AppJourney from "@/components/AppJourney";
 import DevelopApps from "@/components/DevelopApps";
 import assets from "@/lib/asset-manifest.json";
@@ -52,10 +51,7 @@ export const metadata: Metadata = {
 };
 
 export default function MobileAppDevelopmentPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "mobile-app-development-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("mobile-app-development-body.html");
 
   return (
     <div className={caveat.variable}>
@@ -75,10 +71,10 @@ export default function MobileAppDevelopmentPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       <AppJourney />
       <DevelopApps />
-      <Script src={assets.mobileAppDevelopment} strategy="afterInteractive" />
+      <Script src={assets.mobileAppDevelopment} strategy="lazyOnload" />
       <JsonLd data={mobileAppDevelopmentServicesSchema} />
     </div>
   );

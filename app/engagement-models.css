@@ -23,7 +23,7 @@ html[data-theme="dark"] #engagement-models .em3-in{border-color:rgba(255,255,255
 #engagement-models .em3-head{text-align:center; margin-bottom:clamp(16px,1.8vw,24px);}
 #engagement-models .em3-head h3{
   margin:0; font-family:var(--font-display); font-size:clamp(22px,2.1vw,30px);
-  font-weight:800; letter-spacing:-.035em; line-height:1.15; color:var(--text); text-transform:none;
+  font-weight:800; color:var(--text); text-transform:none;
 }
 #engagement-models .em3-head h3 em{font-style:normal; color:var(--primary);}
 #engagement-models .mcs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px;}
@@ -46,8 +46,7 @@ html[data-theme="dark"] #engagement-models .mc{background:#141F27; border-color:
 }
 html[data-theme="dark"] #engagement-models .mc-ic{background:#E8EEF2; color:#0F1720;}
 #engagement-models .mc h4{
-  margin:0; font:800 clamp(16px,1.25vw,18px)/1.25 var(--font-display);
-  letter-spacing:-.02em; color:var(--text); text-transform:none;
+  margin:0; font:800 clamp(16px,1.25vw,18px)/1.25 var(--font-display); color:var(--text); text-transform:none;
 }
 #engagement-models .mc p{margin:0; font-size:14px; line-height:1.55; color:var(--text-2); flex:1;}
 

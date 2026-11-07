@@ -1,0 +1,124 @@
+/* About us hero only (#hero-1.a3-center).
+   Restores centered claim + equal header→H1 / button→strip gaps.
+   Loaded after service-hero-lock on /about-us — does not affect /services. */
+
+#hero-1.hs.a3-center{
+  --hero-pad-y:64px;
+  --about-hero-content-max:1080px;
+  /* Keep strip height token from service-hero-lock; do not change strip height */
+  position:relative;
+  isolation:isolate;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  align-items:stretch !important;
+  height:auto !important;
+  max-height:none !important;
+  min-height:100vh !important;
+  min-height:100svh !important;
+  overflow:visible !important;
+  /* Nav clearance only — equal 64px air lives on .hs-in padding-block */
+  padding:0 !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+
+/* One centered column — not the service two-column / left-claim layout */
+#hero-1.hs.a3-center .hs-in{
+  display:flex !important;
+  flex-direction:column !important;
+  flex:1 1 auto !important;
+  align-items:center !important;
+  justify-content:center !important;
+  grid-template-columns:none !important;
+  column-gap:0 !important;
+  row-gap:0 !important;
+  gap:0 !important;
+  width:100% !important;
+  /* keep .wrap max-width + side gutters */
+  margin-block:0 !important;
+  /* Equal min air: header→H1 and button→strip (= --hero-pad-y). Extra height splits evenly. */
+  padding-top:calc(var(--nav-h) + var(--hero-pad-y)) !important;
+  padding-bottom:var(--hero-pad-y) !important;
+  text-align:center !important;
+  box-sizing:border-box !important;
+}
+
+#hero-1.hs.a3-center .hs-copy{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-self:center !important;
+  align-self:center !important;
+  width:100% !important;
+  max-width:var(--about-hero-content-max) !important;
+  margin-inline:auto !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  padding-inline:0 !important;
+  text-align:center !important;
+}
+
+#hero-1.hs.a3-center .hs-copy > .tag,
+#hero-1.hs.a3-center .hs-copy .tag,
+#hero-1.hs.a3-center .hs-h1,
+#hero-1.hs.a3-center .a3-sub,
+#hero-1.hs.a3-center .hs-lede,
+#hero-1.hs.a3-center .hs-act{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+
+/* Natural H1 wrap — spans stay inline (no forced line boxes) */
+#hero-1.hs.a3-center .hs-h1{
+  text-align:center !important;
+  text-wrap:wrap !important;
+  white-space:normal !important;
+}
+#hero-1.hs.a3-center .hs-h1 span,
+#hero-1.hs.a3-center .hs-h1 em{
+  display:inline !important;
+  white-space:normal !important;
+  float:none !important;
+}
+
+#hero-1.hs.a3-center .a3-sub{
+  border-left:0 !important;
+  padding-left:0 !important;
+  max-width:52ch !important;
+}
+
+#hero-1.hs.a3-center .hs-lede{
+  max-width:62ch !important;
+}
+
+#hero-1.hs.a3-center .hs-act{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  width:100% !important;
+  margin-bottom:0 !important;
+}
+
+/* Strip stays at hero floor — gap above it comes from .hs-in padding-bottom */
+#hero-1.hs.a3-center > .hs-logos{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  flex-grow:0 !important;
+  flex-shrink:0 !important;
+}
+
+@media (max-width:900px){
+  #hero-1.hs.a3-center{
+    --hero-pad-y:40px;
+    min-height:0 !important;
+  }
+  #hero-1.hs.a3-center .hs-in{
+    flex:0 0 auto !important;
+    justify-content:flex-start !important;
+  }
+}

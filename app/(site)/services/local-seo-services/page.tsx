@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
 import DeferredStylesheet from "@/components/DeferredStylesheet";
 import JsonLd from "@/components/JsonLd";
@@ -8,7 +6,8 @@ import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/local-seo-meta.json";
 import lcp from "@/lib/local-seo-lcp.json";
 import { localSeoServicesSchema } from "@/lib/schema";
-import { stampFooterYear } from "@/lib/stamp-footer-year";
+import PageBodyEffects from "@/components/PageBodyEffects";
+import { readPreparedBody } from "@/lib/compose-site-html";
 /* Tiny above-the-fold hero paint (LCP) — full page CSS loads deferred */
 import "@/app/local-seo-critical.css";
 /* Shared service hero shell — same style/design on every /services page */
@@ -37,12 +36,7 @@ export const metadata: Metadata = {
 };
 
 export default function LocalSeoPage() {
-  const html = stampFooterYear(
-    fs.readFileSync(
-      path.join(process.cwd(), "lib", "local-seo-body.html"),
-      "utf8"
-    )
-  );
+  const html = readPreparedBody("local-seo-body.html");
 
   return (
     <>
@@ -64,12 +58,13 @@ export default function LocalSeoPage() {
       />
       {/* Large page CSS off critical path — hero covered by critical + lock CSS */}
       <DeferredStylesheet href="/css/local-seo.css" />
-      {/* Server HTML only — avoid hydrating the full markup tree (TBT) */}
+      {/* Body only — shared header/footer stay in SiteShell layout */}
       <div
-        id="tekcroft-root"
+        className="tekcroft-page"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <PageBodyEffects />
       <Script src={assets.localSeo} strategy="lazyOnload" />
       <JsonLd data={localSeoServicesSchema} />
     </>

@@ -167,10 +167,9 @@ html[data-theme="dark"]{
 .hs .tag{--d:40ms; margin-bottom:clamp(18px,2vw,26px);}
 
 .hs-h1{--d:130ms; margin:0 0 clamp(18px,2vw,26px);
-  font-family:var(--font-display); font-weight:800; letter-spacing:-.045em;
-  line-height:1.04; font-size:var(--h1); color:#fff;}
+  font-family:var(--font-display); font-weight:800; font-size:var(--h1); color:#fff;}
 .hs-h1 em{font-style:normal; color:var(--primary);}
-#hero-1 .hs-h1{text-wrap:balance; width:100%; max-width:100%; box-sizing:border-box;}
+#hero-1 .hs-h1{text-wrap:wrap; width:100%; max-width:100%; box-sizing:border-box;}
 #hero-1 .hs-h1 em{display:inline; white-space:normal;}
 @media (max-width:960px){
   #hero-1 .hs-h1{text-wrap:wrap;}
@@ -209,7 +208,7 @@ html[data-theme="dark"]{
  /* the homepage sizes a heading inside its own form dialog at 26px rather
     than at --h2, which is a section's size; this is that heading. */
 .hs-form h2{margin:0; font-family:var(--font-display); font-size:26px;
-  font-weight:700; letter-spacing:-0.035em; line-height:1.22; color:#fff;}
+  font-weight:700; color:#fff;}
 .hs-rule{display:block; width:52px; height:3px; margin:14px auto 0; border-radius:3px;
   background:var(--primary);}
 .hs-sub{margin:14px auto clamp(20px,1.8vw,26px); max-width:34ch;
@@ -252,8 +251,7 @@ html[data-theme="dark"]{
 .hs-done i{display:grid; place-items:center; width:52px; height:52px; margin:0 auto 16px;
   border-radius:50%; background:hsl(var(--brand-h) 100% 45% / .18); color:var(--primary);}
 .hs-done i svg{width:24px; height:24px;}
-.hs-done h3{margin:0 0 8px; font-family:var(--font-display); font-size:var(--h3); font-weight:700;
-  letter-spacing:-0.03em; color:#fff;}
+.hs-done h3{margin:0 0 8px; font-family:var(--font-display); font-size:var(--h3); font-weight:700; color:#fff;}
 .hs-done p{margin:0; font-size:14px; line-height:1.6; color:rgba(255,255,255,.74);}
 
 /* ─────────────────────────────────────────────────────────────
@@ -431,8 +429,8 @@ html[data-theme="light"] .hs-done p{color:var(--text-2);}
    ══════════════════════════════════════════════════════════════════════ */
 
 /* the sections that restated the tracking give it back */
-.mp-say h2,.pf-head h2{ letter-spacing:-0.04em; }
-h2{ letter-spacing:-0.04em; }
+.mp-say h2,.pf-head h2{ }
+h2{ }
 
 /* the badge sits the same distance above every heading it introduces */
 .smark{ margin-bottom:clamp(16px,1.8vw,22px); }
@@ -482,9 +480,8 @@ h2{ letter-spacing:-0.04em; }
    second, smaller heading rather than as the line under the first. */
 .hx .sec-lede{font-weight:inherit; color:var(--text-2);}
 
-h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
-  line-height:1.14; letter-spacing:-0.04em;}
-.eg-card h3,.pf-card h3,.mm h3,.wc-panel h3,.wk-say h3{letter-spacing:-0.03em;}
+h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{}
+.eg-card h3,.pf-card h3,.mm h3,.wc-panel h3,.wk-say h3{}
 
 /* a glyph in a tile */
 .hx-ic svg,.eg-ico svg,.pf-core svg,.mp-si svg,.mp-mk svg,.mp-cart svg,
@@ -554,7 +551,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 
 .ax-head{text-align:center;max-width:780px;margin:0 auto 36px}
 .ax-eye{font-size:12.5px;font-weight:600;letter-spacing:.2em;color:var(--ax-blue);margin-bottom:12px}
-.ax-head h2{font-size:clamp(28px,3.3vw,44px);line-height:1.14;font-weight:800;letter-spacing:-.02em;color:var(--ax-navy)}
+.ax-head h2{font-size:clamp(28px,3.3vw,44px);font-weight:800;color:var(--ax-navy)}
 .ax-head h2 span{display:block;background:linear-gradient(90deg,#1E6BFF,#3B9BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ax-intro{margin-top:12px;font-size:16.5px;color:var(--ax-text)}
 
@@ -588,7 +585,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 .ax-ph{display:flex;align-items:center;gap:14px;margin-bottom:10px}
 .ax-pi{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--c),var(--c2));box-shadow:0 10px 22px -10px var(--c)}
 .ax-pn{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--c)}
-.ax-ph h3{font-size:22px;line-height:1.2;font-weight:700;letter-spacing:-.01em;color:var(--ax-navy)}
+.ax-ph h3{font-size:22px;font-weight:700;color:var(--ax-navy)}
 .ax-pd{font-size:15.5px;line-height:1.65;color:var(--ax-text);max-width:720px;margin-bottom:20px}
 .ax-pb{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;align-items:stretch}
 .ax-vis{position:relative;min-height:212px;border-radius:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 7%,#fff),#F8FAFF);border:1px solid color-mix(in srgb,var(--c) 14%,transparent);padding:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -763,7 +760,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 @media (max-width:680px){ #tech-v4 .ax-wrap{padding:56px 20px;} }
 #tech-v4 .ax-eye{display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:99px; background:#fff; font-family:var(--font-display); font-size:12px; font-weight:800; letter-spacing:.14em; color:var(--primary);}
 #tech-v4 .ax-eye::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--primary);}
-#tech-v4 .ax-head h2{font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); letter-spacing:-.045em; line-height:1.06; color:var(--text);}
+#tech-v4 .ax-head h2{font-family:var(--font-display); font-size:clamp(30px,3.2vw,50px); color:var(--text);}
 #tech-v4 .ax-head h2 span{background:none; -webkit-text-fill-color:currentColor; color:var(--primary);}
 #tech-v4 .ax-intro{font-size:clamp(15px,1.1vw,17px); color:var(--text-2);}
 #tech-v4 .ax-tab{background:rgba(255,255,255,.6); font-family:var(--font-display);}
@@ -772,7 +769,7 @@ h2,.hx .sec-head h2,.sg-head h2,.mp-say h2,.pf-head h2,.wc-say h2{
 #tech-v4 .ax-uc ul{gap:6px;}
 #tech-v4 .ax-uc li{padding:12px 2px; min-width:0;}
 #tech-v4 .ax-uc li span{font-size:11.5px; line-height:1.3; letter-spacing:-.01em; max-width:100%;}
-#tech-v4 .ax-ph h3{font-weight:800; letter-spacing:-.03em; font-size:clamp(20px,1.7vw,24px);}
+#tech-v4 .ax-ph h3{font-weight:800; font-size:clamp(20px,1.7vw,24px);}
 #tech-v4 .ax-stage{border-color:#fff; box-shadow:0 30px 60px -44px hsl(var(--brand-h) 60% 25% / .55);}
 #tech-v4 .ax-vis{background:linear-gradient(135deg,#EAF6FC,#F6FBFE); border-color:hsl(var(--brand-h) 70% 88%);}
 #tech-v4 .ax-uc{background:#F3F9FD; border-color:hsl(var(--brand-h) 70% 88%);}
@@ -981,13 +978,11 @@ html[data-theme="dark"] #tech-v4 .g1-l.s{border-color:var(--border);}
 
 /* AIS hero H1 only — stay inside the copy column (never grow toward the form) */
 html[data-design="raw"] #hero-1 .hs-h1{
-  text-wrap:balance !important;
+  text-wrap:wrap !important;
   width:100% !important;
   max-width:100% !important;
   box-sizing:border-box !important;
   font-size:var(--h1) !important;
-  line-height:1.04 !important;
-  letter-spacing:-.045em !important;
 }
 @media (max-width:960px){
   html[data-design="raw"] #hero-1 .hs-h1{text-wrap:wrap !important;}
@@ -1002,9 +997,9 @@ html[data-design="raw"] #hero-1 .hs-h1 em{
   color:var(--primary) !important;
 }
 
-/* Hero client ticker — in-flow under CTAs (matches service-hero-lock) */
+/* Hero client ticker — fixed strip height (matches service-hero-lock) */
 html[data-design="raw"] #hero-1.hs:has(> .ticker){
-  padding-bottom:20px !important;
+  padding-bottom:0 !important;
 }
 html[data-design="raw"] #hero-1 > .ticker{
   position:relative !important;
@@ -1012,13 +1007,27 @@ html[data-design="raw"] #hero-1 > .ticker{
   top:auto !important;
   z-index:4 !important;
   width:100% !important;
-  margin-top:32px !important;
+  height:var(--hero-strip-height, 72px) !important;
+  min-height:var(--hero-strip-height, 72px) !important;
+  max-height:var(--hero-strip-height, 72px) !important;
+  margin-top:0 !important;
   margin-bottom:0 !important;
-  padding:14px 0 16px !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
   border-top:1px solid rgba(255,255,255,.16) !important;
+  display:flex !important;
+  align-items:center !important;
+  flex-grow:0 !important;
+  flex-shrink:0 !important;
+  overflow:hidden !important;
 }
 @media (max-width:900px){
-  html[data-design="raw"] #hero-1 > .ticker{margin-top:28px !important;}
+  html[data-design="raw"] #hero-1 > .ticker{
+    margin-top:0 !important;
+    height:var(--hero-strip-height, 56px) !important;
+    min-height:var(--hero-strip-height, 56px) !important;
+    max-height:var(--hero-strip-height, 56px) !important;
+  }
 }
 html[data-design="raw"] #hero-1 .ticker .marq-track{
   display:flex !important;

@@ -22,12 +22,22 @@ const cssFiles = [
   "app/google-business-profile-optimization.css",
   "app/mobile-app-development.css",
   "app/web-design-and-development.css",
+  "app/web-and-app-development.css",
   "app/custom-software-development.css",
   "app/ai-agent-development.css",
   "app/ai-chatbot-development.css",
   "app/ai-seo.css",
   "app/ai-development.css",
+  "app/artificial-intelligence-services.css",
+  "app/seo-services.css",
+  "app/about-us.css",
   "app/contact.css",
+  "app/services.css",
+  "app/accessibility.css",
+  "app/privacy-policy.css",
+  "app/terms-of-use.css",
+  "app/sitemap.css",
+  "app/book-a-free-evaluation.css",
 ];
 
 const block = "\n\n" + MARK + "\n" + lock + "\n";

@@ -1,8 +1,7 @@
 ﻿import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import "@/app/contact.css";
 import "@/app/footer-lock.css";
@@ -15,15 +14,12 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "blog-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("blog-body.html");
 
   return (
     <>
-      <Homepage html={html} />
-      <Script src={assets.contact} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.contact} strategy="lazyOnload" />
     </>
   );
 }

@@ -179,8 +179,7 @@ html{font-family:var(--font); -webkit-text-size-adjust:100%;
 body{margin:0; background:var(--bg); color:var(--text); font-size:var(--body); line-height:1.65;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
   transition:background .35s var(--ease), color .35s var(--ease);}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; line-height:1.14;
-  letter-spacing:-0.03em; font-weight:800;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; font-weight:800;}
 h1{font-size:var(--h1);} h3{font-size:var(--h3);}
 h4{font-size:var(--h4);} h5,h6{font-size:var(--h5);}
 p{margin:0;}
@@ -547,7 +546,7 @@ html[data-theme="dark"] .theme-btn .sun{display:none;}
   font-style:normal; flex-shrink:0;}
 .on-dark .tag{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.20); color:#fff;}
 
-h2{font-size:var(--h2); letter-spacing:-0.042em;}
+h2{font-size:var(--h2);}
 h2 em{font-style:normal; color:var(--brand-text);}
 .sec-lede{font-size:var(--body); color:var(--text-2); margin-top:16px; max-width:56ch;}
 .sec-head.mid .sec-lede{margin-left:auto; margin-right:auto;}
@@ -584,7 +583,8 @@ h2 em{font-style:normal; color:var(--brand-text);}
    ============================================================ */
 .hero{position:relative; min-height:100vh; min-height:100svh; height:auto; display:flex;
   flex-direction:column; justify-content:flex-start; color:#fff; overflow:hidden;
-  padding:calc(var(--nav-h) + 62px) 0 20px;
+  --hero-strip-height:72px;
+  padding:calc(var(--nav-h) + 62px) 0 0;}
   /* the floor the slider sits on. If every photo fails to load the hero is
      still a finished dark slab rather than a hole. */
   background:linear-gradient(160deg, var(--n900) 0%, var(--ink-plate) 55%, #050505 100%);}
@@ -646,8 +646,7 @@ h2 em{font-style:normal; color:var(--brand-text);}
    from the lowercase -0.05em, or the letters run into each other; the size
    comes down a step too, because caps read a good deal larger than the
    same words in mixed case and the longest line has to hold one line. */
-.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase;
-  letter-spacing:-0.012em; line-height:1.08; margin:0;}
+.lamp h1{font-family:var(--font-display); font-weight:800; text-transform:uppercase; margin:0;}
 .lamp .ln{display:block; overflow:hidden; padding-bottom:.05em;}
 .lamp .ln > span{display:block; transform:translateY(110%);
   transition:transform 1s var(--ease) var(--d,0ms);}
@@ -680,12 +679,18 @@ h2 em{font-style:normal; color:var(--brand-text);}
 .hero-note b{color:#fff; font-weight:600;}
 .hero-note s{text-decoration:none; color:rgba(255,255,255,.35);}
 
-/* client ticker — in-flow under CTAs (homepage .hero + service .hs) */
-.ticker{position:relative; z-index:3; width:100%; margin-top:32px; margin-bottom:0;
-  padding:14px 0 16px; border-top:1px solid rgba(255,255,255,.16);}
+/* client ticker — fixed-height strip at hero bottom (homepage .hero + service .hs).
+   Height/centering owned by --hero-strip-height in service-hero-lock.css. */
+.ticker{position:relative; z-index:3; width:100%; margin-top:0; margin-bottom:0;
+  height:var(--hero-strip-height, 72px); min-height:var(--hero-strip-height, 72px);
+  max-height:var(--hero-strip-height, 72px); padding:0; box-sizing:border-box;
+  border-top:1px solid rgba(255,255,255,.16); display:flex; align-items:center;
+  flex-grow:0; flex-shrink:0; overflow:hidden;}
 .hs > .ticker{z-index:4;}
 .hs:has(> .ticker),
-.hero:has(> .ticker){padding-bottom:20px;}
+.hero:has(> .ticker){padding-bottom:0;}
+.ticker > .wrap,
+.ticker .marq{width:100%; height:100%; display:flex; align-items:center; margin:0; padding:0;}
 .marq{overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
@@ -723,37 +728,40 @@ html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--
 
 /* === stats-strip.css === */
 /* Shared stats strip — identical on every page (#proof-v2).
-   Four figures, hairline dividers, #DAEEF6 ground. */
+   Four figures, hairline dividers. Outer pad + ground come from
+   site-consistency (--section-padding-y + data-ground zebra). */
 
 html body #proof-v2.st.sec,
 html body #proof-v2.st[data-ground],
 #proof-v2.st{
-  margin-top:0;
-  padding-block:clamp(34px,3.6vw,52px) !important;
-  background:#DAEEF6 !important;
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  padding-block:var(--section-padding-y, 80px) !important;
   border:0 !important;
 }
-html[data-theme="dark"] body #proof-v2.st.sec,
-html[data-theme="dark"] body #proof-v2.st[data-ground],
-html[data-theme="dark"] #proof-v2.st{
-  background:hsl(var(--brand-h) 28% 14%) !important;
-}
+/* Ground is owned by data-ground zebra (white / tint). Do not force a tint. */
 
 #proof-v2 .st-row{
-  position:relative;
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  align-items:stretch;
-  gap:0;
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  align-items:stretch !important;
+  gap:0 !important;
+  width:100% !important;
+  padding:0 !important;
+  margin:0 !important;
+  text-align:center !important;
+  cursor:default !important;
+  font:inherit !important;
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
 }
 
 #proof-v2 .st-c{
-  position:relative;
-  padding:clamp(22px,2.4vw,32px) clamp(16px,2vw,28px);
-  text-align:center;
+  position:relative !important;
+  padding:clamp(22px,2.4vw,32px) clamp(16px,2vw,28px) !important;
+  text-align:center !important;
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
@@ -826,7 +834,7 @@ html[data-theme="dark"] #proof-v2 .st-c + .st-c::before{
 }
 
 @media (max-width:900px){
-  #proof-v2 .st-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #proof-v2 .st-row{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
   /* hide vertical dividers when wrapped to 2x2 */
   #proof-v2 .st-c + .st-c::before{content:none !important; display:none !important;}
   /* hairline between the two rows only */
@@ -844,10 +852,13 @@ html[data-theme="dark"] #proof-v2 .st-c + .st-c::before{
 
 
 /* === nav-pill.css === */
-/* HighGate-style shared nav pill — Tekcroft blue. Look only; mega/burger structure untouched. */
+/* HighGate-style shared nav pill — Tekcroft blue. Look only; mega/burger structure untouched.
+   This is the ONE sitewide header look. Page CSS must not restyle .nav / .nav-links. */
 
 .nav{
   transition: padding .3s var(--ease);
+  font-family: var(--font-inter), var(--font), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-synthesis: none;
 }
 .nav-shell{
   border-style:solid !important;

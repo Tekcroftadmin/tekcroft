@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/services-meta.json";
 import lcp from "@/lib/services-lcp.json";
@@ -29,10 +28,7 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "services-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("services-body.html");
 
   return (
     <>
@@ -43,8 +39,8 @@ export default function ServicesPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.services} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.services} strategy="lazyOnload" />
     </>
   );
 }

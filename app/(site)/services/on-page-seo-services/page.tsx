@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { onPageSeoServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/on-page-seo-meta.json";
 import lcp from "@/lib/on-page-seo-lcp.json";
@@ -33,10 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default function OnPageSeoPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "on-page-seo-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("on-page-seo-body.html");
 
   return (
     <>
@@ -56,8 +52,8 @@ export default function OnPageSeoPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.onPageSeo} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.onPageSeo} strategy="lazyOnload" />
       <JsonLd data={onPageSeoServicesSchema} />
     </>
   );

@@ -41,7 +41,7 @@
     var __h = (__bar ? __bar.offsetHeight : 64)
       + (parseFloat(__cs.paddingTop) || 0)
       + (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");
+    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
   }
   }
   navHeight();
@@ -429,26 +429,6 @@
     else narrow.addListener(swap);
   });
 })();
-
-
-/* === ft-script === */
-
-/* The footer's run of service names. One row written twice, because the
-   slide travels exactly half the track — so the copy arrives where the
-   original left and the loop has no seam. */
-(function(){
-  "use strict";
-  var el = document.getElementById("ftMarq");
-  if (!el) return;
-  var row = ["Technical SEO","Site audits","Crawl and indexation","Core Web Vitals",
-             "Page speed","Site architecture","Internal linking","Structured data",
-             "JavaScript SEO","Site migrations","Log file analysis",
-             "Answer engine visibility","Monitoring"]
-    .map(function(t){ return "<span>" + t + "</span><i></i>"; }).join("");
-  el.innerHTML = row + row;
-})();
-
-
 /* === faq-script (hardened) === */
 (function(){
   function panelFor(btn){
@@ -1096,13 +1076,7 @@ var $$ = function(s, r){
    ══════════════════════════════════════════════════════════════════════ */
 (function(){
   "use strict";
-  /* Platforms cards use a sticky scroll-stack on every breakpoint now —
-     no carousel clones, no horizontal track. Drop any leftover copies. */
-  var track = document.querySelector("#platforms .pf-track") ||
-              document.querySelector(".pf-track");
-  if (!track) return;
-  Array.prototype.slice.call(track.querySelectorAll("[data-copy]"))
-    .forEach(function(el){ el.remove(); });
+  /* Platforms marquee clones are owned by tekcroft-pf-marquee.js. */
 })();
 
 

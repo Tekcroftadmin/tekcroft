@@ -11,7 +11,7 @@
 #accessibility .lp-bc{display:flex; align-items:center; gap:8px; margin-bottom:18px; font:600 13px/1 var(--font-display); color:rgba(255,255,255,.6);}
 #accessibility .lp-bc a{color:rgba(255,255,255,.8); text-decoration:none;} #accessibility .lp-bc a:hover{color:#fff;}
 #accessibility .lp-bc [aria-current]{color:#7FD6FA;}
-#accessibility .lp-hero h1{margin:0 0 20px; font-family:var(--font-display); font-size:clamp(38px,5vw,68px); font-weight:800; letter-spacing:-.045em; line-height:1; color:#fff;}
+#accessibility .lp-hero h1{margin:0 0 20px; font-family:var(--font-display); font-size:clamp(38px,5vw,68px); font-weight:800; color:#fff;}
 #accessibility .lp-hero h1 em{font-style:normal; color:var(--primary);}
 #accessibility .lp-meta{display:flex; flex-wrap:wrap; gap:10px;}
 #accessibility .lp-meta span{display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border-radius:99px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); font-size:13.5px;}
@@ -53,9 +53,9 @@ html[data-theme="dark"] #accessibility .lp-s{border-color:rgba(255,255,255,.06);
 #accessibility .lp-sh{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
 #accessibility .lp-ic{flex:none; display:grid; place-items:center; width:38px; height:38px; border-radius:11px; background:#E3F3FB; color:var(--primary);}
 html[data-theme="dark"] #accessibility .lp-ic{background:rgba(0,150,213,.14); color:#7FD6FA;}
-#accessibility .lp-sh h2{margin:0; font-family:var(--font-display); font-size:clamp(20px,1.8vw,24px); font-weight:800; letter-spacing:-.025em; line-height:1.25; color:var(--text); text-transform:none;}
+#accessibility .lp-sh h2{margin:0; font-family:var(--font-display); font-size:clamp(20px,1.8vw,24px); font-weight:800; color:var(--text); text-transform:none;}
 #accessibility .lp-no{color:var(--primary);}
-#accessibility .lp-sb h3{margin:22px 0 10px; font-family:var(--font-display); font-size:16.5px; font-weight:800; letter-spacing:-.01em; color:var(--text); text-transform:none;}
+#accessibility .lp-sb h3{margin:22px 0 10px; font-family:var(--font-display); font-size:16.5px; font-weight:800; color:var(--text); text-transform:none;}
 /* lists */
 #accessibility .ck{list-style:none; margin:4px 0 18px; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;}
 #accessibility .ck li{display:flex; align-items:flex-start; gap:10px; padding:11px 13px; border-radius:12px; background:#F7FAFC; border:1px solid #E8EFF4; font-size:14.5px; line-height:1.5; color:var(--text);}
@@ -201,3 +201,801 @@ html[data-theme="dark"] #accessibility .lp-body > .lp-meta .mi{background:rgba(0
 @media (max-width:980px){ #accessibility .ct3{grid-template-columns:minmax(0,1fr);} }
 /* source headings are not numbered, so no numbers here */ #accessibility .lp-no{display:none;} #accessibility .lp-toc .tn{display:none;}
 
+/* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
+/* ══════════════════════════════════════════════════════════════════════
+   SITE CONSISTENCY — design-system source of truth.
+
+   Loaded last from layout.tsx, and appended to every page stylesheet by:
+     node scripts/_apply-site-consistency.mjs
+   Edit THIS file, then re-run that script so page CSS stays in sync.
+
+   System:
+   - One type scale for h1–h6 + body
+   - Section rhythm: --sec-y / --sec-y-tight / --sec-y-feat
+   - Shared gaps: head / lede / block / card / grid / form / wrap
+   - Mobile/tablet overrides below keep vertical space compact
+   - Heroes (.hs / .ct-hero) use --hero-pad-* tokens
+   Future pages: add class "sec" (or .sec-pad*) — spacing follows automatically.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* Type scale — one value per level, site-wide (responsive via clamp) */
+  --h1:clamp(32px,4.2vw,56px);
+  --h2:clamp(28px,3.2vw,44px);
+  --h3:clamp(17px,1.7vw,22px);
+  --h4:clamp(14px,1.25vw,16px);
+  --h5:clamp(12.5px,1.1vw,14px);
+  --h6:clamp(12px,1.05vw,13px);
+  --body:16px;
+  --lede:16px;
+  --body-lh:1.7;
+
+  /* Spacing scale — equal outer section rhythm (exact values per breakpoint) */
+  --section-padding-y:80px;                /* desktop ≥1024 — source of truth */
+  --sec-y:var(--section-padding-y);        /* alias used by existing rules */
+  --sec-y-tight:var(--section-padding-y);  /* same outer rhythm (no specials) */
+  --sec-y-feat:var(--section-padding-y);
+  --head-gap:clamp(12px,1.2vw,16px);       /* eyebrow → title */
+  --lede-gap:clamp(14px,1.4vw,20px);       /* title → lede */
+  --block-gap:clamp(22px,2.4vw,36px);      /* head block → content */
+  --card-pad:clamp(18px,2vw,28px);
+  --card-gap:clamp(14px,1.6vw,22px);
+  --grid-gap:clamp(16px,2vw,28px);
+  --form-gap:clamp(12px,1.4vw,16px);
+  --wrap-x:clamp(16px,4vw,26px);
+  --cta-pad-y:clamp(28px,3.6vw,48px);
+  --hero-pad-top:clamp(30px,3.4vw,62px);
+  --hero-pad-bot:20px;
+}
+
+/* Future-proof layout primitives (optional on new sections) */
+.sec-pad{padding-block:var(--sec-y);}
+.sec-pad-tight{padding-block:var(--sec-y-tight);}
+.sec-pad-feat{padding-block:var(--sec-y-feat);}
+.stack-block{margin-top:var(--block-gap);}
+.stack-cards{gap:var(--card-gap);}
+.stack-grid{gap:var(--grid-gap);}
+
+/* ── Equal vertical padding on every content section ─────────────────
+   One shared --section-padding-y. Heroes / footer keep their own spacing. */
+main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#tekcroft-root main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+.sec,
+section.sec,
+section.wx-why,
+section.built,
+section.rpx,
+section.pplx,
+section.wg,
+section.vx,
+section.lp-s,
+section.sg,
+section.book,
+.sec.acv,
+.sec.ax,
+.sec.bl-sec,
+.sec.eg-sec,
+.sec.revs,
+.sec.faq,
+.sec.wy,
+.sec.pz,
+.sec.pf,
+.sec.wn,
+.sec.vs,
+.sec.wk,
+.sec.cta,
+.sec.tsm,
+.sec.wc-sec,
+.sec.svc,
+.sec.beam-zone,
+.sec.tb,
+.sec.tm,
+.sec.ls,
+.sec.lp,
+.sec.ws,
+.sec.clients,
+#who.sec,
+#vs.sec,
+#model.sec,
+#process.sec,
+#why.sec,
+#whyus.sec,
+#receive.sec,
+#pricing.sec,
+#reviews.sec,
+#work.sec,
+#faq.sec,
+#contact.sec,
+#signs.sec,
+#get.sec,
+#platforms.sec,
+#ai.sec,
+#crawl-check.sec,
+#what-local.sec,
+#services-2.sec,
+#franchise-covers.sec,
+#pack.sec,
+#apart.sec,
+#clients.sec,
+#fit.sec,
+#industries.sec,
+#proof-v2.sec,
+#proof-v2{
+  padding-block:var(--section-padding-y) !important;
+  margin-block:0 !important;
+}
+
+/* Heroes keep their own vertical rhythm */
+section.hs,
+section.ct-hero,
+section#hero-1,
+header.hero,
+#top.hero{
+  /* do not apply --section-padding-y */
+}
+
+/* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
+html body{
+  font-family:var(--font);
+}
+html body :is(h1, h2, h3, h4, h5, h6, .hs-h1, .ct-hero h1),
+html body .hs .hs-h1,
+html body .sec-head h2,
+html body .lamp h1{
+  font-family:var(--font-display) !important;
+}
+
+/* ── Headings: one size per level — beat page-local clamps ──────────── */
+/* letter-spacing + line-height owned by the global lock at file end */
+html body :is(h1, .hs-h1, .ct-hero h1),
+html body .hs .hs-h1{
+  font-size:var(--h1) !important;
+  /* Optical flush kept; tracking is no longer negative (see global lock) */
+  margin-inline-start:-0.04em;
+}
+html body :is(h2),
+html body .sec-head h2,
+html body .ac-head h2,
+html body .wy-say h2,
+html body .mp-say h2,
+html body .gw-say h2,
+html body .pf-head h2,
+html body .cta3 h2,
+html body .eg-sec h2,
+html body .hx .sec-head h2,
+html body .sg-head h2,
+html body .ct-side h2,
+html body .ct-next-head h2,
+html body .tm-head h2,
+html body .ls-say h2,
+html body .lp-say h2,
+html body .pw-head h2,
+html body .ps-head h2,
+html body .fp-head h2,
+html body .dc-head h2,
+html body .cq-top h2,
+html body #services-2 .sec-head h2,
+html body #services-2 h2,
+html body #franchise-covers .sec-head h2,
+html body #franchise-covers h2,
+html body #franchise-covers .tm-head h2,
+html body #what-local h2,
+html body #pack h2,
+html body #process h2,
+html body #faq h2,
+html body #duplicate h2,
+html body #duplicate h2 span,
+html body #duplicate h2 em,
+html body #duplicate h2 small,
+html body #duplicate-v2 h2,
+html body #duplicate-v2 h2 span,
+html body #duplicate-v2 h2 em,
+html body #duplicate-v2 h2 small{
+  font-size:var(--h2) !important;
+}
+html body :is(h3),
+html body .ac-card h3,
+html body .eg-card h3,
+html body .pf-card h3,
+html body .ws-item h3,
+html body .gw-block h3,
+html body .sp-top h3,
+html body .wc-panel h3,
+html body .wn-card h3,
+html body .tm-card h3,
+html body .dv-card h3,
+html body .fw-step h3,
+html body .em-card h3,
+html body .faq-aside h3{
+  font-size:var(--h3) !important;
+}
+/* What-we-do console tabs keep rail size (h3 is semantic only) */
+html body .cn-tab h3{
+  font-size:inherit !important;
+  font-weight:inherit !important;
+  margin:0 !important;
+  color:inherit !important;
+}
+/* Hero form title stays compact (p.hs-form-title or legacy h3) */
+html body .hs-form > h3,
+html body .hs-form > .hs-form-title,
+html body .hs-done h3{
+  font-size:clamp(17px,1.5vw,19px) !important;
+  font-weight:700 !important;
+  margin:0 !important;
+  text-transform:none !important;
+}
+html body :is(h4){ font-size:var(--h4) !important; }
+html body :is(h5){ font-size:var(--h5) !important; }
+html body :is(h6){ font-size:var(--h6) !important; }
+
+/* ── H2 ≤ 2 lines: give titles enough measure — never shrink the type ─ */
+html body .sec-head{
+  max-width:min(100%, 62ch) !important;
+}
+html body .sec-head.mid{
+  max-width:min(100%, 68ch) !important;
+  margin-inline:auto !important;
+}
+html body .sec h2,
+html body .sec-head h2{
+  text-wrap:balance;
+}
+/* Never force a third stacked line inside an h2 */
+html body h2 > span + span + span{
+  display:inline !important;
+}
+/* Headings must flow as one phrase — no forced line breaks via <em>/<span>/<br> */
+html body :is(h1, h2, h3, h4, h5, h6) em,
+html body :is(h1, h2, h3, h4, h5, h6) > span{
+  display:inline !important;
+}
+html body :is(h1, h2, h3, h4, h5, h6) br{
+  display:none !important;
+}
+
+/* ── Body / lede reading size ───────────────────────────────────────── */
+html body .sec p,
+html body .sec-lede,
+html body .hs-lede,
+html body .ac-lede,
+html body .cta3 > p,
+html body .cta3-line,
+html body .faq-a p,
+html body .faq-aside p,
+html body .wy-pane p,
+html body .wy-say > p,
+html body .wc-panel > p,
+html body .wn-panel > p,
+html body .ac-card p,
+html body .eg-card p,
+html body .pf-card > p,
+html body .gr-text,
+html body .mp-say > p,
+html body .gw-say > p,
+html body .wc-say > p,
+html body .wn-say p,
+html body .tm-aside p,
+html body .tm-foot p,
+html body .lp-lede,
+html body .ls-say p,
+html body .tm-card p{
+  font-size:var(--body) !important;
+  line-height:var(--body-lh) !important;
+}
+
+/* Keep form errors / helper chrome from inheriting body size */
+html body .sec .hs-err,
+html body .sec .ct-err,
+html body .sec .form-err,
+html body .hs-err,
+html body .ct-err,
+html body .hs-sub{
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+/* Hero form title is a label (p.hs-form-title), not body copy — keep compact size */
+html body .hs-form > h3,
+html body .hs-form > .hs-form-title{
+  font-size:clamp(17px,1.5vw,19px) !important;
+  font-weight:700 !important;
+  margin:0 !important;
+  text-transform:none !important;
+}
+
+/* ── Heading → description / content gaps ───────────────────────────── */
+html body .sec-head .smark,
+html body .sec-head > .smark{
+  margin-bottom:var(--head-gap) !important;
+}
+html body .sec-head h2,
+html body .ac-head h2,
+html body .tm-head h2,
+html body .ls-say h2,
+html body .lp-say h2{
+  margin:0 !important;
+}
+html body .sec-head .sec-lede,
+html body .sec-lede,
+html body .ls-say p,
+html body .lp-lede,
+html body .wy-say > p,
+html body .mp-say > p,
+html body .gw-say > p{
+  margin-top:var(--lede-gap) !important;
+}
+
+/* Eyebrow HTML removed sitewide — keep mark helper so process heads stay clean */
+.fw-mark{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+.fw-mark::before,
+.fw-mark::after{
+  content:none !important;
+  display:none !important;
+  width:0 !important;
+  height:0 !important;
+  background:none !important;
+  margin:0 !important;
+}
+
+/* ── Alternating grounds helper (pages set --ground / --panel) ────────
+   Includes .cta OUTER bands (not .cta3 / .wrap photo card). Excludes
+   photo shells #fit / .vs. */
+.sec[data-ground="tint"]:not(.vs):not(#fit),
+.sec.is-tint:not(.vs):not(#fit),
+section.cta[data-ground="tint"]{
+  --ground:var(--bg-alt);
+  --panel:var(--surface);
+  background:var(--ground) !important;
+}
+.sec[data-ground="white"]:not(.vs):not(#fit),
+.sec.is-white:not(.vs):not(#fit),
+section.cta[data-ground="white"]{
+  --ground:var(--surface);
+  --panel:var(--bg-alt);
+  background:var(--ground) !important;
+}
+.sec[data-ground="soft"]:not(.vs):not(#fit),
+.sec.is-soft:not(.vs):not(#fit){
+  --ground:var(--bg);
+  --panel:var(--surface);
+  background:var(--ground) !important;
+}
+/* Process steps: icons only — hide step numbers in titles */
+#process .eg-card h3 i{
+  display:none !important;
+  margin:0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE SPACING SYSTEM
+   Tokens + component rhythm. Beats page-local clamps via cascade lock.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Tablet — equal outer section spacing */
+@media (max-width:1023px){
+  :root{
+    --section-padding-y:64px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
+    --head-gap:12px !important;
+    --lede-gap:14px !important;
+    --block-gap:clamp(18px,2.6vw,28px) !important;
+    --card-pad:clamp(16px,2.2vw,22px) !important;
+    --card-gap:clamp(12px,1.8vw,18px) !important;
+    --grid-gap:clamp(14px,2vw,22px) !important;
+    --form-gap:14px !important;
+    --wrap-x:clamp(16px,3.5vw,22px) !important;
+    --cta-pad-y:clamp(26px,4vw,40px) !important;
+    --hero-pad-top:clamp(26px,3vw,48px) !important;
+    --hero-pad-bot:20px !important;
+  }
+}
+
+/* Mobile — equal outer section spacing */
+@media (max-width:767px){
+  :root{
+    --section-padding-y:48px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
+    --head-gap:10px !important;
+    --lede-gap:12px !important;
+    --block-gap:clamp(16px,4.5vw,22px) !important;
+    --card-pad:clamp(14px,4vw,18px) !important;
+    --card-gap:clamp(10px,3vw,14px) !important;
+    --grid-gap:clamp(12px,3.5vw,16px) !important;
+    --form-gap:12px !important;
+    --wrap-x:16px !important;
+    --cta-pad-y:clamp(24px,6vw,36px) !important;
+    --hero-pad-top:26px !important;
+    --hero-pad-bot:20px !important;
+    --body-lh:1.65 !important;
+  }
+
+  /* Horizontal gutters */
+  html body .wrap{
+    padding-left:var(--wrap-x) !important;
+    padding-right:var(--wrap-x) !important;
+  }
+
+  /* Re-assert section rhythm (beats page-local padding-block !important) */
+  html body .sec,
+  html body section.sec,
+  html body .sec.acv,
+  html body .sec.ax,
+  html body .sec.bl-sec,
+  html body .sec.eg-sec,
+  html body .sec.revs,
+  html body .sec.faq,
+  html body .sec.wy,
+  html body .sec.pz,
+  html body .sec.pf,
+  html body .sec.wn,
+  html body .sec.vs,
+  html body .sec.wk,
+  html body .sec.cta,
+  html body .sec.tsm,
+  html body .sec.wc-sec,
+  html body .sec.svc,
+  html body .sec.beam-zone,
+  html body .sec.tb,
+  html body .sec.tm,
+  html body .sec.ls,
+  html body .sec.lp,
+  html body .sec.ws,
+  html body .sec.clients,
+  html body #who.sec,
+  html body #vs.sec,
+  html body #model.sec,
+  html body #process.sec,
+  html body #why.sec,
+  html body #whyus.sec,
+  html body #receive.sec,
+  html body #pricing.sec,
+  html body #reviews.sec,
+  html body #work.sec,
+  html body #faq.sec,
+  html body #contact.sec,
+  html body #signs.sec,
+  html body #get.sec,
+  html body #platforms.sec,
+  html body #ai.sec,
+  html body #ai.tb,
+  html body #ai.tb.sec,
+  html body #crawl-check.sec,
+  html body #what-local.sec,
+  html body #services-2.sec,
+  html body #franchise-covers.sec,
+  html body #pack.sec,
+  html body #apart.sec,
+  html body #clients.sec,
+  html body #fit.sec,
+  html body #industries.sec,
+  html body .sec-pad,
+  html body .sec-pad-feat,
+  html body .sec-pad-tight,
+  html body main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body #main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body section.wx-why,
+  html body section.built,
+  html body section.rpx,
+  html body section.pplx,
+  html body section.wg,
+  html body section.vx,
+  html body section.lp-s,
+  html body #proof-v2{
+    padding-block:var(--section-padding-y) !important;
+    margin-block:0 !important;
+  }
+
+  /* Hero — content-driven height, keep impact */
+  html body .hs,
+  html body .hero,
+  html body .ct-hero{
+    min-height:0 !important;
+    padding-top:calc(var(--nav-h, 64px) + var(--hero-pad-top)) !important;
+    padding-bottom:var(--hero-pad-bot) !important;
+  }
+  /* Full-height photo + veil behind entire mobile hero (not just the H1) */
+  html body .hs-bg,
+  html body .hero-slider,
+  html body .hero-scrim,
+  html body .hs-veil{
+    position:absolute !important;
+    inset:0 !important;
+    max-height:none !important;
+    height:auto !important;
+  }
+  html body .hs-bg img,
+  html body .hero-slide img{
+    width:100% !important;
+    height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center top !important;
+  }
+  html body .mnav > a,
+  html body .mnav .mm-acc,
+  html body .mnav .mm-acc .mm-acc-label,
+  html body .mnav .mm-accp a{
+    text-align:left !important;
+  }
+  html body .mnav .mm-acc{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+  }
+  html body .hs-in{
+    gap:var(--block-gap) !important;
+  }
+  html body .hs-h1,
+  html body .ct-hero h1{
+    margin-bottom:var(--lede-gap) !important;
+  }
+  html body .hs-lede{
+    margin-top:0 !important;
+    margin-bottom:var(--block-gap) !important;
+  }
+  html body .hs-lede + .hs-lede{
+    margin-top:calc(var(--lede-gap) * -0.25) !important;
+    margin-bottom:var(--block-gap) !important;
+  }
+  html body .hs-act{
+    margin-top:0 !important;
+    gap:12px !important;
+  }
+  html body .hs-form{
+    padding:clamp(16px,4vw,20px) !important;
+  }
+  html body .hs-sub{
+    margin-bottom:var(--form-gap) !important;
+  }
+  html body .hs-grid,
+  html body .hs-form .hs-grid,
+  html body .ct-form,
+  html body form[data-lead]{
+    gap:var(--form-gap) !important;
+  }
+  html body .hs-field,
+  html body .ct-field{
+    margin:0 !important;
+  }
+
+  /* Head → content */
+  html body .sec-head,
+  html body .ac-head,
+  html body .tm-head,
+  html body .sg-head,
+  html body .pf-head,
+  html body .hx-head,
+  html body .pw-head,
+  html body .ps-head,
+  html body .fp-head,
+  html body .dc-head,
+  html body .cq-top,
+  html body .wy-say,
+  html body .mp-say,
+  html body .gw-say,
+  html body .ls-say,
+  html body .lp-say{
+    margin-bottom:0 !important;
+  }
+  html body .sec-head + *,
+  html body .ac-head + *,
+  html body .tm-head + *,
+  html body .sg-head + *,
+  html body .pf-head + *,
+  html body .hx-head + *,
+  html body .wy-say + *,
+  html body .mp-say + *,
+  html body .gw-say + *,
+  html body .ls-say + *,
+  html body .lp-say + *,
+  html body .eg,
+  html body .ac-grid,
+  html body .pf-grid,
+  html body .tm-panels,
+  html body .tm-grid,
+  html body .sg-grid,
+  html body .gr,
+  html body .cn,
+  html body .faq-wrap,
+  html body .wk-rail,
+  html body .cl-wall,
+  html body .ax-stage,
+  html body .wn,
+  html body .wc-card,
+  html body .lp-grid,
+  html body .ls-grid{
+    margin-top:var(--block-gap) !important;
+  }
+
+  /* Grids / lists */
+  html body .ac-grid,
+  html body .pf-grid,
+  html body .tm-panels,
+  html body .tm-grid,
+  html body .eg-list,
+  html body .faq-list,
+  html body .lp-grid,
+  html body .ls-grid,
+  html body .ws-list,
+  html body .dv-grid,
+  html body .em-grid,
+  html body .stack-grid,
+  html body .stack-cards{
+    gap:var(--grid-gap) !important;
+  }
+  html body .eg{
+    --eg-gap:var(--grid-gap) !important;
+    gap:var(--grid-gap) !important;
+  }
+  html body .ax{
+    --ax-gap:clamp(16px,4vw,28px) !important;
+  }
+  html body .ax-stage{
+    column-gap:var(--ax-gap) !important;
+    row-gap:var(--grid-gap) !important;
+  }
+  html body .ax-col{
+    gap:var(--card-gap) !important;
+  }
+  html body .hx{
+    --hx-gap:var(--grid-gap) !important;
+  }
+  html body .sg-grid,
+  html body .mp-panel,
+  html body .wn{
+    gap:var(--grid-gap) !important;
+  }
+
+  /* Cards — internal pad */
+  html body .ac-card,
+  html body .eg-card,
+  html body .pf-card,
+  html body .tm-card,
+  html body .wn-card,
+  html body .dv-card,
+  html body .em-card,
+  html body .fw-step,
+  html body .ws-item,
+  html body .gw-block,
+  html body .revs-card{
+    padding:var(--card-pad) !important;
+  }
+  html body .ac-card p,
+  html body .eg-card p,
+  html body .pf-card > p,
+  html body .tm-card p,
+  html body .wn-card p{
+    margin-top:8px !important;
+    margin-bottom:0 !important;
+  }
+  html body .ac-card h3,
+  html body .eg-card h3,
+  html body .pf-card h3,
+  html body .tm-card h3{
+    margin:0 0 6px !important;
+  }
+
+  /* CTA bands */
+  html body .cta .cta3,
+  html body .cta3{
+    padding:var(--cta-pad-y) var(--wrap-x) !important;
+  }
+  html body .cta3-actions,
+  html body .sg-act,
+  html body .eg-cta,
+  html body .wk-cta,
+  html body .gr-end,
+  html body .mp-say .btn{
+    margin-top:var(--block-gap) !important;
+    gap:12px !important;
+  }
+
+  /* FAQ */
+  html body .faq-wrap{
+    gap:var(--block-gap) !important;
+  }
+  html body .faq-q{
+    padding-block:14px !important;
+  }
+  html body .faq-a{
+    padding-bottom:14px !important;
+  }
+
+  /* Footer — slightly tighter plate on small screens */
+  html body .ftm{
+    padding-block:clamp(20px,5vw,28px) !important;
+  }
+  html body .ft4-top,
+  html body .ft-top{
+    gap:clamp(22px,5vw,30px) !important;
+  }
+  html body .mnav{
+    padding:8px 16px 16px !important;
+    gap:2px !important;
+  }
+  html body .mnav a{
+    padding:10px 0 !important;
+  }
+
+  /* Kill leftover spacer habits */
+  html body .sec br:only-child,
+  html body .sec > br,
+  html body .spacer,
+  html body .v-space,
+  html body [aria-hidden="true"].spacer{
+    display:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    height:0 !important;
+  }
+  html body .sec > .wrap > :last-child{
+    margin-bottom:0 !important;
+  }
+}
+
+/* Desktop — lock equal 80px outer rhythm against page media overrides */
+@media (min-width:1024px){
+  :root{
+    --section-padding-y:80px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
+    --head-gap:clamp(12px,1.2vw,16px) !important;
+    --lede-gap:clamp(14px,1.4vw,20px) !important;
+    --block-gap:clamp(22px,2.4vw,36px) !important;
+  }
+}
+
+/* === ZEBRA GROUND LOCK (site) ===
+   white = --surface, tint = --bg-alt (light + dark).
+   Paint CTA OUTER section bands too (FAQ→CTA must not share tint).
+   Keep photo shells (#fit, .vs) and heroes unpainted. Inner .cta3 card unchanged. */
+html body section[data-ground="tint"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="tint"]:not(.vs):not(#fit),
+html body .sec.is-tint:not(.vs):not(#fit),
+html body section.cta[data-ground="tint"],
+html body #contact.cta[data-ground="tint"],
+html body #contact.sec[data-ground="tint"]{
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+html body section[data-ground="white"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="white"]:not(.vs):not(#fit),
+html body .sec.is-white:not(.vs):not(#fit),
+html body section.cta[data-ground="white"],
+html body #contact.cta[data-ground="white"],
+html body #contact.sec[data-ground="white"]{
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
+
+/* In-page hash targets clear the fixed nav */
+#approach{
+  scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* ── Global heading letter-spacing + line-height (all pages / breakpoints) ─
+   Must win over page-local negative tracking and tight leading. */
+html body :is(h1, h2, h3, h4, h5, h6),
+html body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html body h1.hs-h1,
+html[data-design] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html[data-design="raw"] body h1.hs-h1{
+  letter-spacing:0.005em !important;
+  line-height:1.2 !important;
+}

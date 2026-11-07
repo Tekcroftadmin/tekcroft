@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import LegalPageScript from "@/components/LegalPageScript";
 import { SITE_URL } from "@/lib/site-url";
 import meta from "@/lib/accessibility-meta.json";
@@ -15,11 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function AccessibilityPage() {
-  const html = fs
-    .readFileSync(
-      path.join(process.cwd(), "lib", "accessibility-body.html"),
-      "utf8"
-    )
+  const html = readPreparedBody("accessibility-body.html")
     .split("__SITE_URL__")
     .join(SITE_URL);
 
@@ -32,7 +27,7 @@ export default function AccessibilityPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
+      <SitePage html={html} prepared />
       <LegalPageScript rootId="accessibility" />
     </>
   );

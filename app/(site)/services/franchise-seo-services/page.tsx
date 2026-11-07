@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { franchiseSeoServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import FranchiseWhyChoose from "@/components/FranchiseWhyChoose";
 import FranchiseCovers from "@/components/FranchiseCovers";
 import assets from "@/lib/asset-manifest.json";
@@ -38,10 +37,7 @@ export const metadata: Metadata = {
 };
 
 export default function FranchiseSeoServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "franchise-seo-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("franchise-seo-body.html");
 
   return (
     <>
@@ -61,11 +57,11 @@ export default function FranchiseSeoServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} slot="<!--FRANCHISE_WHY_SLOT-->">
+      <SitePage html={html} prepared slot="<!--FRANCHISE_WHY_SLOT-->">
         <FranchiseWhyChoose />
-      </Homepage>
+      </SitePage>
       <FranchiseCovers />
-      <Script src={assets.franchiseSeo} strategy="afterInteractive" />
+      <Script src={assets.franchiseSeo} strategy="lazyOnload" />
       <JsonLd data={franchiseSeoServicesSchema} />
     </>
   );

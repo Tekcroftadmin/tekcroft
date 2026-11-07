@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { webDesignAndDevelopmentServicesSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/web-design-and-development-meta.json";
 import lcp from "@/lib/web-design-and-development-lcp.json";
@@ -34,10 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default function WebDesignAndDevelopmentServicesPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "web-design-and-development-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("web-design-and-development-body.html");
 
   return (
     <>
@@ -57,8 +53,8 @@ export default function WebDesignAndDevelopmentServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.webDesignAndDevelopment} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.webDesignAndDevelopment} strategy="lazyOnload" />
       <JsonLd data={webDesignAndDevelopmentServicesSchema} />
     </>
   );

@@ -3,8 +3,15 @@ import fs from "fs";
 import path from "path";
 import Script from "next/script";
 import Homepage from "@/components/Homepage";
+import SiteShell from "@/components/SiteShell";
 import DeferredStylesheet from "@/components/DeferredStylesheet";
 import assets from "@/lib/asset-manifest.json";
+import {
+  preparePageBody,
+  readSiteFooter,
+  readSiteHeader,
+} from "@/lib/compose-site-html";
+import { stampFooterYear } from "@/lib/stamp-footer-year";
 
 /* Same chrome CSS stack as (site)/layout — root not-found is outside that layout */
 import "./responsive.css";
@@ -30,9 +37,11 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "not-found-body.html"),
-    "utf8"
+  const html = preparePageBody(
+    fs.readFileSync(
+      path.join(process.cwd(), "lib", "not-found-body.html"),
+      "utf8"
+    )
   );
 
   return (
@@ -42,7 +51,12 @@ export default function NotFound() {
         dangerouslySetInnerHTML={{ __html: criticalCss }}
       />
       <DeferredStylesheet href="/css/tekcroft-defer.css" />
-      <Homepage html={html} />
+      <SiteShell
+        headerHtml={readSiteHeader()}
+        footerHtml={stampFooterYear(readSiteFooter())}
+      >
+        <Homepage html={html} />
+      </SiteShell>
       <Script src={assets.notFound} strategy="afterInteractive" />
     </>
   );

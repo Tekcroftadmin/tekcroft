@@ -1,0 +1,287 @@
+/* ============================================================
+   Mobile / tablet only (≤1023px): buttons + CTA card fit.
+   Desktop (≥1024) is intentionally untouched.
+   Loaded last so it beats critical CSS .btn { white-space:nowrap }.
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  /* ---- Shared button containment + wrap ---- */
+  html body a.btn,
+  html body button.btn,
+  html body .btn {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: auto;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    text-align: center !important;
+    height: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden; /* keep wipe clip; text wraps inside */
+    line-height: 1.25 !important;
+  }
+
+  html body .btn .btn-label,
+  html body .btn-label {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0 !important;
+    max-width: 100%;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  /* Letter-roll: one-line stacks can't wrap — flatten on small screens */
+  html body .btn-roll {
+    display: inline !important;
+    height: auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  html body .btn-roll b {
+    display: inline !important;
+    height: auto !important;
+    white-space: normal !important;
+    flex-wrap: wrap !important;
+  }
+  html body .btn-roll b + b {
+    display: none !important;
+  }
+  html body .btn-roll span {
+    white-space: normal !important;
+    display: inline !important;
+  }
+
+  html body .btn .arw {
+    flex-shrink: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* Parents that hold CTAs must be able to shrink in flex/grid */
+  html body .cta3,
+  html body .cta3-actions,
+  html body .cta > .wrap,
+  html body .cta-stage,
+  html body .cta-panel,
+  html body .pf-cta,
+  html body .hs-act,
+  html body .hero-actions,
+  html body .sg-act,
+  html body .eg-cta,
+  html body .wk-cta,
+  html body .gr-end,
+  html body .faq-cta,
+  html body .tb-act,
+  html body .mp-say,
+  html body .gw-cta-end {
+    min-width: 0 !important;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* About-us glass CTA uses .cta-btn (not .btn) */
+  html body .cta-btn,
+  html body #ctaw .cta-btn {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: auto;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    text-align: center !important;
+    height: auto !important;
+    justify-content: center !important;
+    overflow-wrap: break-word;
+  }
+
+  html body .cta-btn .arw,
+  html body #ctaw .cta-btn .arw {
+    flex-shrink: 0 !important;
+  }
+
+  html body .cta-panel,
+  html body #ctaw .cta-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .cta-panel > *,
+  html body #ctaw .cta-panel > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word;
+  }
+
+  html body .cta-panel .cta-btn,
+  html body #ctaw .cta-panel .cta-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  html body .cta3-actions,
+  html body .pf-cta,
+  html body .sg-act,
+  html body .eg-cta,
+  html body .wk-cta,
+  html body .gr-end,
+  html body .faq-cta,
+  html body .gw-cta-end,
+  html body .mp-say {
+    width: 100%;
+  }
+
+  html body .cta3-actions .btn,
+  html body .pf-cta .btn,
+  html body .sg-act .btn,
+  html body .eg-cta .btn,
+  html body .wk-cta .btn,
+  html body .gr-end .btn,
+  html body .faq-cta .btn,
+  html body .gw-cta-end .btn,
+  html body .mp-say .btn,
+  html body .cta3-actions > a.btn,
+  html body .pf-cta > a.btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* FAQ aside CTA: defer CSS forces nowrap */
+  html body .faq-cta .btn {
+    white-space: normal !important;
+  }
+
+  /* ---- Dark glass CTA card ---- */
+  html body .cta > .wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: clip;
+  }
+
+  html body .cta .cta3,
+  html body .cta3 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    margin-inline: auto !important;
+    justify-items: center !important;
+    overflow-x: clip;
+  }
+
+  html body .cta .cta3 > *,
+  html body .cta3 > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-wrap: break-word;
+  }
+
+  html body .cta .cta3 h2,
+  html body .cta3 h2 {
+    max-width: 100% !important;
+    width: 100%;
+    margin-inline: auto !important;
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: clamp(1.28rem, 5.4vw, 1.85rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  html body .cta .cta3 > p,
+  html body .cta3 > p {
+    max-width: 100% !important;
+    width: 100%;
+    margin-inline: auto !important;
+    text-align: center;
+    overflow-wrap: break-word;
+    font-size: clamp(0.92rem, 3.5vw, 1.05rem) !important;
+  }
+
+  html body .cta3-mail {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  html body .cta3-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  /* ---- Hero dual CTAs: stack, equal width ---- */
+  html body .hs-act,
+  html body .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 12px !important;
+  }
+
+  html body .hs-act .btn,
+  html body .hero-actions .btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Mobile menu CTAs */
+  html body .mnav .btn,
+  html body .mm-cta,
+  html body .mx-cta,
+  html body .mm-foot .mm-cta,
+  html body .mm-foot .mm-cta2 {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    height: auto !important;
+  }
+
+  html body .mm-cta .btn-label,
+  html body .mx-cta .btn-label,
+  html body .mm-foot .mm-cta .btn-label,
+  html body .mm-foot .mm-cta2 .btn-label {
+    white-space: normal !important;
+  }
+}
+
+/* Narrow phones: comfortable padding so wrapped labels clear the edges */
+@media (max-width: 480px) {
+  html body a.btn,
+  html body button.btn,
+  html body .btn {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  html body .btn.btn-lg {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  html body .btn .arw {
+    margin-right: -4px !important;
+  }
+}
+
+/* Very narrow: slightly tighter CTA card pad (keeps equal L/R) */
+@media (max-width: 360px) {
+  html body .cta .cta3,
+  html body .cta3 {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}

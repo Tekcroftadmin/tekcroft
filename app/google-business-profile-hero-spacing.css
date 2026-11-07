@@ -12,20 +12,32 @@
   z-index:2;
 }
 
-/* 2) Drop forced full-viewport height + auto vertical centering so the
-   hero ends right after the logo carousel (no empty band under it). */
+/* 2) Drop forced full-viewport height so the hero ends at the strip.
+   Strip height/centering come from --hero-strip-height (service-hero-lock). */
 #hero-1.hs,
 #hero-1.hs:has(> .ticker){
   min-height:0 !important;
-  padding-bottom:12px !important;
+  /* Shell ends at strip; equal content→strip air comes from .hs-in padding-bottom */
+  padding-bottom:0 !important;
 }
 #hero-1 .hs-in{
   margin-block:0 !important;
   margin-top:0 !important;
   margin-bottom:0 !important;
+  flex:0 0 auto !important;
+  padding-bottom:var(--hero-space-y, var(--hero-pad-y, 64px)) !important;
 }
 #hero-1 > .ticker{
-  margin-top:clamp(20px,2.4vw,28px) !important;
+  height:var(--hero-strip-height, 72px) !important;
+  min-height:var(--hero-strip-height, 72px) !important;
+  max-height:var(--hero-strip-height, 72px) !important;
+  margin-top:0 !important;
   margin-bottom:0 !important;
-  padding-block:8px 0 !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  align-items:center !important;
+  flex-grow:0 !important;
+  flex-shrink:0 !important;
+  overflow:hidden !important;
 }

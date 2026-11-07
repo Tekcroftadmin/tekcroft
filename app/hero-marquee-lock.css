@@ -1,0 +1,54 @@
+/* Hero brand ticker — full-bleed, always-full track, seamless loop.
+   Shared by .ticker/.marq and .hs-logos on every page. */
+
+/* Full viewport width — do not clip to .wrap max-width */
+.ticker > .wrap,
+#hero-1 > .ticker > .wrap,
+header.hero > .ticker > .wrap,
+#top.hero > .ticker > .wrap{
+  max-width:none !important;
+  width:100% !important;
+  margin-inline:0 !important;
+  padding-inline:0 !important;
+}
+
+.ticker .marq,
+#hero-1 .hs-logos,
+.hs > .hs-logos{
+  width:100% !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  /* Symmetrical edge fade */
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) !important;
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) !important;
+}
+
+.ticker .marq-track,
+#hero-1 .hs-logos-track,
+.hs > .hs-logos .hs-logos-track{
+  display:flex !important;
+  align-items:center !important;
+  gap:44px !important;
+  width:max-content !important;
+  /* Exactly one half of a doubled track (seamless) */
+  animation:tekcroftHeroMarq 38s linear infinite !important;
+}
+
+.ticker .marq:hover .marq-track,
+#hero-1 .hs-logos:hover .hs-logos-track,
+.hs > .hs-logos:hover .hs-logos-track{
+  animation-play-state:paused !important;
+}
+
+@keyframes tekcroftHeroMarq{
+  to{ transform:translateX(-50%); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ticker .marq-track,
+  #hero-1 .hs-logos-track,
+  .hs > .hs-logos .hs-logos-track{
+    animation:none !important;
+  }
+}

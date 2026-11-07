@@ -40,8 +40,6 @@ body:has(#watch),
 #seo-services-page #watch .vx-head h2{
   font-size:clamp(26px,3.3vw,44px) !important;
   font-weight:800 !important;
-  letter-spacing:-.04em !important;
-  line-height:1.08 !important;
   max-width:24ch;
   margin:0 auto;
   text-transform:none !important;

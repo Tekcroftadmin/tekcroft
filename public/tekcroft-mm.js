@@ -112,8 +112,13 @@ function imgKeyForPath(pathname){
   }
   return null;
 }
-var activeImg = imgKeyForPath(location.pathname);
-if(activeImg && BG[activeImg]) BG_IDLE = activeImg;
+var DEFAULT_BG_IDLE = BG_IDLE;
+var activeImg = null;
+function refreshActiveImg(){
+  activeImg = imgKeyForPath(location.pathname);
+  BG_IDLE = (activeImg && BG[activeImg]) ? activeImg : DEFAULT_BG_IDLE;
+}
+refreshActiveImg();
 
 var stack = panel.querySelector('.mm-stack');
 stack.innerHTML = BG_KEYS.map(function(k){
@@ -126,6 +131,67 @@ function showBg(key){
     img.setAttribute('data-on', img.dataset.key === want ? 'true' : 'false');
   });
 }
+
+/* Mark the row that matches the live URL. Soft-nav keeps this DOM mounted,
+   so this must re-run on every route change — never leave a stale is-current. */
+function clearMmCurrent(){
+  [].forEach.call(panel.querySelectorAll('.mm-row.is-current'), function(a){
+    a.classList.remove('is-current');
+    a.removeAttribute('aria-current');
+  });
+  [].forEach.call(panel.querySelectorAll('.mm-gp.is-current-parent, .mm-gp[aria-current="page"]'), function(gp){
+    gp.classList.remove('is-current-parent');
+    gp.removeAttribute('aria-current');
+  });
+  var t = document.getElementById('mmTrigger');
+  if(t) t.classList.remove('is-current-parent');
+}
+function markMmCurrent(){
+  clearMmCurrent();
+  function norm(p){ return (p||'').replace(/\/+$/,'').toLowerCase(); }
+  var here = norm(location.pathname);
+  if(!here || here === '/') return;
+  var marked = false;
+  [].forEach.call(panel.querySelectorAll('.mm-row'), function(a){
+    var hit = false;
+    try{
+      var u = new URL(a.getAttribute('href'), location.href);
+      hit = norm(u.pathname) === here && !u.hash;
+    }catch(e){}
+    if(!hit) return;
+    a.classList.add('is-current');
+    a.setAttribute('aria-current','page');
+    var col = a.closest('.mm-svc-col');
+    var gp = col && col.querySelector('.mm-gp');
+    if(gp) gp.classList.add('is-current-parent');
+    var t = document.getElementById('mmTrigger');
+    if(t) t.classList.add('is-current-parent');
+    marked = true;
+  });
+  if(!marked){
+    [].forEach.call(panel.querySelectorAll('.mm-gp'), function(gp){
+      var hit = false;
+      try{
+        var href = gp.getAttribute('href');
+        if(!href) return;
+        var u = new URL(href, location.href);
+        hit = norm(u.pathname) === here && !u.hash;
+      }catch(e){}
+      if(!hit) return;
+      gp.classList.add('is-current-parent');
+      gp.setAttribute('aria-current','page');
+      var t = document.getElementById('mmTrigger');
+      if(t) t.classList.add('is-current-parent');
+    });
+  }
+}
+function syncMmCurrent(){
+  refreshActiveImg();
+  markMmCurrent();
+  if(!panel.hidden) reset();
+  else showBg(activeImg || null);
+}
+window.__tekcroftSyncMm = syncMmCurrent;
 
 /* ── open, close, and the caret that points at the trigger ── */
 var hideTimer = null, showTimer = null;
@@ -167,6 +233,9 @@ function reset(){
 }
 function open(){
   clearTimeout(hideTimer);
+  /* Re-sync from the live URL so soft-nav never opens with a stale highlight. */
+  refreshActiveImg();
+  markMmCurrent();
   panel.hidden = false;
   btn.setAttribute('aria-expanded','true');
   placeCaret();
@@ -316,6 +385,9 @@ function mxIc(n){
     }
   });
 })();
+
+/* Initial active highlight from the live URL (must stay inside this IIFE). */
+markMmCurrent();
 })();
 
 /* ── Mega-menu footer CTA: label + arrow like primary buttons ── */
@@ -361,29 +433,20 @@ function mxIc(n){
   });
 })();
 
-/* === mm-current-js === */
+/* === mm-current-js ===
+   Soft-nav / back-forward: sync via the window hook (functions live in the
+   mega-menu IIFE above and are not in this scope). */
 (function(){
-  var panel=document.getElementById('mmPanel'); if(!panel) return;
-  function norm(p){ return (p||'').replace(/\/+$/,'').toLowerCase(); }
-  var here=norm(location.pathname), forced=(panel.getAttribute('data-current')||'').toLowerCase().trim();
-  var marked=false;
-  [].forEach.call(panel.querySelectorAll('.mm-row'),function(a){
-    var name=(a.querySelector('.mm-n')||a).textContent.toLowerCase().trim(), hit=false;
-    try{ var u=new URL(a.getAttribute('href'),location.href); hit = here && here!=='' && norm(u.pathname)===here && !u.hash; }catch(e){}
-    if(!hit && forced) hit = name===forced;
-    if(hit){ a.classList.add('is-current'); a.setAttribute('aria-current','page');
-      var col=a.closest('.mm-svc-col'), gp=col&&col.querySelector('.mm-gp'); if(gp) gp.classList.add('is-current-parent');
-      var t=document.getElementById('mmTrigger'); if(t) t.classList.add('is-current-parent');
-      marked=true; }
-  });
-  if(!marked){
-    [].forEach.call(panel.querySelectorAll('.mm-gp'),function(gp){
-      var hit=false;
-      try{ var u=new URL(gp.getAttribute('href'),location.href); hit = here && here!=='' && norm(u.pathname)===here && !u.hash; }catch(e){}
-      if(hit){ gp.classList.add('is-current-parent'); gp.setAttribute('aria-current','page');
-        var t=document.getElementById('mmTrigger'); if(t) t.classList.add('is-current-parent'); }
-    });
+  var last = location.pathname;
+  function maybeSync(){
+    var now = location.pathname;
+    if(now === last) return;
+    last = now;
+    if (typeof window.__tekcroftSyncMm === 'function') window.__tekcroftSyncMm();
   }
+  if (typeof window.__tekcroftSyncMm === 'function') window.__tekcroftSyncMm();
+  window.addEventListener('popstate', maybeSync);
+  setInterval(maybeSync, 250);
 })();
 
 

@@ -219,8 +219,7 @@ html{font-family:var(--font); -webkit-text-size-adjust:100%;
 body{margin:0; background:var(--bg); color:var(--text); font-size:16px; line-height:1.65;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
   transition:background .35s var(--ease), color .35s var(--ease);}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; line-height:1.14;
-  letter-spacing:-0.03em; font-weight:800;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display); margin:0; font-weight:800;}
 h1{font-size:var(--h1);} h3{font-size:var(--h3);}
 h4{font-size:var(--h4);} h5,h6{font-size:var(--h5);}
 p{margin:0;}
@@ -532,7 +531,7 @@ html[data-theme="dark"] .theme-btn .sun{display:none;}
   font-style:normal; flex-shrink:0;}
 .on-dark .tag{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.20); color:#fff;}
 
-h2{font-size:var(--h2); letter-spacing:-0.042em;}
+h2{font-size:var(--h2);}
 h2 em{font-style:normal; color:var(--brand-text);}
 .sec-lede{font-size:var(--body); color:var(--text-2); margin-top:16px; max-width:56ch;}
 .sec-head.mid .sec-lede{margin-left:auto; margin-right:auto;}
@@ -601,7 +600,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
 @keyframes mm-in{from{opacity:0; transform:translateY(-8px);} to{opacity:1; transform:none;}}
 .mm-caret{position:absolute; top:-1px; left:var(--caret-x,50%); transform:translateX(-50%);
   width:46px; height:2px; background:var(--primary); border-radius:2px; z-index:5;}
-.mm h3{font-family:var(--font-display); letter-spacing:-.03em; font-weight:700;}
+.mm h3{font-family:var(--font-display); font-weight:700;}
 
 .mm-hero-grid{display:grid; grid-template-columns:1fr 252px; gap:18px; align-items:stretch;}
 
@@ -760,8 +759,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
 .hs .tag{--d:40ms; margin-bottom:clamp(18px,2vw,26px);}
 
 .hs-h1{--d:130ms; margin:0 0 clamp(18px,2vw,26px);
-  font-family:var(--font-display); font-weight:800; letter-spacing:-0.04em;
-  line-height:1.08; font-size:var(--h1); color:#fff;}
+  font-family:var(--font-display); font-weight:800; font-size:var(--h1); color:#fff;}
 .hs-h1 em{font-style:normal; color:var(--primary);}
 .hs-h1 span{display:inline;}
 
@@ -798,7 +796,7 @@ html[data-theme="dark"]{  --mm-hover:rgba(255,255,255,.06); }
  /* the homepage sizes a heading inside its own form dialog at 26px rather
     than at --h2, which is a section's size; this is that heading. */
 .hs-form > h3, .hs-form > .hs-form-title{margin:0; font-family:var(--font-display); font-size:clamp(17px,1.5vw,19px) !important;
-  font-weight:700; letter-spacing:-0.035em; line-height:1.22; color:#fff;}
+  font-weight:700; color:#fff;}
 .hs-rule{display:block; width:52px; height:3px; margin:14px auto 0; border-radius:3px;
   background:var(--primary);}
 .hs-sub{margin:14px auto clamp(20px,1.8vw,26px); max-width:34ch;
@@ -1236,7 +1234,7 @@ html[data-theme="dark"] .mp-panel{
    panel it is white, the same reading it has everywhere else. */
 .mp-say .smark{background:var(--surface);}
 
-.mp-say h2{font-size:var(--h2); line-height:1.16; letter-spacing:-0.038em;}
+.mp-say h2{font-size:var(--h2);}
 .mp-say h2 span{display:block;}
 .mp-say h2 em{font-style:normal; color:var(--cta-blue);}
 
@@ -1434,7 +1432,7 @@ html[data-theme="dark"] .mp-arch{fill:rgba(255,255,255,.05);}
 .pf-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.82fr);
   gap:clamp(30px,4%,64px); align-items:center;}
 .pf-head .sec-head{max-width:none;}
-.pf-head h2{font-size:var(--h2); line-height:1.16; letter-spacing:-0.038em;}
+.pf-head h2{font-size:var(--h2);}
 .pf-head h2 span{display:block;}
 .pf-head h2 em{font-style:normal; color:var(--brand-text);}
 .pf-head .sec-lede{margin-top:clamp(16px,1.8vw,24px); max-width:44ch;}
@@ -1637,7 +1635,7 @@ html[data-theme="dark"] .mp-arch{fill:rgba(255,255,255,.05);}
 .pf-n{font-size:13px; font-weight:700; letter-spacing:.12em;
   color:var(--brand-text); font-variant-numeric:tabular-nums;}
 
-.pf-card h3{font-size:var(--h3); letter-spacing:-0.032em; line-height:1.25;}
+.pf-card h3{font-size:var(--h3);}
 .pf-card h3 em{font-style:normal;}
 /* the rule under the name, and the description under that */
 .pf-card > p{margin-top:clamp(14px,1.4vw,18px);
@@ -1871,7 +1869,7 @@ html[data-theme="dark"] .pf{--ring:var(--border-soft);}
    heading well short of the plate's edge ? a line running the full
    width of a 1220px card is a line nobody reads to the end of. */
 .cta3 h2{margin-top:14px; font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.045em; line-height:1.08;
+  font-weight:800;
   max-width:27ch; margin-inline:auto;}
 .cta3 > p{margin-top:14px; font-size:15px; line-height:1.6;}
 
@@ -2345,8 +2343,7 @@ html[data-theme="dark"] .modal .field.sel select{
 /* ---- the columns and the socials ----
    These were the card footer's, and the plate borrowed them. The card is
    gone, so they belong to the footer that is left and are named for it. */
-.ft-col h4{font-family:var(--font-display); font-size:var(--h4); font-weight:800;
-  letter-spacing:.16em; text-transform:uppercase; color:var(--text);
+.ft-col h4{font-family:var(--font-display); font-size:var(--h4); font-weight:800; text-transform:uppercase; color:var(--text);
   margin-bottom:16px;}
 .ft-col nav{display:grid; gap:11px;}
 .ft-col nav a{font-size:14.2px; color:var(--text-2);
@@ -2717,7 +2714,7 @@ html[data-theme="dark"] .cn-sheet{background:var(--n875);}
    above it for the same job. */
 .cn-lead{
   font-size:var(--body);
-  font-weight:700; letter-spacing:-0.022em; line-height:1.5; color:var(--text);
+  font-weight:700; color:var(--text);
   max-width:38ch;}
 
 .cn-list{margin-top:24px; display:grid; gap:16px;}
@@ -3283,7 +3280,7 @@ html[data-theme="dark"] .mp-panel{
    every section rather than a second one written here. The <em> is a
    block as well as a span, which is what puts the blue phrase on its own
    line the way the two-line heads elsewhere do. */
-.wn-say h2{font-size:var(--h2); line-height:1.16; letter-spacing:-0.038em;}
+.wn-say h2{font-size:var(--h2);}
 html body #who .wn-say h2 > span,
 html body #who .wn-say h2 > em{display:block !important;}
 html body #who .wn-say h2 em{font-style:normal; color:var(--primary) !important;}
@@ -3868,7 +3865,7 @@ html[data-theme="dark"] .c-us .vs-m{background:hsl(146 48% 92%);}
 .bpx-stage:hover .bpx-ico{transform:scale(1.07); background:var(--primary); color:#fff;}
 
 .bpx-stage h3{margin-top:clamp(14px,1.6vw,20px); font-family:var(--font-display);
-  font-weight:700; letter-spacing:-0.03em;
+  font-weight:700;
   color:var(--text);}
 .bpx-rule{display:block; width:22px; height:2px; border-radius:2px; margin-top:10px;
   background:var(--border); transform-origin:50% 50%;
@@ -3992,7 +3989,7 @@ html[data-theme="dark"] .c-us .vs-m{background:hsl(146 48% 92%);}
   gap:clamp(34px,5vw,80px); align-items:center;}
 
 /* ---- the claim ---- */
-.wc-say h2{letter-spacing:-0.045em; line-height:1.04;}
+.wc-say h2{}
 .wc-say h2 em{font-style:normal; color:var(--brand-text);}
 .wc-say > p{margin-top:20px; font-size:var(--body); line-height:1.7; color:var(--text-2);
   max-width:44ch;}
@@ -4049,7 +4046,7 @@ html[data-theme="dark"] .c-us .vs-m{background:hsl(146 48% 92%);}
 .wc-panel.on{display:block; animation:wcIn .45s var(--pop);}
 @keyframes wcIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
 .wc-panel h3{font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.035em; line-height:1.18; max-width:22ch;}
+  font-weight:800; max-width:22ch;}
 .wc-panel > p{margin-top:12px; font-size:var(--body); line-height:1.65; color:var(--text-2);
   max-width:48ch;}
 
@@ -4271,9 +4268,8 @@ html[data-theme="dark"] .wk-deck.wired .wk-card.on .wk-shot{
 .wk-say{padding-top:clamp(14px,1.6vw,20px);}
 .wk-say h3{display:flex; align-items:baseline; gap:12px;
   font-family:var(--font-display);
-  font-weight:800; letter-spacing:-0.035em; color:var(--text);}
-.wk-say h3 i{font-style:normal; font-size:var(--h3); font-weight:700;
-  letter-spacing:.1em; color:var(--subtle); font-variant-numeric:tabular-nums;}
+  font-weight:800; color:var(--text);}
+.wk-say h3 i{font-style:normal; font-size:var(--h3); font-weight:700; color:var(--subtle); font-variant-numeric:tabular-nums;}
 .wk-say p{margin-top:10px; font-size:14px; line-height:1.58; color:var(--text-2);
   max-width:46ch;}
 
@@ -4621,8 +4617,8 @@ html[data-theme="light"] .hs-done p{color:var(--text-2);}
    ?????????????????????????????????????????????????????????????????????? */
 
 /* the sections that restated the tracking give it back */
-.mp-say h2,.pf-head h2{ letter-spacing:-0.04em; }
-h2{ letter-spacing:-0.04em; }
+.mp-say h2,.pf-head h2{ }
+h2{ }
 
 /* the badge sits the same distance above every heading it introduces */
 .smark{ margin-bottom:clamp(16px,1.8vw,22px); }
@@ -4699,7 +4695,7 @@ html[data-theme="dark"] #receive .pf-card{background:var(--surface) !important;}
 #receive .pf-card:hover{transform:none; box-shadow:none;}
 #receive .pf-top{margin-bottom:clamp(10px,1.1vw,14px);}
 #receive .pf-ic{width:clamp(38px,3.4vw,46px);}
-#receive .pf-card h3{font-size:var(--h3); line-height:1.3;}
+#receive .pf-card h3{font-size:var(--h3);}
 #receive .pf-card p{margin-top:8px; font-size:var(--body); line-height:1.55;}
 
 
@@ -4734,7 +4730,7 @@ html[data-theme="dark"] #receive .pf-card{background:var(--surface) !important;}
 .ac-head{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:clamp(24px,5vw,90px);
   align-items:end; margin-bottom:clamp(24px,2.6vw,36px);}
 .ac-head .smark{margin-bottom:10px;}
-.acv h2{margin:0; font-size:var(--h2); line-height:1.06; letter-spacing:-.04em; text-transform:none;}
+.acv h2{margin:0; font-size:var(--h2); text-transform:none;}
 .acv h2 em{font-style:normal; color:var(--primary);}
 #services-2 .ac-lede,
 .ac-lede{margin:0; justify-self:end; max-width:44ch; padding-left:clamp(16px,1.6vw,22px);
@@ -4792,7 +4788,7 @@ html[data-theme="dark"] #receive .pf-card{background:var(--surface) !important;}
 .ac-ico{display:grid; place-items:center; width:46px; height:46px; border-radius:13px; margin:auto 0 16px;
   background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28); color:#fff;}
 .ac-ico svg{width:22px; height:22px;}
-.ac-open h3{margin:0 0 10px; font-size:var(--h3); letter-spacing:-.04em; line-height:1.15;
+.ac-open h3{margin:0 0 10px; font-size:var(--h3);
   color:#fff; text-transform:none; max-width:20ch;}
 .ac-open p{margin:0 0 16px; font-size:var(--body); line-height:1.65;
   color:rgba(255,255,255,.78); max-width:52ch;}
@@ -5612,7 +5608,7 @@ html[data-theme="dark"] #services-2 .ac-card,html[data-theme="dark"] #services-2
 
 #why .wy-say{text-align:center;}
 #why .wy-say h2{margin:clamp(16px,1.9vw,24px) auto 0; max-width:20ch;
-  font-size:var(--h2); line-height:1.1; letter-spacing:-0.045em;}
+  font-size:var(--h2);}
 #why .wy-say h2 em{font-style:normal; color:var(--brand-text);}
 
 
@@ -5658,7 +5654,7 @@ html[data-theme="dark"] #services-2 .ac-card,html[data-theme="dark"] #services-2
 #why .wy-mark svg{width:50%; height:50%;}
 
 #why .wy-pane h3{font-family:var(--font-display); font-weight:800;
-  font-size:var(--h3); line-height:1.2; letter-spacing:-0.035em;
+  font-size:var(--h3);
   color:var(--text);}
 #why .wy-pane p{margin:clamp(9px,1vw,13px) 0 0;
   font-size:var(--body); line-height:1.7; color:var(--text-2);}
@@ -5754,7 +5750,7 @@ html[data-theme="dark"] #services-2 .ac-card,html[data-theme="dark"] #services-2
    raised, the way the mock-up has it.
    ?????????????????????????????????????????????????????????????????????? */
 #pricing{padding-block:clamp(40px,4.4vw,64px); background:var(--ground);}
-#pricing h2{text-transform:none; letter-spacing:-.04em;}
+#pricing h2{text-transform:none;}
 #pricing h2 em{font-style:normal; color:var(--brand-text);}
 #pricing .sec-head{margin-bottom:clamp(22px,2.6vw,34px);}
 
@@ -5774,7 +5770,7 @@ html[data-theme="dark"] .pz-ic{background:hsl(var(--brand-h) 40% 18%);}
 .pz-lab{display:block; font-size:10.6px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
   color:var(--muted);}
 #pricing .pz-tier h3{margin:5px 0 0; font-family:var(--font-display); font-size:var(--h3);
-  font-weight:800; letter-spacing:-.03em; color:var(--text); text-transform:none;}
+  font-weight:800; color:var(--text); text-transform:none;}
 .pz-best{margin:0; padding-left:clamp(14px,2vw,28px); border-left:1px solid var(--border);
   font-size:clamp(13.4px,1.05vw,14.8px); line-height:1.6; color:var(--text-2);}
 .pz-price{padding-left:clamp(14px,2vw,28px); border-left:1px solid var(--border); text-align:left;}
@@ -5864,8 +5860,6 @@ html[data-theme="dark"] .pz-row.is-ent:hover{background:hsl(150 45% 12%);}
   font-family:var(--font-display);
   font-size:clamp(30px,3.4vw,52px) !important;
   font-weight:800;
-  letter-spacing:-.045em;
-  line-height:1.06 !important;
   color:var(--text);
   text-transform:none;
 }
@@ -5994,8 +5988,6 @@ html[data-theme="dark"] #audit-why .awy-ic{
   font-family:var(--font-display);
   font-size:clamp(20px,1.8vw,26px);
   font-weight:700;
-  letter-spacing:-.02em;
-  line-height:1.2;
   color:var(--text);
   text-transform:none;
 }
@@ -6840,10 +6832,11 @@ html[data-theme="dark"] #audit-why .wv-tg .ch{
   --lede:16px;
   --body-lh:1.7;
 
-  /* Spacing scale — desktop defaults; mobile/tablet override below */
-  --sec-y:clamp(56px,5.4vw,84px);          /* standard sections */
-  --sec-y-tight:clamp(36px,4vw,56px);      /* proof strips / compact bands */
-  --sec-y-feat:clamp(64px,6vw,88px);       /* large / featured bands */
+  /* Spacing scale — equal outer section rhythm (exact values per breakpoint) */
+  --section-padding-y:80px;                /* desktop ≥1024 — source of truth */
+  --sec-y:var(--section-padding-y);        /* alias used by existing rules */
+  --sec-y-tight:var(--section-padding-y);  /* same outer rhythm (no specials) */
+  --sec-y-feat:var(--section-padding-y);
   --head-gap:clamp(12px,1.2vw,16px);       /* eyebrow → title */
   --lede-gap:clamp(14px,1.4vw,20px);       /* title → lede */
   --block-gap:clamp(22px,2.4vw,36px);      /* head block → content */
@@ -6865,9 +6858,22 @@ html[data-theme="dark"] #audit-why .wv-tg .ch{
 .stack-cards{gap:var(--card-gap);}
 .stack-grid{gap:var(--grid-gap);}
 
-/* ── Equal vertical padding on every content section ───────────────── */
+/* ── Equal vertical padding on every content section ─────────────────
+   One shared --section-padding-y. Heroes / footer keep their own spacing. */
+main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+#tekcroft-root main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
 .sec,
 section.sec,
+section.wx-why,
+section.built,
+section.rpx,
+section.pplx,
+section.wg,
+section.vx,
+section.lp-s,
+section.sg,
+section.book,
 .sec.acv,
 .sec.ax,
 .sec.bl-sec,
@@ -6915,16 +6921,20 @@ section.sec,
 #apart.sec,
 #clients.sec,
 #fit.sec,
-#industries.sec{
-  padding-block:var(--sec-y) !important;
+#industries.sec,
+#proof-v2.sec,
+#proof-v2{
+  padding-block:var(--section-padding-y) !important;
+  margin-block:0 !important;
 }
 
-/* Under-hero stats strip — rhythm owned by stats-strip.css (#proof-v2) */
-/* Legacy #ai.tb (different section) stays tighter */
-.sec.tb,
-html body #ai.tb,
-html body #ai.tb.sec{
-  padding-block:var(--sec-y-tight) !important;
+/* Heroes keep their own vertical rhythm */
+section.hs,
+section.ct-hero,
+section#hero-1,
+header.hero,
+#top.hero{
+  /* do not apply --section-padding-y */
 }
 
 /* ── Branding fonts (Sora display / Inter body) — one stack site-wide ─ */
@@ -6939,11 +6949,11 @@ html body .lamp h1{
 }
 
 /* ── Headings: one size per level — beat page-local clamps ──────────── */
+/* letter-spacing + line-height owned by the global lock at file end */
 html body :is(h1, .hs-h1, .ct-hero h1),
 html body .hs .hs-h1{
   font-size:var(--h1) !important;
-  line-height:1.08 !important;
-  /* Negative letter-spacing on display type leaves an optical left gap — pull flush */
+  /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
 html body :is(h2),
@@ -6985,8 +6995,6 @@ html body #duplicate-v2 h2 span,
 html body #duplicate-v2 h2 em,
 html body #duplicate-v2 h2 small{
   font-size:var(--h2) !important;
-  line-height:1.12 !important;
-  letter-spacing:-0.04em !important;
 }
 html body :is(h3),
 html body .ac-card h3,
@@ -7003,13 +7011,10 @@ html body .fw-step h3,
 html body .em-card h3,
 html body .faq-aside h3{
   font-size:var(--h3) !important;
-  line-height:1.25 !important;
 }
 /* What-we-do console tabs keep rail size (h3 is semantic only) */
 html body .cn-tab h3{
   font-size:inherit !important;
-  line-height:inherit !important;
-  letter-spacing:inherit !important;
   font-weight:inherit !important;
   margin:0 !important;
   color:inherit !important;
@@ -7020,14 +7025,12 @@ html body .hs-form > .hs-form-title,
 html body .hs-done h3{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
-html body :is(h4){ font-size:var(--h4) !important; line-height:1.3 !important; }
-html body :is(h5){ font-size:var(--h5) !important; line-height:1.35 !important; }
-html body :is(h6){ font-size:var(--h6) !important; line-height:1.35 !important; }
+html body :is(h4){ font-size:var(--h4) !important; }
+html body :is(h5){ font-size:var(--h5) !important; }
+html body :is(h6){ font-size:var(--h6) !important; }
 
 /* ── H2 ≤ 2 lines: give titles enough measure — never shrink the type ─ */
 html body .sec-head{
@@ -7094,13 +7097,11 @@ html body .hs-sub{
   font-size:13px !important;
   line-height:1.45 !important;
 }
-/* Hero form title is a label (p.hs-form-title), not body copy — keep compact */
+/* Hero form title is a label (p.hs-form-title), not body copy — keep compact size */
 html body .hs-form > h3,
 html body .hs-form > .hs-form-title{
   font-size:clamp(17px,1.5vw,19px) !important;
   font-weight:700 !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.035em !important;
   margin:0 !important;
   text-transform:none !important;
 }
@@ -7127,67 +7128,7 @@ html body .gw-say > p{
   margin-top:var(--lede-gap) !important;
 }
 
-/* ── Section eyebrows: one pill + blue dot ───────────────────────────── */
-.smark,
-.wy-eyebrow,
-.gw-eyebrow,
-.nsr-eyebrow,
-.vs-rule{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  margin-bottom:var(--head-gap) !important;
-  padding:8px 18px !important;
-  border:1px solid var(--border) !important;
-  border-radius:30px !important;
-  background:var(--surface) !important;
-  white-space:nowrap !important;
-  box-shadow:none !important;
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-  line-height:1.2 !important;
-  width:fit-content !important;
-  max-width:100% !important;
-  flex:none !important;
-  justify-content:flex-start !important;
-}
-.smark b,
-.vs-rule b{
-  font-size:11.5px !important;
-  font-weight:700 !important;
-  letter-spacing:.16em !important;
-  text-transform:uppercase !important;
-  color:var(--brand-text) !important;
-  font-family:inherit !important;
-}
-.smark::before,
-.gw-eyebrow::before,
-.vs-rule::before{
-  content:"" !important;
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  box-shadow:none !important;
-  background-image:none !important;
-}
-.vs-rule::after{
-  content:none !important;
-  display:none !important;
-  width:0 !important;
-  height:0 !important;
-  background:none !important;
-}
-/* Eyebrows never get flanking rules ? pill + blue dot only */
+/* Eyebrow HTML removed sitewide — keep mark helper so process heads stay clean */
 .fw-mark{
   display:inline-flex !important;
   align-items:center !important;
@@ -7202,58 +7143,26 @@ html body .gw-say > p{
   background:none !important;
   margin:0 !important;
 }
-.wy-eyebrow > i,
-.nsr-eyebrow > i{
-  display:block !important;
-  width:7px !important;
-  height:7px !important;
-  border-radius:50% !important;
-  background:var(--primary) !important;
-  flex-shrink:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  color:transparent !important;
-  overflow:hidden !important;
-}
-.wy-eyebrow > i svg,
-.nsr-eyebrow > i svg{
-  display:none !important;
-}
-.on-dark .smark,
-.on-dark .wy-eyebrow,
-.on-dark .gw-eyebrow,
-.on-dark .nsr-eyebrow,
-.on-dark .vs-rule,
-.ws .smark,
-#fit .smark,
-#stack .smark{
-  background:rgba(255,255,255,.10) !important;
-  border-color:rgba(255,255,255,.20) !important;
-  color:#fff !important;
-}
-.on-dark .smark b,
-.on-dark .vs-rule b,
-.ws .smark b,
-#fit .smark b,
-#stack .smark b{
-  color:#fff !important;
-}
 
-/* ── Alternating grounds helper (pages set --ground / --panel) ──────── */
-.sec[data-ground="tint"],
-.sec.is-tint{
+/* ── Alternating grounds helper (pages set --ground / --panel) ────────
+   Includes .cta OUTER bands (not .cta3 / .wrap photo card). Excludes
+   photo shells #fit / .vs. */
+.sec[data-ground="tint"]:not(.vs):not(#fit),
+.sec.is-tint:not(.vs):not(#fit),
+section.cta[data-ground="tint"]{
   --ground:var(--bg-alt);
   --panel:var(--surface);
   background:var(--ground) !important;
 }
-.sec[data-ground="white"],
-.sec.is-white{
+.sec[data-ground="white"]:not(.vs):not(#fit),
+.sec.is-white:not(.vs):not(#fit),
+section.cta[data-ground="white"]{
   --ground:var(--surface);
   --panel:var(--bg-alt);
   background:var(--ground) !important;
 }
-.sec[data-ground="soft"],
-.sec.is-soft{
+.sec[data-ground="soft"]:not(.vs):not(#fit),
+.sec.is-soft:not(.vs):not(#fit){
   --ground:var(--bg);
   --panel:var(--surface);
   background:var(--ground) !important;
@@ -7269,12 +7178,13 @@ html body .gw-say > p{
    Tokens + component rhythm. Beats page-local clamps via cascade lock.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* Tablet — keep room, avoid desktop-sized empty bands */
+/* Tablet — equal outer section spacing */
 @media (max-width:1023px){
   :root{
-    --sec-y:clamp(52px,6.5vw,72px) !important;
-    --sec-y-tight:clamp(32px,4vw,48px) !important;
-    --sec-y-feat:clamp(60px,7vw,80px) !important;
+    --section-padding-y:64px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:12px !important;
     --lede-gap:14px !important;
     --block-gap:clamp(18px,2.6vw,28px) !important;
@@ -7289,12 +7199,13 @@ html body .gw-say > p{
   }
 }
 
-/* Mobile — compact + premium (avoid 100px+ section padding) */
+/* Mobile — equal outer section spacing */
 @media (max-width:767px){
   :root{
-    --sec-y:clamp(48px,11vw,64px) !important;
-    --sec-y-tight:clamp(28px,7vw,40px) !important;
-    --sec-y-feat:clamp(56px,12vw,72px) !important;
+    --section-padding-y:48px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:10px !important;
     --lede-gap:12px !important;
     --block-gap:clamp(16px,4.5vw,22px) !important;
@@ -7369,12 +7280,20 @@ html body .gw-say > p{
   html body #fit.sec,
   html body #industries.sec,
   html body .sec-pad,
-  html body .sec-pad-feat{
-    padding-block:var(--sec-y) !important;
-  }
-  html body .sec.tb,
-  html body .sec-pad-tight{
-    padding-block:var(--sec-y-tight) !important;
+  html body .sec-pad-feat,
+  html body .sec-pad-tight,
+  html body main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body #main > section:not(.hs):not(.hero):not(.ct-hero):not(#hero-1),
+  html body section.wx-why,
+  html body section.built,
+  html body section.rpx,
+  html body section.pplx,
+  html body section.wg,
+  html body section.vx,
+  html body section.lp-s,
+  html body #proof-v2{
+    padding-block:var(--section-padding-y) !important;
+    margin-block:0 !important;
   }
 
   /* Hero — content-driven height, keep impact */
@@ -7627,29 +7546,39 @@ html body .gw-say > p{
   }
 }
 
-/* Desktop — preserve breathing room; lock tokens against page media overrides */
+/* Desktop — lock equal 80px outer rhythm against page media overrides */
 @media (min-width:1024px){
   :root{
-    --sec-y:clamp(56px,5.4vw,84px) !important;
-    --sec-y-tight:clamp(36px,4vw,56px) !important;
-    --sec-y-feat:clamp(64px,6vw,88px) !important;
+    --section-padding-y:80px !important;
+    --sec-y:var(--section-padding-y) !important;
+    --sec-y-tight:var(--section-padding-y) !important;
+    --sec-y-feat:var(--section-padding-y) !important;
     --head-gap:clamp(12px,1.2vw,16px) !important;
     --lede-gap:clamp(14px,1.4vw,20px) !important;
     --block-gap:clamp(22px,2.4vw,36px) !important;
   }
 }
 
-/* === ZEBRA GROUND LOCK (site) === */
-html body section[data-ground="tint"],
-html body .sec[data-ground="tint"],
-html body .sec.is-tint{
+/* === ZEBRA GROUND LOCK (site) ===
+   white = --surface, tint = --bg-alt (light + dark).
+   Paint CTA OUTER section bands too (FAQ→CTA must not share tint).
+   Keep photo shells (#fit, .vs) and heroes unpainted. Inner .cta3 card unchanged. */
+html body section[data-ground="tint"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="tint"]:not(.vs):not(#fit),
+html body .sec.is-tint:not(.vs):not(#fit),
+html body section.cta[data-ground="tint"],
+html body #contact.cta[data-ground="tint"],
+html body #contact.sec[data-ground="tint"]{
   --ground:var(--bg-alt) !important;
   --panel:var(--surface) !important;
   background:var(--bg-alt) !important;
 }
-html body section[data-ground="white"],
-html body .sec[data-ground="white"],
-html body .sec.is-white{
+html body section[data-ground="white"]:not(.hs):not(.hero):not(.ct-hero):not(.vs):not(#fit),
+html body .sec[data-ground="white"]:not(.vs):not(#fit),
+html body .sec.is-white:not(.vs):not(#fit),
+html body section.cta[data-ground="white"],
+html body #contact.cta[data-ground="white"],
+html body #contact.sec[data-ground="white"]{
   --ground:var(--surface) !important;
   --panel:var(--bg-alt) !important;
   background:var(--surface) !important;
@@ -7658,4 +7587,17 @@ html body .sec.is-white{
 /* In-page hash targets clear the fixed nav */
 #approach{
   scroll-margin-top:calc(var(--nav-h) + var(--nav-gap, 14px) + 12px);
+}
+
+/* ── Global heading letter-spacing + line-height (all pages / breakpoints) ─
+   Must win over page-local negative tracking and tight leading. */
+html body :is(h1, h2, h3, h4, h5, h6),
+html body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html body h1.hs-h1,
+html[data-design] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6),
+html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6).hs-h1,
+html[data-design="raw"] body h1.hs-h1{
+  letter-spacing:0.005em !important;
+  line-height:1.2 !important;
 }

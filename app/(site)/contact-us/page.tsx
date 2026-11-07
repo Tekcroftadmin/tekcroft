@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { contactUsSchema } from "@/lib/schema";
-import fs from "fs";
-import path from "path";
 import Script from "next/script";
-import Homepage from "@/components/Homepage";
+import SitePage from "@/components/SitePage";
+import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/contact-meta.json";
 import lcp from "@/lib/contact-lcp.json";
@@ -30,10 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default function ContactUsPage() {
-  const html = fs.readFileSync(
-    path.join(process.cwd(), "lib", "contact-body.html"),
-    "utf8"
-  );
+  const html = readPreparedBody("contact-body.html");
 
   return (
     <>
@@ -44,8 +40,8 @@ export default function ContactUsPage() {
         type="image/webp"
         fetchPriority="high"
       />
-      <Homepage html={html} />
-      <Script src={assets.contact} strategy="afterInteractive" />
+      <SitePage html={html} prepared />
+      <Script src={assets.contact} strategy="lazyOnload" />
       <JsonLd data={contactUsSchema} />
     </>
   );
