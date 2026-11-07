@@ -220,6 +220,83 @@ export default function SiteShell({
       signal: abort.signal,
     });
 
+    /* One capture-phase toggle so stacked page-script burger listeners
+       (soft-nav) cannot double-toggle open/close. Scroll-lock stays on
+       mm's MutationObserver of .js-mnav.open. */
+    const mnav = document.querySelector(".js-mnav");
+    const onBurgerClick = (e: Event) => {
+      if (!(burger instanceof HTMLElement)) return;
+      if (!(mnav instanceof HTMLElement)) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const open = mnav.classList.toggle("open");
+      burger.classList.toggle("open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      const measure = (
+        window as Window & { __tekcroftMeasureNavH?: () => void }
+      ).__tekcroftMeasureNavH;
+      if (typeof measure === "function") measure();
+    };
+    burger?.addEventListener("click", onBurgerClick, {
+      capture: true,
+      signal: abort.signal,
+    });
+
+    /* Same stacking issue as the burger: each page script re-binds
+       .js-theme. Capture once so toggles cannot cancel each other. */
+    const onThemeClick = (e: Event) => {
+      const el = e.target;
+      if (!(el instanceof Element)) return;
+      const btn = el.closest(".js-theme");
+      if (!(btn instanceof HTMLElement)) return;
+      if (!btn.closest("#tekcroft-root")) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const root = document.documentElement;
+      const next =
+        root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      btn.classList.toggle("spin");
+    };
+    document.addEventListener("click", onThemeClick, {
+      capture: true,
+      signal: abort.signal,
+    });
+
+    /* mm rebuilds the mobile "Get a Free Proposal" <a href=…> into a
+       <button class="mx-cta" data-jump> that page scripts scroll-to-form.
+       User intent (and desktop header CTA) is /book-a-free-evaluation. */
+    const closeMnav = () => {
+      const close = (
+        window as Window & { __tekcroftCloseMnav?: () => void }
+      ).__tekcroftCloseMnav;
+      if (typeof close === "function") {
+        close();
+        return;
+      }
+      if (!(mnav instanceof HTMLElement)) return;
+      mnav.classList.remove("open");
+      if (burger instanceof HTMLElement) {
+        burger.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    };
+    const onMxCtaClick = (e: Event) => {
+      const el = e.target;
+      if (!(el instanceof Element)) return;
+      const cta = el.closest(".js-mnav .mx-cta");
+      if (!cta) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      closeMnav();
+      prefetch("/book-a-free-evaluation");
+      router.push("/book-a-free-evaluation");
+    };
+    document.addEventListener("click", onMxCtaClick, {
+      capture: true,
+      signal: abort.signal,
+    });
+
     const idlePrefetch = () => {
       for (const path of IDLE_PREFETCH) prefetch(path);
     };
