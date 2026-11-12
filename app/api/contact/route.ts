@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { buildEnquiryEmail } from "@/lib/enquiry-email";
 
 export const runtime = "nodejs";
 
@@ -122,15 +123,6 @@ function multiLine(v: unknown, max: number): string {
   return v.trim().slice(0, max);
 }
 
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 function countUrls(...parts: string[]): number {
   let n = 0;
   for (const p of parts) {
@@ -138,11 +130,6 @@ function countUrls(...parts: string[]): number {
     if (m) n += m.length;
   }
   return n;
-}
-
-function row(label: string, value: string): string {
-  if (!value) return "";
-  return `<tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#64748b;white-space:nowrap">${escapeHtml(label)}</td><td style="padding:6px 0;color:#0f172a">${escapeHtml(value).replace(/\n/g, "<br>")}</td></tr>`;
 }
 
 function silentOk() {
@@ -211,7 +198,6 @@ export async function POST(req: Request) {
     const date = singleLine(body.date, 120);
     const time = singleLine(body.time, 120);
     const page = singleLine(body.page, 500) || singleLine(body.source, 500);
-    const timestamp = new Date().toISOString();
 
     if (!name || name.length < 2) {
       return NextResponse.json(
@@ -257,45 +243,20 @@ export async function POST(req: Request) {
     }
 
     const subject = `New enquiry: ${formName}`;
-
-    const html = `
-    <div style="font-family:Segoe UI,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#0f172a">
-      <h2 style="margin:0 0 12px;font-size:18px">New enquiry: ${escapeHtml(formName)}</h2>
-      <table style="border-collapse:collapse">${[
-        row("Form", formName),
-        row("Name", name),
-        row("Email", email),
-        row("Phone", phone),
-        row("Company", company),
-        row("Website", website),
-        row("Service", service),
-        row("Date", date),
-        row("Time", time),
-        row(/question/i.test(formName) ? "Your question" : "Message", message),
-        row("Page / source", page),
-        row("Submitted at", timestamp),
-      ].join("")}</table>
-    </div>
-  `;
-
-    const text = [
-      `New enquiry: ${formName}`,
-      `Form: ${formName}`,
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone && `Phone: ${phone}`,
-      company && `Company: ${company}`,
-      website && `Website: ${website}`,
-      service && `Service: ${service}`,
-      date && `Date: ${date}`,
-      time && `Time: ${time}`,
-      message &&
-        `${/question/i.test(formName) ? "Your question" : "Message"}:\n${message}`,
-      page && `Page / source: ${page}`,
-      `Submitted at: ${timestamp}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const { html, text } = buildEnquiryEmail({
+      formName,
+      name,
+      email,
+      phone,
+      company,
+      website,
+      service,
+      message,
+      messageLabel: /question/i.test(formName) ? "Your question" : "Message",
+      date,
+      time,
+      page,
+    });
 
     const transporter = nodemailer.createTransport({
       host,
