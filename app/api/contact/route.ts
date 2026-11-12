@@ -33,11 +33,64 @@ const rateMap = new Map<string, number[]>();
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX = 5;
 
+/** Production hosts — www and apex are the same site. */
+const OUR_HOSTS = new Set(["tekcroft.com", "www.tekcroft.com"]);
+
+function normalizeOrigin(value: string): string {
+  return value.trim().replace(/\/+$/, "").toLowerCase();
+}
+
 function allowedOrigins(): string[] {
   return (process.env.ALLOWED_ORIGINS || "")
     .split(",")
-    .map((s) => s.trim())
+    .map((s) => normalizeOrigin(s))
     .filter(Boolean);
+}
+
+function requestHost(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-host");
+  const raw = (forwarded || req.headers.get("host") || "").split(",")[0].trim();
+  return raw.replace(/:\d+$/, "").toLowerCase();
+}
+
+function isOurHost(host: string): boolean {
+  return OUR_HOSTS.has(host);
+}
+
+/** https://www.tekcroft.com and https://tekcroft.com are both allowed. */
+function isProductionOrigin(origin: string): boolean {
+  try {
+    const url = new URL(origin);
+    return url.protocol === "https:" && isOurHost(url.hostname.toLowerCase());
+  } catch {
+    return false;
+  }
+}
+
+function originMatchesAllowed(origin: string, allowed: string): boolean {
+  if (origin === allowed) return true;
+  try {
+    const incoming = new URL(origin);
+    const entry = new URL(allowed);
+    if (incoming.protocol !== entry.protocol) return false;
+    const incomingHost = incoming.hostname.toLowerCase();
+    const allowedHost = entry.hostname.toLowerCase();
+    if (incomingHost === allowedHost) return true;
+    return isOurHost(incomingHost) && isOurHost(allowedHost);
+  } catch {
+    return false;
+  }
+}
+
+function passesOriginCheck(req: Request, allowed: string[]): boolean {
+  const raw = req.headers.get("origin");
+  if (!raw || !raw.trim()) {
+    // Same-origin form posts may omit Origin. Allow when Host is our domain.
+    return isOurHost(requestHost(req));
+  }
+  const origin = normalizeOrigin(raw);
+  if (isProductionOrigin(origin)) return true;
+  return allowed.some((entry) => originMatchesAllowed(origin, entry));
 }
 
 function clientIp(req: Request): string {
@@ -103,13 +156,12 @@ function genericFail(status = 500) {
 export async function POST(req: Request) {
   try {
     const origins = allowedOrigins();
-    const origin = req.headers.get("origin") || "";
-    if (origins.length === 0) {
-      console.warn("contact: ALLOWED_ORIGINS empty or missing — rejecting");
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
-    if (!origin || !origins.includes(origin)) {
-      console.warn("contact: rejected origin", origin);
+    const origin = req.headers.get("origin");
+    if (!passesOriginCheck(req, origins)) {
+      console.log("contact: origin rejected", {
+        origin,
+        allowedOrigins: origins,
+      });
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
