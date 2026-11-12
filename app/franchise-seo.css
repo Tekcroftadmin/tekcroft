@@ -8730,3 +8730,24 @@ html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
 }
+
+/* Franchise SEO only. Compare and Why Choose were both tint, which
+   shifted the rest of the run. White under the dark hero stays; from
+   Why onward the grounds step the other way so neighbours never match.
+   Beats the zebra lock (:not(#fit) counts as an ID). */
+html body #why.sec:not(#fit){
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
+html body #faq.sec:not(#fit){
+  --ground:var(--bg-alt) !important;
+  --panel:var(--surface) !important;
+  background:var(--bg-alt) !important;
+}
+html body #contact.sec:not(#fit),
+html body #contact.cta:not(#fit){
+  --ground:var(--surface) !important;
+  --panel:var(--bg-alt) !important;
+  background:var(--surface) !important;
+}
