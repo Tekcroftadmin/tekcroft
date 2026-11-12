@@ -17,7 +17,7 @@ const SOCIAL = {
   X: "https://www.x.com/tekcroft",
   Instagram: "https://www.instagram.com/tekcroft",
   Pinterest: "https://www.pinterest.com/tekcroft/",
-  LinkedIn: "https://www.linkedin.com/company/tekcroft/",
+  LinkedIn: "https://www.linkedin.com/company/tekcrofts",
   YouTube: "https://www.youtube.com/@tekcroft",
   TikTok: "https://www.tiktok.com/@tekcroft",
   Facebook: "https://www.facebook.com/Tekcroft",

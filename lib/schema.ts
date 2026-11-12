@@ -88,7 +88,7 @@ export const sitewideSchema = {
         "https://x.com/tekcroft",
         "https://www.instagram.com/tekcroft",
         "https://www.pinterest.com/tekcroft/",
-        "https://www.linkedin.com/company/tekcroft/",
+        "https://www.linkedin.com/company/tekcrofts",
         "https://www.youtube.com/@tekcroft",
         "https://www.tiktok.com/@tekcroft",
         "https://www.facebook.com/Tekcroft"
