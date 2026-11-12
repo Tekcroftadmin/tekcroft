@@ -68,14 +68,32 @@
           <div class="hs-field">
             <label for="v1-service">Service</label>
             <select id="v1-service" data-rule="service" name="service" required aria-describedby="v1-service-err">
-              <option value="" disabled>Select a service</option>
-              <option selected>Mobile app development</option>
-              <option>Ecommerce SEO</option>
-              <option>Technical SEO</option>
-              <option>On-page SEO</option>
-              <option>Local SEO</option>
-              <option>Web design and development</option>
-              <option>Artificial Intelligence Services</option>
+              <option value="" selected disabled>Select a service</option>
+              <optgroup label="SEO Services">
+                <option>SEO Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Ecommerce SEO Services</option>
+                <option>&nbsp;&nbsp;&nbsp;SEO Audit Services</option>
+                <option>&nbsp;&nbsp;&nbsp;On-Page SEO Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Technical SEO Services</option>
+                <option>&nbsp;&nbsp;&nbsp;AI SEO Services</option>
+              </optgroup>
+              <optgroup label="Local SEO Services">
+                <option>Local SEO Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Google Business Profile Optimization Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Franchise SEO Services</option>
+              </optgroup>
+              <optgroup label="Web and App Development Services">
+                <option>Web and App Development Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Web Design and Development Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Custom Software Development Services</option>
+                <option>&nbsp;&nbsp;&nbsp;Mobile App Development Services</option>
+              </optgroup>
+              <optgroup label="Artificial Intelligence Services">
+                <option>Artificial Intelligence Services</option>
+                <option>&nbsp;&nbsp;&nbsp;AI Development Services</option>
+                <option>&nbsp;&nbsp;&nbsp;AI Chatbot Development Services</option>
+                <option>&nbsp;&nbsp;&nbsp;AI Agent Development Services</option>
+              </optgroup>
               <option>Not sure yet</option>
             </select>
             <p class="hs-err" id="v1-service-err"></p>

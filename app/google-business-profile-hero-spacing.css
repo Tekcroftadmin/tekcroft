@@ -1,9 +1,13 @@
 /* GBP hero only — spacing fixes after service-hero-lock.
    Do not reuse on other pages. */
 
-/* 1) Keep CTA button cleanly below the stat cards */
+/* 1) Keep CTA button cleanly below the stat cards, with air under the lede */
+#hero-1 .hs-lede{
+  margin-bottom:clamp(40px,4.5vw,56px) !important;
+}
 #hero-1 .hs-stats{
-  margin:0 0 clamp(22px,2.5vw,32px) !important;
+  margin-top:clamp(40px,4.5vw,56px) !important;
+  margin-bottom:clamp(22px,2.5vw,32px) !important;
 }
 #hero-1 .hs-act{
   margin-top:0 !important;
