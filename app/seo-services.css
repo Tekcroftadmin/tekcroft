@@ -5711,6 +5711,11 @@ html[data-theme="dark"] #seo-services-page .xv-sum span{background:rgba(255,255,
 
 html[data-theme="dark"] #seo-services-page #process{background:var(--surface) !important;}
 
+#seo-services-page #process .eg-card,
+#seo-services-page #process .eg-card::after{background:#fff !important;}
+
+#seo-services-page #process .sec-head{margin-bottom:clamp(28px,3.2vw,48px) !important;}
+
 #seo-services-page #process .eg-node:nth-of-type(1){left:81.82%; top:18.18%;}
 
 #seo-services-page #process .eg-node:nth-of-type(2){left:93.47%; top:38.35%;}
