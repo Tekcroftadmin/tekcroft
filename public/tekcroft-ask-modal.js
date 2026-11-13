@@ -27,7 +27,9 @@
     "#askModal.modal.on .mf .field.q{" +
     "animation:askQIn .4s var(--pop,cubic-bezier(.16,1,.3,1)) .5s backwards;" +
     "transform:none !important}" +
-    "#askModal .field.q{opacity:1;transform:none;margin:0;padding:0}" +
+    /* .q is shared with quote slides (pointer-events:none). Re-enable input. */
+    "#askModal .field.q{opacity:1;transform:none;margin:0;padding:0;" +
+    "position:relative;inset:auto;pointer-events:auto}" +
     "#askModal .modal-card h2{font-size:calc(28 * var(--u));text-transform:uppercase;" +
     "letter-spacing:-.035em;line-height:1.06}" +
     "#askModal .modal-intro{font-size:calc(13 * var(--u));line-height:1.42;" +
