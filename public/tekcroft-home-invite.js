@@ -115,11 +115,31 @@
     '<label for="m-svc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3"/></svg> Service</label>' +
     '<select id="m-svc">' +
     '<option value="">Select a service</option>' +
+    '<optgroup label="SEO Services">' +
     "<option>SEO Services</option>" +
-    "<option>Artificial Intelligence Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Ecommerce SEO Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;SEO Audit Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;On-Page SEO Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Technical SEO Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;AI SEO Services</option>" +
+    "</optgroup>" +
+    '<optgroup label="Local SEO Services">' +
+    "<option>Local SEO Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Google Business Profile Optimization Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Franchise SEO Services</option>" +
+    "</optgroup>" +
+    '<optgroup label="Web and App Development Services">' +
     "<option>Web and App Development Services</option>" +
-    "<option>Digital Marketing</option>" +
-    "<option>All of the above</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Web Design and Development Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Custom Software Development Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;Mobile App Development Services</option>" +
+    "</optgroup>" +
+    '<optgroup label="Artificial Intelligence Services">' +
+    "<option>Artificial Intelligence Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;AI Development Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;AI Chatbot Development Services</option>" +
+    "<option>&nbsp;&nbsp;&nbsp;AI Agent Development Services</option>" +
+    "</optgroup>" +
     "<option>Not sure yet</option>" +
     "</select>" +
     '<span class="field-ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.6 4.5L19 7.5"/></svg></span>' +

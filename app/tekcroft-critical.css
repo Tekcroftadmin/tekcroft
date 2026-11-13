@@ -977,7 +977,7 @@ html[data-theme="dark"] #proof-v2 .st-c + .st-c::before{
   flex:0 0 auto !important;
 }
 
-/* ---- CTA: brand blue gradient pill ---- */
+/* ---- CTA: solid brand blue pill ---- */
 .nav-right > .btn.btn-primary{
   height:48px !important;
   padding:0 24px !important;
