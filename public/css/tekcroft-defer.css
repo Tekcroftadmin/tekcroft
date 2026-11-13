@@ -7178,21 +7178,31 @@ html[data-design="raw"] body h1.hs-h1{
   line-height:1.2 !important;
 }
 
-/* Homepage services console only. Fit the photograph to the visible
-   left panel and cover it edge to edge. The overlay and tabs stay on top. */
+/* Homepage services console only. The photo lives on ::before with cover
+   so it fills the left panel edge to edge; gradients stay on the plate
+   and the dark ::after overlay keeps the tabs readable. */
 #services.svc .cn-plate{
   left:0;
   right:auto;
-  width:calc(100% * .62 / 2 - var(--cn-lap));
-  background-repeat:no-repeat;
-  background-size:cover, auto, auto, auto;
-  background-position:center center, 4% -8%, 108% 106%, center;
+  width:calc(100% * .62 / 2 + var(--cn-lap) + var(--cn-over));
+  /* Gradients only — the shot is painted by ::before */
+  background:
+    radial-gradient(120% 96% at 4% -8%, hsl(var(--brand-h) 62% 30%) 0%, transparent 58%),
+    radial-gradient(96% 84% at 108% 106%, hsl(var(--brand-h) 78% 15%) 0%, transparent 62%),
+    linear-gradient(152deg, #0b1d2e 0%, #0e2537 46%, #061320 100%);
+}
+#services.svc .cn-plate::before{
+  display:block;
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:var(--cn-shot, none) center center / cover no-repeat;
 }
 @media (max-width:1040px){
   #services.svc .cn-plate{
     right:0;
     width:auto;
-    background-size:cover, auto, auto, auto;
-    background-position:center center, 4% -8%, 108% 106%, center;
   }
 }
