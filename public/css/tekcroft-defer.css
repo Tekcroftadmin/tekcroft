@@ -7177,3 +7177,22 @@ html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
 }
+
+/* Homepage services console only. Fit the photograph to the visible
+   left panel and cover it edge to edge. The overlay and tabs stay on top. */
+#services.svc .cn-plate{
+  left:0;
+  right:auto;
+  width:calc(100% * .62 / 2 - var(--cn-lap));
+  background-repeat:no-repeat;
+  background-size:cover, auto, auto, auto;
+  background-position:center center, 4% -8%, 108% 106%, center;
+}
+@media (max-width:1040px){
+  #services.svc .cn-plate{
+    right:0;
+    width:auto;
+    background-size:cover, auto, auto, auto;
+    background-position:center center, 4% -8%, 108% 106%, center;
+  }
+}

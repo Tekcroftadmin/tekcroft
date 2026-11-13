@@ -125,7 +125,7 @@
     '<span class="field-ok" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.6 4.5L19 7.5"/></svg></span>' +
     "</div></div>" +
     '<button class="btn btn-primary btn-lg" type="button" id="modalGo">' +
-    'Get Your Free Proposal <span class="arw">&uarr;</span></button>' +
+    '<span class="btn-label">Get Your Free Proposal</span> <span class="arw">&uarr;</span></button>' +
     '<p class="modal-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 19 6v5.4c0 4.2-2.9 7.6-7 9.4-4.1-1.8-7-5.2-7-9.4V6l7-2.8Z"/><path d="m9.2 12 2 2 3.6-3.9"/></svg> By submitting you agree to our <a href="/privacy-policy">privacy policy</a>.</p>' +
     "</div></div>" +
     '<div class="modal-done" id="modalDone" role="status">' +
@@ -182,7 +182,23 @@
     }
   }
 
+  /* Ink wipe sits under .btn > *; bare text is covered on hover. */
+  function wrapModalGoLabel() {
+    var go = modal && modal.querySelector("#modalGo");
+    if (!go || go.querySelector(".btn-label")) return;
+    Array.prototype.slice.call(go.childNodes).forEach(function (node) {
+      if (node.nodeType !== 3) return;
+      var text = node.nodeValue.replace(/\s+/g, " ").trim();
+      if (!text) return;
+      var label = document.createElement("span");
+      label.className = "btn-label";
+      label.textContent = text;
+      go.replaceChild(label, node);
+    });
+  }
+
   function wireUi() {
+    wrapModalGoLabel();
     Array.prototype.forEach.call(
       modal.querySelectorAll("[data-close]"),
       function (el) {
@@ -243,11 +259,15 @@
   }
 
   function mount() {
-    if (modal) return modal;
+    if (modal) {
+      wrapModalGoLabel();
+      return modal;
+    }
     var existing = document.getElementById("modal");
     if (existing) {
       modal = existing;
       modal.classList.add("soft-invite");
+      wrapModalGoLabel();
       return modal;
     }
     var wrap = document.createElement("div");
