@@ -55,10 +55,12 @@
     "display:flex;width:100%;flex:0 0 auto;" +
     "margin-top:16px !important;margin-bottom:0 !important;" +
     "padding:calc(12 * var(--u)) calc(22 * var(--u))}" +
-    /* Hover wipe is ink — keep label + arrow white (override shared .arw ink color) */
+    /* No ink wipe on submit — keep brand fill + white label readable */
+    "#askModal #askModalGo::before{display:none!important;content:none!important;transform:none!important}" +
     "#askModal #askModalGo:hover,#askModal #askModalGo:focus-visible{color:#fff !important}" +
+    "#askModal #askModalGo:hover .btn-label,#askModal #askModalGo:focus-visible .btn-label{color:#fff !important}" +
     "#askModal #askModalGo:hover .arw,#askModal #askModalGo:focus-visible .arw{" +
-    "color:#fff !important;background:transparent !important;border-color:#fff !important}" +
+    "color:var(--ink-plate,#101010) !important;background:var(--n0,#fff) !important;border-color:transparent !important}" +
     "#askModal .modal-note{margin-top:calc(8 * var(--u));font-size:calc(12 * var(--u));flex:0 0 auto}" +
     "#askModal .modal-x{opacity:1}" +
     "#askModal.modal.on .modal-x{opacity:1}" +

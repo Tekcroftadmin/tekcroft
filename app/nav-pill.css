@@ -123,19 +123,27 @@
   flex:0 0 auto !important;
 }
 
-/* ---- CTA: brand blue gradient pill ---- */
+/* ---- CTA: solid brand blue pill ---- */
 .nav-right > .btn.btn-primary{
   height:48px !important;
   padding:0 24px !important;
   white-space:nowrap !important;
   max-width:none !important;
   flex:0 0 auto !important;
-  background:linear-gradient(135deg, hsl(var(--brand-h) 100% 48%), hsl(var(--brand-h) 95% 38%)) !important;
+  background:#0096D5 !important;
   border-color:transparent !important;
   color:#fff !important;
   box-shadow:0 10px 22px -12px hsl(var(--brand-h) 90% 28% / .6);
 }
-.nav-right > .btn.btn-primary:hover{
+.nav-right > .btn.btn-primary::before{
+  display:none !important;
+  content:none !important;
+  transform:none !important;
+}
+.nav-right > .btn.btn-primary:hover,
+.nav-right > .btn.btn-primary:focus-visible{
+  background:#0096D5 !important;
+  color:#fff !important;
   box-shadow:0 14px 28px -12px hsl(var(--brand-h) 90% 28% / .7);
 }
 

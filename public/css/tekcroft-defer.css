@@ -7206,3 +7206,30 @@ html[data-design="raw"] body h1.hs-h1{
     width:auto;
   }
 }
+
+/* Form submit buttons only (hero forms + proposal/ask popups).
+   Shared .btn ink wipe turns the control black and can hide the label —
+   keep the resting brand fill and a readable white label on hover. */
+.hs-form .btn.btn-primary::before,
+#modalGo::before,
+#askModalGo::before{
+  display:none !important;
+  content:none !important;
+  transform:none !important;
+}
+.hs-form .btn.btn-primary:hover,
+.hs-form .btn.btn-primary:focus-visible,
+#modalGo:hover,
+#modalGo:focus-visible,
+#askModalGo:hover,
+#askModalGo:focus-visible{
+  color:#fff !important;
+}
+.hs-form .btn.btn-primary:hover .btn-label,
+.hs-form .btn.btn-primary:focus-visible .btn-label,
+#modalGo:hover .btn-label,
+#modalGo:focus-visible .btn-label,
+#askModalGo:hover .btn-label,
+#askModalGo:focus-visible .btn-label{
+  color:#fff !important;
+}
