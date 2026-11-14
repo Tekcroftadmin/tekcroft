@@ -4923,7 +4923,8 @@ html[data-theme="dark"] .modal .field.sel select{
 .faq-wrap[data-at="5"] .faq-aside-panel:nth-child(5),
 .faq-wrap[data-at="6"] .faq-aside-panel:nth-child(6),
 .faq-wrap[data-at="7"] .faq-aside-panel:nth-child(7),
-.faq-wrap:not([data-at]) .faq-aside-panel:nth-child(1){
+.faq-wrap:not([data-at]) .faq-aside-panel:nth-child(1),
+.faq-aside-stack > .faq-aside-panel:only-child{
   opacity:1; visibility:visible; pointer-events:auto;}
 @media (prefers-reduced-motion:reduce){
   .faq-aside-panel{ transition:none; }
