@@ -655,10 +655,10 @@ html[data-theme="dark"] #web-and-app-development-page .theme-btn .sun{display:no
 
 /* scroll reveal */
 
-#web-and-app-development-page .rv{opacity:0; transform:translateY(20px);
+#web-and-app-development-page .rv{opacity:1; transform:none;
   transition:opacity .7s var(--ease) var(--d,0ms), transform .7s var(--ease) var(--d,0ms);}
-
-#web-and-app-development-page .rv.in{opacity:1; transform:none;}
+html.js-ready #web-and-app-development-page .rv:not(.in){opacity:0; transform:translateY(20px);}
+html.js-ready #web-and-app-development-page .rv.in{opacity:1; transform:none;}
 
 /* ---------- responsive: the nav, as the homepage sets it ---------- */
 
@@ -6395,7 +6395,8 @@ html[data-theme="dark"] #web-and-app-development-page .dv{--il-blob:hsl(var(--br
 
 #web-and-app-development-page .dv-row:hover dt i{transform:scale(1.2);}
 
-#web-and-app-development-page .dv-opt.rv .dv-row{opacity:0; transform:translateX(-10px);}
+#web-and-app-development-page .dv-opt.rv .dv-row{opacity:1; transform:none;}
+html.js-ready #web-and-app-development-page .dv-opt.rv:not(.in) .dv-row{opacity:0; transform:translateX(-10px);}
 
 #web-and-app-development-page .dv-opt.rv.in .dv-row{animation:dvRow .55s var(--ease) forwards;}
 

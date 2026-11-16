@@ -369,6 +369,8 @@
      Other walks (blueprint strip) keep the 1.6s desktop pace.
   --------------------------------------------------------------- */
   $$("[data-walk]").forEach(function(pw){
+    /* Scroll+swipe owns .eg process sections — do not auto-rotate them. */
+    if (pw.querySelector(".eg-list") || pw.classList.contains("eg")) return;
     var steps = $$(".walk-step", pw), at = -1, tick = null;
     var isEg = !!pw.querySelector(".eg-list");
     var narrow = window.matchMedia("(max-width: 1000px)");

@@ -539,10 +539,11 @@ h2 em{font-style:normal; color:var(--brand-text);}
 
 .on-dark .sec-lede{color:rgba(255,255,255,.70);}
 
-/* scroll reveal */
-.rv{opacity:0; transform:translateY(20px);
+/* scroll reveal — visible by default; hide only under html.js-ready */
+.rv{opacity:1; transform:none;
   transition:opacity .7s var(--ease) var(--d,0ms), transform .7s var(--ease) var(--d,0ms);}
-.rv.in{opacity:1; transform:none;}
+html.js-ready .rv:not(.in){opacity:0; transform:translateY(20px);}
+html.js-ready .rv.in{opacity:1; transform:none;}
 
 /* ---------- responsive: the nav, as the homepage sets it ---------- */
 @media (max-width:1080px){

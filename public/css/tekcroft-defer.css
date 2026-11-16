@@ -1,3 +1,12 @@
+html[data-theme="dark"] section#proof .tb-figs{
+  background:var(--surface) !important;
+  border-color:var(--border);
+  box-shadow:0 18px 40px -28px rgba(0,0,0,.65);
+}
+html[data-theme="dark"] section#proof .tb-fig b{color:var(--text);}
+html[data-theme="dark"] section#proof .tb-fig .tb-cap{color:var(--text-2);}
+html[data-theme="dark"] section#proof .tb-meter{background:var(--border);}
+html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--border);}
 
 /* ============================================================
    WHY US ? the honest contrast. Left column is the industry
@@ -2087,17 +2096,20 @@ html[data-theme="dark"] .wl-cell:nth-child(3){background:hsl(var(--brand-h) 100%
   background:var(--primary);}
 /* ---- the four cards ---- */
 .eg-list{display:grid; gap:clamp(9px,1.1vw,13px);}
+/* Visible by default — hide only after JS opts in via html.js-ready.
+   Soft-nav remounts cards without .seen; without this flip they stay blank. */
 .eg-card{position:relative; display:grid; grid-template-columns:auto 1fr;
   gap:clamp(16px,1.8vw,22px); align-items:start;
   padding:clamp(13px,1.5vw,17px) clamp(16px,1.9vw,22px);
   border-radius:clamp(14px,1.4vw,18px);
   background:var(--surface); border:1px solid var(--border);
-  opacity:0; transform:translateX(16px);
+  opacity:1; transform:none;
   transition:opacity .45s var(--ease) var(--lay),
              transform .55s var(--pop) var(--lay),
              border-color .4s var(--ease), box-shadow .4s var(--ease);
   --lay:calc(var(--i) * 90ms);}
-.eg-card.seen{opacity:1; transform:none;}
+html.js-ready .eg-card:not(.seen){opacity:0; transform:translateX(16px);}
+html.js-ready .eg-card.seen{opacity:1; transform:none;}
 .eg-card.on{border-color:var(--primary); box-shadow:var(--shadow-lift);}
 /* a rail rather than a fill: the card stays readable and the red stays
    a mark of attention instead of becoming the background */
@@ -2170,12 +2182,21 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
   .eg-rule{width:52px; margin:14px auto;}
 
   .eg-list{position:relative; display:grid; gap:0; overflow:hidden;}
-  .eg-card,.eg-card.seen{grid-area:1 / 1; order:0; --lay:0ms;
+  /* No-JS: first card visible. With js-ready: only .on (stage) is visible. */
+  .eg-card{grid-area:1 / 1; order:0; --lay:0ms;
     opacity:0; visibility:hidden; pointer-events:none;
     transform:translateX(14px);
     transition:opacity .4s var(--ease), transform .5s var(--pop),
                visibility 0s linear .4s;}
+  .eg-card:first-child,
   .eg-card.on{opacity:1; visibility:visible; pointer-events:auto;
+    transform:none; transition-delay:0s;}
+  html.js-ready .eg-card,
+  html.js-ready .eg-card.seen,
+  html.js-ready .eg-card:first-child{
+    opacity:0; visibility:hidden; pointer-events:none;
+    transform:translateX(14px);}
+  html.js-ready .eg-card.on{opacity:1; visibility:visible; pointer-events:auto;
     transform:none; transition-delay:0s;}
   .eg-card::after{display:none;}
   .eg-cta{justify-content:stretch;}
@@ -2187,14 +2208,22 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
 }
 @media (prefers-reduced-motion:reduce){
   .eg-card{opacity:1; transform:none;}
+  html.js-ready .eg-card:not(.seen){opacity:1; transform:none;}
   .eg-track{animation:none;}
 }
 @media (max-width:1000px) and (prefers-reduced-motion:reduce){
-  /* One card at a time ? global reduce-motion opacity:1 would stack them. */
-  .eg-card,.eg-card.seen{
+  /* One card at a time — global reduce-motion opacity:1 would stack them. */
+  .eg-card,.eg-card.seen,.eg-card:first-child{
     opacity:0; visibility:hidden; pointer-events:none;
     transform:translateX(14px);}
-  .eg-card.on{
+  .eg-card:first-child,.eg-card.on{
+    opacity:1; visibility:visible; pointer-events:auto; transform:none;}
+  html.js-ready .eg-card,
+  html.js-ready .eg-card.seen,
+  html.js-ready .eg-card:first-child{
+    opacity:0; visibility:hidden; pointer-events:none;
+    transform:translateX(14px);}
+  html.js-ready .eg-card.on{
     opacity:1; visibility:visible; pointer-events:auto; transform:none;}
 }
 
@@ -3284,8 +3313,9 @@ html[data-theme="dark"] .ft4-brand .logo{--logo:var(--logo-white);}
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important;
     transition-duration:.001ms !important;}
-  .rv{opacity:1; transform:none;}
+  .rv{opacity:1 !important; transform:none !important;}
   .lamp .ln > span{transform:none;}
+
   .modal-frame{transform:none !important; clip-path:none !important;}
   .modal-frame::before{display:none !important;}
   .pop-spark{display:none !important;}

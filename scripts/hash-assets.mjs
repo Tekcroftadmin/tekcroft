@@ -71,6 +71,8 @@ const names = [
   "tekcroft-main.js",
   "tekcroft-home-defer.js",
   "tekcroft-home-invite.js",
+  "tekcroft-eg-scroll.js",
+  "tekcroft-rv.js",
   "tekcroft-mm.js",
   "tekcroft-vs-halo.js",
   "tekcroft-pf-marquee.js",
@@ -103,6 +105,8 @@ const keys = [
   "main",
   "homeDefer",
   "homeInvite",
+  "egScroll",
+  "rv",
   "mm",
   "vsHalo",
   "pfMarquee",
@@ -153,9 +157,23 @@ if (fs.existsSync(localSeoCss)) {
 const tekcroftCss = path.join(ROOT, "app", "tekcroft.css");
 if (fs.existsSync(tekcroftCss)) {
   const lines = fs.readFileSync(tekcroftCss, "utf8").split(/\n/);
-  /* Lines 0–726 = above-the-fold (tokens/nav/hero + dark #proof rules).
-     Must end on a closed rule — cutting mid-block drops stats-strip.css. */
-  const CRITICAL_END = 727;
+  /* Above-the-fold through the dark #proof rule. Cut on THAT rule's
+     closing brace — a mid-rule cut nests stats-strip.css inside it
+     (CSS nesting) and the strip falls back to the timeline .st-row. */
+  const src = lines.join("\n");
+  const marker = 'html[data-theme="dark"] section#proof{';
+  const at = src.indexOf(marker);
+  let CRITICAL_END = 727;
+  if (at >= 0) {
+    let i = at + marker.length;
+    let d = 1;
+    while (i < src.length && d > 0) {
+      if (src[i] === "{") d++;
+      else if (src[i] === "}") d--;
+      i++;
+    }
+    CRITICAL_END = src.slice(0, i).split("\n").length;
+  }
   let critical = lines.slice(0, CRITICAL_END).join("\n") + "\n";
   for (const extra of ["stats-strip.css", "nav-pill.css", "perf.css"]) {
     const p = path.join(ROOT, "app", extra);

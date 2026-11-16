@@ -164,6 +164,15 @@ export default function NoHashScroll() {
     if (window.__tekcroftHash || window.location.hash) {
       consumeHashScroll("smooth");
     }
+    /* Soft-nav / back-forward: re-init reveals + button labels. */
+    try {
+      window.dispatchEvent(new Event("tekcroft:nav"));
+      (
+        window as Window & { __tekcroftPageInit?: () => void }
+      ).__tekcroftPageInit?.();
+    } catch {
+      /* ignore */
+    }
   }, [pathname]);
 
   return null;

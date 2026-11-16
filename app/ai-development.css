@@ -4252,7 +4252,8 @@ html[data-theme="dark"] .dv{--il-blob:hsl(var(--brand-h) 45% 15%); --il-glow:hsl
 .dv-row dt i{transition:transform .35s var(--pop);}
 .dv-row:hover dt i{transform:scale(1.2);}
 
-.dv-opt.rv .dv-row{opacity:0; transform:translateX(-10px);}
+.dv-opt.rv .dv-row{opacity:1; transform:none;}
+html.js-ready .dv-opt.rv:not(.in) .dv-row{opacity:0; transform:translateX(-10px);}
 .dv-opt.rv.in .dv-row{animation:dvRow .55s var(--ease) forwards;}
 .dv-opt.in .dv-row:nth-child(1){animation-delay:calc(var(--d,0ms) + 180ms);}
 .dv-opt.in .dv-row:nth-child(2){animation-delay:calc(var(--d,0ms) + 260ms);}

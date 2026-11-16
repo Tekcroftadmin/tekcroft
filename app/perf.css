@@ -1,30 +1,7 @@
-/* Performance-only additions — visual design tokens stay in tekcroft.css */
-
-/* next/font CSS variables → existing design tokens (same faces/weights) */
-:root {
-  --font: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: var(--font-sora), var(--font-inter), sans-serif;
-}
-
-/*
-  content-visibility speeds scroll by skipping off-screen paint.
-  Exclude the AI ecosystem (CSS background brand marks) and the hero.
-*/
-.sec:not(#ai-ecosystem) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
-#ai-ecosystem,
-.hero,
-#top,
-#hero-1,
-.hs,
-.boot,
-#boot,
-#why {
-  content-visibility: visible;
-  contain-intrinsic-size: auto none;
-}
+/* Performance helpers — no reveal hiding here.
+   Reveal visibility is owned by tekcroft.css (visible-by-default +
+   html.js-ready opt-in). A CSS failsafe animation was removed: cancelling
+   it mid-delay during soft-nav left .rv.in stuck at opacity:0. */
 
 /* Hero must never wait on IntersectionObserver / JS for visibility (LCP) */
 .hero .rv,
@@ -34,20 +11,6 @@
 #hero-1 .hs-form-wrap {
   opacity: 1 !important;
   transform: none !important;
-}
-
-/* If JS is late/fails, reveals still appear (does not change the .in look) */
-@keyframes tc-rv-failsafe {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.rv:not(.in) {
-  animation: tc-rv-failsafe 0.01s linear 2.5s forwards;
-}
-.rv.in {
-  animation: none;
 }
 
 /* Prefer compositor-friendly layer promotion for continuous movers */
@@ -73,10 +36,10 @@
   .cg-seal svg {
     animation: none !important;
   }
-  .rv:not(.in) {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  html.js-ready .rv:not(.in),
+  .rv {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

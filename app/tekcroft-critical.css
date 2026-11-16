@@ -554,10 +554,20 @@ h2 em{font-style:normal; color:var(--brand-text);}
 
 .on-dark .sec-lede{color:rgba(255,255,255,.70);}
 
-/* scroll reveal */
-.rv{opacity:0; transform:translateY(20px);
+/* scroll reveal — VISIBLE by default. JS opts into hiding via html.js-ready.
+   Soft-nav remounts .rv without .in; without this flip they stay blank forever.
+   Hide state must NOT use !important (transitions + !important stick at 0 in
+   Chromium after soft-nav). Revealed/.in uses !important so it always wins. */
+.rv{
+  opacity:1; transform:none;
   transition:opacity .7s var(--ease) var(--d,0ms), transform .7s var(--ease) var(--d,0ms);}
-.rv.in{opacity:1; transform:none;}
+html.js-ready .rv:not(.in){
+  opacity:0; transform:translateY(20px);}
+html.js-ready .rv.in{
+  opacity:1 !important; transform:none !important;}
+@media (scripting: none){
+  .rv{opacity:1 !important; transform:none !important;}
+}
 
 /* ============================================================
    THE DARK SLABS ? a fixed wash, not a light
@@ -716,15 +726,6 @@ html[data-theme="dark"] section#proof{
   background:var(--bg) !important;
   color:var(--text);
 }
-html[data-theme="dark"] section#proof .tb-figs{
-  background:var(--surface) !important;
-  border-color:var(--border);
-  box-shadow:0 18px 40px -28px rgba(0,0,0,.65);
-}
-html[data-theme="dark"] section#proof .tb-fig b{color:var(--text);}
-html[data-theme="dark"] section#proof .tb-fig .tb-cap{color:var(--text-2);}
-html[data-theme="dark"] section#proof .tb-meter{background:var(--border);}
-html[data-theme="dark"] section#proof .tb-fig + .tb-fig{border-left-color:var(--border);}
 
 /* === stats-strip.css === */
 /* Shared stats strip — identical on every page (#proof-v2).
@@ -1131,33 +1132,10 @@ html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
 
 
 /* === perf.css === */
-/* Performance-only additions — visual design tokens stay in tekcroft.css */
-
-/* next/font CSS variables → existing design tokens (same faces/weights) */
-:root {
-  --font: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: var(--font-sora), var(--font-inter), sans-serif;
-}
-
-/*
-  content-visibility speeds scroll by skipping off-screen paint.
-  Exclude the AI ecosystem (CSS background brand marks) and the hero.
-*/
-.sec:not(#ai-ecosystem) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
-#ai-ecosystem,
-.hero,
-#top,
-#hero-1,
-.hs,
-.boot,
-#boot,
-#why {
-  content-visibility: visible;
-  contain-intrinsic-size: auto none;
-}
+/* Performance helpers — no reveal hiding here.
+   Reveal visibility is owned by tekcroft.css (visible-by-default +
+   html.js-ready opt-in). A CSS failsafe animation was removed: cancelling
+   it mid-delay during soft-nav left .rv.in stuck at opacity:0. */
 
 /* Hero must never wait on IntersectionObserver / JS for visibility (LCP) */
 .hero .rv,
@@ -1167,20 +1145,6 @@ html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
 #hero-1 .hs-form-wrap {
   opacity: 1 !important;
   transform: none !important;
-}
-
-/* If JS is late/fails, reveals still appear (does not change the .in look) */
-@keyframes tc-rv-failsafe {
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.rv:not(.in) {
-  animation: tc-rv-failsafe 0.01s linear 2.5s forwards;
-}
-.rv.in {
-  animation: none;
 }
 
 /* Prefer compositor-friendly layer promotion for continuous movers */
@@ -1206,10 +1170,10 @@ html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
   .cg-seal svg {
     animation: none !important;
   }
-  .rv:not(.in) {
-    animation: none;
-    opacity: 1;
-    transform: none;
+  html.js-ready .rv:not(.in),
+  .rv {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

@@ -76,6 +76,8 @@ export default function RootLayout({
         {children}
         <Script src={assets.leadSubmit || "/tekcroft-lead-submit.js"} strategy="afterInteractive" />
         <Script src="/tekcroft-ask-modal.js" strategy="afterInteractive" />
+        <Script src={assets.rv || "/tekcroft-rv.js"} strategy="afterInteractive" />
+        <Script src={assets.egScroll || "/tekcroft-eg-scroll.js"} strategy="afterInteractive" />
         <Script src={assets.vsHalo} strategy="lazyOnload" />
         <Script src={assets.mm} strategy="lazyOnload" />
         <Script src={assets.pfMarquee || "/tekcroft-pf-marquee.js"} strategy="lazyOnload" />

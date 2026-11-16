@@ -623,6 +623,8 @@ P.forEach((t,i)=>document.getElementById("v4T").insertAdjacentHTML("beforeend",`
   var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   $$("[data-walk]").forEach(function(pw){
+    /* Scroll+swipe owns .eg process sections — do not auto-rotate them. */
+    if (pw.querySelector(".eg-list") || pw.classList.contains("eg")) return;
     var steps = $$(".walk-step", pw), at = -1, tick = null;
 
     /* On the narrow layout the lit step is pulled to the head of the list

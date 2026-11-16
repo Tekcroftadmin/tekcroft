@@ -19,10 +19,19 @@ import "./../service-hero-lock.css";
 import "./../mobile-cta-btn-lock.css";
 /* stats-strip / nav-pill / perf are inlined via tekcroft-critical.css */
 
-const criticalCss = fs.readFileSync(
-  path.join(process.cwd(), "app", "tekcroft-critical.css"),
-  "utf8"
+const criticalCssPath = path.join(
+  process.cwd(),
+  "app",
+  "tekcroft-critical.css"
 );
+/* Dev: re-read every render so hash-assets / CSS flips aren't stuck behind
+   a stale module-scope buffer after `next dev` has been running for hours. */
+function readCriticalCss() {
+  return fs.readFileSync(criticalCssPath, "utf8");
+}
+const criticalCssProd = process.env.NODE_ENV === "production"
+  ? readCriticalCss()
+  : null;
 
 export default function SiteLayout({
   children,
@@ -31,6 +40,7 @@ export default function SiteLayout({
 }>) {
   const headerHtml = readSiteHeader();
   const footerHtml = stampFooterYear(readSiteFooter());
+  const criticalCss = criticalCssProd ?? readCriticalCss();
 
   return (
     <>
