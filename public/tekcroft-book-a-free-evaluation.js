@@ -17,7 +17,6 @@
   var slot=document.getElementById('slot'), cont=document.getElementById('toStep2');
 
   function sameDay(a,b){return a.getFullYear()==b.getFullYear()&&a.getMonth()==b.getMonth()&&a.getDate()==b.getDate();}
-  function isWeekend(d){var g=d.getDay(); return g===0||g===6;}
   function fmt(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
 
   function render(){
@@ -31,7 +30,7 @@
     for(var d=1;d<=dim;d++){
       var cell=document.createElement('button'); cell.type='button'; cell.className='day'; cell.textContent=d;
       var date=new Date(view.getFullYear(),view.getMonth(),d);
-      if(date<today||isWeekend(date)){cell.disabled=true;}       // past + weekends unavailable
+      if(date<today){cell.disabled=true;} // only past dates unavailable (Sat/Sun selectable)
       if(sameDay(date,today)) cell.classList.add('today');
       if(selected&&sameDay(date,selected)) cell.classList.add('sel');
       (function(date){cell.addEventListener('click',function(){selected=date;render();sync();});})(date);
