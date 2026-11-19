@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   description: meta.description,
   keywords: meta.keywords,
   alternates: { canonical: meta.canonical },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     siteName: "Tekcroft",

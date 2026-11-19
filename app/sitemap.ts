@@ -7,7 +7,7 @@ const routes = [
   "/about-us",
   "/services",
   "/blog",
-  "/contact",
+  "/contact-us",
   "/book-a-free-evaluation",
   "/privacy-policy",
   "/terms-of-use",
@@ -38,6 +38,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${BASE}${path === "/" ? "" : path}`,
     lastModified: now,
     changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : path.startsWith("/blog") || path === "/contact" ? 0.7 : 0.8,
+    priority: path === "/" ? 1 : path.startsWith("/blog") || path === "/contact-us" ? 0.7 : 0.8,
   }));
 }

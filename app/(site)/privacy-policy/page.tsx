@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: meta.title,
   description: meta.description,
   alternates: { canonical: meta.canonical },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPolicyPage() {
