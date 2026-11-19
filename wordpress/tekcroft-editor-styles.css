@@ -1,0 +1,475 @@
+/**
+ * Tekcroft Gutenberg editor preview styles ONLY.
+ * Mirrors .blog-post-page__body from the Next.js frontend.
+ * Loaded only inside the block editor canvas — does not affect tekcroft.com.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap");
+
+:root,
+.editor-styles-wrapper {
+  --tek-brand: #0096d5;
+  --tek-brand-deep: #00608a;
+  --tek-navy: #061a26;
+  --tek-ink: #0a1f2c;
+  --tek-body: #2b3e4d;
+  --tek-muted: #4a5b68;
+  --tek-line: #e3eaef;
+  --tek-tint: #e3f4fb;
+  --tek-band: #daeef6;
+  --tek-surface: #fff;
+  --tek-table-border: #bcdceb;
+  --tek-font: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --tek-font-display: "Sora", "Inter", sans-serif;
+}
+
+.editor-styles-wrapper {
+  color: var(--tek-ink);
+  background: var(--tek-surface);
+  font-family: var(--tek-font);
+  font-size: 18px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  padding: 28px 28px 56px !important;
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.editor-styles-wrapper *,
+.editor-styles-wrapper *::before,
+.editor-styles-wrapper *::after {
+  box-sizing: border-box;
+}
+
+.editor-styles-wrapper .wp-block {
+  max-width: 100%;
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"],
+.editor-styles-wrapper .wp-block[data-align="full"],
+.editor-styles-wrapper .alignwide,
+.editor-styles-wrapper .alignfull {
+  max-width: 100%;
+}
+
+/* Title (post title field in canvas when present) */
+.editor-styles-wrapper .editor-post-title,
+.editor-styles-wrapper .editor-post-title__block .editor-post-title__input,
+.editor-styles-wrapper .wp-block-post-title,
+.editor-styles-wrapper h1.wp-block-post-title {
+  max-width: none;
+  margin: 0;
+  padding: 12px 0 32px;
+  text-align: left;
+  font-family: var(--tek-font-display) !important;
+  font-size: clamp(28px, 3.4vw, 42px) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.03em;
+  font-weight: 700 !important;
+  color: var(--tek-ink) !important;
+}
+
+/* Headings */
+.editor-styles-wrapper h1,
+.editor-styles-wrapper .wp-block-heading.h1,
+.editor-styles-wrapper h1.wp-block-heading {
+  margin: 40px 0 16px;
+  font-family: var(--tek-font-display);
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h2.wp-block-heading {
+  margin: 52px 0 16px;
+  font-family: var(--tek-font-display);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h3.wp-block-heading {
+  margin: 34px 0 12px;
+  font-family: var(--tek-font-display);
+  font-size: 21px;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h4.wp-block-heading {
+  margin: 28px 0 10px;
+  font-family: var(--tek-font-display);
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h5.wp-block-heading {
+  margin: 24px 0 8px;
+  font-family: var(--tek-font-display);
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper h6,
+.editor-styles-wrapper h6.wp-block-heading {
+  margin: 20px 0 8px;
+  font-family: var(--tek-font-display);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--tek-muted);
+}
+
+.editor-styles-wrapper > *:first-child,
+.editor-styles-wrapper .is-root-container > *:first-child {
+  margin-top: 0;
+}
+
+/* Paragraphs */
+.editor-styles-wrapper p,
+.editor-styles-wrapper .wp-block-paragraph {
+  margin: 0 0 22px;
+  font-family: var(--tek-font);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--tek-body);
+}
+
+.editor-styles-wrapper strong,
+.editor-styles-wrapper b {
+  color: var(--tek-ink);
+  font-weight: 600;
+}
+
+/* Links */
+.editor-styles-wrapper a {
+  color: var(--tek-brand-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.editor-styles-wrapper a:hover {
+  color: var(--tek-ink);
+}
+
+/* Lists — match frontend custom markers */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol,
+.editor-styles-wrapper .wp-block-list {
+  margin: 0 0 26px;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.editor-styles-wrapper li {
+  position: relative;
+  padding-left: 32px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--tek-body);
+  margin: 0;
+}
+
+.editor-styles-wrapper ul > li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tek-brand);
+}
+
+.editor-styles-wrapper ol {
+  counter-reset: n;
+}
+
+.editor-styles-wrapper ol > li {
+  counter-increment: n;
+}
+
+.editor-styles-wrapper ol > li::before {
+  content: counter(n);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--tek-tint);
+  color: var(--tek-brand-deep);
+  font-family: var(--tek-font-display);
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.editor-styles-wrapper ul ul,
+.editor-styles-wrapper ol ol,
+.editor-styles-wrapper ul ol,
+.editor-styles-wrapper ol ul {
+  margin: 12px 0 0;
+  gap: 10px;
+}
+
+/* Blockquote */
+.editor-styles-wrapper blockquote,
+.editor-styles-wrapper .wp-block-quote {
+  margin: 32px 0;
+  padding: 6px 0 6px 28px;
+  border-left: 4px solid var(--tek-brand);
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 0;
+  box-shadow: none;
+  background: transparent;
+  font-family: var(--tek-font-display);
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper .wp-block-quote p {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  margin: 0 0 0.4em;
+}
+
+.editor-styles-wrapper .wp-block-quote cite,
+.editor-styles-wrapper .wp-block-quote__citation {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--tek-font);
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--tek-muted);
+}
+
+.editor-styles-wrapper .wp-block-pullquote {
+  margin: 32px 0;
+  padding: 28px 30px;
+  border: 1px solid var(--tek-table-border);
+  border-radius: 20px;
+  background: var(--tek-band);
+  text-align: left;
+}
+
+.editor-styles-wrapper .wp-block-pullquote blockquote {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.editor-styles-wrapper .wp-block-pullquote p {
+  font-family: var(--tek-font-display);
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--tek-ink);
+}
+
+/* Images */
+.editor-styles-wrapper img,
+.editor-styles-wrapper .wp-block-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+}
+
+.editor-styles-wrapper .wp-block-image {
+  margin: 28px 0;
+}
+
+.editor-styles-wrapper .wp-block-image figcaption,
+.editor-styles-wrapper figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tek-muted);
+  text-align: center;
+}
+
+.editor-styles-wrapper .wp-block-gallery {
+  margin: 28px 0;
+}
+
+/* Tables ≈ frontend .tablewrap */
+.editor-styles-wrapper .wp-block-table,
+.editor-styles-wrapper figure.wp-block-table {
+  margin: 30px 0 38px;
+  overflow-x: auto;
+  border: 1px solid var(--tek-table-border);
+  border-radius: 20px;
+  background: var(--tek-surface);
+}
+
+.editor-styles-wrapper .wp-block-table table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 0;
+}
+
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+  padding: 14px 20px;
+  text-align: left;
+  vertical-align: top;
+  border-right: 1px solid var(--tek-table-border);
+  border-bottom: 1px solid var(--tek-table-border);
+  border-left: 0;
+  border-top: 0;
+}
+
+.editor-styles-wrapper .wp-block-table th:last-child,
+.editor-styles-wrapper .wp-block-table td:last-child {
+  border-right: 0;
+}
+
+.editor-styles-wrapper .wp-block-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.editor-styles-wrapper .wp-block-table thead th,
+.editor-styles-wrapper .wp-block-table th {
+  background: var(--tek-brand);
+  color: #fff;
+  border-right-color: rgba(255, 255, 255, 0.28);
+  border-bottom: 0;
+  font-family: var(--tek-font-display);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.editor-styles-wrapper .wp-block-table td {
+  color: var(--tek-body);
+}
+
+.editor-styles-wrapper .wp-block-table tbody tr:hover td {
+  background: #f1f8fc;
+}
+
+.editor-styles-wrapper .wp-block-table figcaption {
+  padding: 10px 16px 14px;
+  margin: 0;
+  border-top: 1px solid var(--tek-table-border);
+}
+
+/* Separator */
+.editor-styles-wrapper hr,
+.editor-styles-wrapper .wp-block-separator {
+  margin: 36px 0;
+  border: 0;
+  border-top: 1px solid var(--tek-line);
+  background: transparent;
+  height: 0;
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-wide {
+  border-top-width: 2px;
+}
+
+/* Code / pre */
+.editor-styles-wrapper code,
+.editor-styles-wrapper .wp-block-code code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92em;
+  background: var(--tek-tint);
+  color: var(--tek-ink);
+  padding: 0.12em 0.4em;
+  border-radius: 6px;
+}
+
+.editor-styles-wrapper pre,
+.editor-styles-wrapper .wp-block-code,
+.editor-styles-wrapper .wp-block-preformatted {
+  margin: 28px 0;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 1px solid var(--tek-table-border);
+  background: #f4f8fa;
+  overflow-x: auto;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--tek-ink);
+}
+
+.editor-styles-wrapper .wp-block-code code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Callout-like group / group with background */
+.editor-styles-wrapper .wp-block-group.has-background,
+.editor-styles-wrapper .wp-block-group[style*="background"] {
+  border-radius: 20px;
+  border: 1px solid var(--tek-table-border);
+  padding: 28px 30px;
+  margin: 32px 0 8px;
+}
+
+/* Buttons (preview only — keep WP button chrome usable) */
+.editor-styles-wrapper .wp-block-button__link {
+  font-family: var(--tek-font);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 999px;
+  padding: 14px 28px;
+  background: var(--tek-brand);
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+/* Embeds / media */
+.editor-styles-wrapper .wp-block-embed,
+.editor-styles-wrapper .wp-block-video,
+.editor-styles-wrapper .wp-block-audio {
+  margin: 28px 0;
+}
+
+/* Columns */
+.editor-styles-wrapper .wp-block-columns {
+  margin: 28px 0;
+  gap: 24px;
+}
+
+/* Soft band behind canvas (optional realism) */
+.edit-post-visual-editor__content-area {
+  background: var(--tek-band) !important;
+}
