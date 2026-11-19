@@ -23,7 +23,7 @@
     "verify:icons": "node scripts/verify-icons-live.mjs"
   },
   "dependencies": {
-    "next": "^16.4.2",
+    "next": "^16.4.6",
     "nodemailer": "^10.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

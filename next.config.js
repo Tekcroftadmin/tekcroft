@@ -9,6 +9,7 @@ const nextConfig = {
   experimental: {
     /* Critical CSS is manually inlined in (site)/layout; Critters off to avoid double-processing */
     optimizeCss: false,
+    agentUpgrade: "security",
   },
   images: {
     formats: ["image/webp", "image/avif"],
