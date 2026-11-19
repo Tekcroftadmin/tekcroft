@@ -3956,6 +3956,11 @@ section.cta[data-ground="white"]{
     --cta-pad-y:clamp(26px,4vw,40px) !important;
     --hero-pad-top:clamp(26px,3vw,48px) !important;
     --hero-pad-bot:20px !important;
+    --hero-strip-height:64px;
+  }
+  .hero,
+  #hero-1.hs{
+    --hero-strip-height:64px;
   }
 }
 
@@ -3977,7 +3982,12 @@ section.cta[data-ground="white"]{
     --cta-pad-y:clamp(24px,6vw,36px) !important;
     --hero-pad-top:26px !important;
     --hero-pad-bot:20px !important;
+    --hero-strip-height:56px;
     --body-lh:1.65 !important;
+  }
+  .hero,
+  #hero-1.hs{
+    --hero-strip-height:56px;
   }
 
   /* Horizontal gutters */
@@ -4064,6 +4074,16 @@ section.cta[data-ground="white"]{
     padding-top:calc(var(--nav-h, 64px) + var(--hero-pad-top)) !important;
     padding-bottom:var(--hero-pad-bot) !important;
   }
+  /* Logo strip is the hero floor — no padding under .ticker / .hs-logos */
+  html body .hs:has(> .ticker),
+  html body .hs:has(> .hs-logos),
+  html body .hero:has(> .ticker),
+  html body #hero-1.hs:has(> .ticker),
+  html body #hero-1.hs:has(> .hs-logos),
+  html body #top.hero:has(> .ticker),
+  html body header.hero:has(> .ticker){
+    padding-bottom:0 !important;
+  }
   /* Full-height photo + veil behind entire mobile hero (not just the H1) */
   html body .hs-bg,
   html body .hero-slider,
@@ -4101,6 +4121,54 @@ section.cta[data-ground="white"]{
   html body .hs-h1,
   html body .ct-hero h1{
     margin-bottom:var(--lede-gap) !important;
+  }
+  /* Homepage hero: keep every line (incl. rotating keyword) centered on mobile.
+     .kw is sized to the longest keyword and overflows the viewport as inline-grid,
+     which left-anchors short words like Google — force a full-width centered grid. */
+  html body #top.hero .hero-in,
+  html body header.hero .hero-in{
+    align-items:center !important;
+    text-align:center !important;
+  }
+  html body #top.hero .lamp,
+  html body header.hero .lamp{
+    width:100% !important;
+    max-width:100% !important;
+    margin-inline:auto !important;
+    text-align:center !important;
+  }
+  html body #top.hero .lamp h1,
+  html body header.hero .lamp h1{
+    width:100% !important;
+    text-align:center !important;
+    margin-inline:0 !important;
+  }
+  html body #top.hero .lamp .ln,
+  html body #top.hero .lamp .ln > span,
+  html body header.hero .lamp .ln,
+  html body header.hero .lamp .ln > span{
+    display:block !important;
+    width:100% !important;
+    text-align:center !important;
+  }
+  html body #top.hero .kw,
+  html body header.hero .kw{
+    display:grid !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin-inline:0 !important;
+    padding-inline:0 !important;
+    justify-items:center !important;
+    justify-content:center !important;
+    box-sizing:border-box !important;
+  }
+  html body #top.hero .lede,
+  html body header.hero .lede,
+  html body #top.hero .hero-actions,
+  html body header.hero .hero-actions{
+    text-align:center !important;
+    margin-inline:auto !important;
+    justify-content:center !important;
   }
   html body .hs-lede{
     margin-top:0 !important;
@@ -4199,6 +4267,14 @@ section.cta[data-ground="white"]{
   html body .eg{
     --eg-gap:var(--grid-gap) !important;
     gap:var(--grid-gap) !important;
+  }
+  /* Prev/Next sit above the card with a 10px gap. The shared grid gap
+     would add extra space between the buttons and the card. */
+  html body .eg:has(.eg-nav){
+    gap:0 !important;
+  }
+  html body .eg:has(.eg-nav) .eg-nav{
+    margin:0 0 10px !important;
   }
   html body .ax{
     --ax-gap:clamp(16px,4vw,28px) !important;
@@ -4361,3 +4437,4 @@ html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
 }
+

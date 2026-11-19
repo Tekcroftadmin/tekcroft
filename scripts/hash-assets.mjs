@@ -190,7 +190,11 @@ if (fs.existsSync(tekcroftCss)) {
     "    padding-top:calc(var(--nav-h) + 62px)!important;\n" +
     "    padding-bottom:20px!important;\n" +
     "  }\n" +
-    "  #top.hero .hero-in, header.hero .hero-in{margin-block:auto!important;}\n" +
+    "  #top.hero .hero-in, header.hero .hero-in{margin-block:auto!important;text-align:center!important;align-items:center!important;}\n" +
+    "  #top.hero .lamp, header.hero .lamp{width:100%!important;max-width:100%!important;margin-inline:auto!important;text-align:center!important;}\n" +
+    "  #top.hero .lamp h1, header.hero .lamp h1{width:100%!important;text-align:center!important;margin-inline:0!important;}\n" +
+    "  #top.hero .lamp .ln, #top.hero .lamp .ln > span, header.hero .lamp .ln, header.hero .lamp .ln > span{display:block!important;width:100%!important;text-align:center!important;}\n" +
+    "  #top.hero .kw, header.hero .kw{display:grid!important;width:100%!important;max-width:100%!important;margin-inline:0!important;padding-inline:0!important;justify-items:center!important;box-sizing:border-box!important;}\n" +
     "}\n";
   fs.writeFileSync(path.join(ROOT, "app", "tekcroft-critical.css"), critical);
   fs.writeFileSync(

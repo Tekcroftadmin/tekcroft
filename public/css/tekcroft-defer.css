@@ -3313,7 +3313,15 @@ html[data-theme="dark"] .ft4-brand .logo{--logo:var(--logo-white);}
   .hero{height:auto; min-height:0; padding:calc(var(--nav-h) + var(--hero-pad-top, 26px)) 0 0;
     --hero-strip-height:56px;}
   .hero:not(:has(> .ticker)){padding-bottom:var(--hero-pad-bot, 20px);}
-  .hero-in{margin-block:0;}
+  .hero-in{margin-block:0; text-align:center; align-items:center;}
+  .lamp{width:100%; max-width:100%; margin-inline:auto; text-align:center;}
+  .lamp h1{width:100%; text-align:center; margin-inline:0;}
+  .lamp .ln,
+  .lamp .ln > span{display:block; width:100%; text-align:center;}
+  /* Longest keyword can exceed the phone width as inline-grid; full-width
+     grid keeps Google / ChatGPT / etc. centered under the headline. */
+  .kw{display:grid; width:100%; max-width:100%; margin-inline:0;
+    padding-inline:0; justify-items:center; box-sizing:border-box;}
   .ticker{margin-top:0; height:var(--hero-strip-height, 56px);
     min-height:var(--hero-strip-height, 56px); max-height:var(--hero-strip-height, 56px);}
   .hero-actions .btn{flex:1 1 auto;}
@@ -6977,6 +6985,54 @@ section.cta[data-ground="white"]{
   html body .ct-hero h1{
     margin-bottom:var(--lede-gap) !important;
   }
+  /* Homepage hero: keep every line (incl. rotating keyword) centered on mobile.
+     .kw is sized to the longest keyword and overflows the viewport as inline-grid,
+     which left-anchors short words like Google — force a full-width centered grid. */
+  html body #top.hero .hero-in,
+  html body header.hero .hero-in{
+    align-items:center !important;
+    text-align:center !important;
+  }
+  html body #top.hero .lamp,
+  html body header.hero .lamp{
+    width:100% !important;
+    max-width:100% !important;
+    margin-inline:auto !important;
+    text-align:center !important;
+  }
+  html body #top.hero .lamp h1,
+  html body header.hero .lamp h1{
+    width:100% !important;
+    text-align:center !important;
+    margin-inline:0 !important;
+  }
+  html body #top.hero .lamp .ln,
+  html body #top.hero .lamp .ln > span,
+  html body header.hero .lamp .ln,
+  html body header.hero .lamp .ln > span{
+    display:block !important;
+    width:100% !important;
+    text-align:center !important;
+  }
+  html body #top.hero .kw,
+  html body header.hero .kw{
+    display:grid !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin-inline:0 !important;
+    padding-inline:0 !important;
+    justify-items:center !important;
+    justify-content:center !important;
+    box-sizing:border-box !important;
+  }
+  html body #top.hero .lede,
+  html body header.hero .lede,
+  html body #top.hero .hero-actions,
+  html body header.hero .hero-actions{
+    text-align:center !important;
+    margin-inline:auto !important;
+    justify-content:center !important;
+  }
   html body .hs-lede{
     margin-top:0 !important;
     margin-bottom:var(--block-gap) !important;
@@ -7244,6 +7300,7 @@ html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
 }
+
 
 /* Homepage services console only. The photo lives on ::before with cover
    so it fills the left panel edge to edge; gradients stay on the plate
