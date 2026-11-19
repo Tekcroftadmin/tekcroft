@@ -34,6 +34,7 @@ const IDLE_PREFETCH = [
   "/services/ai-chatbot-development-services",
   "/services/ai-agent-development-services",
   "/about-us",
+  "/blog",
   "/contact-us",
 ];
 
@@ -70,7 +71,8 @@ function syncAriaCurrent(pathname: string) {
   const path = (pathname || "/").replace(/\/+$/, "") || "/";
   document.querySelectorAll(".nav-links a[href]").forEach((a) => {
     const href = (a.getAttribute("href") || "").replace(/\/+$/, "") || "/";
-    if (href === path) a.setAttribute("aria-current", "page");
+    const onBlog = href === "/blog" && (path === "/blog" || path.startsWith("/blog/"));
+    if (href === path || onBlog) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
   const mm = document.getElementById("mmTrigger");

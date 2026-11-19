@@ -12,6 +12,13 @@ const nextConfig = {
   },
   images: {
     formats: ["image/webp", "image/avif"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "comic-peachpuff-ibis-64.hostingersite.com",
+        pathname: "/**",
+      },
+    ],
   },
   async redirects() {
     return [

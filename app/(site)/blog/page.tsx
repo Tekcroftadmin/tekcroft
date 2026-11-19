@@ -1,25 +1,34 @@
-﻿import type { Metadata } from "next";
-import Script from "next/script";
-import SitePage from "@/components/SitePage";
-import { readPreparedBody } from "@/lib/compose-site-html";
-import assets from "@/lib/asset-manifest.json";
-import "@/app/contact.css";
+﻿import PageBodyEffects from "@/components/PageBodyEffects";
+import BlogListing from "@/components/blog/BlogListing";
+import { getPosts } from "@/lib/wordpress";
+import { blogListingMetadata } from "@/lib/wordpress/seo";
+import "@/app/blog-listing.css";
 import "@/app/footer-lock.css";
 
-export const metadata: Metadata = {
+export const metadata = blogListingMetadata({
   title: "Blog | Tekcroft",
   description:
     "Insights on SEO, AI, and software development from Tekcroft.",
-  alternates: { canonical: "https://www.tekcroft.com/blog" },
+  path: "/blog",
+});
+
+type BlogPageProps = {
+  searchParams?: Promise<{ page?: string }>;
 };
 
-export default function BlogPage() {
-  const html = readPreparedBody("blog-body.html");
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const sp = (await searchParams) || {};
+  const page = Math.max(1, Number(sp.page) || 1);
+  const list = await getPosts({ page });
 
   return (
     <>
-      <SitePage html={html} prepared />
-      <Script src={assets.contact} strategy="lazyOnload" />
+      <BlogListing
+        posts={list.posts}
+        page={list.page}
+        totalPages={list.totalPages}
+      />
+      <PageBodyEffects />
     </>
   );
 }
