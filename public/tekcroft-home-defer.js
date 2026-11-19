@@ -1,3 +1,7 @@
+/* Soft-nav: every widget below is a mount function with a per-root
+   __tcWired guard, registered here and re-run on tekcroft:nav (see end of file). */
+window.__tekcroftHomeDeferMounts = [];
+function __tcHdReg(fn){ window.__tekcroftHomeDeferMounts.push(fn); fn(); }
 (function(){
   "use strict";
   var $  = function(sel, r){ return (r || document).querySelector(sel); };
@@ -18,9 +22,11 @@
      Below 1080 the chips are gone and so is this: there is no gutter
      left for a line to cross.
   --------------------------------------------------------------- */
-  (function(){
+  __tcHdReg(function(){
     var axStage = $(".ax-stage"), axSvg = $(".ax-wires"), axHub = $(".ax-hub");
     if (!axStage || !axSvg || !axHub) return;
+    if (axStage.__tcWired) return;
+    axStage.__tcWired = true;
     var axWireEls = $$(".ax-wire", axSvg);
 
     function axWires(){
@@ -62,7 +68,11 @@
       axWired = true;
       axWires();
     }
-    window.addEventListener("resize", function(){ if (axWired) axWires(); }, { passive:true });
+    function axOnResize(){
+      if (!axStage.isConnected){ window.removeEventListener("resize", axOnResize); return; }
+      if (axWired) axWires();
+    }
+    window.addEventListener("resize", axOnResize, { passive:true });
     if ("IntersectionObserver" in window && axStage){
       new IntersectionObserver(function(entries){
         if (!entries[0].isIntersecting) return;
@@ -71,7 +81,7 @@
     } else {
       setTimeout(axWiresOnce, 0);
     }
-  })();
+  });
 
   /* ---------------- the queries that type themselves ----------------
      These used to run once, on the way past. That was the right instinct
@@ -89,8 +99,10 @@
      markup, so they start staggered and stay staggered through every
      pass, and no two of them are ever typing the same letter.
   --------------------------------------------------------------- */
-  var axFields = $$(".ax-type");
+  __tcHdReg(function(){
+  var axFields = $$(".ax-type").filter(function(f){ return !f.__tcWired; });
   if (axFields.length){
+    axFields.forEach(function(f){ f.__tcWired = true; });
 
     function axRun(field){
       var live  = $(".ax-type-live", field),
@@ -146,6 +158,7 @@
       axRunners.forEach(function(r){ here ? r.start() : r.stop(); });
     }, { threshold:0.15 }).observe($("#ai-ecosystem") || axFields[0]);
   }
+  });
 
   /* ---------------- reviews ---------------- */
   var REVIEWS = [
@@ -156,11 +169,13 @@
     { text:"The free review found a redirect chain that had been eating a third of our organic traffic for two years. They sent it before we paid them anything.",
       name:"Priya Raman", role:"Head of Growth, Bright Fork", initials:"PR", key:"before we paid them anything" }
   ];
-  var slot = $("#quoteSlot"), qnav = $("#quoteNav"), at = 0, qTimer;
-
   function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-  if (slot && qnav){
+  __tcHdReg(function(){
+  var slot = $("#quoteSlot"), qnav = $("#quoteNav"), at = 0, qTimer;
+
+  if (slot && qnav && !slot.__tcWired){
+    slot.__tcWired = true;
     slot.innerHTML = REVIEWS.map(function(r, i){
       var body = esc(r.text).replace(esc(r.key), "<em>" + esc(r.key) + "</em>");
       return '<div class="q' + (i === 0 ? " on" : "") + '">' +
@@ -188,7 +203,10 @@
     function auto(){
       if (calm) return;
       clearInterval(qTimer);
-      qTimer = setInterval(function(){ show(at + 1); }, 7000);
+      qTimer = setInterval(function(){
+        if (!slot.isConnected){ clearInterval(qTimer); return; }
+        show(at + 1);
+      }, 7000);
     }
     dots.forEach(function(d, k){
       d.addEventListener("click", function(){ show(k); auto(); });
@@ -206,7 +224,11 @@
       slot.style.minHeight = tallest + "px";
     }
     sizeSlot();
-    window.addEventListener("resize", sizeSlot);
+    function onSlotResize(){
+      if (!slot.isConnected){ window.removeEventListener("resize", onSlotResize); clearInterval(qTimer); return; }
+      sizeSlot();
+    }
+    window.addEventListener("resize", onSlotResize);
     if (document.fonts && document.fonts.ready){ document.fonts.ready.then(sizeSlot); }
 
     var revsSec = $("#reviews");
@@ -214,6 +236,7 @@
     revsSec.addEventListener("pointerleave", auto);
     auto();
   }
+  });
 
 })();
 
@@ -226,10 +249,11 @@
 
 
 /* === why-v2 tabs (scoped) === */
-(function(){
+__tcHdReg(function(){
   "use strict";
   var box = document.querySelector("#why [data-tabs]");
-  if (!box) return;
+  if (!box || box.__tcWired) return;
+  box.__tcWired = true;
   var tabs  = Array.prototype.slice.call(box.querySelectorAll(".wy-tab")),
       panes = Array.prototype.slice.call(box.querySelectorAll(".wy-pane"));
 
@@ -284,12 +308,13 @@
       }
     });
   }
-})();
+});
 
 
 /* === spl-script (search-split) === */
-(function(){
-  var stage=document.querySelector('#search-split [data-split]'); if(!stage) return;
+__tcHdReg(function(){
+  var stage=document.querySelector('#search-split [data-split]'); if(!stage || stage.__tcWired) return;
+  stage.__tcWired=true;
   var chips=[].slice.call(stage.querySelectorAll('.spl-chip'));
   var order=['gsearch','aio','gmaps','chatgpt','plx','gemini'];
   var idx=0, timer=null, held=false;
@@ -350,10 +375,10 @@
   show('aio'); show(order[0]);
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
   io.observe(stage);
-})();
+});
 
 /* about counters */
-(function(){
+__tcHdReg(function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function run(el){
     var target=parseFloat(el.getAttribute('data-count'))||0;
@@ -371,13 +396,16 @@
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ run(e.target); io.unobserve(e.target); } });
   },{threshold:.4});
-  document.querySelectorAll('#about [data-count]').forEach(function(el){ io.observe(el); });
-})();
+  document.querySelectorAll('#about [data-count]').forEach(function(el){
+    if(el.__tcWiredHd) return; el.__tcWiredHd=true; io.observe(el);
+  });
+});
 
 /* === home variants: section behaviors (nsr / blueprint / ix) === */
 /* --- ref script 6 --- */
-(function(){
-  var stage=document.querySelector('[data-nsr]'); if(!stage) return;
+__tcHdReg(function(){
+  var stage=document.querySelector('[data-nsr]'); if(!stage || stage.__tcWired) return;
+  stage.__tcWired=true;
   var nodes=[].slice.call(stage.querySelectorAll('.nsr-node'));
   var cards=[].slice.call(stage.querySelectorAll('.nsr-card'));
   var dots=[].slice.call(stage.querySelectorAll('.nsr-dot'));
@@ -416,14 +444,16 @@
 
   function centre(){ var c=cards[at]; if(c) rail.scrollLeft = c.offsetLeft - (rail.clientWidth - c.offsetWidth)/2; }
   go(at,false); requestAnimationFrame(centre); setTimeout(centre,300);
-  window.addEventListener('resize',centre);
+  function onCentre(){ if(!stage.isConnected){ window.removeEventListener('resize',onCentre); stop(); return; } centre(); }
+  window.addEventListener('resize',onCentre);
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
   io.observe(stage);
-})();
+});
 
 /* --- ref script 8 --- */
-(function(){
-  var board=document.querySelector('[data-blueprint]'); if(!board) return;
+__tcHdReg(function(){
+  var board=document.querySelector('[data-blueprint]'); if(!board || board.__tcWired) return;
+  board.__tcWired=true;
   var steps=[].slice.call(board.querySelectorAll('.bw-step'));
   var at=0, timer=null, held=false;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -438,11 +468,12 @@
   show(0);
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
   io.observe(board);
-})();
+});
 
 /* --- ref script 16 --- */
-(function(){
-  var board=document.querySelector('[data-ix]'); if(!board) return;
+__tcHdReg(function(){
+  var board=document.querySelector('[data-ix]'); if(!board || board.__tcWired) return;
+  board.__tcWired=true;
   var chips=[].slice.call(board.querySelectorAll('.ix-chip'));
   var at=0, timer=null, held=false;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -457,12 +488,14 @@
   show(0);
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.3});
   io.observe(board);
-})();
+});
 
 
 /* === about ribbon === */
-(function(){
+__tcHdReg(function(){
   document.querySelectorAll('[data-ribbon]').forEach(function(board){
+  if(board.__tcWired) return;
+  board.__tcWired=true;
   var cvs=[].slice.call(board.querySelectorAll('.cv'));
   var at=0, timer=null, held=false;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -488,4 +521,19 @@
   var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.3});
   io.observe(board);
  });
-})();
+});
+
+/* soft-nav re-mount (App Router swaps page HTML; this file does not re-run) */
+window.__tekcroftHomeDeferRefresh = function(){
+  window.__tekcroftHomeDeferMounts.forEach(function(fn){
+    try { fn(); } catch (err) {}
+  });
+};
+if (!window.__tekcroftHomeDeferNavBound){
+  window.__tekcroftHomeDeferNavBound = true;
+  ["tekcroft:nav", "pageshow", "popstate"].forEach(function(ev){
+    window.addEventListener(ev, function(){
+      if (window.__tekcroftHomeDeferRefresh) window.__tekcroftHomeDeferRefresh();
+    });
+  });
+}

@@ -46,8 +46,13 @@ function pageInit() {
         (el as HTMLElement).style.setProperty("transform", "none", "important");
       }
     });
-    document.querySelectorAll(".eg-card").forEach((el) => {
+    document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
       el.classList.add("seen");
+      if (el instanceof HTMLElement) {
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("transform");
+        el.style.removeProperty("visibility");
+      }
     });
     document.querySelectorAll(".eg-sec .eg").forEach((pw) => {
       if (!(pw instanceof HTMLElement)) return;
@@ -83,7 +88,14 @@ function pageInit() {
         (el as HTMLElement).style.setProperty("transform", "none", "important");
       }
     });
-    document.querySelectorAll(".eg-card").forEach((el) => el.classList.add("seen"));
+    document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
+      el.classList.add("seen");
+      if (el instanceof HTMLElement) {
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("transform");
+        el.style.removeProperty("visibility");
+      }
+    });
     document.querySelectorAll(".eg-sec .eg").forEach((pw) => {
       if (!(pw instanceof HTMLElement)) return;
       if (pw.querySelector(".eg-card.on")) return;

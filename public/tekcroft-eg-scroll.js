@@ -1,11 +1,14 @@
 /* ============================================================
    Approach / process section (.eg-sec)
 
-   Desktop (>1000px): auto-rotate + hover-to-select. Normal height.
-
-   Mobile (≤1000px): compact content height (no tall track, no pin).
-   Steps advance from viewport scroll position, swipe, or a short
-   auto-timer. Timer pauses while the user is scrolling/swiping.
+   No scroll-pin and no scroll-to-step mapping. The section is a
+   normal block. Steps advance by:
+     - auto, every 3s, looping 01 → 04 → 01
+     - swipe on the card (left = next, right = prev)
+     - Prev / Next buttons, mobile only
+   A manual move restarts the 3s timer. Desktop pauses while the
+   pointer is over the section. Auto pauses while the tab is hidden.
+   The ring fills from the current stop toward the next over those 3s.
    ============================================================ */
 (function () {
   "use strict";
@@ -19,12 +22,26 @@
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var narrow = window.matchMedia("(max-width: 1000px)");
+  var DWELL = 3000;
+  var STOPS = [563.5, 510.5, 447.7, 392.7];
+
+  var CHEV_L =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg>';
+  var CHEV_R =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>';
+
+  function stopFor(i, n) {
+    if (n === 4) return STOPS[i];
+    var a = STOPS[0];
+    var b = STOPS[STOPS.length - 1];
+    if (n < 2) return a;
+    return a + ((b - a) * i) / (n - 1);
+  }
 
   function init(pw) {
     if (pw.__egScroll) return;
     var sec = pw.closest(".eg-sec");
     if (!sec) return;
-
     var steps = $$(".walk-step", pw);
     var n = steps.length;
     if (n < 2) return;
@@ -32,255 +49,183 @@
     pw.__egScroll = true;
 
     var arc = pw.querySelector(".eg-arc");
-    var at = -1;
-    var tick = null;
-    var mode = null; /* "desk" | "mob" */
-    var swipeWired = false;
+    var list = pw.querySelector(".eg-list");
+    var at = 0;
+    var from = stopFor(0, n);
+    var to = stopFor(1, n);
+    var acc = 0;
+    var last = 0;
+    var raf = 0;
     var inView = false;
-    var hold = false;
-    var holdTimer = null;
+    var hovering = false;
 
-    function light(k) {
-      k = Math.max(0, Math.min(n - 1, k | 0));
-      if (k === at) return;
-      at = k;
+    sec.classList.remove("eg-scroll");
+    sec.style.height = "";
+    sec.style.minHeight = "";
+    if (arc) arc.style.transition = "none";
+
+    function paint(offset) {
+      if (!arc) return;
+      arc.style.transition = "none";
+      arc.style.strokeDashoffset = String(offset);
+    }
+
+    function setStep(k) {
+      at = ((k % n) + n) % n;
       steps.forEach(function (s, i) {
-        s.classList.toggle("on", i === k);
+        s.classList.toggle("on", i === at);
+        s.classList.add("seen");
+        s.style.removeProperty("opacity");
+        s.style.removeProperty("transform");
+        s.style.removeProperty("visibility");
       });
-      pw.setAttribute("data-at", String(k));
-      if (arc) {
-        arc.style.transition = "";
-        arc.style.strokeDashoffset = "";
-      }
+      pw.setAttribute("data-at", String(at));
+      from = stopFor(at, n);
+      if (at < n - 1) to = stopFor(at + 1, n);
+      else to = from - (stopFor(0, n) - stopFor(1, n));
+      acc = 0;
+      last = 0;
+      paint(calm ? from : from);
     }
 
-    function stopTimer() {
-      if (tick) {
-        clearInterval(tick);
-        tick = null;
-      }
+    function shouldRun() {
+      if (!inView || document.hidden) return false;
+      if (hovering && !narrow.matches) return false;
+      return true;
     }
 
-    function runTimer() {
-      if (calm || tick || !inView || hold) return;
-      /* Mobile cycles sooner; desktop keeps the original 1.6s pace. */
-      var ms = mode === "mob" ? 3200 : 1600;
-      tick = setInterval(function () {
-        light((at + 1) % n);
-      }, ms);
-    }
-
-    /* Pause auto-advance while the user is driving the step. */
-    function pauseForUser() {
-      hold = true;
-      stopTimer();
-      if (holdTimer) clearTimeout(holdTimer);
-      holdTimer = setTimeout(function () {
-        hold = false;
-        holdTimer = null;
-        if (inView) runTimer();
-      }, 1400);
-    }
-
-    function bump(d) {
-      light((at + d + n) % n);
-      pauseForUser();
-    }
-
-    /* Desktop hover selects a step and pauses the timer. */
-    steps.forEach(function (s, i) {
-      s.addEventListener("mouseenter", function () {
-        if (mode !== "desk") return;
-        light(i);
-        stopTimer();
-      });
-    });
-    pw.addEventListener("mouseleave", function () {
-      if (mode !== "desk") return;
-      runTimer();
-    });
-
-    /* Mobile: steps follow the section only while it is on screen.
-       Before it enters → 01. While its top travels bottom→top of the
-       viewport → 01…04. After it leaves above → stay on 04. */
-    function applyScrollStep() {
-      if (mode !== "mob") return;
-      var rect = sec.getBoundingClientRect();
-      var vh = window.innerHeight || 1;
-
-      if (rect.top >= vh) {
-        /* Still below the viewport — do not advance. */
-        if (at !== 0) {
-          pauseForUser();
-          light(0);
-        }
+    function frame(now) {
+      raf = 0;
+      if (!shouldRun()) return;
+      if (!last) last = now;
+      acc += now - last;
+      last = now;
+      var t = acc / DWELL;
+      if (t >= 1) {
+        setStep(at + 1);
+        if (shouldRun()) raf = requestAnimationFrame(frame);
         return;
       }
-      if (rect.bottom <= 0) {
-        /* Fully past — lock the last step. */
-        if (at !== n - 1) {
-          pauseForUser();
-          light(n - 1);
-        }
-        return;
-      }
-
-      /* On screen: map section top from viewport bottom (0) to top (1). */
-      var p = 1 - rect.top / vh;
-      p = Math.max(0, Math.min(1, p));
-      var next = Math.round(p * (n - 1));
-      if (next === at) return;
-      pauseForUser();
-      light(next);
+      paint(calm ? from : from + (to - from) * t);
+      raf = requestAnimationFrame(frame);
     }
 
-    var ticking = false;
-    function onScroll() {
-      if (mode !== "mob") return;
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        ticking = false;
-        applyScrollStep();
+    function kick() {
+      if (raf || !shouldRun()) return;
+      last = 0;
+      raf = requestAnimationFrame(frame);
+    }
+
+    function manual(delta) {
+      setStep(at + delta);
+      kick();
+    }
+
+    if (list && !pw.querySelector(".eg-nav")) {
+      var nav = document.createElement("div");
+      nav.className = "eg-nav";
+      nav.innerHTML =
+        '<button type="button" class="eg-prev" aria-label="Previous step">' +
+        CHEV_L +
+        "<span>Prev</span></button>" +
+        '<button type="button" class="eg-next" aria-label="Next step"><span>Next</span>' +
+        CHEV_R +
+        "</button>";
+      list.parentNode.insertBefore(nav, list);
+      nav.querySelector(".eg-prev").addEventListener("click", function () {
+        manual(-1);
+      });
+      nav.querySelector(".eg-next").addEventListener("click", function () {
+        manual(1);
       });
     }
 
-    /* Mobile: clear horizontal swipe only — vertical page scroll stays free. */
-    var x0 = null;
-    var y0 = null;
-    function swipeStart(x, y) {
-      if (mode !== "mob") return;
-      x0 = x;
-      y0 = y;
-    }
-    function swipeEnd(x, y) {
-      if (mode !== "mob" || x0 === null) {
-        x0 = null;
-        y0 = null;
-        return;
-      }
-      var dx = x - x0;
-      var dy = y - y0;
-      x0 = null;
-      y0 = null;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-        bump(dx < 0 ? 1 : -1);
-      }
-    }
-
-    function wireSwipe() {
-      if (swipeWired) return;
-      swipeWired = true;
-      pw.addEventListener(
-        "touchstart",
+    if (list) {
+      var x0 = null;
+      var y0 = null;
+      var pid = null;
+      list.addEventListener(
+        "pointerdown",
         function (e) {
-          var t = e.changedTouches[0];
-          swipeStart(t.clientX, t.clientY);
+          if (!narrow.matches) return;
+          if (e.pointerType === "mouse" && e.button !== 0) return;
+          x0 = e.clientX;
+          y0 = e.clientY;
+          pid = e.pointerId;
         },
         { passive: true }
       );
-      pw.addEventListener(
-        "touchend",
+      list.addEventListener(
+        "pointerup",
         function (e) {
-          var t = e.changedTouches[0];
-          swipeEnd(t.clientX, t.clientY);
+          if (x0 === null || e.pointerId !== pid) return;
+          var dx = e.clientX - x0;
+          var dy = e.clientY - y0;
+          x0 = null;
+          y0 = null;
+          pid = null;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+            manual(dx < 0 ? 1 : -1);
+          }
         },
         { passive: true }
       );
-      pw.addEventListener(
-        "touchcancel",
+      list.addEventListener(
+        "pointercancel",
         function () {
           x0 = null;
           y0 = null;
-        },
-        { passive: true }
-      );
-      pw.addEventListener(
-        "pointerdown",
-        function (e) {
-          if (e.pointerType === "mouse") swipeStart(e.clientX, e.clientY);
-        },
-        { passive: true }
-      );
-      pw.addEventListener(
-        "pointerup",
-        function (e) {
-          if (e.pointerType === "mouse") swipeEnd(e.clientX, e.clientY);
+          pid = null;
         },
         { passive: true }
       );
     }
+
+    sec.addEventListener("mouseenter", function () {
+      if (narrow.matches) return;
+      hovering = true;
+      last = 0;
+    });
+    sec.addEventListener("mouseleave", function () {
+      hovering = false;
+      kick();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      last = 0;
+      if (!document.hidden) kick();
+    });
 
     var io = new IntersectionObserver(
       function (entries) {
         inView = entries[0].isIntersecting;
-        if (!inView) {
-          stopTimer();
-          if (mode === "mob") applyScrollStep();
-          return;
-        }
-        steps.forEach(function (s) {
-          s.classList.add("seen");
-        });
-        if (mode === "mob") applyScrollStep();
-        else if (at < 0) light(0);
-        runTimer();
+        last = 0;
+        if (inView) kick();
       },
-      { threshold: 0 }
+      { threshold: 0.15 }
     );
 
-    function setMode(next) {
-      if (next === mode) return;
-      stopTimer();
-      mode = next;
-      sec.classList.remove("eg-scroll");
-      sec.style.height = "";
-      if (arc) {
-        arc.style.transition = "";
-        arc.style.strokeDashoffset = "";
-      }
-      if (next === "mob") wireSwipe();
-      if (at < 0) light(0);
-      else light(at);
-      if (inView) {
-        if (next === "mob") applyScrollStep();
-        runTimer();
-      }
-    }
-
-    function syncMode() {
-      setMode(narrow.matches ? "mob" : "desk");
-    }
-
-    syncMode();
+    setStep(0);
     io.observe(pw);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", syncMode, { passive: true });
-    if (narrow.addEventListener) narrow.addEventListener("change", syncMode);
-    else if (narrow.addListener) narrow.addListener(syncMode);
+    if (narrow.addEventListener) {
+      narrow.addEventListener("change", function () {
+        hovering = false;
+        last = 0;
+        kick();
+      });
+    }
   }
 
   function boot() {
     $$(".eg-sec .eg").forEach(function (pw) {
       if (!pw.querySelector(".walk-step")) return;
-      /* Soft-nav remounts nodes; clear stale flag if re-used. */
       if (pw.__egScroll && !document.documentElement.contains(pw)) {
         pw.__egScroll = false;
       }
       init(pw);
-      /* Immediate reveal so cards are never stuck opacity:0 awaiting IO. */
-      $$(".walk-step, .eg-card", pw).forEach(function (s) {
-        s.classList.add("seen");
-      });
-      if (!pw.querySelector(".eg-card.on, .walk-step.on")) {
-        var first = pw.querySelector(".eg-card, .walk-step");
-        if (first) first.classList.add("on");
-        if (!pw.getAttribute("data-at")) pw.setAttribute("data-at", "0");
-      }
     });
   }
 
-  /* Soft-nav remounts .eg nodes — re-scan on every route change. */
   window.__tekcroftEgScrollRefresh = boot;
   window.addEventListener("tekcroft:nav", boot);
   window.addEventListener("pageshow", boot);

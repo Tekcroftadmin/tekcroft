@@ -2898,6 +2898,9 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
 
 .eg-cta{margin-top:clamp(20px,2.2vw,28px); display:flex; justify-content:center;}
 
+/* Mobile-only step controls. Desktop keeps auto + hover-pause, no buttons. */
+.eg-nav{display:none;}
+
 @media (max-width:1000px){
   /* One column: disc on top, one stage card under it. Cards share a
      single grid cell so the list is as tall as the tallest card and the
@@ -2909,7 +2912,32 @@ html[data-theme="dark"] .eg-ico{background:var(--surface-2);}
   .eg-lab,.eg-of{font-size:10.5px; letter-spacing:.13em;}
   .eg-rule{width:52px; margin:14px auto;}
 
-  .eg-list{position:relative; display:grid; gap:0; overflow:hidden;}
+  .eg:has(.eg-nav){gap:0;}
+  /* Beats #process .eg and page-scoped .eg gap locks, mobile only.
+     The nav node exists on desktop too, so this stays inside 1000px. */
+  html body .eg-sec .eg:has(.eg-nav),
+  html body #process .eg:has(.eg-nav){gap:0 !important;}
+  .eg:has(.eg-nav) .eg-core{margin-bottom:clamp(14px,3.6vw,22px);}
+  .eg-list{position:relative; display:grid; gap:0; overflow:hidden; touch-action:pan-y;}
+  .eg-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    gap:12px; margin:0 0 10px;
+  }
+  .eg-nav button{
+    display:inline-flex; align-items:center; gap:6px;
+    margin:0; appearance:none; cursor:pointer;
+    background:var(--surface); color:#0096D5 !important;
+    border:1px solid var(--border); border-radius:100px;
+    font-family:inherit; font-weight:700; font-size:13px; line-height:1;
+    letter-spacing:0; padding:8px 15px;
+    box-shadow:0 6px 16px -10px rgba(0,30,60,.45);
+  }
+  .eg-nav button svg{width:14px; height:14px; display:block; flex:none;}
+  .eg-nav button:hover,
+  .eg-nav button:focus-visible{border-color:#0096D5;}
+  html[data-theme="dark"] .eg-nav button{color:var(--brand-text) !important;}
+  html[data-theme="dark"] .eg-nav button:hover,
+  html[data-theme="dark"] .eg-nav button:focus-visible{border-color:var(--primary);}
   /* No-JS: first card visible. With js-ready: only .on (stage) is visible. */
   .eg-card{grid-area:1 / 1; order:0; --lay:0ms;
     opacity:0; visibility:hidden; pointer-events:none;
@@ -7774,6 +7802,14 @@ section.cta[data-ground="white"]{
   html body .eg{
     --eg-gap:var(--grid-gap) !important;
     gap:var(--grid-gap) !important;
+  }
+  /* Prev/Next sit above the card with a 10px gap. The shared grid gap
+     would add extra space between the buttons and the card. */
+  html body .eg:has(.eg-nav){
+    gap:0 !important;
+  }
+  html body .eg:has(.eg-nav) .eg-nav{
+    margin:0 0 10px !important;
   }
   html body .ax{
     --ax-gap:clamp(16px,4vw,28px) !important;

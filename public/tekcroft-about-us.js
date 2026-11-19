@@ -1,4 +1,8 @@
 /* About Us page interactions */
+/* Soft-nav: page-DOM widgets are mount functions with per-root __tcWired
+   guards, registered here and re-run on tekcroft:nav (see end of file). */
+window.__tekcroftAboutMounts = [];
+function __tcAbReg(fn){ window.__tekcroftAboutMounts.push(fn); fn(); }
 (function(){
   "use strict";
   var $  = function(s, r){ return (r || document).querySelector(s); };
@@ -65,20 +69,25 @@
       if (e.target.closest("a[href],[data-jump]")) closeMenu();
     });
   }
-  $$("[data-jump]").forEach(function(el){
-    el.addEventListener("click", function(){
-      var form = $(".hs:not([hidden]) form[data-lead]") || $("form[data-lead]") || $("#cta");
-      if (!form) return;
-      closeMenu();
-      form.scrollIntoView({ behavior:"smooth", block:"center" });
+  __tcAbReg(function(){
+    $$("[data-jump]").forEach(function(el){
+      if (el.__tcWired) return;
+      el.__tcWired = true;
+      el.addEventListener("click", function(){
+        var form = $(".hs:not([hidden]) form[data-lead]") || $("form[data-lead]") || $("#cta");
+        if (!form) return;
+        closeMenu();
+        form.scrollIntoView({ behavior:"smooth", block:"center" });
+      });
     });
   });
 })();
 
-(function(){var s=document.getElementById('what-we-do-h');if(!s)return;
-new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecting){s.classList.add('in');o.disconnect();}});},{threshold:.15}).observe(s);})();
+__tcAbReg(function(){var s=document.getElementById('what-we-do-h');if(!s||s.__tcWired)return;
+s.__tcWired=true;
+new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecting){s.classList.add('in');o.disconnect();}});},{threshold:.15}).observe(s);});
 
-(function(){
+__tcAbReg(function(){
   var WWB=document.getElementById('wwb');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -134,13 +143,14 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
   }
 
   var stage = WWB && WWB.querySelector('.variant');
-  if (stage) initStage(stage);
-})();
+  if (stage && !stage.__tcWired){ stage.__tcWired = true; initStage(stage); }
+});
 
 /* =================== OPTION A SCRIPT (mouse parallax) =================== */
-(function () {
+__tcAbReg(function () {
   var map = document.querySelector('.hgra-map');
-  if (!map) return;
+  if (!map || map.__tcWired) return;
+  map.__tcWired = true;
   var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (rm) return;
   map.addEventListener('pointermove', function (e) {
@@ -153,11 +163,12 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     map.style.setProperty('--mx', 0);
     map.style.setProperty('--my', 0);
   });
-})();
+});
 /* =================== END OPTION A SCRIPT =================== */
 
-(function(){
-  var sec=document.getElementById('rpk-sec'); if(!sec) return;
+__tcAbReg(function(){
+  var sec=document.getElementById('rpk-sec'); if(!sec || sec.__tcWired) return;
+  sec.__tcWired=true;
   var svg=sec.querySelector('.rpk-svg'), chips=[].slice.call(sec.querySelectorAll('.rpk-chip'));
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function go(){ sec.classList.add('in'); setTimeout(function(){ sec.classList.add('live'); }, reduce?0:2600); }
@@ -173,10 +184,11 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     c.addEventListener('mouseenter',function(){ if(!pinned) focus(c.dataset.k); });
     c.addEventListener('mouseleave',function(){ if(!pinned) focus(null); });
   });
-})();
+});
 
-(function(){
-  var sec=document.getElementById('rpm-sec'); if(!sec) return;
+__tcAbReg(function(){
+  var sec=document.getElementById('rpm-sec'); if(!sec || sec.__tcWired) return;
+  sec.__tcWired=true;
   var svgs=[].slice.call(sec.querySelectorAll('.rpm-svg')), chips=[].slice.call(sec.querySelectorAll('.rpk-chip'));
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function go(){ sec.classList.add('in'); setTimeout(function(){ sec.classList.add('live'); }, reduce?0:2600); }
@@ -192,11 +204,13 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     c.addEventListener('mouseenter',function(e){ if(!pinned && matchMedia('(hover:hover)').matches) focus(c.dataset.k); });
     c.addEventListener('mouseleave',function(){ if(!pinned) focus(null); });
   });
-})();
+});
 
-(function(){
+__tcAbReg(function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-hwwalk]').forEach(function(pw){
+    if(pw.__tcWired) return;
+    pw.__tcWired=true;
     var steps=[].slice.call(pw.querySelectorAll('.walk-step')), at=-1, tick=null;
     function light(k){ at=k; pw.setAttribute('data-at',String(k)); steps.forEach(function(s,n){ s.classList.toggle('on', n===k); }); }
     function go(){ light((at+1)%steps.length); }
@@ -207,19 +221,21 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     if('IntersectionObserver' in window){
       new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting?start():stop(); }); },{threshold:.3}).observe(pw);
     } else { start(); }
-  })})();
+  })});
 
-(function(){
+__tcAbReg(function(){
   /* People — founders timeline */
   var cc=document.getElementById('people-c');
-  if(cc){ new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){cc.classList.add('sp-seen');o.disconnect();}});},{threshold:.2}).observe(cc); }
-})();
+  if(cc && !cc.__tcWired){ cc.__tcWired=true; new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){cc.classList.add('sp-seen');o.disconnect();}});},{threshold:.2}).observe(cc); }
+});
 
-(function(){var wg=document.getElementById('wg');
-  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)wg.classList.add('in');});},{threshold:.25}).observe(wg);})();
+__tcAbReg(function(){var wg=document.getElementById('wg');
+  if(!wg||wg.__tcWired) return; wg.__tcWired=true;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)wg.classList.add('in');});},{threshold:.25}).observe(wg);});
 
-(function(){var cta=document.getElementById('cta');
-  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)cta.classList.add('in');});},{threshold:.25}).observe(cta);})();
+__tcAbReg(function(){var cta=document.getElementById('cta');
+  if(!cta||cta.__tcWired) return; cta.__tcWired=true;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)cta.classList.add('in');});},{threshold:.25}).observe(cta);});
 
 /* ══════════════════════════════════════════════════════════════════════
    THE WALK — ported from the homepage.
@@ -238,14 +254,16 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
    moving: the cards are all revealed on first sight, and the stepping is
    decoration on top of that.
    ══════════════════════════════════════════════════════════════════════ */
-(function(){
+__tcAbReg(function(){
   "use strict";
   var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   $$("[data-walk]").forEach(function(pw){
-    /* Scroll+swipe owns .eg process sections — do not auto-rotate them. */
+    /* eg-scroll.js owns .eg-sec process sections (auto / swipe / Prev-Next). */
     if (pw.querySelector(".eg-list") || pw.classList.contains("eg")) return;
+    if (pw.__tcWired) return;
+    pw.__tcWired = true;
     var steps = $$(".walk-step", pw), at = -1, tick = null;
 
     /* On the narrow layout the lit step is pulled to the head of the list
@@ -416,5 +434,20 @@ new IntersectionObserver(function(en,o){en.forEach(function(e){if(e.isIntersecti
     if (narrow.addEventListener) narrow.addEventListener("change", swap);
     else narrow.addListener(swap);
   });
-})();
+});
+
+/* soft-nav re-mount (App Router swaps page HTML; this file does not re-run) */
+window.__tekcroftAboutRefresh = function(){
+  window.__tekcroftAboutMounts.forEach(function(fn){
+    try { fn(); } catch (err) {}
+  });
+};
+if (!window.__tekcroftAboutNavBound){
+  window.__tekcroftAboutNavBound = true;
+  ["tekcroft:nav", "pageshow", "popstate"].forEach(function(ev){
+    window.addEventListener(ev, function(){
+      if (window.__tekcroftAboutRefresh) window.__tekcroftAboutRefresh();
+    });
+  });
+}
 

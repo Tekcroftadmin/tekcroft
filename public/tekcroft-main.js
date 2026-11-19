@@ -161,9 +161,11 @@
   --------------------------------------------------------------- */
   var KEYWORDS = ["AI-Era Search Growth", "Google", "AI Overviews", "ChatGPT",
                   "Gemini", "Perplexity"];
-  var kwSlots = $$("[data-kw]");
-  if (kwSlots.length){
+  function mountKw(){
+    var kwSlots = $$("[data-kw]").filter(function(s){ return !s.__tcWired; });
+    if (!kwSlots.length) return;
     kwSlots.forEach(function(slot){
+      slot.__tcWired = true;
       slot.innerHTML = "<u></u>" + KEYWORDS.map(function(w, i){
         return "<i" + (i === 0 ? ' class="on"' : "") + ">" + w + "</i>";
       }).join("");
@@ -172,7 +174,8 @@
     /* Width comes from CSS grid (longest keyword). JS only swaps classes. */
     var kwAt = 0;
     if (!calm){
-      setInterval(function(){
+      var kwTimer = setInterval(function(){
+        if (!kwSlots[0].isConnected){ clearInterval(kwTimer); return; }
         var next = (kwAt + 1) % KEYWORDS.length;
         kwSlots.forEach(function(slot){
           var words = $$("i", slot);
@@ -185,22 +188,27 @@
       }, 2900);
     }
   }
+  mountKw();
 
   /* ---------------- hero slider ----------------
      The slides are in the markup, so this only decides which one is lit.
      Add or remove a .hero-slide and the cycle adjusts itself.
   --------------------------------------------------------------- */
   var SHOT_HOLD = 6000;
-  var shots = $$(".hero-slide");
-  if (shots.length > 1 && !calm){
+  function mountHeroSlider(){
+    var shots = $$(".hero-slide");
+    if (shots.length < 2 || calm || shots[0].__tcWired) return;
+    shots.forEach(function(s){ s.__tcWired = true; });
     var shotAt = 0;
-    setInterval(function(){
+    var shotTimer = setInterval(function(){
+      if (!shots[0].isConnected){ clearInterval(shotTimer); return; }
       if (document.hidden) return;   /* don't cross-fade into an empty tab */
       shots[shotAt].classList.remove("on");
       shotAt = (shotAt + 1) % shots.length;
       shots[shotAt].classList.add("on");
     }, SHOT_HOLD);
   }
+  mountHeroSlider();
 
   /* ---------------- brand ticker ---------------- */
   var CLIENTS = ["MedVital", "CarePoint", "ServiClean", "FixMaster",
@@ -349,7 +357,14 @@
       if (en.isIntersecting){ countUp(en.target); ioCount.unobserve(en.target); }
     });
   }, { threshold:0.6 });
-  $$("[data-count]").forEach(function(el){ ioCount.observe(el); });
+  function mountCounts(){
+    $$("[data-count]").forEach(function(el){
+      if (el.__tcWired) return;
+      el.__tcWired = true;
+      ioCount.observe(el);
+    });
+  }
+  mountCounts();
 
   /* ---------------- the process walk ----------------
      Two separate things happen here, and keeping them apart is the
@@ -368,9 +383,12 @@
      time, auto-advance every 7s, and a drag that restarts the clock.
      Other walks (blueprint strip) keep the 1.6s desktop pace.
   --------------------------------------------------------------- */
+  function mountWalks(){
   $$("[data-walk]").forEach(function(pw){
-    /* Scroll+swipe owns .eg process sections — do not auto-rotate them. */
+    /* eg-scroll.js owns .eg-sec process sections (auto / swipe / Prev-Next). */
     if (pw.querySelector(".eg-list") || pw.classList.contains("eg")) return;
+    if (pw.__tcWired) return;
+    pw.__tcWired = true;
     var steps = $$(".walk-step", pw), at = -1, tick = null;
     var isEg = !!pw.querySelector(".eg-list");
     var narrow = window.matchMedia("(max-width: 1000px)");
@@ -493,6 +511,8 @@
       else narrow.addListener(swap);
     }
   });
+  }
+  mountWalks();
 
   /* ---------------- the review dialog ----------------
      Hidden with [hidden] so it is out of the render tree entirely
@@ -787,7 +807,10 @@
      One rail, one panel. The cards share a grid cell and cross over in
      place, so switching cannot change the height of the block.
   --------------------------------------------------------------- */
+  function mountConsoles(){
   $$("[data-console]").forEach(function(cn){
+    if (cn.__tcWired) return;
+    cn.__tcWired = true;
     var cnTabs  = $$(".cn-tab", cn),
         cnCards = $$(".cn-card", cn),
         cnSheet = $(".cn-sheet", cn),
@@ -1003,7 +1026,7 @@
 
     /* crossing the width re-houses the cards, and a block left shut on
        the accordion cannot arrive on the wide layout empty */
-    function cnRehouse(){ cnShow(cnAt < 0 && !cnFold.matches ? 0 : cnAt, false); }
+    function cnRehouse(){ if (!cn.isConnected) return; cnShow(cnAt < 0 && !cnFold.matches ? 0 : cnAt, false); }
     if (cnFold.addEventListener) cnFold.addEventListener("change", cnRehouse);
     else if (cnFold.addListener) cnFold.addListener(cnRehouse);
 
@@ -1012,21 +1035,32 @@
        that were true before either happened. Both are re-measured, and
        neither is animated: this is the pane being put back where it
        already was, not being sent anywhere. */
-    window.addEventListener("resize", function(){ cnPlaceLift(cnAt, false); });
+    function cnOnResize(){
+      if (!cn.isConnected){
+        window.removeEventListener("resize", cnOnResize);
+        return;
+      }
+      cnPlaceLift(cnAt, false);
+    }
+    window.addEventListener("resize", cnOnResize);
     if (document.fonts && document.fonts.ready){
       document.fonts.ready.then(function(){ cnPlaceLift(cnAt, false); });
     }
 
     cnShow(0, false);   /* seat the opening card in whichever layout is live */
   });
+  }
+  mountConsoles();
 
   /* ---------------- why us: the panel ----------------
      Each instrument is drawn from nothing every time its tab is opened.
      All three panels already exist in the markup — switching only toggles
      which one is shown. Never clone, append, or re-render panel content.
   --------------------------------------------------------------- */
+  function mountWn(){
   var wnPanel = $("#wnPanel");
-  if (wnPanel && !wnPanel.getAttribute("data-wn-wired")){
+  if (wnPanel && !wnPanel.getAttribute("data-wn-wired") && !wnPanel.__tcWired){
+    wnPanel.__tcWired = true;
     wnPanel.setAttribute("data-wn-wired", "1");
     var wnTabs   = $$(".wn-tab", wnPanel),
         wnBody   = $(".wn-body", wnPanel),
@@ -1110,6 +1144,8 @@
     }, { threshold:.2 });
     wnIO.observe(wnPanel);
   }
+  }
+  mountWn();
 
   /* ---------------- selected work ----------------
      The rail already scrolls, snaps and takes the arrow keys on its own.
@@ -1118,9 +1154,11 @@
      a key and a button all report the same place — and closes the run
      into a ring so it never reaches an end.
   --------------------------------------------------------------- */
-  (function(){
+  function mountDeck(){
     var deck = $("#wkDeck"), rail = $("#wkRail");
     if (!deck || !rail) return;
+    if (deck.__tcWired) return;
+    deck.__tcWired = true;
 
     var cards = $$(".wk-card", rail),
         at    = $("#wkAt"),
@@ -1255,7 +1293,14 @@
       clearTimeout(settle);
       settle = setTimeout(ringWrap, 150);
     }, { passive:true });
-    window.addEventListener("resize", relayout);
+    function onDeckResize(){
+      if (!deck.isConnected){
+        window.removeEventListener("resize", onDeckResize);
+        return;
+      }
+      relayout();
+    }
+    window.addEventListener("resize", onDeckResize);
 
     /* ---- mouse drag ----
        The rail already scrolls on touch and on a trackpad; a mouse has
@@ -1313,9 +1358,15 @@
     deck.addEventListener("pointerleave", function(){ if (!dragging) startAuto(); });
     rail.addEventListener("focusin", stopAuto);
     rail.addEventListener("focusout", startAuto);
-    document.addEventListener("visibilitychange", function(){
+    function onDeckVis(){
+      if (!deck.isConnected){
+        stopAuto();
+        document.removeEventListener("visibilitychange", onDeckVis);
+        return;
+      }
       if (document.hidden) stopAuto(); else if (!dragging) startAuto();
-    });
+    }
+    document.addEventListener("visibilitychange", onDeckVis);
 
     deck.classList.add("wired");
     relayout();
@@ -1327,7 +1378,8 @@
     } else {
       startAuto();
     }
-  })();
+  }
+  mountDeck();
 
   /* PERF_PATCHED */
   /* PERF_V2 */
@@ -1344,6 +1396,46 @@
     }, { rootMargin: "80px" });
     nodes.forEach(function(n){ io.observe(n); });
   })();
+
+  /* ---------------- soft-nav re-mount ----------------
+     App Router soft-nav swaps the page HTML but this file does not run
+     again. Everything above that touches page DOM is a mount*() function
+     guarded per node with __tcWired, so calling them again only wires the
+     new nodes. Theme / scroll / nav delegation above stays once-only. */
+  function mountAll(){
+    var bootEl = $("#boot");
+    if (bootEl && !bootEl.classList.contains("done") &&
+        !document.body.classList.contains("booting")){
+      /* soft-nav re-injects #boot — never replay the curtain
+         (a first-load boot in progress sets body.booting, so it is left alone) */
+      bootEl.classList.add("done");
+      document.body.classList.remove("booting");
+      var heroEl = $("#top");
+      if (heroEl) heroEl.classList.add("play");
+    }
+    var mq = $("#marqTrack");
+    if (mq && !mq.children.length) fillMarq(mq, CLIENTS, false);
+    mountKw();
+    mountHeroSlider();
+    mountCounts();
+    mountWalks();
+    mountConsoles();
+    mountWn();
+    mountDeck();
+  }
+  window.__tekcroftMainRefresh = mountAll;
+  if (!window.__tekcroftMainNavBound){
+    window.__tekcroftMainNavBound = true;
+    window.addEventListener("tekcroft:nav", function(){
+      if (window.__tekcroftMainRefresh) window.__tekcroftMainRefresh();
+    });
+    window.addEventListener("pageshow", function(){
+      if (window.__tekcroftMainRefresh) window.__tekcroftMainRefresh();
+    });
+    window.addEventListener("popstate", function(){
+      if (window.__tekcroftMainRefresh) window.__tekcroftMainRefresh();
+    });
+  }
 
 
 })();

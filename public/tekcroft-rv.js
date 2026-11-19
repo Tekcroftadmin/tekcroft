@@ -49,8 +49,6 @@
   }
 
   function forceEgCards() {
-    var narrow =
-      window.matchMedia && window.matchMedia("(max-width: 1000px)").matches;
     var eg = document.querySelectorAll(".eg-sec .eg");
     Array.prototype.forEach.call(eg, function (pw) {
       if (!pw.querySelector(".eg-card.on, .walk-step.on")) {
@@ -59,24 +57,15 @@
       }
       if (!pw.getAttribute("data-at")) pw.setAttribute("data-at", "0");
     });
-    var cards = document.querySelectorAll(".eg-card");
+    /* Stepper CSS owns opacity. Inline !important leftovers pin the
+       previous card visible after Prev/Next. */
+    var cards = document.querySelectorAll(".eg-sec .eg-card");
     Array.prototype.forEach.call(cards, function (c) {
       c.classList.add("seen");
-      /* Mobile stages one card via .on — do not force the rest visible. */
-      if (narrow && !c.classList.contains("on")) {
-        try {
-          c.style.removeProperty("opacity");
-          c.style.removeProperty("transform");
-          c.style.removeProperty("visibility");
-        } catch (e) {}
-        return;
-      }
       try {
-        if (parseFloat(window.getComputedStyle(c).opacity) < 0.05) {
-          c.style.setProperty("opacity", "1", "important");
-          c.style.setProperty("transform", "none", "important");
-          c.style.setProperty("visibility", "visible", "important");
-        }
+        c.style.removeProperty("opacity");
+        c.style.removeProperty("transform");
+        c.style.removeProperty("visibility");
       } catch (e) {}
     });
   }
