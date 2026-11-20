@@ -150,6 +150,10 @@ html body .hs .hs-h1{
   /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
+/* Single blog article title only — keep site hero H1s untouched */
+html body .blog-post-page h1.blog-post-page__title{
+  font-size:40px !important;
+}
 html body :is(h2),
 html body .sec-head h2,
 html body .ac-head h2,
