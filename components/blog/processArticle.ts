@@ -30,14 +30,26 @@ export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
   const faqs: FaqItem[] = [];
   let out = html;
 
-  // Rank Math FAQ
+  // Rank Math FAQ block (list-item OR legacy faq-item)
   out = out.replace(
-    /<div[^>]*class="[^"]*rank-math-faq-item[^"]*"[^>]*>[\s\S]*?<h[23][^>]*class="[^"]*rank-math-question[^"]*"[^>]*>([\s\S]*?)<\/h[23]>[\s\S]*?<div[^>]*class="[^"]*rank-math-answer[^"]*"[^>]*>([\s\S]*?)<\/div>[\s\S]*?<\/div>/gi,
+    /<div[^>]*class="[^"]*rank-math-(?:list-item|faq-item)[^"]*"[^>]*>[\s\S]*?<h[23][^>]*class="[^"]*rank-math-question[^"]*"[^>]*>([\s\S]*?)<\/h[23]>[\s\S]*?<div[^>]*class="[^"]*rank-math-answer[^"]*"[^>]*>([\s\S]*?)<\/div>[\s\S]*?<\/div>/gi,
     (_m, q, a) => {
       faqs.push({ question: stripTags(q), answerHtml: String(a).trim() });
       return "";
     }
   );
+
+  // Remove empty Rank Math FAQ wrappers left after item extraction
+  if (faqs.length) {
+    out = out.replace(
+      /<div[^>]*(?:id="rank-math-faq"|class="[^"]*rank-math-(?:block|list|faq)[^"]*")[^>]*>\s*<\/div>/gi,
+      ""
+    );
+    out = out.replace(
+      /<div[^>]*(?:id="rank-math-faq"|class="[^"]*rank-math-(?:block|list|faq)[^"]*")[^>]*>\s*<div[^>]*class="[^"]*rank-math-list[^"]*"[^>]*>\s*<\/div>\s*<\/div>/gi,
+      ""
+    );
+  }
 
   // Native <details>/<summary>
   out = out.replace(
@@ -64,7 +76,7 @@ export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
     }
   );
 
-  // H2 FAQs / FAQ section with H3 questions
+  // H2 FAQs / FAQ section with H3 questions (fallback)
   const faqHeading =
     /<(h2)([^>]*)>([\s\S]*?FAQ[\s\S]*?)<\/\1>/i.exec(out);
   if (faqHeading && faqs.length === 0) {
@@ -87,8 +99,13 @@ export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
     }
   }
 
-  // Drop empty FAQ heading left behind
-  out = out.replace(/<h2[^>]*>\s*FAQs?\s*<\/h2>\s*/gi, "");
+  // Drop FAQ heading only after we successfully extracted accordion items
+  if (faqs.length) {
+    out = out.replace(/<h2[^>]*>\s*FAQs?\s*<\/h2>\s*/gi, "");
+  }
+
+  // Clean leftover empty wrappers / whitespace-only divs near FAQ residue
+  out = out.replace(/(?:<div[^>]*>\s*<\/div>\s*)+$/gi, "");
 
   return { html: out, faqs };
 }
