@@ -80,7 +80,11 @@ export default function BlogPostView({
   post,
   related = [],
 }: BlogPostViewProps) {
-  const { html, toc, faqs } = prepareArticleContent(post.contentHtml);
+  // Body HTML already has FAQs removed in mapWpPost; only TOC/tables here.
+  // FAQ Q&A always comes from the WordPress post (`post.faqs`).
+  const { html, toc } = prepareArticleContent(post.contentHtml);
+  const faqs = post.faqs || [];
+  const faqHeading = post.faqHeading || "FAQs";
   const share = shareUrls(post.seo.canonical, post.title);
   const relatedThree = related.slice(0, 3);
 
@@ -119,10 +123,10 @@ export default function BlogPostView({
             {faqs.length > 0 ? (
               <section
                 className="blog-post-page__faq-wrap"
-                aria-label="FAQs"
+                aria-label={faqHeading}
                 id="faqs"
               >
-                <h2 id="faqs-heading">FAQs</h2>
+                <h2 id="faqs-heading">{faqHeading}</h2>
                 <div className="blog-post-page__faq faq">
                   {faqs.map((item, i) => (
                     <details key={i} open={i === 0 || undefined}>
@@ -201,7 +205,7 @@ export default function BlogPostView({
                   ))}
                   {faqs.length > 0 ? (
                     <li>
-                      <a href="#faqs">FAQs</a>
+                      <a href="#faqs">{faqHeading}</a>
                     </li>
                   ) : null}
                 </ol>

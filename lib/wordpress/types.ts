@@ -106,13 +106,23 @@ export type BlogSeo = {
   twitterImage?: string;
 };
 
+export type BlogFaq = {
+  question: string;
+  answerHtml: string;
+};
+
 export type BlogPost = {
   id: number;
   slug: string;
   title: string;
   excerptHtml: string;
   excerptText: string;
+  /** Article body HTML with FAQ block removed (FAQs live in `faqs`). */
   contentHtml: string;
+  /** FAQ accordion items parsed from the WordPress post content. */
+  faqs: BlogFaq[];
+  /** FAQ section heading from the WordPress post (e.g. "FAQs"). */
+  faqHeading: string;
   date: string;
   modified: string;
   author: BlogTerm & { description?: string };

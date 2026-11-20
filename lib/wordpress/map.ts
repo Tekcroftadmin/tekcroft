@@ -1,3 +1,4 @@
+import { extractFaqs } from "@/components/blog/processArticle";
 import { getPublicSiteUrl, getWordPressSiteUrl } from "./config";
 import { decodeEntities, sanitizeWpHtml, stripHtml } from "./sanitize";
 import type {
@@ -132,7 +133,13 @@ export function mapWpPost(post: WpPost): BlogPost {
   const title = decodeEntities(stripHtml(post.title?.rendered || "Untitled"));
   const excerptHtml = sanitizeWpHtml(post.excerpt?.rendered || "");
   const excerptText = stripHtml(post.excerpt?.rendered || "");
-  const contentHtml = rewriteContentUrls(sanitizeWpHtml(post.content?.rendered || ""));
+  const rawHtml = rewriteContentUrls(sanitizeWpHtml(post.content?.rendered || ""));
+  // FAQs always come from this WordPress post's content (Rank Math / details / H2+H3).
+  const {
+    html: contentHtml,
+    faqs,
+    heading: faqHeading,
+  } = extractFaqs(rawHtml);
   const image = featuredImage(post);
   const authorEmb = post._embedded?.author?.[0];
   const author = {
@@ -151,6 +158,8 @@ export function mapWpPost(post: WpPost): BlogPost {
     excerptHtml,
     excerptText,
     contentHtml,
+    faqs,
+    faqHeading,
     date: post.date,
     modified: post.modified,
     author,

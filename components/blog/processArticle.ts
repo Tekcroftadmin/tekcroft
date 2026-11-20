@@ -25,10 +25,21 @@ function slugify(text: string, used: Set<string>): string {
   return id;
 }
 
-/** Pull FAQ blocks out of HTML; return remaining body + items. */
-export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
+/** Pull FAQ blocks out of WordPress HTML; return remaining body + items. */
+export function extractFaqs(html: string): {
+  html: string;
+  faqs: FaqItem[];
+  heading: string;
+} {
   const faqs: FaqItem[] = [];
   let out = html;
+  let heading = "FAQs";
+
+  const headingMatch = /<h2[^>]*>([\s\S]*?FAQ[\s\S]*?)<\/h2>/i.exec(out);
+  if (headingMatch) {
+    const text = stripTags(headingMatch[1]);
+    if (text) heading = text;
+  }
 
   // Rank Math FAQ block (list-item OR legacy faq-item)
   out = out.replace(
@@ -76,7 +87,7 @@ export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
     }
   );
 
-  // H2 FAQs / FAQ section with H3 questions (fallback)
+  // H2 FAQs / FAQ section with H3 questions (fallback when no Rank Math / details block)
   const faqHeading =
     /<(h2)([^>]*)>([\s\S]*?FAQ[\s\S]*?)<\/\1>/i.exec(out);
   if (faqHeading && faqs.length === 0) {
@@ -101,13 +112,13 @@ export function extractFaqs(html: string): { html: string; faqs: FaqItem[] } {
 
   // Drop FAQ heading only after we successfully extracted accordion items
   if (faqs.length) {
-    out = out.replace(/<h2[^>]*>\s*FAQs?\s*<\/h2>\s*/gi, "");
+    out = out.replace(/<h2[^>]*>[\s\S]*?FAQ[\s\S]*?<\/h2>\s*/gi, "");
   }
 
   // Clean leftover empty wrappers / whitespace-only divs near FAQ residue
   out = out.replace(/(?:<div[^>]*>\s*<\/div>\s*)+$/gi, "");
 
-  return { html: out, faqs };
+  return { html: out, faqs, heading };
 }
 
 /** Ensure H2s have ids; return TOC from those headings. */
@@ -148,13 +159,12 @@ export function wrapTables(html: string): string {
   );
 }
 
+/** TOC + table chrome for article body. FAQs are extracted earlier in mapWpPost. */
 export function prepareArticleContent(contentHtml: string): {
   html: string;
   toc: TocItem[];
-  faqs: FaqItem[];
 } {
-  const { html: withoutFaq, faqs } = extractFaqs(contentHtml || "");
-  const withTables = wrapTables(withoutFaq);
+  const withTables = wrapTables(contentHtml || "");
   const { html, toc } = ensureHeadingIds(withTables);
-  return { html, toc, faqs };
+  return { html, toc };
 }
