@@ -11,6 +11,10 @@ export default function BlogPostEffects() {
     const root = document.querySelector(".blog-post-page");
     if (!root) return;
 
+    // Light-band article page: keep header logo/links readable (not white-on-tint).
+    const nav = document.getElementById("nav");
+    nav?.classList.add("on-light");
+
     const bar = root.querySelector<HTMLElement>(".blog-post-page__progress");
     const art = root.querySelector<HTMLElement>("#article");
     const links = Array.from(
@@ -140,6 +144,7 @@ export default function BlogPostEffects() {
     });
 
     return () => {
+      nav?.classList.remove("on-light");
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       items.forEach((d) => {

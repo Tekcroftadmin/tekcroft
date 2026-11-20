@@ -1,5 +1,52 @@
 /* Single blog post page ONLY. Prefixed with .blog-post-page — does not affect other pages. */
 
+/*
+ * Blog posts sit on a light band (#DAEEF6), not a dark hero.
+ * Default site nav assumes a dark hero when not .stuck (white logo/links) —
+ * force the readable light/stuck treatment for this page only.
+ */
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-shell{
+  background:#FFFFFF !important;
+  border-color:hsl(var(--brand-h) 85% 72% / .6) !important;
+  box-shadow:0 14px 34px -18px hsl(var(--brand-h) 60% 25% / .35) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .logo{
+  --logo:var(--logo-ink);
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links a,
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links .mm-trigger{
+  color:#0F1720 !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links a:hover,
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links a[aria-current="page"],
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links .mm-trigger:hover,
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links .mm-trigger[aria-expanded="true"],
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .nav-links .mm-trigger[aria-current="page"]{
+  color:var(--primary, #0096D5) !important;
+  background:hsl(var(--brand-h) 90% 94%) !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .theme-btn{
+  color:#0F1720 !important;
+  border-color:hsl(var(--brand-h) 40% 80% / .55) !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .theme-btn:hover{
+  color:var(--primary, #0096D5) !important;
+  border-color:var(--primary, #0096D5) !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger{
+  border-color:hsl(var(--brand-h) 40% 80% / .55) !important;
+}
+html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
+  background:#0F1720 !important;
+}
+/* Hide mega-menu caret when the panel is closed (avoids floating arrow over light pages). */
+html body:has(.blog-post-page) .mm[hidden] .mm-caret,
+html body:has(.blog-post-page) .mm[hidden]{
+  display:none !important;
+}
+
 .blog-post-page{
   --bpp-brand:var(--primary, #0096D5);
   --bpp-brand-deep:var(--brand-deep, #00608A);
