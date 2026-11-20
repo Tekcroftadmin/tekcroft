@@ -289,23 +289,45 @@ body:has(.blog-post-page){
   margin-bottom:14px;
 }
 
+/* Tables must match paragraph width — site responsive.css sets table{display:block;max-width:100%}
+   which shrink-wraps content unless we restore table layout + width:100%. */
 .blog-post-page__body .tablewrap,
+.blog-post-page__body figure.wp-block-table,
+.blog-post-page__body .wp-block-table,
 .blog-post-page .tablewrap{
+  display:block;
+  width:100% !important;
+  max-width:100% !important;
   margin:30px 0 38px;
+  margin-left:0 !important;
+  margin-right:0 !important;
   overflow-x:auto;
   padding:0;
   border:1px solid #BCDCEB;
   border-radius:20px;
   background:var(--bpp-surface);
+  box-sizing:border-box;
 }
+.blog-post-page__body .tablewrap table,
+.blog-post-page__body figure.wp-block-table table,
+.blog-post-page__body .wp-block-table table,
 .blog-post-page .tablewrap table{
-  width:100%;
-  min-width:520px;
+  display:table !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:100%;
   border-collapse:separate;
   border-spacing:0;
   font-size:16px;
   line-height:1.5;
+  table-layout:fixed;
 }
+.blog-post-page__body .tablewrap th,
+.blog-post-page__body .tablewrap td,
+.blog-post-page__body figure.wp-block-table th,
+.blog-post-page__body figure.wp-block-table td,
+.blog-post-page__body .wp-block-table th,
+.blog-post-page__body .wp-block-table td,
 .blog-post-page .tablewrap th,
 .blog-post-page .tablewrap td{
   padding:14px 20px;
@@ -313,10 +335,23 @@ body:has(.blog-post-page){
   vertical-align:top;
   border-right:1px solid #BCDCEB;
   border-bottom:1px solid #BCDCEB;
+  word-break:break-word;
 }
+.blog-post-page__body .tablewrap th:last-child,
+.blog-post-page__body .tablewrap td:last-child,
+.blog-post-page__body figure.wp-block-table th:last-child,
+.blog-post-page__body figure.wp-block-table td:last-child,
+.blog-post-page__body .wp-block-table th:last-child,
+.blog-post-page__body .wp-block-table td:last-child,
 .blog-post-page .tablewrap th:last-child,
 .blog-post-page .tablewrap td:last-child{border-right:0;}
+.blog-post-page__body .tablewrap tbody tr:last-child td,
+.blog-post-page__body figure.wp-block-table tbody tr:last-child td,
+.blog-post-page__body .wp-block-table tbody tr:last-child td,
 .blog-post-page .tablewrap tbody tr:last-child td{border-bottom:0;}
+.blog-post-page__body .tablewrap th,
+.blog-post-page__body figure.wp-block-table th,
+.blog-post-page__body .wp-block-table th,
 .blog-post-page .tablewrap th{
   background:var(--bpp-brand);
   color:#fff;
@@ -326,12 +361,21 @@ body:has(.blog-post-page){
   font-weight:600;
   font-size:15px;
 }
+.blog-post-page__body .tablewrap td,
+.blog-post-page__body figure.wp-block-table td,
+.blog-post-page__body .wp-block-table td,
 .blog-post-page .tablewrap td{color:var(--bpp-body);}
+.blog-post-page__body .tablewrap td:first-child,
+.blog-post-page__body figure.wp-block-table td:first-child,
+.blog-post-page__body .wp-block-table td:first-child,
 .blog-post-page .tablewrap td:first-child{
   font-weight:600;
   color:var(--bpp-ink);
   width:34%;
 }
+.blog-post-page__body .tablewrap tbody tr:hover td,
+.blog-post-page__body figure.wp-block-table tbody tr:hover td,
+.blog-post-page__body .wp-block-table tbody tr:hover td,
 .blog-post-page .tablewrap tbody tr:hover td{background:#F1F8FC;}
 
 .blog-post-page__body .myth,
@@ -805,11 +849,16 @@ body:has(.blog-post-page){
   .blog-post-page__body li{font-size:17px;}
   .blog-post-page__body li{padding-left:30px;}
   .blog-post-page .myth{padding:22px 20px; border-radius:16px;}
-  .blog-post-page .tablewrap{border-radius:16px; margin:24px 0 30px;}
-  .blog-post-page .tablewrap table{min-width:0; font-size:14.5px;}
+  .blog-post-page .tablewrap,
+  .blog-post-page__body figure.wp-block-table{border-radius:16px; margin:24px 0 30px;}
+  .blog-post-page .tablewrap table,
+  .blog-post-page__body figure.wp-block-table table{min-width:100%; font-size:14.5px;}
   .blog-post-page .tablewrap th,
-  .blog-post-page .tablewrap td{padding:12px 14px;}
-  .blog-post-page .tablewrap td:first-child{width:38%;}
+  .blog-post-page .tablewrap td,
+  .blog-post-page__body figure.wp-block-table th,
+  .blog-post-page__body figure.wp-block-table td{padding:12px 14px;}
+  .blog-post-page .tablewrap td:first-child,
+  .blog-post-page__body figure.wp-block-table td:first-child{width:38%;}
   .blog-post-page__faq{padding:10px; border-radius:16px;}
   .blog-post-page__faq summary{padding:16px; font-size:15px;}
   .blog-post-page__faq .ans{padding:0 16px 18px;}

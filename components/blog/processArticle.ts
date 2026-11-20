@@ -146,9 +146,21 @@ export function ensureHeadingIds(html: string): {
   return { html: next, toc };
 }
 
-/** Wrap bare tables for the design's table chrome. */
+/** Normalize WP/Gutenberg tables into full-width `.tablewrap` chrome. */
 export function wrapTables(html: string): string {
-  return html.replace(
+  let out = html || "";
+
+  // Flatten figure.wp-block-table → tablewrap (avoid nested shrink-wrap).
+  out = out.replace(
+    /<figure\b[^>]*\bwp-block-table\b[^>]*>([\s\S]*?)<\/figure>/gi,
+    (_m, inner: string) => {
+      const tableMatch = inner.match(/<table\b[\s\S]*?<\/table>/i);
+      if (!tableMatch) return _m;
+      return `<div class="tablewrap">${tableMatch[0]}</div>`;
+    }
+  );
+
+  out = out.replace(
     /(?:<div[^>]*class="[^"]*tablewrap[^"]*"[^>]*>[\s\S]*?<\/div>)|(<table[\s\S]*?<\/table>)/gi,
     (m, table) => {
       if (!table) return m;
@@ -156,6 +168,14 @@ export function wrapTables(html: string): string {
       return `<div class="tablewrap">${table}</div>`;
     }
   );
+
+  // Drop fixed HTML width attrs so CSS can stretch to paragraph width.
+  out = out.replace(
+    /(<table\b[^>]*?)\swidth\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi,
+    "$1"
+  );
+
+  return out;
 }
 
 /** TOC + table chrome for article body. FAQs are extracted earlier in mapWpPost. */
