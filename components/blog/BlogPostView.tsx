@@ -1,10 +1,6 @@
 import Link from "next/link";
 import BlogPostEffects from "./BlogPostEffects";
-import {
-  accentHeadingText,
-  accentTitleHtml,
-  prepareArticleContent,
-} from "./processArticle";
+import { accentTitleHtml, prepareArticleContent } from "./processArticle";
 import type { BlogPost } from "@/lib/wordpress/types";
 
 const ARROW = (
@@ -91,7 +87,6 @@ export default function BlogPostView({
   const titleHtml = accentTitleHtml(post.title, focusKeyword);
   const faqs = post.faqs || [];
   const faqHeading = post.faqHeading || "FAQs";
-  const faqHeadingHtml = accentHeadingText(faqHeading, focusKeyword);
   const share = shareUrls(post.seo.canonical, post.title);
   const relatedThree = related.slice(0, 3);
 
@@ -136,10 +131,7 @@ export default function BlogPostView({
                 aria-label={faqHeading}
                 id="faqs"
               >
-                <h2
-                  id="faqs-heading"
-                  dangerouslySetInnerHTML={{ __html: faqHeadingHtml }}
-                />
+                <h2 id="faqs-heading">{faqHeading}</h2>
                 <div className="blog-post-page__faq faq">
                   {faqs.map((item, i) => (
                     <details key={i} open={i === 0 || undefined}>

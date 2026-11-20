@@ -132,9 +132,15 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/** Closing/utility headings stay solid ink — no two-tone accent. */
+function skipHeadingAccent(plain: string): boolean {
+  return /^(conclusion|faqs?)$/i.test((plain || "").replace(/\s+/g, " ").trim());
+}
+
 /**
  * Homepage/services two-tone heading: wrap accent phrase in <em>.
  * Prefers focus keyword; otherwise accents the trailing phrase.
+ * Skips Conclusion / FAQ(s) so they keep the normal heading color.
  */
 export function accentHeadingText(
   plain: string,
@@ -142,6 +148,7 @@ export function accentHeadingText(
 ): string {
   const text = (plain || "").replace(/\s+/g, " ").trim();
   if (!text) return "";
+  if (skipHeadingAccent(text)) return escapeHtml(text);
 
   const kw = (focusKeyword || "").replace(/\s+/g, " ").trim();
   if (kw && text.toLowerCase().includes(kw.toLowerCase())) {
@@ -235,10 +242,13 @@ export function ensureHeadingIds(
       const attrStr = cleaned ? ` ${cleaned}` : "";
       toc.push({ id, text });
 
-      // Keep editor-authored <em>; otherwise apply site two-tone accent.
-      const accented = /<em[\s>]/i.test(inner)
-        ? inner
-        : accentHeadingText(text, focusKeyword);
+      // Keep editor-authored <em>; skip Conclusion/FAQ; else two-tone accent.
+      let accented = inner;
+      if (skipHeadingAccent(text)) {
+        accented = escapeHtml(text);
+      } else if (!/<em[\s>]/i.test(inner)) {
+        accented = accentHeadingText(text, focusKeyword);
+      }
       return `<h2 id="${id}"${attrStr}>${accented}</h2>`;
     }
   );
