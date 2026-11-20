@@ -161,7 +161,39 @@ export function accentHeadingText(
   return `${escapeHtml(head)} <em>${escapeHtml(tail)}</em>`;
 }
 
-/** H1: highlight only the main keyword (Rank Math focus), not the whole title. */
+/** Wrap the first case-insensitive occurrence of `keyword` in <em>. */
+function wrapKeywordOnce(text: string, keyword?: string): string | null {
+  const kw = (keyword || "").replace(/\s+/g, " ").trim();
+  if (!kw) return null;
+  const idx = text.toLowerCase().indexOf(kw.toLowerCase());
+  if (idx < 0) return null;
+  const before = text.slice(0, idx);
+  const match = text.slice(idx, idx + kw.length);
+  const after = text.slice(idx + kw.length);
+  return `${escapeHtml(before)}<em>${escapeHtml(match)}</em>${escapeHtml(after)}`;
+}
+
+/**
+ * Infer primary keyword from common blog title shapes when Rank Math is empty.
+ * e.g. "How Do Citations for Local SEO Work? …" → "Citations for Local SEO"
+ */
+function inferPrimaryKeyword(title: string): string | undefined {
+  const t = title.replace(/\s+/g, " ").trim();
+  const patterns = [
+    /\bhow\s+do(?:es)?\s+(.+?)\s+work\b/i,
+    /\bwhat\s+(?:is|are)\s+(.+?)(?:\?|$)/i,
+    /\bwhy\s+(.+?)\s+matter\b/i,
+    /\b(?:a|the)\s+complete\s+guide\s+to\s+(.+?)(?:\?|$|:|—|–)/i,
+  ];
+  for (const re of patterns) {
+    const m = t.match(re);
+    const phrase = m?.[1]?.trim();
+    if (phrase && phrase.split(/\s+/).length >= 2) return phrase;
+  }
+  return undefined;
+}
+
+/** H1: highlight only the main keyword — never the whole title. */
 export function accentTitleHtml(
   title: string,
   focusKeyword?: string
@@ -169,27 +201,14 @@ export function accentTitleHtml(
   const text = (title || "").replace(/\s+/g, " ").trim();
   if (!text) return "";
 
-  const kw = (focusKeyword || "").replace(/\s+/g, " ").trim();
-  if (kw && text.toLowerCase().includes(kw.toLowerCase())) {
-    const re = new RegExp(`(${escapeRegExp(kw)})`, "i");
-    return escapeHtml(text).replace(re, "<em>$1</em>");
-  }
-
-  // No focus keyword: accent the distinctive clause (before ?/: ) last words —
-  // matches OG art like “Local SEO Work?” without painting the whole H1.
-  const clause = text.split(/[?:—–]/)[0]?.trim() || text;
-  const words = clause.split(/\s+/).filter(Boolean);
-  if (words.length < 3) return escapeHtml(text);
-
-  const accentCount = Math.min(4, Math.max(2, Math.ceil(words.length / 3)));
-  const accent = words.slice(-accentCount).join(" ");
-  const idx = text.toLowerCase().lastIndexOf(accent.toLowerCase());
-  if (idx < 0) return escapeHtml(text);
-
-  const before = text.slice(0, idx);
-  const match = text.slice(idx, idx + accent.length);
-  const after = text.slice(idx + accent.length);
-  return `${escapeHtml(before)}<em>${escapeHtml(match)}</em>${escapeHtml(after)}`;
+  // 1) Rank Math focus keyword (e.g. "Citations for Local SEO")
+  // 2) Inferred phrase from title shape
+  // 3) Leave plain if neither matches
+  return (
+    wrapKeywordOnce(text, focusKeyword) ||
+    wrapKeywordOnce(text, inferPrimaryKeyword(text)) ||
+    escapeHtml(text)
+  );
 }
 
 /** Ensure H2s have ids + two-tone <em> accent; return TOC from those headings. */
