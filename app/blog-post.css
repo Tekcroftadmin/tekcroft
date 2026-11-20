@@ -106,8 +106,8 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
   padding:12px 0 32px;
   text-align:left;
   font-family:var(--font-display);
-  font-size:clamp(28px,3.4vw,42px);
-  line-height:1.2;
+  font-size:clamp(28px,3.4vw,42px) !important;
+  line-height:1.2 !important;
   letter-spacing:-.03em;
   font-weight:700;
   color:var(--bpp-ink);
@@ -138,18 +138,23 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
 
 .blog-post-page__body{
   font-family:var(--font);
-  font-size:18px;
-  line-height:1.8;
+  font-size:18px !important;
+  line-height:1.8 !important;
   color:var(--bpp-body);
 }
 .blog-post-page__body > *:first-child{margin-top:0;}
+/* Beat site-wide heading lock — keep article type at designed sizes */
+.blog-post-page__body :is(h1,h2,h3,h4,h5,h6),
+.blog-post-page__faq-wrap :is(h1,h2,h3,h4,h5,h6){
+  letter-spacing:normal;
+}
 .blog-post-page__body h2,
 .blog-post-page__faq-wrap h2{
   margin:52px 0 16px;
   font-family:var(--font-display);
-  font-size:clamp(24px,2.4vw,30px);
-  line-height:1.25;
-  letter-spacing:-.02em;
+  font-size:clamp(24px,2.4vw,30px) !important;
+  line-height:1.25 !important;
+  letter-spacing:-.02em !important;
   font-weight:700;
   color:var(--bpp-ink);
   scroll-margin-top:calc(var(--nav-h, 88px) + 24px);
@@ -159,19 +164,25 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
 .blog-post-page__body h3{
   margin:34px 0 12px;
   font-family:var(--font-display);
-  font-size:21px;
-  line-height:1.35;
-  letter-spacing:-.01em;
+  font-size:21px !important;
+  line-height:1.35 !important;
+  letter-spacing:-.01em !important;
   font-weight:600;
   color:var(--bpp-ink);
   scroll-margin-top:calc(var(--nav-h, 88px) + 24px);
 }
-.blog-post-page__body p{
+.blog-post-page__body h4{
+  font-size:18px !important;
+  line-height:1.4 !important;
+}
+.blog-post-page__body p,
+.blog-post-page__body li{
   margin:0 0 22px;
-  font-size:18px;
-  line-height:1.8;
+  font-size:18px !important;
+  line-height:1.8 !important;
   color:var(--bpp-body);
 }
+.blog-post-page__body li{margin:0; line-height:1.7 !important;}
 .blog-post-page__body p a{
   color:var(--bpp-brand-deep);
   text-decoration:underline;
