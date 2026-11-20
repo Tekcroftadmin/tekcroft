@@ -54,6 +54,7 @@ async function handle(req: NextRequest) {
     "post.save";
 
   try {
+    // Wipe all WordPress data-cache tags so listing + article HTML refresh together.
     revalidateTag(WP_CACHE_TAGS.all, { expire: 0 });
     revalidateTag(WP_CACHE_TAGS.posts, { expire: 0 });
     revalidateTag(WP_CACHE_TAGS.categories, { expire: 0 });
@@ -62,21 +63,30 @@ async function handle(req: NextRequest) {
     revalidatePath("/blog");
     revalidatePath("/blog", "layout");
     revalidatePath("/sitemap.xml");
+    revalidatePath("/sitemap");
 
     if (slug) {
       revalidateTag(WP_CACHE_TAGS.post(slug), { expire: 0 });
+      revalidateTag(WP_CACHE_TAGS.category(slug), { expire: 0 });
+      revalidateTag(WP_CACHE_TAGS.tag(slug), { expire: 0 });
       revalidatePath(`/blog/${slug}`);
+      revalidatePath(`/blog/category/${slug}`);
+      revalidatePath(`/blog/tag/${slug}`);
     }
 
     if (body.path) {
       revalidatePath(body.path);
     }
 
+    // Soft signal for operators: unpublish/delete still clears /blog even without slug.
+    const clearedListing = true;
+
     return NextResponse.json({
       ok: true,
       revalidated: true,
       event,
       slug: slug || null,
+      clearedListing,
       now: Date.now(),
     });
   } catch (err) {

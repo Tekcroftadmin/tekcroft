@@ -23,7 +23,8 @@ export function getPublicSiteUrl(): string {
   return trimSlash(raw);
 }
 
-export const WP_REVALIDATE_SECONDS = 300;
+/** Fallback ISR when the WordPress webhook cannot clear cache (seconds). */
+export const WP_REVALIDATE_SECONDS = 60;
 export const WP_POSTS_PER_PAGE = 9;
 
 export const WP_CACHE_TAGS = {

@@ -1,18 +1,25 @@
 <?php
 /**
  * Plugin Name: Tekcroft Headless Bridge
- * Description: Exposes Rank Math SEO fields on the REST API and pings the Tekcroft Next.js revalidate webhook on publish/update/delete.
+ * Description: Exposes Rank Math SEO fields on the REST API and pings the Tekcroft Next.js revalidate webhook on publish/update/delete/trash.
  * Author: Tekcroft
- * Version: 1.0.0
+ * Version: 1.1.0
  *
- * Install (Hostinger):
+ * Install (Hostinger WordPress):
  * 1. Upload this file to wp-content/mu-plugins/tekcroft-headless.php
  *    (create the mu-plugins folder if it does not exist)
- * 2. In wp-config.php (above "That's all, stop editing!"), add:
- *      define('TEKCROFT_REVALIDATE_URL', 'https://tekcroft.com/api/revalidate');
- *      define('TEKCROFT_REVALIDATE_SECRET', 'same-value-as-REVALIDATION_SECRET-in-Next');
- * 3. Settings → Reading → discourage search engines (staging only).
- * 4. Rank Math → make sure posts have SEO titles/descriptions.
+ * 2. In wp-config.php (above "That's all, stop editing!"), add THE SAME secret
+ *    you set as REVALIDATION_SECRET on the Next.js host:
+ *      define('TEKCROFT_REVALIDATE_URL', 'https://www.tekcroft.com/api/revalidate');
+ *      define('TEKCROFT_REVALIDATE_SECRET', 'paste-same-secret-here');
+ * 3. On the Next.js host (Hostinger Node / Vercel / etc.), set:
+ *      REVALIDATION_SECRET=paste-same-secret-here
+ *    Then redeploy so the env var is live.
+ * 4. Test: publish or trash a post, then open
+ *      https://www.tekcroft.com/api/revalidate?secret=YOUR_SECRET
+ *    Expect {"ok":true,"revalidated":true,...}
+ * 5. Settings → Reading → discourage search engines (WP staging only).
+ * 6. Rank Math → make sure posts have SEO titles/descriptions.
  */
 
 if (!defined('ABSPATH')) {
@@ -68,7 +75,11 @@ add_action('rest_api_init', function () {
 });
 
 /**
- * Ping Tekcroft Next.js when a post changes.
+ * Queue a revalidate ping; flush on shutdown so save/trash finish first.
+ *
+ * @param int         $post_id
+ * @param WP_Post|null $post
+ * @param string      $event
  */
 function tekcroft_headless_ping($post_id, $post = null, $event = 'post.save') {
   if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -81,6 +92,11 @@ function tekcroft_headless_ping($post_id, $post = null, $event = 'post.save') {
   $url = defined('TEKCROFT_REVALIDATE_URL') ? TEKCROFT_REVALIDATE_URL : '';
   $secret = defined('TEKCROFT_REVALIDATE_SECRET') ? TEKCROFT_REVALIDATE_SECRET : '';
   if (!$url || !$secret) {
+    static $warned = false;
+    if (!$warned) {
+      $warned = true;
+      error_log('[tekcroft-headless] TEKCROFT_REVALIDATE_URL / TEKCROFT_REVALIDATE_SECRET not set in wp-config.php — live tekcroft.com cache will not clear on publish/trash.');
+    }
     return;
   }
 
@@ -89,35 +105,85 @@ function tekcroft_headless_ping($post_id, $post = null, $event = 'post.save') {
     return;
   }
 
+  $slug = (string) $post->post_name;
+  // Keep last known public slug for trash/delete when WP clears post_name.
+  if ($slug) {
+    update_post_meta($post_id, '_tekcroft_last_slug', $slug);
+  } else {
+    $slug = (string) get_post_meta($post_id, '_tekcroft_last_slug', true);
+  }
+
   $payload = [
     'secret' => $secret,
     'event' => $event,
     'id' => (int) $post_id,
-    'slug' => $post->post_name,
+    'slug' => $slug,
     'status' => $post->post_status,
   ];
 
-  wp_remote_post($url, [
-    'timeout' => 8,
-    'blocking' => false,
-    'headers' => [
-      'Content-Type' => 'application/json',
-      'x-tekcroft-revalidate-secret' => $secret,
-    ],
-    'body' => wp_json_encode($payload),
-  ]);
+  $GLOBALS['tekcroft_headless_pending'][] = [
+    'url' => $url,
+    'secret' => $secret,
+    'payload' => $payload,
+  ];
 }
+
+/**
+ * Send queued pings after the request finishes writing the post.
+ */
+add_action('shutdown', function () {
+  if (empty($GLOBALS['tekcroft_headless_pending']) || !is_array($GLOBALS['tekcroft_headless_pending'])) {
+    return;
+  }
+
+  $seen = [];
+  foreach ($GLOBALS['tekcroft_headless_pending'] as $job) {
+    $key = ($job['payload']['event'] ?? '') . '|' . ($job['payload']['id'] ?? '') . '|' . ($job['payload']['slug'] ?? '');
+    if (isset($seen[$key])) {
+      continue;
+    }
+    $seen[$key] = true;
+
+    wp_remote_post($job['url'], [
+      'timeout' => 8,
+      // Brief block so hosts that drop non-blocking requests still deliver.
+      'blocking' => true,
+      'headers' => [
+        'Content-Type' => 'application/json',
+        'x-tekcroft-revalidate-secret' => $job['secret'],
+      ],
+      'body' => wp_json_encode($job['payload']),
+    ]);
+  }
+
+  $GLOBALS['tekcroft_headless_pending'] = [];
+}, 20);
 
 add_action('save_post_post', function ($post_id, $post, $update) {
   if (!$post instanceof WP_Post) {
     return;
   }
-  if (!in_array($post->post_status, ['publish', 'draft', 'private', 'trash', 'pending'], true)) {
+  if (!in_array($post->post_status, ['publish', 'draft', 'private', 'trash', 'pending', 'future'], true)) {
     return;
   }
   $event = $post->post_status === 'publish' ? 'post.save' : 'post.unpublish';
   tekcroft_headless_ping($post_id, $post, $event);
 }, 20, 3);
+
+add_action('wp_trash_post', function ($post_id) {
+  $post = get_post($post_id);
+  if ($post && $post->post_type === 'post') {
+    tekcroft_headless_ping($post_id, $post, 'post.unpublish');
+  }
+});
+
+add_action('untrash_post', function ($post_id) {
+  $post = get_post($post_id);
+  if ($post && $post->post_type === 'post') {
+    $event = $post->post_status === 'publish' ? 'post.save' : 'post.unpublish';
+    tekcroft_headless_ping($post_id, $post, $event);
+  }
+});
 
 add_action('before_delete_post', function ($post_id) {
   $post = get_post($post_id);
@@ -128,6 +194,13 @@ add_action('before_delete_post', function ($post_id) {
 
 add_action('transition_post_status', function ($new, $old, $post) {
   if (!$post instanceof WP_Post || $post->post_type !== 'post') {
+    return;
+  }
+  if ($old === $new) {
+    return;
+  }
+  if ($new === 'publish') {
+    tekcroft_headless_ping($post->ID, $post, 'post.save');
     return;
   }
   if ($old === 'publish' && $new !== 'publish') {

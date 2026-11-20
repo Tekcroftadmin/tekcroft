@@ -5,6 +5,9 @@ import { blogListingMetadata } from "@/lib/wordpress/seo";
 import "@/app/blog-listing.css";
 import "@/app/footer-lock.css";
 
+/** Fallback refresh if on-demand revalidate webhook is misconfigured. */
+export const revalidate = 60;
+
 export const metadata = blogListingMetadata({
   title: "Blog | Tekcroft",
   description:

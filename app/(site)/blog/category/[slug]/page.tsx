@@ -11,6 +11,9 @@ import {
 import "@/app/blog.css";
 import "@/app/footer-lock.css";
 
+/** Fallback refresh if on-demand revalidate webhook is misconfigured. */
+export const revalidate = 60;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
   searchParams?: Promise<{ page?: string }>;

@@ -57,20 +57,22 @@ function rankMathFromPost(post: WpPost): WpRankMath {
   };
 }
 
-/** Rewrite WordPress absolute links that point at the staging host to Tekcroft blog URLs. */
+/** Rewrite WordPress permalinks to Tekcroft blog URLs — keep media on the WP host. */
 export function rewriteContentUrls(html: string): string {
   const wp = getWordPressSiteUrl();
   const site = getPublicSiteUrl();
   if (!html || !wp) return html;
 
-  const skip = /^(wp-content|wp-admin|wp-includes|wp-json|category|tag|author|feed|comments)$/i;
+  // Uploads and WP internals must stay on the WordPress domain (not tekcroft.com).
+  const keepOnWp = /^(wp-content|wp-admin|wp-includes|wp-json)(\/|$)/i;
+
   return html.replace(
     new RegExp(`${escapeRegExp(wp)}/([^"'\\s<]+)`, "gi"),
     (full, path: string) => {
       const clean = String(path || "").replace(/\/+$/, "");
-      const first = clean.split("/")[0] || "";
-      if (!clean || skip.test(first)) {
-        return `${site}/${clean}`;
+      if (!clean) return site;
+      if (keepOnWp.test(clean)) {
+        return full;
       }
       if (clean.startsWith("category/")) {
         return `${site}/blog/category/${clean.slice("category/".length)}`;
@@ -82,7 +84,8 @@ export function rewriteContentUrls(html: string): string {
       if (!clean.includes("/")) {
         return `${site}/blog/${clean}`;
       }
-      return `${site}/${clean}`;
+      // Unknown multi-segment paths: leave on WordPress rather than inventing a broken URL.
+      return full;
     }
   );
 }

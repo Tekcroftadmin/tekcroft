@@ -51,6 +51,7 @@ const ALLOWED_ATTR = new Set([
   "cite",
   "class",
   "colspan",
+  "decoding",
   "height",
   "href",
   "id",
@@ -66,7 +67,8 @@ const ALLOWED_ATTR = new Set([
 ]);
 
 function isSafeUrl(value: string): boolean {
-  const v = value.trim().toLowerCase();
+  // srcset entries look like: "https://host/img.webp 1024w"
+  const v = value.trim().split(/\s+/)[0]?.toLowerCase() || "";
   if (!v) return false;
   if (v.startsWith("#") || v.startsWith("/") || v.startsWith("mailto:") || v.startsWith("tel:")) {
     return true;
@@ -75,6 +77,12 @@ function isSafeUrl(value: string): boolean {
     return true;
   }
   return false;
+}
+
+function isSafeSrcset(value: string): boolean {
+  const parts = value.split(",").map((p) => p.trim()).filter(Boolean);
+  if (!parts.length) return false;
+  return parts.every((part) => isSafeUrl(part));
 }
 
 function scrubAttrs(tag: string, rawAttrs: string): string {
@@ -86,7 +94,12 @@ function scrubAttrs(tag: string, rawAttrs: string): string {
     if (name.startsWith("on")) continue;
     if (!ALLOWED_ATTR.has(name)) continue;
     const value = m[2] ?? m[3] ?? m[4] ?? "";
-    if ((name === "href" || name === "src" || name === "srcset") && !isSafeUrl(value.split(",")[0] || value)) {
+    if (name === "srcset") {
+      if (!isSafeSrcset(value)) continue;
+    } else if (
+      (name === "href" || name === "src") &&
+      !isSafeUrl(value)
+    ) {
       continue;
     }
     if (name === "target") {
