@@ -139,6 +139,23 @@
 }
 .blog-post-page__body p a:hover{color:var(--bpp-ink);}
 .blog-post-page__body strong{color:var(--bpp-ink); font-weight:600;}
+/* Gutenberg image blocks from WordPress */
+.blog-post-page__body .wp-block-image{
+  margin:28px 0;
+}
+.blog-post-page__body .wp-block-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:16px;
+}
+.blog-post-page__body .wp-block-image figcaption{
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.5;
+  color:var(--bpp-muted);
+  text-align:center;
+}
 .blog-post-page__body ul,
 .blog-post-page__body ol{
   margin:0 0 26px;

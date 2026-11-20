@@ -110,6 +110,18 @@ function scrubAttrs(tag: string, rawAttrs: string): string {
       out.push(`rel="noopener noreferrer"`);
       continue;
     }
+    // WP 6.7+ sizes="auto, …" + lazy-load can leave body images unresolved in some browsers.
+    if (name === "sizes") {
+      let sizes = value.trim();
+      if (/^auto\s*,/i.test(sizes)) {
+        sizes = sizes.replace(/^auto\s*,\s*/i, "");
+      } else if (/^auto$/i.test(sizes)) {
+        sizes = "(max-width: 840px) 100vw, 840px";
+      }
+      if (!sizes) continue;
+      out.push(`sizes="${sizes.replace(/"/g, "&quot;")}"`);
+      continue;
+    }
     out.push(`${name}="${value.replace(/"/g, "&quot;")}"`);
   }
   if (tag === "img" && !/\bloading=/.test(out.join(" "))) {
