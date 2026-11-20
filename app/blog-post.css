@@ -125,6 +125,14 @@ html body .blog-post-page h1.blog-post-page__title,
   font-weight:700;
   color:var(--bpp-ink);
 }
+/* Two-tone headings — same <em> accent as homepage / services (blog only) */
+.blog-post-page h1.blog-post-page__title em,
+.blog-post-page__body h2 em,
+.blog-post-page__faq-wrap h2 em{
+  font-style:normal !important;
+  color:var(--bpp-brand) !important;
+  display:inline !important;
+}
 
 /* Natural image height — no fixed crop (avoids cutting URL/logo footers) */
 .blog-post-page__hero-img{

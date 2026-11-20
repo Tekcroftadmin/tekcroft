@@ -69,6 +69,7 @@ export type WpPost = {
     rank_math?: WpRankMath;
     rank_math_title?: string;
     rank_math_description?: string;
+    rank_math_focus_keyword?: string;
   };
   rank_math?: WpRankMath;
   _embedded?: {
@@ -98,6 +99,7 @@ export type BlogSeo = {
   description: string;
   canonical: string;
   robots?: string;
+  focusKeyword?: string;
   ogTitle: string;
   ogDescription: string;
   ogImage?: string;

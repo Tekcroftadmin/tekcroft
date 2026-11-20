@@ -1,6 +1,10 @@
 import Link from "next/link";
 import BlogPostEffects from "./BlogPostEffects";
-import { prepareArticleContent } from "./processArticle";
+import {
+  accentHeadingText,
+  accentTitleHtml,
+  prepareArticleContent,
+} from "./processArticle";
 import type { BlogPost } from "@/lib/wordpress/types";
 
 const ARROW = (
@@ -82,9 +86,12 @@ export default function BlogPostView({
 }: BlogPostViewProps) {
   // Body HTML already has FAQs removed in mapWpPost; only TOC/tables here.
   // FAQ Q&A always comes from the WordPress post (`post.faqs`).
-  const { html, toc } = prepareArticleContent(post.contentHtml);
+  const focusKeyword = post.seo.focusKeyword;
+  const { html, toc } = prepareArticleContent(post.contentHtml, focusKeyword);
+  const titleHtml = accentTitleHtml(post.title, focusKeyword);
   const faqs = post.faqs || [];
   const faqHeading = post.faqHeading || "FAQs";
+  const faqHeadingHtml = accentHeadingText(faqHeading, focusKeyword);
   const share = shareUrls(post.seo.canonical, post.title);
   const relatedThree = related.slice(0, 3);
 
@@ -94,7 +101,10 @@ export default function BlogPostView({
 
       <div className="blog-post-page__layout">
         <article className="blog-post-page__post" id="article">
-          <h1 className="blog-post-page__title">{post.title}</h1>
+          <h1
+            className="blog-post-page__title"
+            dangerouslySetInnerHTML={{ __html: titleHtml }}
+          />
 
           {post.image ? (
             <div className="blog-post-page__hero-img">
@@ -126,7 +136,10 @@ export default function BlogPostView({
                 aria-label={faqHeading}
                 id="faqs"
               >
-                <h2 id="faqs-heading">{faqHeading}</h2>
+                <h2
+                  id="faqs-heading"
+                  dangerouslySetInnerHTML={{ __html: faqHeadingHtml }}
+                />
                 <div className="blog-post-page__faq faq">
                   {faqs.map((item, i) => (
                     <details key={i} open={i === 0 || undefined}>

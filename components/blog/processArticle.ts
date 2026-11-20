@@ -120,8 +120,83 @@ export function extractFaqs(html: string): {
   return { html: out, faqs, heading };
 }
 
-/** Ensure H2s have ids; return TOC from those headings. */
-export function ensureHeadingIds(html: string): {
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Homepage/services two-tone heading: wrap accent phrase in <em>.
+ * Prefers focus keyword; otherwise accents the trailing phrase.
+ */
+export function accentHeadingText(
+  plain: string,
+  focusKeyword?: string
+): string {
+  const text = (plain || "").replace(/\s+/g, " ").trim();
+  if (!text) return "";
+
+  const kw = (focusKeyword || "").replace(/\s+/g, " ").trim();
+  if (kw && text.toLowerCase().includes(kw.toLowerCase())) {
+    const re = new RegExp(`(${escapeRegExp(kw)})`, "i");
+    return escapeHtml(text).replace(re, "<em>$1</em>");
+  }
+
+  const words = text.split(" ");
+  if (words.length <= 2) {
+    return `<em>${escapeHtml(text)}</em>`;
+  }
+
+  // Mirror site section titles: accent the last ~40% (2–5 words).
+  const accentCount = Math.min(5, Math.max(2, Math.ceil(words.length * 0.4)));
+  const head = words.slice(0, -accentCount).join(" ");
+  const tail = words.slice(-accentCount).join(" ");
+  return `${escapeHtml(head)} <em>${escapeHtml(tail)}</em>`;
+}
+
+/** H1: highlight only the main keyword (Rank Math focus), not the whole title. */
+export function accentTitleHtml(
+  title: string,
+  focusKeyword?: string
+): string {
+  const text = (title || "").replace(/\s+/g, " ").trim();
+  if (!text) return "";
+
+  const kw = (focusKeyword || "").replace(/\s+/g, " ").trim();
+  if (kw && text.toLowerCase().includes(kw.toLowerCase())) {
+    const re = new RegExp(`(${escapeRegExp(kw)})`, "i");
+    return escapeHtml(text).replace(re, "<em>$1</em>");
+  }
+
+  // No focus keyword: accent the distinctive clause (before ?/: ) last words —
+  // matches OG art like “Local SEO Work?” without painting the whole H1.
+  const clause = text.split(/[?:—–]/)[0]?.trim() || text;
+  const words = clause.split(/\s+/).filter(Boolean);
+  if (words.length < 3) return escapeHtml(text);
+
+  const accentCount = Math.min(4, Math.max(2, Math.ceil(words.length / 3)));
+  const accent = words.slice(-accentCount).join(" ");
+  const idx = text.toLowerCase().lastIndexOf(accent.toLowerCase());
+  if (idx < 0) return escapeHtml(text);
+
+  const before = text.slice(0, idx);
+  const match = text.slice(idx, idx + accent.length);
+  const after = text.slice(idx + accent.length);
+  return `${escapeHtml(before)}<em>${escapeHtml(match)}</em>${escapeHtml(after)}`;
+}
+
+/** Ensure H2s have ids + two-tone <em> accent; return TOC from those headings. */
+export function ensureHeadingIds(
+  html: string,
+  focusKeyword?: string
+): {
   html: string;
   toc: TocItem[];
 } {
@@ -140,7 +215,12 @@ export function ensureHeadingIds(html: string): {
         .trim();
       const attrStr = cleaned ? ` ${cleaned}` : "";
       toc.push({ id, text });
-      return `<h2 id="${id}"${attrStr}>${inner}</h2>`;
+
+      // Keep editor-authored <em>; otherwise apply site two-tone accent.
+      const accented = /<em[\s>]/i.test(inner)
+        ? inner
+        : accentHeadingText(text, focusKeyword);
+      return `<h2 id="${id}"${attrStr}>${accented}</h2>`;
     }
   );
   return { html: next, toc };
@@ -178,12 +258,15 @@ export function wrapTables(html: string): string {
   return out;
 }
 
-/** TOC + table chrome for article body. FAQs are extracted earlier in mapWpPost. */
-export function prepareArticleContent(contentHtml: string): {
+/** TOC + table chrome + two-tone H2s. FAQs are extracted earlier in mapWpPost. */
+export function prepareArticleContent(
+  contentHtml: string,
+  focusKeyword?: string
+): {
   html: string;
   toc: TocItem[];
 } {
   const withTables = wrapTables(contentHtml || "");
-  const { html, toc } = ensureHeadingIds(withTables);
+  const { html, toc } = ensureHeadingIds(withTables, focusKeyword);
   return { html, toc };
 }

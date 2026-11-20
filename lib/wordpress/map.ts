@@ -40,6 +40,10 @@ function featuredImage(post: WpPost) {
 function rankMathFromPost(post: WpPost): WpRankMath {
   const meta = post.meta || {};
   const nested = (post.rank_math || meta.rank_math || {}) as WpRankMath;
+  const focusFromMeta =
+    typeof meta.rank_math_focus_keyword === "string"
+      ? meta.rank_math_focus_keyword
+      : undefined;
   return {
     title: nested.title || (typeof meta.rank_math_title === "string" ? meta.rank_math_title : undefined),
     description:
@@ -47,6 +51,7 @@ function rankMathFromPost(post: WpPost): WpRankMath {
       (typeof meta.rank_math_description === "string"
         ? meta.rank_math_description
         : undefined),
+    focus_keyword: nested.focus_keyword || focusFromMeta,
     canonical_url: nested.canonical_url,
     robots: nested.robots,
     og_title: nested.og_title,
@@ -115,11 +120,14 @@ function buildSeo(post: WpPost, title: string, excerptText: string, imageSrc?: s
       ? rm.robots
       : undefined;
 
+  const focusKeyword = stripHtml(rm.focus_keyword || "").trim() || undefined;
+
   return {
     title: seoTitle,
     description,
     canonical,
     robots,
+    focusKeyword,
     ogTitle,
     ogDescription,
     ogImage,
