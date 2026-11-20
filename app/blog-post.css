@@ -41,12 +41,6 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger{
 html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
   background:#0F1720 !important;
 }
-/* Hide mega-menu caret when the panel is closed (avoids floating arrow over light pages). */
-html body:has(.blog-post-page) .mm[hidden] .mm-caret,
-html body:has(.blog-post-page) .mm[hidden]{
-  display:none !important;
-}
-
 .blog-post-page{
   --bpp-brand:var(--primary, #0096D5);
   --bpp-brand-deep:var(--brand-deep, #00608A);

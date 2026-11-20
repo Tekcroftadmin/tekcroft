@@ -35,10 +35,10 @@ export function extractFaqs(html: string): {
   let out = html;
   let heading = "FAQs";
 
-  const headingMatch = /<h2[^>]*>([\s\S]*?FAQ[\s\S]*?)<\/h2>/i.exec(out);
+  // Only the dedicated FAQ heading (never match across earlier H2s).
+  const headingMatch = /<h2[^>]*>\s*(FAQs?)\s*<\/h2>/i.exec(out);
   if (headingMatch) {
-    const text = stripTags(headingMatch[1]);
-    if (text) heading = text;
+    heading = stripTags(headingMatch[1]) || "FAQs";
   }
 
   // Rank Math FAQ block (list-item OR legacy faq-item)
@@ -88,8 +88,7 @@ export function extractFaqs(html: string): {
   );
 
   // H2 FAQs / FAQ section with H3 questions (fallback when no Rank Math / details block)
-  const faqHeading =
-    /<(h2)([^>]*)>([\s\S]*?FAQ[\s\S]*?)<\/\1>/i.exec(out);
+  const faqHeading = /<h2[^>]*>\s*FAQs?\s*<\/h2>/i.exec(out);
   if (faqHeading && faqs.length === 0) {
     const start = faqHeading.index!;
     const after = out.slice(start + faqHeading[0].length);
@@ -110,9 +109,9 @@ export function extractFaqs(html: string): {
     }
   }
 
-  // Drop FAQ heading only after we successfully extracted accordion items
+  // Drop ONLY the FAQ heading after accordion items were extracted
   if (faqs.length) {
-    out = out.replace(/<h2[^>]*>[\s\S]*?FAQ[\s\S]*?<\/h2>\s*/gi, "");
+    out = out.replace(/<h2[^>]*>\s*FAQs?\s*<\/h2>\s*/gi, "");
   }
 
   // Clean leftover empty wrappers / whitespace-only divs near FAQ residue
