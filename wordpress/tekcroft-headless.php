@@ -3,7 +3,7 @@
  * Plugin Name: Tekcroft Headless Bridge
  * Description: Exposes Rank Math SEO fields on the REST API and pings the Tekcroft Next.js revalidate webhook on publish/update/delete/trash.
  * Author: Tekcroft
- * Version: 1.1.0
+ * Version: 1.2.0
  *
  * Install (Hostinger WordPress):
  * 1. Upload this file to wp-content/mu-plugins/tekcroft-headless.php
@@ -27,7 +27,33 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Expose Rank Math meta on post REST responses as `rank_math`.
+ * Resolve Rank Math templates (%title%, %sep%, …) to the final SEO string.
+ *
+ * @param int          $post_id
+ * @param string       $raw
+ * @param string       $setting Rank Math setting key when $raw is empty
+ * @param WP_Post|null $post
+ * @return string
+ */
+function tekcroft_rank_math_resolve($post_id, $raw, $setting = '', $post = null) {
+  $value = is_string($raw) ? trim($raw) : '';
+  $post = $post instanceof WP_Post ? $post : get_post($post_id);
+
+  if ($value === '' && $setting !== '' && class_exists('\RankMath\Helper')) {
+    $value = (string) \RankMath\Helper::get_settings($setting);
+  }
+
+  if ($value !== '' && $post && class_exists('\RankMath\Helper')) {
+    $value = (string) \RankMath\Helper::replace_vars($value, $post);
+  }
+
+  $value = wp_strip_all_tags(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+  return trim(preg_replace('/\s+/u', ' ', $value));
+}
+
+/**
+ * Expose Rank Math SEO fields on post REST responses as `rank_math`.
+ * Title/description are fully resolved — same strings Rank Math puts in the head.
  */
 add_action('rest_api_init', function () {
   register_rest_field('post', 'rank_math', [
@@ -36,6 +62,9 @@ add_action('rest_api_init', function () {
       if (!$id) {
         return null;
       }
+
+      $post = get_post($id);
+      $type = $post instanceof WP_Post ? $post->post_type : 'post';
 
       $robots = get_post_meta($id, 'rank_math_robots', true);
       if (!is_array($robots)) {
@@ -53,17 +82,55 @@ add_action('rest_api_init', function () {
         $twitter_image = $og_image;
       }
 
+      $title = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_title', true),
+        "titles.pt_{$type}_title",
+        $post
+      );
+      $description = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_description', true),
+        "titles.pt_{$type}_description",
+        $post
+      );
+
+      $og_title = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_facebook_title', true),
+        '',
+        $post
+      );
+      $og_description = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_facebook_description', true),
+        '',
+        $post
+      );
+      $twitter_title = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_twitter_title', true),
+        '',
+        $post
+      );
+      $twitter_description = tekcroft_rank_math_resolve(
+        $id,
+        (string) get_post_meta($id, 'rank_math_twitter_description', true),
+        '',
+        $post
+      );
+
       return [
-        'title' => (string) get_post_meta($id, 'rank_math_title', true),
-        'description' => (string) get_post_meta($id, 'rank_math_description', true),
+        'title' => $title,
+        'description' => $description,
         'focus_keyword' => (string) get_post_meta($id, 'rank_math_focus_keyword', true),
         'canonical_url' => (string) get_post_meta($id, 'rank_math_canonical_url', true),
         'robots' => $robots,
-        'og_title' => (string) get_post_meta($id, 'rank_math_facebook_title', true),
-        'og_description' => (string) get_post_meta($id, 'rank_math_facebook_description', true),
+        'og_title' => $og_title !== '' ? $og_title : $title,
+        'og_description' => $og_description !== '' ? $og_description : $description,
         'og_image' => (string) $og_image,
-        'twitter_title' => (string) get_post_meta($id, 'rank_math_twitter_title', true),
-        'twitter_description' => (string) get_post_meta($id, 'rank_math_twitter_description', true),
+        'twitter_title' => $twitter_title !== '' ? $twitter_title : ($og_title !== '' ? $og_title : $title),
+        'twitter_description' => $twitter_description !== '' ? $twitter_description : ($og_description !== '' ? $og_description : $description),
         'twitter_image' => (string) $twitter_image,
       ];
     },

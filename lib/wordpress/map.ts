@@ -100,19 +100,61 @@ function escapeRegExp(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+/** Normalize Rank Math / WP SEO strings — no invented copy. */
+function cleanSeoText(value: string | undefined): string {
+  return decodeEntities(stripHtml(value || ""))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Expand leftover Rank Math placeholders if the WP bridge returned a raw template.
+ * Prefer resolved strings from tekcroft-headless.php (v1.2+).
+ */
+function expandRankMathVars(
+  template: string,
+  postTitle: string,
+  excerptText: string
+): string {
+  if (!template || !/%[a-z0-9_]+%/i.test(template)) return template;
+  const excerpt = excerptText.replace(/\s+/g, " ").trim().slice(0, 160);
+  return template
+    .replace(/%title%/gi, postTitle)
+    .replace(/%excerpt%/gi, excerpt)
+    .replace(/%excerpt_only%/gi, excerpt)
+    .replace(/%sep%/gi, "|")
+    .replace(/%sitename%/gi, "Tekcroft")
+    .replace(/%page%/gi, "")
+    .replace(/%currentyear%/gi, String(new Date().getUTCFullYear()))
+    .replace(/\s*\|\s*$/g, "")
+    .replace(/^\s*\|\s*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function buildSeo(post: WpPost, title: string, excerptText: string, imageSrc?: string): BlogSeo {
   const rm = rankMathFromPost(post);
   const canonical = `${getPublicSiteUrl()}/blog/${post.slug}`;
+
+  // Rank Math fields only — never invent meta title/description in Next.js.
+  const seoTitle =
+    expandRankMathVars(cleanSeoText(rm.title), title, excerptText) || title;
   const description =
-    stripHtml(rm.description || "") ||
-    excerptText ||
-    `Read ${title} on Tekcroft.`;
-  const seoTitle = stripHtml(rm.title || "") || `${title} | Tekcroft`;
-  const ogTitle = stripHtml(rm.og_title || "") || seoTitle;
-  const ogDescription = stripHtml(rm.og_description || "") || description;
+    expandRankMathVars(cleanSeoText(rm.description), title, excerptText) ||
+    cleanSeoText(excerptText);
+
+  const ogTitle =
+    expandRankMathVars(cleanSeoText(rm.og_title), title, excerptText) || seoTitle;
+  const ogDescription =
+    expandRankMathVars(cleanSeoText(rm.og_description), title, excerptText) ||
+    description;
   const ogImage = rm.og_image || imageSrc;
-  const twitterTitle = stripHtml(rm.twitter_title || "") || ogTitle;
-  const twitterDescription = stripHtml(rm.twitter_description || "") || ogDescription;
+  const twitterTitle =
+    expandRankMathVars(cleanSeoText(rm.twitter_title), title, excerptText) ||
+    ogTitle;
+  const twitterDescription =
+    expandRankMathVars(cleanSeoText(rm.twitter_description), title, excerptText) ||
+    ogDescription;
   const twitterImage = rm.twitter_image || ogImage;
   const robots = Array.isArray(rm.robots)
     ? rm.robots.join(", ")
@@ -120,7 +162,7 @@ function buildSeo(post: WpPost, title: string, excerptText: string, imageSrc?: s
       ? rm.robots
       : undefined;
 
-  const focusKeyword = stripHtml(rm.focus_keyword || "").trim() || undefined;
+  const focusKeyword = cleanSeoText(rm.focus_keyword) || undefined;
 
   return {
     title: seoTitle,
