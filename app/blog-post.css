@@ -41,6 +41,14 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger{
 html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
   background:#0F1720 !important;
 }
+/* body overflow-x:hidden makes overflow-y:auto and kills position:sticky —
+   same clip/visible fix used on ecommerce sticky panels. */
+html:has(.blog-post-page),
+body:has(.blog-post-page){
+  overflow-x:clip !important;
+  overflow-y:visible !important;
+}
+
 .blog-post-page{
   --bpp-brand:var(--primary, #0096D5);
   --bpp-brand-deep:var(--brand-deep, #00608A);
@@ -433,22 +441,33 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
   color:var(--bpp-navy);
 }
 
-/* Sidebar */
+/* Sidebar — sticks under the nav while the article scrolls */
 .blog-post-page__layout > aside{
-  position:relative;
-  align-self:stretch;
-}
-.blog-post-page__side{
   position:sticky;
   top:calc(var(--nav-h, 88px) + 12px);
+  align-self:start;
+  z-index:3;
+  max-height:calc(100dvh - var(--nav-h, 88px) - 24px);
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+.blog-post-page__side{
   display:grid;
-  gap:24px;
+  gap:16px;
+  min-height:0;
+  max-height:inherit;
+  grid-template-rows:minmax(0,1fr) auto;
 }
 .blog-post-page__toc{
   padding:24px;
   background:var(--bpp-surface);
   border-radius:22px;
   box-shadow:0 10px 34px rgba(6,26,38,.07);
+  min-height:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
 }
 .blog-post-page__toc h3{
   margin:0 0 14px;
@@ -456,13 +475,18 @@ html[data-theme="light"] body:has(.blog-post-page) .nav:not(.stuck) .burger i{
   font-size:16px;
   font-weight:600;
   color:var(--bpp-ink);
+  flex:0 0 auto;
 }
 .blog-post-page__toc-list{
   list-style:none;
   margin:0;
-  padding:0;
+  padding:0 2px 0 0;
   display:grid;
   gap:2px;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
 }
 .blog-post-page__toc a{
   display:block;
