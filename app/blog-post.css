@@ -702,13 +702,15 @@ body:has(.blog-post-page){
   font-size:13px;
   color:var(--bpp-muted);
 }
+/* Beat site-consistency heading lock on related cards */
+html body .blog-post-page__card h3,
 .blog-post-page__card h3{
   margin:12px 0 0;
   font-family:var(--font-display);
-  font-size:19px;
-  line-height:1.35;
-  letter-spacing:-.01em;
-  font-weight:600;
+  font-size:17px !important;
+  line-height:1.4 !important;
+  letter-spacing:-.01em !important;
+  font-weight:600 !important;
   flex:1;
 }
 .blog-post-page__card h3 a{color:var(--bpp-ink);}
