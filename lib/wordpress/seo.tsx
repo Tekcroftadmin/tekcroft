@@ -16,7 +16,7 @@ export function blogPostMetadata(post: BlogPost): Metadata {
     : { index: true, follow: true };
 
   return {
-    // Absolute so layout default "Tekcroft" never replaces a Rank Math title.
+    // Absolute so layout default "Tekcroft" never replaces the post title.
     title: post.seo.title
       ? { absolute: post.seo.title }
       : { absolute: "Tekcroft" },

@@ -5,18 +5,32 @@ import {
   WP_REVALIDATE_SECONDS,
 } from "./config";
 import { mapWpPost, mapWpTerm } from "./map";
-import {
-  fetchRankMathFromWpHtml,
-  postHasRankMath,
-} from "./rankMathFromHtml";
+import { fetchRankMathDescription } from "./rankMathDescription";
 import type { BlogListResult, BlogPost, BlogTerm, WpPost, WpTerm } from "./types";
 
-/** Prefer REST `rank_math` (tekcroft-headless.php); else read Rank Math from WP HTML head. */
-async function withRankMath(post: WpPost): Promise<WpPost> {
-  if (postHasRankMath(post)) return post;
-  const rm = await fetchRankMathFromWpHtml(post.link, post.slug);
-  if (!rm) return post;
-  return { ...post, rank_math: rm };
+function existingRankMathDescription(post: WpPost): string {
+  const nested = post.rank_math?.description;
+  if (typeof nested === "string" && nested.trim()) return nested.trim();
+  const meta = post.meta?.rank_math_description;
+  if (typeof meta === "string" && meta.trim()) return meta.trim();
+  return "";
+}
+
+/**
+ * Attach Rank Math Edit-Snippet description only.
+ * Never copies robots/canonical/title from WP head (staging is noindex).
+ */
+async function withRankMathDescription(post: WpPost): Promise<WpPost> {
+  if (existingRankMathDescription(post)) return post;
+  const description = await fetchRankMathDescription(post.link, post.slug);
+  if (!description) return post;
+  return {
+    ...post,
+    rank_math: {
+      ...(post.rank_math || {}),
+      description,
+    },
+  };
 }
 
 type FetchOpts = {
@@ -100,7 +114,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     });
     const post = (data || []).find((p) => p.status === "publish" && p.slug === slug);
     if (!post) return null;
-    return mapWpPost(await withRankMath(post));
+    return mapWpPost(await withRankMathDescription(post));
   } catch (err) {
     console.error("[wordpress] getPostBySlug failed", err);
     return null;

@@ -132,38 +132,56 @@ function expandRankMathVars(
     .trim();
 }
 
+/**
+ * Excerpt → meta description fallback: strip tags/entities, drop "[…]" / "Read more",
+ * trim to ~155–160 chars at a word boundary.
+ */
+function excerptMetaDescription(excerptText: string): string {
+  let text = decodeEntities(stripHtml(excerptText || ""))
+    .replace(/\[\s*(?:…|&hellip;|\.{3})\s*\]/gi, "")
+    .replace(/\bRead more\b/gi, "")
+    .replace(/…/g, "")
+    .replace(/\.{3,}/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!text) return "";
+  if (text.length <= 160) return text;
+  const slice = text.slice(0, 160);
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace >= 120 ? slice.slice(0, lastSpace) : slice).trim();
+}
+
 function buildSeo(post: WpPost, title: string, excerptText: string, imageSrc?: string): BlogSeo {
   const rm = rankMathFromPost(post);
   const canonical = `${getPublicSiteUrl()}/blog/${post.slug}`;
 
-  // Meta title / description: Rank Math only (WP plugin resolves templates).
-  // Never fall back to the WP post title or excerpt — those are not SEO fields.
-  const seoTitle = expandRankMathVars(cleanSeoText(rm.title), title, excerptText);
-  const description = expandRankMathVars(
+  // Title / robots / images / social titles: unchanged (REST rank_math / defaults).
+  // Never apply staging WP robots/canonical even if present on rm.
+  const seoTitle =
+    expandRankMathVars(cleanSeoText(rm.title), title, excerptText) || title;
+
+  // Description only: Rank Math snippet → cleaned excerpt → omit.
+  const rankMathDescription = expandRankMathVars(
     cleanSeoText(rm.description),
     title,
     excerptText
   );
+  const description =
+    rankMathDescription || excerptMetaDescription(excerptText) || "";
 
-  // Social: Rank Math social fields, else the Rank Math meta above — never invent.
   const ogTitle =
     expandRankMathVars(cleanSeoText(rm.og_title), title, excerptText) || seoTitle;
-  const ogDescription =
-    expandRankMathVars(cleanSeoText(rm.og_description), title, excerptText) ||
-    description;
+  // Edit Snippet description drives meta + og + twitter description.
+  const ogDescription = description;
   const ogImage = rm.og_image || imageSrc;
   const twitterTitle =
     expandRankMathVars(cleanSeoText(rm.twitter_title), title, excerptText) ||
     ogTitle;
-  const twitterDescription =
-    expandRankMathVars(cleanSeoText(rm.twitter_description), title, excerptText) ||
-    ogDescription;
+  const twitterDescription = description;
   const twitterImage = rm.twitter_image || ogImage;
-  const robots = Array.isArray(rm.robots)
-    ? rm.robots.join(", ")
-    : typeof rm.robots === "string"
-      ? rm.robots
-      : undefined;
+
+  // Do not trust staging Rank Math robots (often noindex on Hostinger WP).
+  const robots = undefined;
 
   const focusKeyword = cleanSeoText(rm.focus_keyword) || undefined;
 
