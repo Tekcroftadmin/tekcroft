@@ -5,7 +5,19 @@ import {
   WP_REVALIDATE_SECONDS,
 } from "./config";
 import { mapWpPost, mapWpTerm } from "./map";
+import {
+  fetchRankMathFromWpHtml,
+  postHasRankMath,
+} from "./rankMathFromHtml";
 import type { BlogListResult, BlogPost, BlogTerm, WpPost, WpTerm } from "./types";
+
+/** Prefer REST `rank_math` (tekcroft-headless.php); else read Rank Math from WP HTML head. */
+async function withRankMath(post: WpPost): Promise<WpPost> {
+  if (postHasRankMath(post)) return post;
+  const rm = await fetchRankMathFromWpHtml(post.link, post.slug);
+  if (!rm) return post;
+  return { ...post, rank_math: rm };
+}
 
 type FetchOpts = {
   tags?: string[];
@@ -87,7 +99,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       tags: [WP_CACHE_TAGS.all, WP_CACHE_TAGS.posts, WP_CACHE_TAGS.post(slug)],
     });
     const post = (data || []).find((p) => p.status === "publish" && p.slug === slug);
-    return post ? mapWpPost(post) : null;
+    if (!post) return null;
+    return mapWpPost(await withRankMath(post));
   } catch (err) {
     console.error("[wordpress] getPostBySlug failed", err);
     return null;

@@ -1,0 +1,92 @@
+/* ============================================================
+   EG PROCESS — mobile sticky stack (≤767px)
+
+   Reuses the same sticky stacking values as
+   .sec.pf#platforms cards in pf-center-and-cards-lock.css:
+     top: nav-h + 16px + stop * 12px
+     margin-bottom: 16px
+     box-shadow: 0 -8px 26px -16px
+   Desktop / tablet (>767) unchanged — carousel + autoplay stay.
+   ============================================================ */
+
+@media (max-width:767px){
+  /* Sticky dies inside overflow/transform ancestors — clear them. */
+  html body .eg-sec,
+  html body .eg-sec.sec,
+  html body section.eg-sec,
+  html body #process.eg-sec,
+  html body #approach.eg-sec{
+    overflow:visible !important;
+  }
+  html body .eg-sec > .wrap,
+  html body .eg-sec .eg,
+  html body .eg-sec .eg-list{
+    overflow:visible !important;
+    transform:none !important;
+  }
+
+  /* Column of cards in normal flow (required for sticky travel). */
+  html body .eg-sec .eg-list{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:0 !important;
+    position:relative !important;
+    touch-action:pan-y !important;
+  }
+
+  /* Prev/Next fight scroll-driven steps — hide in stack mode. */
+  html body .eg-sec .eg-nav{
+    display:none !important;
+  }
+  html body .eg-sec .eg:has(.eg-nav) .eg-core{
+    margin-bottom:clamp(14px,3.6vw,22px) !important;
+  }
+
+  html body .eg-sec .eg-card,
+  html body .eg-sec article.eg-card,
+  html body .eg-sec .eg-card.seen,
+  html body .eg-sec .eg-card:first-child,
+  html body .eg-sec .eg-card.on,
+  html.js-ready body .eg-sec .eg-card,
+  html.js-ready body .eg-sec .eg-card.seen,
+  html.js-ready body .eg-sec .eg-card:first-child,
+  html.js-ready body .eg-sec .eg-card.on{
+    position:sticky !important;
+    grid-area:auto !important;
+    order:0 !important;
+    flex:none !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin-bottom:16px !important;
+    top:calc(var(--nav-h, 64px) + 16px + (var(--stop, 0) * 12px)) !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+    transform:none !important;
+    transition:none !important;
+    background:var(--surface) !important;
+    background-clip:border-box !important;
+    box-shadow:0 -8px 26px -16px rgba(var(--ink-rgb), .45) !important;
+  }
+
+  html body .eg-sec .eg-card:last-child{
+    margin-bottom:0 !important;
+  }
+
+  /* One stop per card (any step count up to 10). */
+  html body .eg-sec .eg-card:nth-child(1){ --stop:0; z-index:1; }
+  html body .eg-sec .eg-card:nth-child(2){ --stop:1; z-index:2; }
+  html body .eg-sec .eg-card:nth-child(3){ --stop:2; z-index:3; }
+  html body .eg-sec .eg-card:nth-child(4){ --stop:3; z-index:4; }
+  html body .eg-sec .eg-card:nth-child(5){ --stop:4; z-index:5; }
+  html body .eg-sec .eg-card:nth-child(6){ --stop:5; z-index:6; }
+  html body .eg-sec .eg-card:nth-child(7){ --stop:6; z-index:7; }
+  html body .eg-sec .eg-card:nth-child(8){ --stop:7; z-index:8; }
+  html body .eg-sec .eg-card:nth-child(9){ --stop:8; z-index:9; }
+  html body .eg-sec .eg-card:nth-child(10){ --stop:9; z-index:10; }
+
+  /* Room for the last card to reach its sticky stop. */
+  html body .eg-sec{
+    padding-bottom:calc(var(--section-padding-y, 48px) + 48px) !important;
+  }
+}

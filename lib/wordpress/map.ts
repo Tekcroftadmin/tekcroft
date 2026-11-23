@@ -136,13 +136,16 @@ function buildSeo(post: WpPost, title: string, excerptText: string, imageSrc?: s
   const rm = rankMathFromPost(post);
   const canonical = `${getPublicSiteUrl()}/blog/${post.slug}`;
 
-  // Rank Math fields only — never invent meta title/description in Next.js.
-  const seoTitle =
-    expandRankMathVars(cleanSeoText(rm.title), title, excerptText) || title;
-  const description =
-    expandRankMathVars(cleanSeoText(rm.description), title, excerptText) ||
-    cleanSeoText(excerptText);
+  // Meta title / description: Rank Math only (WP plugin resolves templates).
+  // Never fall back to the WP post title or excerpt — those are not SEO fields.
+  const seoTitle = expandRankMathVars(cleanSeoText(rm.title), title, excerptText);
+  const description = expandRankMathVars(
+    cleanSeoText(rm.description),
+    title,
+    excerptText
+  );
 
+  // Social: Rank Math social fields, else the Rank Math meta above — never invent.
   const ogTitle =
     expandRankMathVars(cleanSeoText(rm.og_title), title, excerptText) || seoTitle;
   const ogDescription =

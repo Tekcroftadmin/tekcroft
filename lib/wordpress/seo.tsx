@@ -16,24 +16,27 @@ export function blogPostMetadata(post: BlogPost): Metadata {
     : { index: true, follow: true };
 
   return {
-    title: post.seo.title,
-    description: post.seo.description,
+    // Absolute so layout default "Tekcroft" never replaces a Rank Math title.
+    title: post.seo.title
+      ? { absolute: post.seo.title }
+      : { absolute: "Tekcroft" },
+    description: post.seo.description || undefined,
     alternates: { canonical: post.seo.canonical },
     robots,
     openGraph: {
       type: "article",
       siteName: "Tekcroft",
       url: post.seo.canonical,
-      title: post.seo.ogTitle,
-      description: post.seo.ogDescription,
+      title: post.seo.ogTitle || undefined,
+      description: post.seo.ogDescription || undefined,
       publishedTime: post.date,
       modifiedTime: post.modified,
       images: post.seo.ogImage ? [{ url: post.seo.ogImage }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.seo.twitterTitle,
-      description: post.seo.twitterDescription,
+      title: post.seo.twitterTitle || undefined,
+      description: post.seo.twitterDescription || undefined,
       images: post.seo.twitterImage ? [post.seo.twitterImage] : undefined,
     },
   };
