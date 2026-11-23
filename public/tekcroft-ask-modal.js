@@ -48,6 +48,11 @@
     "#askModal .field{gap:5px}" +
     "#askModal .field input,#askModal .field select{" +
     "padding:calc(9 * var(--u)) calc(12 * var(--u))}" +
+    /* Native <select> popup can fail under clip-path / backdrop-filter ancestors */
+    "#askModal.modal.on .modal-frame{clip-path:none;will-change:auto}" +
+    "#askModal .modal-form,#askModal .mf,#askModal .field.sel{overflow:visible}" +
+    "#askModal .field select{backdrop-filter:none;-webkit-backdrop-filter:none;" +
+    "position:relative;z-index:5}" +
     /* Clear gap between Your question and Send Question (match reference ~14–16px) */
     "#askModal .modal-form > #askModalGo," +
     "#askModal .modal-card .btn," +

@@ -15,11 +15,14 @@ html body .sec.pf#platforms:has(.pf-orbit){
 html body .sec.pf#platforms:has(.pf-orbit) .wrap,
 html body .sec.pf#platforms:has(.pf-orbit) .pf-in{
   width:100% !important;
-  max-width:100% !important;
+  /* Keep shared wrap measure (same as other .sec > .wrap sections) */
+  max-width:var(--maxw, 1220px) !important;
   min-width:0 !important;
   box-sizing:border-box !important;
   overflow-x:clip !important;
   margin-inline:auto !important;
+  padding-left:clamp(16px, 4vw, 26px) !important;
+  padding-right:clamp(16px, 4vw, 26px) !important;
 }
 
 /* —— PART 1: centered head + orbit (NOT .pf-split — those keep page 2-col) —— */

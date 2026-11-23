@@ -292,7 +292,7 @@ export const homeSchema = {
       "inLanguage": "en-US",
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://www.tekcroft.com/og.jpg",
+        "url": "https://www.tekcroft.com/images/home-hero-1.webp",
         "width": 1200,
         "height": 630
       },

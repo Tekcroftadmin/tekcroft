@@ -2330,15 +2330,26 @@ html[data-theme="dark"] #web-and-app-development-page .sec{ background:var(--gro
    nine, which is why this is one block rather than a rule beside each
    section: a run cannot be decided a section at a time. */
 
+/* data-ground owns paint; --ground/--panel stay paired for cards.
+   Run: proof white, services tint, build-type white, industries tint,
+   why white, process tint, faq white, contact tint. */
 #web-and-app-development-page #proof,
-#web-and-app-development-page #industries,
-#web-and-app-development-page #ai-search,
-#web-and-app-development-page #faq{
-  --ground:var(--bg-alt);  --panel:var(--surface); }
+#web-and-app-development-page #proof-v2,
+#web-and-app-development-page #why{
+  --ground:var(--surface);  --panel:var(--bg-alt); }
 
-#web-and-app-development-page #services-2,
-#web-and-app-development-page #contact{
-  --ground:var(--surface); --panel:var(--bg-alt); }
+/* build-type + faq: white section AND white panels (table / accordion) */
+#web-and-app-development-page #build-type,
+#web-and-app-development-page #faq{
+  --ground:var(--surface);  --panel:var(--surface); }
+
+#web-and-app-development-page #services,
+#web-and-app-development-page #industries,
+#web-and-app-development-page #process,
+#web-and-app-development-page #contact,
+#web-and-app-development-page #ai-search,
+#web-and-app-development-page #services-2{
+  --ground:var(--bg-alt); --panel:var(--surface); }
 
 /* White cards need somewhere to be white against, so the process joins
    the pair #scope and #clients use: the page's own near-white under
@@ -2352,8 +2363,6 @@ html[data-theme="dark"] #web-and-app-development-page .sec{ background:var(--gro
    its white cards read off a change of colour instead of an edge. */
 
 #web-and-app-development-page #clients{ --ground:var(--bg); --panel:var(--surface); }
-
-#web-and-app-development-page #process{ --ground:var(--bg-alt); --panel:var(--surface); }
 
 /* and the closing band takes a different photograph from the one the FAQ
    aside already uses — the same picture twice on one page is the reader
@@ -10768,7 +10777,8 @@ html[data-theme="dark"] #web-and-app-development-page .ts-lg{background:hsl(var(
 
 #web-and-app-development-page #services-2{--ground:var(--bg-alt) !important;}
 
-#web-and-app-development-page #industries{--ground:var(--bg) !important;}
+/* Live WAD ids follow HTML data-ground (not the older rhythm map). */
+#web-and-app-development-page #industries{--ground:var(--bg-alt) !important;}
 
 #web-and-app-development-page #process{--ground:var(--bg-alt) !important;}
 
@@ -10782,7 +10792,7 @@ html[data-theme="dark"] #web-and-app-development-page .ts-lg{background:hsl(var(
 
 #web-and-app-development-page #tech-stack{--ground:var(--bg) !important;}
 
-#web-and-app-development-page #faq{--ground:var(--bg-alt) !important;}
+#web-and-app-development-page #faq{--ground:var(--surface) !important;}
 
 /* === wad-page === */
 
@@ -10852,7 +10862,9 @@ html[data-theme="light"] #web-and-app-development-page .hs-field select{
    white card; the rest stand closed with their number and name on edge.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #services{padding-block:clamp(36px,4vw,58px); background:var(--surface);}
+/* Ground comes from data-ground="tint" (zebra). Do not force --surface —
+   that stacked white on white with #proof-v2 above and #build-type below. */
+#web-and-app-development-page #services{padding-block:clamp(36px,4vw,58px);}
 
 #web-and-app-development-page .tm-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,48px);
   align-items:end; margin-bottom:clamp(18px,2.2vw,28px);}
@@ -12142,7 +12154,10 @@ html[data-theme="dark"] #web-and-app-development-page #services .wa-ph u{backgro
    and the line and button under it are set here.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #build-type{--ground:var(--bg-alt); --panel:var(--surface); background:var(--ground);}
+/* data-ground="white" — sits between tint #services and tint #industries */
+/* Table reads white (not tint panel) per page request */
+#web-and-app-development-page #build-type{--ground:var(--surface); --panel:var(--surface);}
+#web-and-app-development-page #build-type .vs-table{background:var(--surface);}
 
 #web-and-app-development-page #build-type .sec-head{max-width:min(100%,900px);}
 
@@ -12368,19 +12383,18 @@ html[data-theme="dark"] #web-and-app-development-page #build-type .vs-table thea
 
 #web-and-app-development-page #industries .pf-c5{--mk:var(--mk-cap);}
 
-/* ── white ground: the page alternates white and tint section by section
-   (services white, build type tint, industries white, next one tint) ── */
+/* ── tint ground: proof white → services tint → build-type white → industries tint ── */
 
-#web-and-app-development-page #industries{--ground:var(--surface) !important; --panel:var(--surface); background:var(--ground);}
+#web-and-app-development-page #industries{--ground:var(--bg-alt); --panel:var(--surface);}
 
 /* ── 05-why.css ── */
 
 /* ══════════════════════════════════════════════════════════════════════
-   WHY CHOOSE US — tab strip over one panel, on the tint.
+   WHY CHOOSE US — tab strip over one panel, on white (data-ground="white").
    Every colour, radius and type size is the site's own token.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #why{--ground:var(--bg-alt); --panel:var(--surface); background:var(--ground);}
+#web-and-app-development-page #why{--ground:var(--surface); --panel:var(--bg-alt);}
 
 #web-and-app-development-page #why .sec-head{max-width:min(100%,940px);}
 
@@ -12667,12 +12681,11 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 /* ── 06-process.css ── */
 
 /* ══════════════════════════════════════════════════════════════════════
-   THE PROCESS — the site's own .eg sheet, on white this time (the why
-   section above it is on the tint). The stage cards keep their edge and
-   shadow, so they still read as cards on a white ground.
+   THE PROCESS — the site's own .eg sheet on tint (data-ground="tint";
+   #why above is white). White stage cards read off the tint ground.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #process{--ground:var(--surface) !important; --panel:var(--surface); background:var(--ground);}
+#web-and-app-development-page #process{--ground:var(--bg-alt); --panel:var(--surface);}
 
 #web-and-app-development-page #process .sec-head{max-width:min(100%,860px);}
 
@@ -12685,12 +12698,14 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 /* ── 07-faq.css ── */
 
 /* ══════════════════════════════════════════════════════════════════════
-   FAQ — the site's own sheet, on the coloured ground (the process above
-   is white). The aside keeps its card — eyebrow, line, button, scrim —
+   FAQ — white ground (data-ground="white"; #process above is tint).
+   The aside keeps its card — eyebrow, line, button, scrim —
    with one picture that does not change with the question.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #faq{--ground:var(--bg-alt) !important; --panel:var(--surface); background:var(--ground);}
+/* Accordion list reads white (not tint panel) per page request */
+#web-and-app-development-page #faq{--ground:var(--surface); --panel:var(--surface);}
+#web-and-app-development-page #faq .faq-list{background:var(--surface) !important;}
 
 #web-and-app-development-page #faq .sec-head h2{text-transform:none;}
 
@@ -12709,11 +12724,11 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 /* ── 08-plan.css ── */
 
 /* ══════════════════════════════════════════════════════════════════════
-   LET'S PLAN YOUR APP — the site's .cta band on white (the FAQ above is
-   on the tint). The heading keeps the casing it was written in.
+   LET'S PLAN YOUR APP — CTA outer band on tint (data-ground="tint";
+   FAQ above is white). Inner .cta3 card unchanged.
    ══════════════════════════════════════════════════════════════════════ */
 
-#web-and-app-development-page #contact{--ground:var(--surface); background:var(--ground);}
+#web-and-app-development-page #contact{--ground:var(--bg-alt); --panel:var(--surface);}
 
 /* Match shared CTA band (tekcroft.css / other service pages): page photo + wrap padding */
 /* WAD CTA band photo — desktop landscape / mobile portrait */
@@ -12793,12 +12808,14 @@ html[data-theme="dark"] #web-and-app-development-page .wy-sprints em{background:
 #web-and-app-development-page .sec.vs{background:transparent !important;}
 #web-and-app-development-page .sec.vs[data-ground],#web-and-app-development-page section.vs[data-ground]{/* photo band — ignore ground paint */}
 #web-and-app-development-page .sec.vs{--ground:transparent;}
-#web-and-app-development-page #services[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#web-and-app-development-page #build-type[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#web-and-app-development-page #industries[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#web-and-app-development-page #why[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
-#web-and-app-development-page #process[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
-#web-and-app-development-page #faq[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+/* Id locks match the live HTML data-ground values on this page. */
+#web-and-app-development-page #services[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page #build-type[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--surface) !important;background:var(--surface) !important;}
+#web-and-app-development-page #industries[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page #why[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--bg-alt) !important;background:var(--surface) !important;}
+#web-and-app-development-page #process[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
+#web-and-app-development-page #faq[data-ground="white"]{--ground:var(--surface) !important;--panel:var(--surface) !important;background:var(--surface) !important;}
+#web-and-app-development-page #contact[data-ground="tint"]{--ground:var(--bg-alt) !important;--panel:var(--surface) !important;background:var(--bg-alt) !important;}
 
 /* === SITE CONSISTENCY LOCK (do not edit here — edit site-consistency.css) === */
 /* ══════════════════════════════════════════════════════════════════════

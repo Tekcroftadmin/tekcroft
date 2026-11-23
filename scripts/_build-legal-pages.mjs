@@ -9,7 +9,7 @@ const LIB = path.join(ROOT, "lib");
 const APP = path.join(ROOT, "app");
 
 /** Canonical public site origin (trailing slash). */
-export const SITE_URL = "https://tekcroft-roan.vercel.app/";
+export const SITE_URL = "https://www.tekcroft.com/";
 
 const pages = [
   {
@@ -62,7 +62,11 @@ function replaceHero(mainHtml) {
 
 /** Keep visible URL identical; pages re-apply SITE_URL from config at render. */
 function stampSiteUrl(html) {
-  return html.split("https://tekcroft-roan.vercel.app/").join("__SITE_URL__");
+  return html
+    .split("https://tekcroft-roan.vercel.app/")
+    .join("__SITE_URL__")
+    .split("https://www.tekcroft.com/")
+    .join("__SITE_URL__");
 }
 
 function fixSitemapHrefs(html) {

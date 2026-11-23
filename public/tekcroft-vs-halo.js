@@ -79,4 +79,6 @@
   } else {
     boot();
   }
+  /* Soft-nav remounts .vs-stage nodes — re-measure after page swap */
+  window.addEventListener("tekcroft:nav", schedule);
 })();

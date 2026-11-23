@@ -265,7 +265,8 @@
   function enterPage(){
     document.body.classList.remove("booting");
     navPlate();                       /* now that scrolling is allowed again */
-    hero.classList.add("play");
+    /* Soft-nav / non-home: #top may be absent — never throw mid-boot */
+    if (hero) hero.classList.add("play");
     startReveals();
     /* Auto invite moved to tekcroft-home-invite.js (40% scroll, soft open) */
   }

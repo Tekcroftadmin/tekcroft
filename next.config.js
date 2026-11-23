@@ -186,6 +186,36 @@ const nextConfig = {
         value: "public, max-age=31536000, immutable",
       },
     ];
+    /* Report-Only only — do not enforce until reports are clean in production */
+    const cspReportOnly = [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://www.googletagmanager.com https://www.google-analytics.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://comic-peachpuff-ibis-64.hostingersite.com https://*.hostingersite.com https://www.tekcroft.com https://tekcroft.com",
+      "font-src 'self' data:",
+      "connect-src 'self' https://comic-peachpuff-ibis-64.hostingersite.com https://*.hostingersite.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com",
+      "media-src 'self' data: blob:",
+      "worker-src 'self' blob:",
+      "frame-src 'self' https://www.google.com https://maps.google.com",
+    ].join("; ");
+
+    const securityHeaders = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=()",
+      },
+      {
+        key: "Content-Security-Policy-Report-Only",
+        value: cspReportOnly,
+      },
+    ];
+
     const headers = [
       { source: "/images/:path*", headers: immutable },
       { source: "/tekcroft-main.:hash.js", headers: immutable },
@@ -214,7 +244,7 @@ const nextConfig = {
       },
       {
         source: "/:path*",
-        headers: [{ key: "X-Content-Type-Options", value: "nosniff" }],
+        headers: securityHeaders,
       },
     ];
     // Never pin /_next/static in dev — immutable headers freeze stale Turbopack chunks.

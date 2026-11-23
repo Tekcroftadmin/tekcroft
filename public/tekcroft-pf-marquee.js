@@ -123,6 +123,8 @@
   else reduce.addListener(onChange);
 
   window.addEventListener("load", syncAll);
+  /* Soft-nav remounts platform HTML — rebuild tracks on the new DOM */
+  window.addEventListener("tekcroft:nav", syncAll);
   /* Page scripts (lazyOnload) may add/drop copies after us — rebuild once more. */
   setTimeout(syncAll, 0);
   setTimeout(syncAll, 400);

@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, type ReactNode } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import assets from "@/lib/asset-manifest.json";
 
@@ -337,7 +337,7 @@ export default function SiteShell({
     return () => abort.abort();
   }, [router]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     syncAriaCurrent(pathname || "/");
     // Services mega menu highlight/preview — re-sync on every soft-nav.
     const syncMm = (
@@ -348,14 +348,20 @@ export default function SiteShell({
     window.scrollTo(0, 0);
 
     // Homepage #boot is in the body HTML. Soft-nav remounts it, but
-    // tekcroft-main.js does not re-run — without dismissing, the black
-    // curtain stays until a hard refresh.
-    if (isFirstPathEffect.current) {
+    // tekcroft-main.js does not re-run — dismiss before paint to avoid a
+    // stuck black curtain. Skip only while a hard-load boot is in progress.
+    const boot = document.getElementById("boot");
+    if (!boot) {
       isFirstPathEffect.current = false;
       return;
     }
-    const boot = document.getElementById("boot");
-    if (boot) {
+    const hardBootInProgress = document.body.classList.contains("booting");
+    if (isFirstPathEffect.current && hardBootInProgress) {
+      isFirstPathEffect.current = false;
+      return;
+    }
+    isFirstPathEffect.current = false;
+    if (!hardBootInProgress) {
       boot.classList.add("done");
       document.body.classList.remove("booting");
       document.getElementById("top")?.classList.add("play");

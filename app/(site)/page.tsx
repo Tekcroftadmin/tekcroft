@@ -33,9 +33,10 @@ export const metadata: Metadata = {
     description: meta.description,
     images: [
       {
-        url: "https://www.tekcroft.com/og.jpg",
-        width: 1200,
-        height: 630,
+        /* /og.jpg was 404 — use existing homepage hero (no new design asset) */
+        url: "https://www.tekcroft.com/images/home-hero-1.webp",
+        width: 1024,
+        height: 576,
       },
     ],
   },
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: meta.title,
     description: meta.description,
-    images: ["https://www.tekcroft.com/og.jpg"],
+    images: ["https://www.tekcroft.com/images/home-hero-1.webp"],
   },
 };
 

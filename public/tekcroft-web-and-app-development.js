@@ -1321,38 +1321,50 @@ var $$ = function(s, r){
 /* === wad-02-services === */
 
 (function(){
-  var rail=document.querySelector('[data-tm]'); if(!rail) return;
-  var items=[].slice.call(rail.querySelectorAll('.tm-item'));
-  items.forEach(function(el){ var b=document.createElement('span'); b.className='tm-prog';
-    b.setAttribute('aria-hidden','true'); el.appendChild(b); });
-  var at=0, timer=null, held=false;
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function show(i){
-    at=(i+items.length)%items.length;
-    items.forEach(function(el,k){ var on=k===at; el.classList.toggle('on',on);
-      el.setAttribute('aria-selected',String(on));
-      if(on){ var b=el.querySelector('.tm-prog'); if(b){ b.style.animation='none'; void b.offsetWidth; b.style.animation=''; } }
+  function mountTmRail(){
+    var rail=document.querySelector('[data-tm]'); if(!rail) return;
+    if(rail.getAttribute('data-tc-wired')==='1') return;
+    rail.setAttribute('data-tc-wired','1');
+    var items=[].slice.call(rail.querySelectorAll('.tm-item'));
+    items.forEach(function(el){
+      if(el.querySelector('.tm-prog')) return;
+      var b=document.createElement('span'); b.className='tm-prog';
+      b.setAttribute('aria-hidden','true'); el.appendChild(b);
     });
+    var at=0, timer=null, held=false;
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(i){
+      at=(i+items.length)%items.length;
+      items.forEach(function(el,k){ var on=k===at; el.classList.toggle('on',on);
+        el.setAttribute('aria-selected',String(on));
+        if(on){ var b=el.querySelector('.tm-prog'); if(b){ b.style.animation='none'; void b.offsetWidth; b.style.animation=''; } }
+      });
+    }
+    function play(){ stop(); rail.classList.remove('paused'); if(!held && !reduce) timer=setInterval(function(){ show(at+1); },6000); }
+    function stop(){ clearInterval(timer); }
+    function hold(){ held=true; stop(); rail.classList.add('paused'); clearTimeout(hold._t);
+      hold._t=setTimeout(function(){ held=false; play(); },12000); }
+    items.forEach(function(el,i){
+      /* hover-intent: open only when the pointer rests on a panel */ el.addEventListener('mouseenter',function(){ clearTimeout(rail._hi); rail._hi=setTimeout(function(){ if(at!==i) show(i); },220); }); el.addEventListener('mouseleave',function(){ clearTimeout(rail._hi); });
+      el.addEventListener('click',function(){ hold(); show(i); });
+      el.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); hold(); show(i); return; }
+        var to = e.key==='ArrowRight'||e.key==='ArrowDown' ? i+1 : e.key==='ArrowLeft'||e.key==='ArrowUp' ? i-1 : -1;
+        if(to<0||to>=items.length) return;
+        e.preventDefault(); items[to].focus(); hold(); show(to);
+      });
+    });
+    rail.addEventListener('mouseenter',function(){ stop(); rail.classList.add('paused'); });
+    rail.addEventListener('mouseleave',function(){ rail.classList.remove('paused'); if(!held) play(); });
+    show(0);
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
+    io.observe(rail);
   }
-  function play(){ stop(); rail.classList.remove('paused'); if(!held && !reduce) timer=setInterval(function(){ show(at+1); },6000); }
-  function stop(){ clearInterval(timer); }
-  function hold(){ held=true; stop(); rail.classList.add('paused'); clearTimeout(hold._t);
-    hold._t=setTimeout(function(){ held=false; play(); },12000); }
-  items.forEach(function(el,i){
-    /* hover-intent: open only when the pointer rests on a panel */ el.addEventListener('mouseenter',function(){ clearTimeout(rail._hi); rail._hi=setTimeout(function(){ if(at!==i) show(i); },220); }); el.addEventListener('mouseleave',function(){ clearTimeout(rail._hi); });
-    el.addEventListener('click',function(){ hold(); show(i); });
-    el.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); hold(); show(i); return; }
-      var to = e.key==='ArrowRight'||e.key==='ArrowDown' ? i+1 : e.key==='ArrowLeft'||e.key==='ArrowUp' ? i-1 : -1;
-      if(to<0||to>=items.length) return;
-      e.preventDefault(); items[to].focus(); hold(); show(to);
-    });
-  });
-  rail.addEventListener('mouseenter',function(){ stop(); rail.classList.add('paused'); });
-  rail.addEventListener('mouseleave',function(){ rail.classList.remove('paused'); if(!held) play(); });
-  show(0);
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting ? play() : stop(); }); },{threshold:.25});
-  io.observe(rail);
+  mountTmRail();
+  if(!window.__tekcroftWadTmNavBound){
+    window.__tekcroftWadTmNavBound=true;
+    window.addEventListener('tekcroft:nav', mountTmRail);
+  }
 })();
 
 
@@ -1362,33 +1374,42 @@ var $$ = function(s, r){
    strip scrolls the picked tab into view on narrow screens; in the last
    panel the pick moves between the three ways to work. */
 (function(){
-  var box = document.querySelector('[data-wy]'); if(!box) return;
-  var tabs = [].slice.call(box.querySelectorAll('.wy-tab'));
-  var panels = [].slice.call(box.querySelectorAll('.wy-panel'));
-  var strip = box.querySelector('.wy-tabs');
-  function show(i, focus){
-    tabs.forEach(function(t,k){ var on = k===i;
-      t.classList.toggle('on', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-    panels.forEach(function(p,k){ var on = k===i; p.classList.toggle('on', on); p.hidden = !on; });
-    var t = tabs[i];
-    if (strip.scrollWidth > strip.clientWidth){
-      strip.scrollTo({ left: t.offsetLeft - (strip.clientWidth - t.offsetWidth)/2, behavior:'smooth' });
+  function mountWyTabs(){
+    var box = document.querySelector('[data-wy]'); if(!box) return;
+    if(box.getAttribute('data-tc-wired')==='1') return;
+    box.setAttribute('data-tc-wired','1');
+    var tabs = [].slice.call(box.querySelectorAll('.wy-tab'));
+    var panels = [].slice.call(box.querySelectorAll('.wy-panel'));
+    var strip = box.querySelector('.wy-tabs');
+    function show(i, focus){
+      tabs.forEach(function(t,k){ var on = k===i;
+        t.classList.toggle('on', on); t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+      panels.forEach(function(p,k){ var on = k===i; p.classList.toggle('on', on); p.hidden = !on; });
+      var t = tabs[i];
+      if (strip && strip.scrollWidth > strip.clientWidth){
+        strip.scrollTo({ left: t.offsetLeft - (strip.clientWidth - t.offsetWidth)/2, behavior:'smooth' });
+      }
+      if (focus) t.focus();
     }
-    if (focus) t.focus();
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click', function(){ show(i); });
-    t.addEventListener('keydown', function(e){
-      var to = e.key==='ArrowRight' ? i+1 : e.key==='ArrowLeft' ? i-1 : e.key==='Home' ? 0 : e.key==='End' ? tabs.length-1 : null;
-      if (to===null) return; e.preventDefault(); show((to+tabs.length)%tabs.length, true);
+    tabs.forEach(function(t,i){
+      t.addEventListener('click', function(){ show(i); });
+      t.addEventListener('keydown', function(e){
+        var to = e.key==='ArrowRight' ? i+1 : e.key==='ArrowLeft' ? i-1 : e.key==='Home' ? 0 : e.key==='End' ? tabs.length-1 : null;
+        if (to===null) return; e.preventDefault(); show((to+tabs.length)%tabs.length, true);
+      });
     });
-  });
 
-  /* the three ways to work take turns being picked */
-  var ways = [].slice.call(box.querySelectorAll('.wy-ways li')), w = 0;
-  if (ways.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    ways[0].classList.add('pick');
-    setInterval(function(){ ways[w].classList.remove('pick'); w = (w+1)%ways.length; ways[w].classList.add('pick'); }, 1800);
-  } else if (ways.length){ ways[0].classList.add('pick'); }
+    /* the three ways to work take turns being picked */
+    var ways = [].slice.call(box.querySelectorAll('.wy-ways li')), w = 0;
+    if (ways.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      ways[0].classList.add('pick');
+      setInterval(function(){ ways[w].classList.remove('pick'); w = (w+1)%ways.length; ways[w].classList.add('pick'); }, 1800);
+    } else if (ways.length){ ways[0].classList.add('pick'); }
+  }
+  mountWyTabs();
+  if(!window.__tekcroftWadWyNavBound){
+    window.__tekcroftWadWyNavBound=true;
+    window.addEventListener('tekcroft:nav', mountWyTabs);
+  }
 })();
 

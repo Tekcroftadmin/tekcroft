@@ -207,21 +207,85 @@ __tcAbReg(function(){
 });
 
 __tcAbReg(function(){
+  /* How We Work (.eg / data-hwwalk) — same 3s autoplay rules as eg-scroll */
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var narrow=window.matchMedia('(max-width: 1000px)');
+  var DWELL=3000;
+  if(!window.__tcHwLive) window.__tcHwLive=[];
+  window.__tcHwLive.slice().forEach(function(pw){
+    if(pw && document.documentElement.contains(pw)) return;
+    if(pw && typeof pw.__tcHwCleanup==='function'){
+      try{ pw.__tcHwCleanup(); }catch(err){}
+    }
+    if(pw){ pw.__tcHwCleanup=null; pw.__tcWired=false; }
+    var ix=window.__tcHwLive.indexOf(pw);
+    if(ix>=0) window.__tcHwLive.splice(ix,1);
+  });
   document.querySelectorAll('[data-hwwalk]').forEach(function(pw){
-    if(pw.__tcWired) return;
+    if(pw.__tcWired && document.documentElement.contains(pw)) return;
+    if(typeof pw.__tcHwCleanup==='function'){
+      try{ pw.__tcHwCleanup(); }catch(err){}
+      pw.__tcHwCleanup=null;
+    }
     pw.__tcWired=true;
     var steps=[].slice.call(pw.querySelectorAll('.walk-step')), at=-1, tick=null;
-    function light(k){ at=k; pw.setAttribute('data-at',String(k)); steps.forEach(function(s,n){ s.classList.toggle('on', n===k); }); }
-    function go(){ light((at+1)%steps.length); }
+    var inView=false, hovering=false;
+    function light(k){
+      at=((k%steps.length)+steps.length)%steps.length;
+      pw.setAttribute('data-at',String(at));
+      steps.forEach(function(s,n){ s.classList.toggle('on', n===at); s.classList.add('seen'); });
+    }
     function reveal(){ steps.forEach(function(s){ s.classList.add('seen'); }); }
-    function start(){ reveal(); if(at<0) light(0); if(reduce||tick) return; tick=setInterval(go,3200); }
+    function shouldRun(){
+      if(reduce) return false;
+      if(!inView || document.hidden) return false;
+      if(hovering && !narrow.matches) return false;
+      return true;
+    }
     function stop(){ if(tick){ clearInterval(tick); tick=null; } }
-    steps.forEach(function(s,n){ s.addEventListener('click',function(){ stop(); reveal(); light(n); if(!reduce) tick=setInterval(go,3200); }); });
+    function kick(){
+      stop();
+      if(!shouldRun()) return;
+      tick=setInterval(function(){ light(at+1); }, DWELL);
+    }
+    function onClick(e){
+      var i=steps.indexOf(e.currentTarget);
+      if(i<0) return;
+      reveal(); light(i); kick();
+    }
+    /* mousemove (not mouseenter): scroll-under-cursor must not pause forever */
+    function onMove(){ if(narrow.matches) return; if(hovering) return; hovering=true; stop(); }
+    function onLeave(){ hovering=false; kick(); }
+    function onVis(){ if(document.hidden) stop(); else kick(); }
+    var sec=pw.closest('section')||pw;
+    steps.forEach(function(s){ s.addEventListener('click', onClick); });
+    sec.addEventListener('mousemove', onMove, {passive:true});
+    sec.addEventListener('mouseleave', onLeave);
+    document.addEventListener('visibilitychange', onVis);
+    var io=null;
     if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ es.forEach(function(e){ e.isIntersecting?start():stop(); }); },{threshold:.3}).observe(pw);
-    } else { start(); }
-  })});
+      io=new IntersectionObserver(function(es){
+        inView=!!(es[0]&&es[0].isIntersecting);
+        if(inView){ reveal(); if(at<0) light(0); kick(); }
+        else stop();
+      },{threshold:.3});
+      io.observe(pw);
+    } else {
+      inView=true; reveal(); light(0); kick();
+    }
+    pw.__tcHwCleanup=function(){
+      stop();
+      if(io) try{ io.disconnect(); }catch(err){}
+      steps.forEach(function(s){ s.removeEventListener('click', onClick); });
+      sec.removeEventListener('mousemove', onMove);
+      sec.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('visibilitychange', onVis);
+      var ix=window.__tcHwLive.indexOf(pw);
+      if(ix>=0) window.__tcHwLive.splice(ix,1);
+    };
+    window.__tcHwLive.push(pw);
+  });
+});
 
 __tcAbReg(function(){
   /* People — founders timeline */
