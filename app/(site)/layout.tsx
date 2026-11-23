@@ -12,7 +12,6 @@ import "./../mobile-menu.css";
 import "./../vs-halo-lock.css";
 import "./../pf-mode-lock.css";
 import "./../pf-center-and-cards-lock.css";
-import "./../eg-mobile-stack-lock.css";
 import "./../hero-marquee-lock.css";
 import "./../a11y-lock.css";
 import "./../internal-link.css";

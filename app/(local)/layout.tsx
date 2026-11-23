@@ -9,7 +9,6 @@ import "./../mobile-menu.css";
 import "./../stats-strip.css";
 import "./../pf-mode-lock.css";
 import "./../pf-center-and-cards-lock.css";
-import "./../eg-mobile-stack-lock.css";
 import "./../a11y-lock.css";
 import "./../nav-pill.css";
 

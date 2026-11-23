@@ -1,18 +1,15 @@
 /* ============================================================
    Approach / process section (.eg-sec)
 
-   Desktop / tablet (>767px):
-     - auto every 3s, looping
+   No scroll-pin and no scroll-to-step mapping. The section is a
+   normal block. Steps advance by:
+     - auto, every 3s, looping (desktop + mobile)
      - click / tap a step card (restarts the 3s timer)
-     - swipe on the card list (≤1000px)
-     - Prev / Next buttons (≤1000px)
-     - Desktop pauses while the pointer moves over the section
-   Mobile (≤767px) sticky stack (same values as platforms cards):
-     - no autoplay (scroll owns the active step)
-     - sticky stacking cards; top card drives circle / arc / image
-     - arc tip stays on the active dot (never past the last)
+     - swipe on the card list (left = next, right = prev)
+     - Prev / Next buttons, mobile only
+   Desktop pauses while the pointer is over the section.
    Auto pauses while the section is off-screen or the tab is hidden.
-   prefers-reduced-motion: no autoplay (manual still works above 767).
+   prefers-reduced-motion: no autoplay (manual still works).
    Soft-nav: destroy + re-init on tekcroft:nav so timers do not leak.
    ============================================================ */
 (function () {
@@ -26,10 +23,7 @@
   var calm =
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  /* Carousel layout / swipe / Prev-Next (existing eg mobile sheet) */
   var narrow = window.matchMedia("(max-width: 1000px)");
-  /* Sticky stack mode — same breakpoint as platforms sticky lock */
-  var stackMq = window.matchMedia("(max-width: 767px)");
   var DWELL = 3000;
   /* Circle r=90 in viewBox 0 0 200 200 → circumference 2πr */
   var ARC_R = 90;
@@ -184,16 +178,11 @@
     var nav = null;
     var prevBtn = null;
     var nextBtn = null;
-    var scrollRaf = 0;
 
     sec.classList.remove("eg-scroll");
     sec.style.height = "";
     sec.style.minHeight = "";
     if (arc) arc.style.transition = "none";
-
-    function isStack() {
-      return stackMq.matches;
-    }
 
     function stopAt(i) {
       var k = ((i % stops.length) + stops.length) % stops.length;
@@ -218,9 +207,8 @@
       pw.setAttribute("data-at", String(at));
       from = stopAt(at);
       /* Hold at the last dot during its dwell — never draw past it.
-         Loop snaps back to step 1 via setStep(0).
-         In sticky-stack mode there is no dwell toward the next step. */
-      if (!isStack() && at < n - 1) to = stopAt(at + 1);
+         Loop snaps back to step 1 via setStep(0). */
+      if (at < n - 1) to = stopAt(at + 1);
       else to = from;
       acc = 0;
       last = 0;
@@ -229,8 +217,6 @@
 
     function shouldRun() {
       if (calm) return false;
-      /* Sticky stack: scroll owns the step — no autoplay fight. */
-      if (isStack()) return false;
       if (!inView || document.hidden) return false;
       if (hovering && !narrow.matches) return false;
       return true;
@@ -267,13 +253,11 @@
     }
 
     function manual(delta) {
-      if (isStack()) return;
       setStep(at + delta);
       kick();
     }
 
     function onStepActivate(i) {
-      if (isStack()) return;
       setStep(i);
       kick();
     }
@@ -319,7 +303,7 @@
     var y0 = null;
     var pid = null;
     function onPointerDown(e) {
-      if (!narrow.matches || isStack()) return;
+      if (!narrow.matches) return;
       if (e.pointerType === "mouse" && e.button !== 0) return;
       x0 = e.clientX;
       y0 = e.clientY;
@@ -332,7 +316,6 @@
       x0 = null;
       y0 = null;
       pid = null;
-      if (isStack()) return;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
         manual(dx < 0 ? 1 : -1);
       }
@@ -352,7 +335,7 @@
        the section scrolls under a stationary cursor — that looked like
        "autoplay never runs" while watching the block. */
     function onMove() {
-      if (narrow.matches || isStack()) return;
+      if (narrow.matches) return;
       if (hovering) return;
       hovering = true;
       stopRaf();
@@ -375,84 +358,34 @@
       function (entries) {
         inView = !!(entries[0] && entries[0].isIntersecting);
         last = 0;
-        if (inView) {
-          if (isStack()) syncStack();
-          else kick();
-        } else stopRaf();
+        if (inView) kick();
+        else stopRaf();
       },
       { threshold: 0.15 }
     );
 
-    /* Sticky-stack: which card is on top of the pile drives data-at.
-       Same top formula as platforms: nav-h + 16 + stop * 12. */
-    function syncStack() {
-      if (!isStack()) return;
-      var navH =
-        parseFloat(
-          getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
-        ) || 64;
-      var base = navH + 16;
-      var best = 0;
-      var i;
-      for (i = 0; i < n; i++) {
-        var top = steps[i].getBoundingClientRect().top;
-        var stickAt = base + i * 12;
-        if (top <= stickAt + 1.5) best = i;
-      }
-      if (best !== at) setStep(best);
-      else {
-        /* Keep arc parked on the active stop (no mid-dwell progress). */
-        to = from;
-        paint(from);
-      }
-    }
-
-    function onScroll() {
-      if (!isStack()) return;
-      if (scrollRaf) return;
-      scrollRaf = requestAnimationFrame(function () {
-        scrollRaf = 0;
-        syncStack();
-      });
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    function onModeChange() {
+    function onNarrowChange() {
       hovering = false;
       stops = measureStops(pw, arc, n);
-      stopRaf();
-      if (isStack()) {
-        syncStack();
-      } else {
-        from = stopAt(at);
-        to = at < n - 1 ? stopAt(at + 1) : from;
-        paint(from);
-        last = 0;
-        kick();
-      }
+      from = stopAt(at);
+      to = at < n - 1 ? stopAt(at + 1) : from;
+      paint(from);
+      last = 0;
+      kick();
     }
-    if (narrow.addEventListener) narrow.addEventListener("change", onModeChange);
-    else if (narrow.addListener) narrow.addListener(onModeChange);
-    if (stackMq.addEventListener) stackMq.addEventListener("change", onModeChange);
-    else if (stackMq.addListener) stackMq.addListener(onModeChange);
+    if (narrow.addEventListener) narrow.addEventListener("change", onNarrowChange);
+    else if (narrow.addListener) narrow.addListener(onNarrowChange);
 
     pw.__egCleanup = function () {
       stopRaf();
-      if (scrollRaf) {
-        cancelAnimationFrame(scrollRaf);
-        scrollRaf = 0;
-      }
       try {
         io.disconnect();
       } catch (err) {}
       sec.removeEventListener("mousemove", onMove);
       sec.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("visibilitychange", onVis);
-      window.removeEventListener("scroll", onScroll);
-      if (narrow.removeEventListener) narrow.removeEventListener("change", onModeChange);
-      else if (narrow.removeListener) narrow.removeListener(onModeChange);
-      if (stackMq.removeEventListener) stackMq.removeEventListener("change", onModeChange);
-      else if (stackMq.removeListener) stackMq.removeListener(onModeChange);
+      if (narrow.removeEventListener) narrow.removeEventListener("change", onNarrowChange);
+      else if (narrow.removeListener) narrow.removeListener(onNarrowChange);
       steps.forEach(function (s) {
         s.removeEventListener("click", onStepClick);
       });
@@ -468,8 +401,7 @@
     live.push(pw);
     setStep(0);
     io.observe(pw);
-    if (isStack()) syncStack();
-    else kick();
+    kick();
   }
 
   function boot() {
