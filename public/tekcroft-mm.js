@@ -294,20 +294,26 @@ function mxIc(n){
 (function buildMobileNav(){
   var mnav = document.querySelector('.js-mnav');
   if(!mnav) return;
-  /* Rebuild if not yet v2, or if an older v2 still has the inner logo/X bar */
-  if(mnav.classList.contains('mnav-v2') && mnav.querySelector('.mx-scroll') && !mnav.querySelector('.mx-top')) return;
+  /* Rebuild if not yet v2, older v2 still has logo/X bar, or Blog link is missing */
+  var hasBlog = !!mnav.querySelector('a.mx-link[href="/blog"], a.mx-link[href="/blog/"]');
+  if(mnav.classList.contains('mnav-v2') && mnav.querySelector('.mx-scroll') && !mnav.querySelector('.mx-top') && hasBlog) return;
 
   /* Preserve page-specific destinations + CTA behaviour from the old markup */
-  var oldLinks = [].slice.call(mnav.querySelectorAll(':scope > a'));
-  function hrefAt(i, fallback){
-    var a = oldLinks[i];
-    return (a && a.getAttribute('href')) || fallback;
+  var oldLinks = [].slice.call(mnav.querySelectorAll('a[href]'));
+  function hrefFor(path, fallback){
+    var needle = String(path || '').replace(/\/+$/, '') || '/';
+    for(var i = 0; i < oldLinks.length; i++){
+      var h = (oldLinks[i].getAttribute('href') || '').replace(/\/+$/, '') || '/';
+      if(h === needle) return oldLinks[i].getAttribute('href') || fallback;
+    }
+    return fallback;
   }
-  var homeHref = hrefAt(0, '/');
-  var aboutHref = hrefAt(1, '/about-us');
-  var servicesHref = hrefAt(2, '/services');
-  var contactHref = hrefAt(3, '/contact-us');
-  var oldCta = mnav.querySelector(':scope > .btn, :scope > button[data-jump], :scope > button[data-modal]');
+  var homeHref = hrefFor('/', '/');
+  var aboutHref = hrefFor('/about-us', '/about-us');
+  var servicesHref = hrefFor('/services', '/services');
+  var blogHref = hrefFor('/blog', '/blog');
+  var contactHref = hrefFor('/contact-us', '/contact-us');
+  var oldCta = mnav.querySelector(':scope > .btn, :scope > button[data-jump], :scope > button[data-modal], .mx-cta');
   var ctaModal = oldCta && oldCta.hasAttribute('data-modal');
   var ctaAttrs = ctaModal ? ' data-modal' : ' data-jump';
 
@@ -340,6 +346,7 @@ function mxIc(n){
     + '<a class="mx-link" href="'+aboutHref+'">About us</a>'
     + cards
     + '<a class="mx-link" href="'+servicesHref+'">Services</a>'
+    + '<a class="mx-link" href="'+blogHref+'">Blog</a>'
     + '<a class="mx-link" href="'+contactHref+'">Contact us</a>'
     + '</div>'
     + '<div class="mx-foot">'

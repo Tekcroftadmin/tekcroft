@@ -55,10 +55,19 @@ function loadScript(src: string): Promise<void> {
 
 function loadMm(): Promise<void> {
   const src = assets.mm;
+  let swapped = false;
   document.querySelectorAll('script[src*="tekcroft-mm."]').forEach((el) => {
     const current = el.getAttribute("src") || "";
-    if (current !== src) el.remove();
+    if (current !== src) {
+      el.remove();
+      swapped = true;
+    }
   });
+  // Allow the new hashed bundle to rebuild the mobile nav (e.g. add Blog).
+  if (swapped && typeof window !== "undefined") {
+    delete (window as Window & { __tekcroftMm?: boolean }).__tekcroftMm;
+    mmPromises.delete(src);
+  }
   let p = mmPromises.get(src);
   if (!p) {
     p = loadScript(src);
