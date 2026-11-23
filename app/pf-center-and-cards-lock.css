@@ -249,25 +249,64 @@ html body .sec.pf#platforms .pf-go{
    Covers #platforms, #industries, #receive (any .sec.pf with .pf-track).
    Desktop / tablet (≥768) untouched — marquee stays in PART 2. */
 @media (max-width:767px){
+  /* body / page-shell overflow-x:hidden forces overflow-y:auto and kills sticky.
+     Same shell fix ecommerce already uses for #why sticky (clip x / visible y). */
+  html:has(.sec.pf .pf-track),
+  body:has(.sec.pf .pf-track),
+  #tekcroft-root:has(.sec.pf .pf-track),
+  #web-and-app-development-page:has(.sec.pf .pf-track),
+  #web-and-app-development-page:has(#industries.pf){
+    overflow-x:clip !important;
+    overflow-y:visible !important;
+  }
+  /* content-visibility:auto / contain:paint on .sec also kill sticky.
+     #platforms IDs beat PART 0's overflow-x:clip so sticky can use the viewport. */
   html body .sec.pf:has(.pf-track),
-  html body .sec.pf:has(.pf-track).beam-zone{
+  html body .sec.pf:has(.pf-track).beam-zone,
+  html body .sec.pf#platforms:has(.pf-track),
+  html body .sec.pf#platforms:has(.pf-orbit),
+  html body .sec.pf#industries:has(.pf-track),
+  html body .sec.pf#receive:has(.pf-track),
+  html body #web-and-app-development-page .sec.pf#industries,
+  html body #web-and-app-development-page #industries.pf{
     overflow:visible !important;
+    overflow-x:visible !important;
+    overflow-y:visible !important;
+    contain:none !important;
+    content-visibility:visible !important;
     padding-bottom:calc(var(--section-padding-y, 48px) + 48px) !important;
   }
   html body .sec.pf:has(.pf-track) .wrap,
   html body .sec.pf:has(.pf-track) .pf-in,
-  html body .sec.pf:has(.pf-track) .pf-carousel{
+  html body .sec.pf:has(.pf-track) .pf-carousel,
+  html body .sec.pf#platforms:has(.pf-orbit) .wrap,
+  html body .sec.pf#platforms:has(.pf-orbit) .pf-in,
+  html body #web-and-app-development-page #industries .wrap,
+  html body #web-and-app-development-page #industries .pf-in,
+  html body #web-and-app-development-page #industries .pf-carousel{
     overflow:visible !important;
+    overflow-x:visible !important;
+    overflow-y:visible !important;
     transform:none !important;
   }
-  html body .sec.pf:has(.pf-track) .pf-rail{
+  /* container-type:inline-size (cqw marquee) is the sticky killer — must clear on mobile.
+     #web-and-app-development-page ID rules need matching weight. */
+  html body .sec.pf:has(.pf-track) .pf-rail,
+  html body #web-and-app-development-page .sec.pf .pf-rail,
+  html body #web-and-app-development-page #industries .pf-rail{
     overflow:visible !important;
+    overflow-x:visible !important;
+    overflow-y:visible !important;
     padding:0 !important;
     margin:0 !important;
+    container-type:normal !important;
+    contain:none !important;
     -webkit-mask-image:none !important;
             mask-image:none !important;
   }
-  html body .sec.pf:has(.pf-track) .pf-track{
+  html body .sec.pf:has(.pf-track) .pf-track,
+  html body #web-and-app-development-page .sec.pf .pf-track,
+  html body #web-and-app-development-page #industries .pf-track{
     display:flex !important;
     flex-direction:column !important;
     width:100% !important;
@@ -275,6 +314,7 @@ html body .sec.pf#platforms .pf-go{
     animation:none !important;
     transform:none !important;
     gap:0 !important;
+    overflow:visible !important;
   }
   html body .sec.pf:has(.pf-track) .pf-track [data-copy]{
     display:none !important;
@@ -282,7 +322,9 @@ html body .sec.pf#platforms .pf-go{
   html body .sec.pf:has(.pf-track) .pf-card,
   html body .sec.pf:has(.pf-track) article.pf-card,
   html body .sec.pf:has(.pf-track) div.pf-card,
-  html body .sec.pf:has(.pf-track) .pf-track > .pf-card{
+  html body .sec.pf:has(.pf-track) .pf-track > .pf-card,
+  html body #web-and-app-development-page .sec.pf .pf-card,
+  html body #web-and-app-development-page #industries .pf-card{
     position:sticky !important;
     flex:none !important;
     flex-basis:auto !important;
@@ -297,23 +339,36 @@ html body .sec.pf#platforms .pf-go{
   }
   html[data-theme="dark"] body .sec.pf:has(.pf-track) .pf-card,
   html[data-theme="dark"] body .sec.pf:has(.pf-track) article.pf-card,
-  html[data-theme="dark"] body .sec.pf:has(.pf-track) div.pf-card{
+  html[data-theme="dark"] body .sec.pf:has(.pf-track) div.pf-card,
+  html[data-theme="dark"] body #web-and-app-development-page .sec.pf .pf-card{
     background:var(--surface) !important;
   }
-  html body .sec.pf:has(.pf-track) .pf-card:last-child{
+  html body .sec.pf:has(.pf-track) .pf-card:last-child,
+  html body #web-and-app-development-page #industries .pf-card:last-child{
     margin-bottom:0 !important;
   }
-  html body .sec.pf:has(.pf-track) .pf-card:hover{
+  html body .sec.pf:has(.pf-track) .pf-card:hover,
+  html body #web-and-app-development-page #industries .pf-card:hover{
     transform:none !important;
   }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(1){ --stop:0; z-index:1; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(2){ --stop:1; z-index:2; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(3){ --stop:2; z-index:3; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(4){ --stop:3; z-index:4; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(5){ --stop:4; z-index:5; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(6){ --stop:5; z-index:6; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(7){ --stop:6; z-index:7; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(8){ --stop:7; z-index:8; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(9){ --stop:8; z-index:9; }
-  html body .sec.pf:has(.pf-track) .pf-card:nth-child(10){ --stop:9; z-index:10; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(1),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(1){ --stop:0; z-index:1; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(2),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(2){ --stop:1; z-index:2; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(3),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(3){ --stop:2; z-index:3; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(4),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(4){ --stop:3; z-index:4; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(5),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(5){ --stop:4; z-index:5; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(6),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(6){ --stop:5; z-index:6; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(7),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(7){ --stop:6; z-index:7; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(8),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(8){ --stop:7; z-index:8; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(9),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(9){ --stop:8; z-index:9; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(10),
+  html body #web-and-app-development-page #industries .pf-card:nth-child(10){ --stop:9; z-index:10; }
 }
