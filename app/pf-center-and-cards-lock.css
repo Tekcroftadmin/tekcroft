@@ -1,9 +1,8 @@
-/* Shared lock for PLATFORM sections only (.sec.pf#platforms with .pf-orbit).
-   Default (Technical SEO): centered column head + orbit.
-   Opt-out (.pf-split, Ecommerce SEO): keep page 2-column text + orbit
-   (same layout as GBP / #industries). Marquee + sticky cards still apply.
-   Industries / other .sec.pf#industries sections keep their own page CSS.
-   Never target those here. */
+/* Shared lock for .sec.pf sections.
+   PART 0–3: PLATFORM sections only (#platforms with .pf-orbit) —
+     centered head / pf-split / marquee. Industries keep their own page CSS there.
+   PART 4: mobile sticky stack for ALL .sec.pf .pf-track card lists
+     (#platforms, #industries, #receive) — same top/gap/shadow as platforms. */
 
 /* —— PART 0: contain wide marquee so it cannot widen / shift the section —— */
 html body .sec.pf#platforms:has(.pf-orbit){
@@ -242,26 +241,33 @@ html body .sec.pf#platforms .pf-go{
   display:none !important;
 }
 
-/* —— PART 4: mobile sticky stack (<768) —— */
+/* —— PART 4: mobile sticky stack (<768) for every .sec.pf card track ——
+   Same values as the ecommerce platforms reference (video):
+     top: nav-h + 16px + stop * 12px
+     margin-bottom: 16px
+     box-shadow: 0 -8px 26px -16px
+   Covers #platforms, #industries, #receive (any .sec.pf with .pf-track).
+   Desktop / tablet (≥768) untouched — marquee stays in PART 2. */
 @media (max-width:767px){
-  html body .sec.pf#platforms:has(.pf-orbit),
-  html body .sec.pf#platforms:has(.pf-orbit).beam-zone{
+  html body .sec.pf:has(.pf-track),
+  html body .sec.pf:has(.pf-track).beam-zone{
     overflow:visible !important;
+    padding-bottom:calc(var(--section-padding-y, 48px) + 48px) !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .wrap,
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-in,
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-carousel{
+  html body .sec.pf:has(.pf-track) .wrap,
+  html body .sec.pf:has(.pf-track) .pf-in,
+  html body .sec.pf:has(.pf-track) .pf-carousel{
     overflow:visible !important;
     transform:none !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-rail{
+  html body .sec.pf:has(.pf-track) .pf-rail{
     overflow:visible !important;
     padding:0 !important;
     margin:0 !important;
     -webkit-mask-image:none !important;
             mask-image:none !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-track{
+  html body .sec.pf:has(.pf-track) .pf-track{
     display:flex !important;
     flex-direction:column !important;
     width:100% !important;
@@ -270,12 +276,13 @@ html body .sec.pf#platforms .pf-go{
     transform:none !important;
     gap:0 !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-track [data-copy]{
+  html body .sec.pf:has(.pf-track) .pf-track [data-copy]{
     display:none !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card,
-  html body .sec.pf#platforms:has(.pf-orbit) article.pf-card,
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-track > .pf-card{
+  html body .sec.pf:has(.pf-track) .pf-card,
+  html body .sec.pf:has(.pf-track) article.pf-card,
+  html body .sec.pf:has(.pf-track) div.pf-card,
+  html body .sec.pf:has(.pf-track) .pf-track > .pf-card{
     position:sticky !important;
     flex:none !important;
     flex-basis:auto !important;
@@ -288,28 +295,25 @@ html body .sec.pf#platforms .pf-go{
     transform:none !important;
     box-shadow:0 -8px 26px -16px rgba(var(--ink-rgb), .45) !important;
   }
-  html[data-theme="dark"] body .sec.pf#platforms:has(.pf-orbit) .pf-card,
-  html[data-theme="dark"] body .sec.pf#platforms:has(.pf-orbit) article.pf-card{
+  html[data-theme="dark"] body .sec.pf:has(.pf-track) .pf-card,
+  html[data-theme="dark"] body .sec.pf:has(.pf-track) article.pf-card,
+  html[data-theme="dark"] body .sec.pf:has(.pf-track) div.pf-card{
     background:var(--surface) !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:last-child{
+  html body .sec.pf:has(.pf-track) .pf-card:last-child{
     margin-bottom:0 !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:hover{
+  html body .sec.pf:has(.pf-track) .pf-card:hover{
     transform:none !important;
   }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(1){ --stop:0; z-index:1; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(2){ --stop:1; z-index:2; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(3){ --stop:2; z-index:3; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(4){ --stop:3; z-index:4; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(5){ --stop:4; z-index:5; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(6){ --stop:5; z-index:6; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(7){ --stop:6; z-index:7; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(8){ --stop:7; z-index:8; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(9){ --stop:8; z-index:9; }
-  html body .sec.pf#platforms:has(.pf-orbit) .pf-card:nth-child(10){ --stop:9; z-index:10; }
-
-  html body .sec.pf#platforms:has(.pf-orbit){
-    padding-bottom:calc(var(--section-padding-y, 48px) + 48px) !important;
-  }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(1){ --stop:0; z-index:1; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(2){ --stop:1; z-index:2; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(3){ --stop:2; z-index:3; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(4){ --stop:3; z-index:4; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(5){ --stop:4; z-index:5; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(6){ --stop:5; z-index:6; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(7){ --stop:6; z-index:7; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(8){ --stop:7; z-index:8; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(9){ --stop:8; z-index:9; }
+  html body .sec.pf:has(.pf-track) .pf-card:nth-child(10){ --stop:9; z-index:10; }
 }
