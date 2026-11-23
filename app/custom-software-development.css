@@ -5113,6 +5113,10 @@ html body .hs .hs-h1{
   /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
+/* Single blog article title only — keep site hero H1s untouched */
+html body .blog-post-page h1.blog-post-page__title{
+  font-size:40px !important;
+}
 html body :is(h2),
 html body .sec-head h2,
 html body .ac-head h2,
@@ -5558,6 +5562,15 @@ section.cta[data-ground="white"]{
     justify-items:center !important;
     justify-content:center !important;
     box-sizing:border-box !important;
+    /* Longest phrase ("AI-Era Search Growth") is nowrap + centered inside
+       overflow:hidden .kw — at ~30px it is ~402px wide and clips both ends
+       on phones. Scale ONLY this line to the content width; cap at 1em so
+       tablet/desktop inherit the H1 size unchanged. Ratio ≈ natural/em. */
+    font-size:clamp(18px, calc((100vw - 2 * var(--wrap-x, 16px) - 4px) / 13.7), 1em) !important;
+  }
+  html body #top.hero .kw i,
+  html body header.hero .kw i{
+    white-space:nowrap !important;
   }
   html body #top.hero .lede,
   html body header.hero .lede,
@@ -5834,4 +5847,3 @@ html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
 }
-

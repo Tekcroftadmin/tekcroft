@@ -195,6 +195,13 @@ if (fs.existsSync(tekcroftCss)) {
     "  #top.hero .lamp h1, header.hero .lamp h1{width:100%!important;text-align:center!important;margin-inline:0!important;}\n" +
     "  #top.hero .lamp .ln, #top.hero .lamp .ln > span, header.hero .lamp .ln, header.hero .lamp .ln > span{display:block!important;width:100%!important;text-align:center!important;}\n" +
     "  #top.hero .kw, header.hero .kw{display:grid!important;width:100%!important;max-width:100%!important;margin-inline:0!important;padding-inline:0!important;justify-items:center!important;box-sizing:border-box!important;}\n" +
+    "}\n" +
+    /* Phone only: longest rotating keyword must fit one line (nowrap + overflow:hidden clips both ends when centered). */
+    "@media (max-width:767px){\n" +
+    "  #top.hero .kw, header.hero .kw{\n" +
+    "    font-size:clamp(18px, calc((100vw - 2 * var(--wrap-x, 16px) - 4px) / 13.7), 1em)!important;\n" +
+    "  }\n" +
+    "  #top.hero .kw i, header.hero .kw i{white-space:nowrap!important;}\n" +
     "}\n";
   fs.writeFileSync(path.join(ROOT, "app", "tekcroft-critical.css"), critical);
   fs.writeFileSync(

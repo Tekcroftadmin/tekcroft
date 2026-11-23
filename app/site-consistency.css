@@ -599,6 +599,15 @@ section.cta[data-ground="white"]{
     justify-items:center !important;
     justify-content:center !important;
     box-sizing:border-box !important;
+    /* Longest phrase ("AI-Era Search Growth") is nowrap + centered inside
+       overflow:hidden .kw — at ~30px it is ~402px wide and clips both ends
+       on phones. Scale ONLY this line to the content width; cap at 1em so
+       tablet/desktop inherit the H1 size unchanged. Ratio ≈ natural/em. */
+    font-size:clamp(18px, calc((100vw - 2 * var(--wrap-x, 16px) - 4px) / 13.7), 1em) !important;
+  }
+  html body #top.hero .kw i,
+  html body header.hero .kw i{
+    white-space:nowrap !important;
   }
   html body #top.hero .lede,
   html body header.hero .lede,

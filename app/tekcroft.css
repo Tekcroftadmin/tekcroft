@@ -7307,6 +7307,10 @@ html body .hs .hs-h1{
   /* Optical flush kept; tracking is no longer negative (see global lock) */
   margin-inline-start:-0.04em;
 }
+/* Single blog article title only — keep site hero H1s untouched */
+html body .blog-post-page h1.blog-post-page__title{
+  font-size:40px !important;
+}
 html body :is(h2),
 html body .sec-head h2,
 html body .ac-head h2,
@@ -7752,6 +7756,15 @@ section.cta[data-ground="white"]{
     justify-items:center !important;
     justify-content:center !important;
     box-sizing:border-box !important;
+    /* Longest phrase ("AI-Era Search Growth") is nowrap + centered inside
+       overflow:hidden .kw — at ~30px it is ~402px wide and clips both ends
+       on phones. Scale ONLY this line to the content width; cap at 1em so
+       tablet/desktop inherit the H1 size unchanged. Ratio ≈ natural/em. */
+    font-size:clamp(18px, calc((100vw - 2 * var(--wrap-x, 16px) - 4px) / 13.7), 1em) !important;
+  }
+  html body #top.hero .kw i,
+  html body header.hero .kw i{
+    white-space:nowrap !important;
   }
   html body #top.hero .lede,
   html body header.hero .lede,
@@ -8027,61 +8040,4 @@ html[data-design="raw"] body :is(h1, h2, h3, h4, h5, h6).hs-h1,
 html[data-design="raw"] body h1.hs-h1{
   letter-spacing:0.005em !important;
   line-height:1.2 !important;
-}
-
-
-/* Homepage services console only. The photo lives on ::before with cover
-   so it fills the left panel edge to edge; gradients stay on the plate
-   and the dark ::after overlay keeps the tabs readable. */
-#services.svc .cn-plate{
-  left:0;
-  right:auto;
-  width:calc(100% * .62 / 2 + var(--cn-lap) + var(--cn-over));
-  /* Gradients only — the shot is painted by ::before */
-  background:
-    radial-gradient(120% 96% at 4% -8%, hsl(var(--brand-h) 62% 30%) 0%, transparent 58%),
-    radial-gradient(96% 84% at 108% 106%, hsl(var(--brand-h) 78% 15%) 0%, transparent 62%),
-    linear-gradient(152deg, #0b1d2e 0%, #0e2537 46%, #061320 100%);
-}
-#services.svc .cn-plate::before{
-  display:block;
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background:var(--cn-shot, none) center center / cover no-repeat;
-}
-@media (max-width:1040px){
-  #services.svc .cn-plate{
-    right:0;
-    width:auto;
-  }
-}
-
-/* Form submit buttons only (hero forms + proposal/ask popups).
-   Shared .btn ink wipe turns the control black and can hide the label —
-   keep the resting brand fill and a readable white label on hover. */
-.hs-form .btn.btn-primary::before,
-#modalGo::before,
-#askModalGo::before{
-  display:none !important;
-  content:none !important;
-  transform:none !important;
-}
-.hs-form .btn.btn-primary:hover,
-.hs-form .btn.btn-primary:focus-visible,
-#modalGo:hover,
-#modalGo:focus-visible,
-#askModalGo:hover,
-#askModalGo:focus-visible{
-  color:#fff !important;
-}
-.hs-form .btn.btn-primary:hover .btn-label,
-.hs-form .btn.btn-primary:focus-visible .btn-label,
-#modalGo:hover .btn-label,
-#modalGo:focus-visible .btn-label,
-#askModalGo:hover .btn-label,
-#askModalGo:focus-visible .btn-label{
-  color:#fff !important;
 }
