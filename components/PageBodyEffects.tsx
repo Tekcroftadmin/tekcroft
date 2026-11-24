@@ -193,11 +193,9 @@ const HERO_CLIENTS = [
 function fillHeroMarq() {
   const el = document.getElementById("marqTrack");
   if (!el) return;
-  /* One set ≈ ~1.5kpx; 3 sets per half keeps half > 2560px so the strip
-     never shows empty space on ultra-wide / high zoom. Loop = -50%. */
+  /* Two copies = seamless -50% loop without 60 DOM nodes (PSI DOM size). */
   const row = HERO_CLIENTS.map((t) => `<span>${t}</span>`).join("");
-  const half = row + row + row;
-  el.innerHTML = half + half;
+  el.innerHTML = row + row;
 }
 
 /**

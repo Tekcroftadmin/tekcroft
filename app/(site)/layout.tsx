@@ -4,17 +4,10 @@ import DeferredStylesheet from "@/components/DeferredStylesheet";
 import SiteShell from "@/components/SiteShell";
 import { readSiteFooter, readSiteHeader } from "@/lib/compose-site-html";
 import { stampFooterYear } from "@/lib/stamp-footer-year";
-/* Locks that are not folded into tekcroft-critical.css */
+/* ATF-only locks stay render-blocking. Below-fold locks load deferred
+   as one sheet so Lighthouse is not blocked by 8–10 CSS chunks. */
 import "./../responsive.css";
-import "./../footer-lock.css";
-import "./../site-consistency.css";
 import "./../mobile-menu.css";
-import "./../vs-halo-lock.css";
-import "./../pf-mode-lock.css";
-import "./../pf-center-and-cards-lock.css";
-import "./../hero-marquee-lock.css";
-import "./../a11y-lock.css";
-import "./../internal-link.css";
 import "./../service-hero-lock.css";
 import "./../mobile-cta-btn-lock.css";
 /* stats-strip / nav-pill / perf are inlined via tekcroft-critical.css */
@@ -49,6 +42,8 @@ export default function SiteLayout({
         dangerouslySetInnerHTML={{ __html: criticalCss }}
       />
       <DeferredStylesheet href="/css/tekcroft-defer.css" />
+      {/* One deferred bundle instead of many blocking Next CSS chunks */}
+      <DeferredStylesheet href="/css/site-locks-defer.css" />
       <SiteShell headerHtml={headerHtml} footerHtml={footerHtml}>
         {children}
       </SiteShell>

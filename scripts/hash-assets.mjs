@@ -179,6 +179,38 @@ function syncDeferredPageCss(name) {
 
 syncDeferredPageCss("local-seo.css");
 syncDeferredPageCss("seo-audit-services.css");
+
+/* Below-fold site locks — one deferred sheet instead of many Next CSS chunks */
+{
+  const lockNames = [
+    "footer-lock.css",
+    "site-consistency.css",
+    "vs-halo-lock.css",
+    "pf-mode-lock.css",
+    "pf-center-and-cards-lock.css",
+    "hero-marquee-lock.css",
+    "a11y-lock.css",
+    "internal-link.css",
+  ];
+  const parts = [];
+  for (const name of lockNames) {
+    const p = path.join(ROOT, "app", name);
+    if (!fs.existsSync(p)) continue;
+    parts.push("/* === " + name + " === */\n" + fs.readFileSync(p, "utf8"));
+  }
+  if (parts.length) {
+    const raw = parts.join("\n");
+    const out = minifyCss(raw);
+    fs.writeFileSync(path.join(cssOut, "site-locks-defer.css"), out);
+    console.log(
+      "synced public/css/site-locks-defer.css (" +
+        (raw.length / 1024).toFixed(1) +
+        " → " +
+        (out.length / 1024).toFixed(1) +
+        " KB)"
+    );
+  }
+}
 const tekcroftCss = path.join(ROOT, "app", "tekcroft.css");
 if (fs.existsSync(tekcroftCss)) {
   const lines = fs.readFileSync(tekcroftCss, "utf8").split(/\n/);

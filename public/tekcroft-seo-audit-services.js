@@ -32,15 +32,29 @@
   /* ---------------- nav ---------------- */
   var nav = $("#nav"), burger = $(".js-burger"), mnav = $(".js-mnav");
 
+  var navMeasureQueued = false;
   function navHeight(){
-    if (nav){
-    var __bar = nav.querySelector(".nav-in");
-    var __cs = getComputedStyle(nav);
-    var __h = (__bar ? __bar.offsetHeight : 64)
-      + (parseFloat(__cs.paddingTop) || 0)
-      + (parseFloat(__cs.paddingBottom) || 0);
-    root.style.setProperty("--nav-h", Math.round(__h) + "px");root.style.setProperty("--nav-h-live", Math.round(__h) + "px");
-  }
+    if (navMeasureQueued) return;
+    navMeasureQueued = true;
+    requestAnimationFrame(function(){
+      navMeasureQueued = false;
+      if (!nav) return;
+      /* Prefer shared mm measure when present — avoids double forced reflow. */
+      if (typeof window.__tekcroftMeasureNavH === "function"){
+        window.__tekcroftMeasureNavH();
+        var live = root.style.getPropertyValue("--nav-h").trim();
+        if (live) root.style.setProperty("--nav-h-live", live);
+        return;
+      }
+      var __bar = nav.querySelector(".nav-in");
+      var __cs = getComputedStyle(nav);
+      var __h = (__bar ? __bar.offsetHeight : 64)
+        + (parseFloat(__cs.paddingTop) || 0)
+        + (parseFloat(__cs.paddingBottom) || 0);
+      var px = Math.round(__h) + "px";
+      root.style.setProperty("--nav-h", px);
+      root.style.setProperty("--nav-h-live", px);
+    });
   }
   navHeight();
   window.addEventListener("resize", navHeight);
@@ -88,15 +102,14 @@
     });
   });
 
-  /* ---------------- the hero's one entrance ---------------- */
+  /* ---------------- the hero's one entrance ----------------
+     Opacity is forced visible in critical CSS — skip offsetWidth reflow. */
   function play(sec){
     if (!sec) return;
-    sec.classList.remove("play");
-    void sec.offsetWidth;              /* let the removal land before it replays */
     sec.classList.add("play");
   }
   requestAnimationFrame(function(){
-    requestAnimationFrame(function(){ play($(".hs:not([hidden])")); });
+    play($(".hs:not([hidden])"));
   });
 
   /* ---------------- the forms ----------------
