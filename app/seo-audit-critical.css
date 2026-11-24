@@ -1,0 +1,103 @@
+/* Above-the-fold only for /services/seo-audit-services — keep tiny.
+   Full design comes from deferred /css/seo-audit-services.css + service-hero-lock. */
+
+#hero-1.hs{
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  color:#fff;
+  height:auto;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:calc(var(--nav-h, 74px) + 30px) 0 20px;
+  background:#0c0c0c;
+}
+@media (max-width:900px){
+  #hero-1.hs{min-height:0; overflow:visible;}
+}
+#hero-1 .hs-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+#hero-1 .hs-bg img{
+  width:100%;
+  height:100%;
+  min-height:100vh;
+  min-height:100svh;
+  max-width:none;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+#hero-1 .hs-veil{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:rgba(0,0,0,.78);
+}
+#hero-1 .hs-in{
+  position:relative;
+  z-index:3;
+  display:grid;
+  align-items:center;
+  gap:30px;
+}
+/* Reserve form box before lock/defer CSS — kills CLS ~0.2 on .hs-form */
+#hero-1 .hs-form-wrap{
+  width:100%;
+  max-width:340px;
+  min-height:356px;
+  box-sizing:border-box;
+  justify-self:end;
+}
+#hero-1 .hs-form{
+  min-height:340px;
+  box-sizing:border-box;
+}
+#hero-1 .hs-copy > *,
+#hero-1 .hs-form-wrap{
+  opacity:1 !important;
+  transform:none !important;
+  color:#fff;
+}
+#hero-1 .hs-h1{
+  margin:0 0 18px;
+  font-family:var(--font-display),system-ui,sans-serif;
+  font-weight:800;
+  font-size:clamp(28px,7vw,48px);
+  color:#fff;
+}
+#hero-1 .hs-h1 em{font-style:normal; color:var(--primary, #0096D5);}
+#hero-1 .hs-lede{
+  margin:0 0 22px;
+  max-width:48ch;
+  font-size:16px;
+  line-height:1.65;
+  color:rgba(255,255,255,.86);
+}
+#hero-1 .hs-lede.hs-lede-1,
+#hero-1 .hs-lede:has(+ .hs-lede){
+  margin-bottom:12px;
+}
+#hero-1 .hs-lede + .hs-lede{
+  margin-top:0;
+}
+@media (min-width:961px){
+  #hero-1 .hs-in{
+    grid-template-columns:minmax(0,1fr) 340px;
+    gap:var(--hero-form-gap, 190px);
+  }
+}
+@media (max-width:960px){
+  #hero-1 .hs-form-wrap{
+    max-width:100%;
+    min-height:0;
+    justify-self:stretch;
+  }
+  #hero-1 .hs-form{min-height:0;}
+}

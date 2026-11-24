@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import DeferredStylesheet from "@/components/DeferredStylesheet";
 import { seoAuditServicesSchema } from "@/lib/schema";
 import Script from "next/script";
 import SitePage from "@/components/SitePage";
@@ -7,7 +8,8 @@ import { readPreparedBody } from "@/lib/compose-site-html";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/seo-audit-services-meta.json";
 import lcp from "@/lib/seo-audit-services-lcp.json";
-import "@/app/seo-audit-services.css";
+/* Tiny above-the-fold hero paint (LCP + CLS) — full page CSS loads deferred */
+import "@/app/seo-audit-critical.css";
 import "@/app/footer-lock.css";
 /* Shared service hero shell — same style/design on every /services page */
 import "@/app/service-hero-lock.css";
@@ -53,6 +55,8 @@ export default function SeoAuditServicesPage() {
         media={lcp.mobileMedia}
         fetchPriority="high"
       />
+      {/* ~347KB page CSS off critical path — hero covered by critical + lock */}
+      <DeferredStylesheet href="/css/seo-audit-services.css" />
       <SitePage html={html} prepared />
       <Script src={assets.seoAuditServices} strategy="lazyOnload" />
       <JsonLd data={seoAuditServicesSchema} />

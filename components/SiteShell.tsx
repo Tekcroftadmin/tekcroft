@@ -13,28 +13,11 @@ type SiteShellProps = {
 const mmPromises = new Map<string, Promise<void>>();
 const prefetchedRoutes = new Set<string>();
 
-/** Warm these routes so About → services feels instant. */
+/** Warm a small hub set only — prefetching every service pulls MBs of
+ *  CSS/hero images into Lighthouse "enormous payloads" and hurts SI. */
 const IDLE_PREFETCH = [
   "/services",
-  "/services/seo-services",
-  "/services/local-seo-services",
-  "/services/artificial-intelligence-services",
-  "/services/web-and-app-development-services",
-  "/services/web-design-and-development-services",
-  "/services/ecommerce-seo-services",
-  "/services/technical-seo-services",
-  "/services/on-page-seo-services",
-  "/services/seo-audit-services",
-  "/services/franchise-seo-services",
-  "/services/google-business-profile-optimization-services",
-  "/services/custom-software-development-services",
-  "/services/mobile-app-development-services",
-  "/services/ai-seo-services",
-  "/services/ai-development-services",
-  "/services/ai-chatbot-development-services",
-  "/services/ai-agent-development-services",
-  "/about-us",
-  "/blog",
+  "/book-a-free-evaluation",
   "/contact-us",
 ];
 

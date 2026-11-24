@@ -149,11 +149,36 @@ console.log("manifest written");
 /* Keep deferred CSS copies in /public/css (Local SEO slim layout + similar) */
 const cssOut = path.join(pub, "css");
 fs.mkdirSync(cssOut, { recursive: true });
-const localSeoCss = path.join(ROOT, "app", "local-seo.css");
-if (fs.existsSync(localSeoCss)) {
-  fs.copyFileSync(localSeoCss, path.join(cssOut, "local-seo.css"));
-  console.log("synced public/css/local-seo.css");
+
+/** Conservative CSS minify — comments + excess whitespace only (no new deps). */
+function minifyCss(src) {
+  return src
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s*([{}:;,>])\s*/g, "$1")
+    .replace(/;}/g, "}")
+    .trim();
 }
+
+function syncDeferredPageCss(name) {
+  const srcPath = path.join(ROOT, "app", name);
+  if (!fs.existsSync(srcPath)) return;
+  const raw = fs.readFileSync(srcPath, "utf8");
+  const out = minifyCss(raw);
+  fs.writeFileSync(path.join(cssOut, name), out);
+  console.log(
+    "synced public/css/" +
+      name +
+      " (" +
+      (raw.length / 1024).toFixed(1) +
+      " → " +
+      (out.length / 1024).toFixed(1) +
+      " KB)"
+  );
+}
+
+syncDeferredPageCss("local-seo.css");
+syncDeferredPageCss("seo-audit-services.css");
 const tekcroftCss = path.join(ROOT, "app", "tekcroft.css");
 if (fs.existsSync(tekcroftCss)) {
   const lines = fs.readFileSync(tekcroftCss, "utf8").split(/\n/);
@@ -204,15 +229,18 @@ if (fs.existsSync(tekcroftCss)) {
     "  #top.hero .kw i, header.hero .kw i{white-space:nowrap!important;}\n" +
     "}\n";
   fs.writeFileSync(path.join(ROOT, "app", "tekcroft-critical.css"), critical);
-  fs.writeFileSync(
-    path.join(cssOut, "tekcroft-defer.css"),
-    lines.slice(CRITICAL_END).join("\n")
-  );
+  const deferRaw = lines.slice(CRITICAL_END).join("\n");
+  const deferMin = minifyCss(deferRaw);
+  fs.writeFileSync(path.join(cssOut, "tekcroft-defer.css"), deferMin);
   console.log(
     "synced tekcroft-critical.css + public/css/tekcroft-defer.css (split @" +
       CRITICAL_END +
       ", critical " +
       (critical.length / 1024).toFixed(1) +
-      "KB)"
+      "KB, defer " +
+      (deferRaw.length / 1024).toFixed(1) +
+      " → " +
+      (deferMin.length / 1024).toFixed(1) +
+      " KB)"
   );
 }

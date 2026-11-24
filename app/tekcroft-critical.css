@@ -1149,6 +1149,32 @@ html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
   transform: none !important;
 }
 
+/* Reserve service-hero form geometry in critical CSS so late chunks
+   cannot expand .hs-form from ~0 → 340px (CLS ~0.2 on audit/SEO heroes). */
+#hero-1.hs:not(.a3-center) .hs-form-wrap{
+  max-width:340px;
+  min-height:356px;
+  box-sizing:border-box;
+}
+#hero-1.hs:not(.a3-center) .hs-form{
+  min-height:340px;
+  box-sizing:border-box;
+}
+@media (min-width:961px){
+  #hero-1.hs:not(.a3-center) .hs-in{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 340px;
+    gap:var(--hero-form-gap, 190px);
+  }
+}
+@media (max-width:960px){
+  #hero-1.hs:not(.a3-center) .hs-form-wrap{
+    max-width:100%;
+    min-height:0;
+  }
+  #hero-1.hs:not(.a3-center) .hs-form{min-height:0;}
+}
+
 /* Prefer compositor-friendly layer promotion for continuous movers */
 .hero-slide.on img,
 .wk-card.on,
