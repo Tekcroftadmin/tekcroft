@@ -41,6 +41,38 @@ function scrollToSection(el: HTMLElement, behavior: ScrollBehavior) {
   el.scrollIntoView({ behavior, block: "start" });
 }
 
+/** Keep fixed nav plate in sync after we force scroll (back / soft-nav). */
+function syncNavPlate() {
+  const nav = document.getElementById("nav");
+  if (!nav) return;
+  const booting = document.body.classList.contains("booting");
+  nav.classList.toggle("stuck", !booting && window.scrollY > 12);
+  window.dispatchEvent(new Event("scroll"));
+}
+
+/**
+ * history.scrollRestoration is manual (boot script) so soft-nav / bfcache /
+ * back-forward will not reset scroll on their own — force top + nav plate.
+ */
+function resetScrollTop() {
+  try {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  } catch {
+    /* ignore */
+  }
+  syncNavPlate();
+  requestAnimationFrame(() => {
+    try {
+      window.scrollTo(0, 0);
+    } catch {
+      /* ignore */
+    }
+    syncNavPlate();
+  });
+}
+
 /** Consume a pending/boot hash or the current location hash and scroll to it. */
 function consumeHashScroll(behavior: ScrollBehavior) {
   const pending = window.__tekcroftHash;
@@ -53,7 +85,7 @@ function consumeHashScroll(behavior: ScrollBehavior) {
 
   const el = findHashTarget(id);
   if (!el) {
-    window.scrollTo(0, 0);
+    resetScrollTop();
     return;
   }
 
@@ -101,6 +133,8 @@ export default function NoHashScroll() {
     /* Landing with #section (or boot-captured __tekcroftHash). */
     if (window.__tekcroftHash || window.location.hash) {
       consumeHashScroll("smooth");
+    } else {
+      resetScrollTop();
     }
 
     const onHashChange = () => {
@@ -108,12 +142,24 @@ export default function NoHashScroll() {
     };
     window.addEventListener("hashchange", onHashChange);
 
+    /* bfcache / browser back: always re-pin to top unless a hash target remains. */
     const onPageShow = (e: PageTransitionEvent) => {
-      if (e.persisted && (window.__tekcroftHash || window.location.hash)) {
-        consumeHashScroll("auto");
+      if (window.__tekcroftHash || window.location.hash) {
+        consumeHashScroll(e.persisted ? "auto" : "smooth");
+        return;
       }
+      resetScrollTop();
     };
     window.addEventListener("pageshow", onPageShow);
+
+    const onPopState = () => {
+      if (window.__tekcroftHash || window.location.hash) {
+        consumeHashScroll("auto");
+        return;
+      }
+      resetScrollTop();
+    };
+    window.addEventListener("popstate", onPopState);
 
     const onClick = (e: MouseEvent) => {
       if (e.defaultPrevented || e.button !== 0) return;
@@ -156,6 +202,7 @@ export default function NoHashScroll() {
     return () => {
       window.removeEventListener("hashchange", onHashChange);
       window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("popstate", onPopState);
       document.removeEventListener("click", onClick, true);
     };
   }, []);
@@ -163,6 +210,9 @@ export default function NoHashScroll() {
   useLayoutEffect(() => {
     if (window.__tekcroftHash || window.location.hash) {
       consumeHashScroll("smooth");
+    } else {
+      /* Soft-nav between pages: pin to top so fixed nav is not mid-hero. */
+      resetScrollTop();
     }
     /* Soft-nav / back-forward: re-init reveals + button labels. */
     try {
