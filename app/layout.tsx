@@ -74,7 +74,9 @@ export default function RootLayout({
         <NoHashScroll />
         <JsonLd data={sitewideSchema} />
         {children}
-        <Script src={assets.rv || "/tekcroft-rv.js"} strategy="afterInteractive" />
+        {/* All site JS off the interactive path — cuts TBT; ATF reveals are
+            handled by PageBodyEffects / critical CSS (opacity unlocked). */}
+        <Script src={assets.rv || "/tekcroft-rv.js"} strategy="lazyOnload" />
         <Script src={assets.leadSubmit || "/tekcroft-lead-submit.js"} strategy="lazyOnload" />
         <Script src="/tekcroft-ask-modal.js" strategy="lazyOnload" />
         <Script src={assets.egScroll || "/tekcroft-eg-scroll.js"} strategy="lazyOnload" />

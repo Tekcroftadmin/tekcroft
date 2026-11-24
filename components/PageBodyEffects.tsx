@@ -16,59 +16,68 @@ declare global {
   }
 }
 
-/** Soft-nav remounts HTML — re-wrap buttons + reveal before paint when possible. */
-function pageInit() {
-  const wrapButtons = () => {
-    document.querySelectorAll(".btn").forEach((btn) => {
-      if (btn.querySelector(".btn-label")) return;
-      Array.from(btn.childNodes).forEach((node) => {
-        if (node.nodeType !== Node.TEXT_NODE) return;
-        const text = (node.nodeValue || "").replace(/\s+/g, " ").trim();
-        if (!text) return;
-        const label = document.createElement("span");
-        label.className = "btn-label";
-        label.textContent = text;
-        btn.replaceChild(label, node);
-      });
+function wrapButtons(scope?: ParentNode) {
+  (scope || document).querySelectorAll(".btn").forEach((btn) => {
+    if (btn.querySelector(".btn-label")) return;
+    Array.from(btn.childNodes).forEach((node) => {
+      if (node.nodeType !== Node.TEXT_NODE) return;
+      const text = (node.nodeValue || "").replace(/\s+/g, " ").trim();
+      if (!text) return;
+      const label = document.createElement("span");
+      label.className = "btn-label";
+      label.textContent = text;
+      btn.replaceChild(label, node);
     });
-  };
+  });
+}
 
-  const softNav = document.documentElement.classList.contains("js-ready");
-  wrapButtons();
+function pinRvVisible(el: Element) {
+  el.classList.add("in");
+  if (!(el instanceof HTMLElement)) return;
+  el.style.setProperty("transition", "none", "important");
+  el.style.setProperty("opacity", "1", "important");
+  el.style.setProperty("transform", "none", "important");
+  requestAnimationFrame(() => {
+    try {
+      el.style.removeProperty("transition");
+    } catch {
+      /* ignore */
+    }
+  });
+}
 
-  /* Soft-nav: mark every .rv/.eg-card visible BEFORE paint. First load keeps
-     entrance animation via tekcroft-rv.js (js-ready then observe). */
+function forceAllVisible() {
+  document.querySelectorAll(".rv").forEach(pinRvVisible);
+  document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
+    el.classList.add("seen");
+    if (el instanceof HTMLElement) {
+      el.style.removeProperty("opacity");
+      el.style.removeProperty("transform");
+      el.style.removeProperty("visibility");
+    }
+  });
+  document.querySelectorAll(".eg-sec .eg").forEach((pw) => {
+    if (!(pw instanceof HTMLElement)) return;
+    if (pw.querySelector(".eg-card.on")) return;
+    const first = pw.querySelector(".eg-card, .walk-step");
+    first?.classList.add("on");
+    if (!pw.getAttribute("data-at")) pw.setAttribute("data-at", "0");
+  });
+}
+
+/**
+ * Soft-nav: sync reveal before paint.
+ * First load: only mark ATF .rv — defer button wrap / full force / nav events
+ * so we do not stack long main-thread tasks (TBT).
+ */
+function pageInit(opts?: { softNav?: boolean; heavy?: boolean }) {
+  const softNav =
+    opts?.softNav ?? document.documentElement.classList.contains("js-ready");
+  const heavy = opts?.heavy ?? softNav;
+
   if (softNav) {
-    document.querySelectorAll(".rv").forEach((el) => {
-      el.classList.add("in");
-      if (!(el instanceof HTMLElement)) return;
-      /* Always pin — Chromium can keep used opacity at 0 after soft-nav. */
-      el.style.setProperty("transition", "none", "important");
-      el.style.setProperty("opacity", "1", "important");
-      el.style.setProperty("transform", "none", "important");
-      requestAnimationFrame(() => {
-        try {
-          el.style.removeProperty("transition");
-        } catch {
-          /* ignore */
-        }
-      });
-    });
-    document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
-      el.classList.add("seen");
-      if (el instanceof HTMLElement) {
-        el.style.removeProperty("opacity");
-        el.style.removeProperty("transform");
-        el.style.removeProperty("visibility");
-      }
-    });
-    document.querySelectorAll(".eg-sec .eg").forEach((pw) => {
-      if (!(pw instanceof HTMLElement)) return;
-      if (pw.querySelector(".eg-card.on")) return;
-      const first = pw.querySelector(".eg-card, .walk-step");
-      first?.classList.add("on");
-      if (!pw.getAttribute("data-at")) pw.setAttribute("data-at", "0");
-    });
+    forceAllVisible();
+    if (heavy) wrapButtons();
   } else {
     document.documentElement.classList.add("js-ready");
     const vh = window.innerHeight || 0;
@@ -77,6 +86,8 @@ function pageInit() {
       if (r.top < vh + 40 && r.bottom > -40) el.classList.add("in");
     });
   }
+
+  if (!heavy) return;
 
   try {
     window.dispatchEvent(new Event("tekcroft:nav"));
@@ -89,35 +100,7 @@ function pageInit() {
 
   window.setTimeout(() => {
     wrapButtons();
-    document.querySelectorAll(".rv").forEach((el) => {
-      el.classList.add("in");
-      if (!(el instanceof HTMLElement)) return;
-      el.style.setProperty("transition", "none", "important");
-      el.style.setProperty("opacity", "1", "important");
-      el.style.setProperty("transform", "none", "important");
-      requestAnimationFrame(() => {
-        try {
-          el.style.removeProperty("transition");
-        } catch {
-          /* ignore */
-        }
-      });
-    });
-    document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
-      el.classList.add("seen");
-      if (el instanceof HTMLElement) {
-        el.style.removeProperty("opacity");
-        el.style.removeProperty("transform");
-        el.style.removeProperty("visibility");
-      }
-    });
-    document.querySelectorAll(".eg-sec .eg").forEach((pw) => {
-      if (!(pw instanceof HTMLElement)) return;
-      if (pw.querySelector(".eg-card.on")) return;
-      const first = pw.querySelector(".eg-card, .walk-step");
-      first?.classList.add("on");
-      if (!pw.getAttribute("data-at")) pw.setAttribute("data-at", "0");
-    });
+    forceAllVisible();
   }, 400);
 }
 
@@ -209,7 +192,9 @@ export default function PageBodyEffects({
   const pathname = usePathname();
 
   useLayoutEffect(() => {
-    pageInit();
+    const softNav = document.documentElement.classList.contains("js-ready");
+    /* Soft-nav needs sync heavy init; first load stays light for TBT. */
+    pageInit({ softNav, heavy: softNav });
   }, [pathname]);
 
   useEffect(() => {
@@ -217,18 +202,34 @@ export default function PageBodyEffects({
       document.documentElement.setAttribute("data-design", "raw");
     }
     const root = document.querySelector(".tekcroft-page");
-    fillHeroMarq();
-    pageInit();
 
     root?.querySelectorAll(".faq-a[data-open='true']").forEach((el) => {
       el.classList.add("is-open");
     });
-
     const unwireFaq =
       root instanceof HTMLElement ? wireFaq(root) : undefined;
 
+    /* Yield past first paint — marquee + remaining reveals/buttons. */
+    const runIdle = () => {
+      fillHeroMarq();
+      pageInit({ softNav: true, heavy: true });
+    };
+    let idleId = 0;
+    let timeoutId = 0;
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      idleId = w.requestIdleCallback(runIdle, { timeout: 1200 });
+    } else {
+      timeoutId = window.setTimeout(runIdle, 200);
+    }
+
     return () => {
       unwireFaq?.();
+      if (idleId && w.cancelIdleCallback) w.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
       if (rawDesign) {
         document.documentElement.removeAttribute("data-design");
       }

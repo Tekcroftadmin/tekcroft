@@ -149,12 +149,13 @@ function resetScrollTop() {
   forceRevealsVisible();
   syncNavPlate();
 
-  const delays = [0, 16, 50, 100, 200, 400];
-  delays.forEach((ms) => {
+  /* Few retries beat late mobile scroll restore without stacking long tasks. */
+  const delays = [0, 50, 200];
+  delays.forEach((ms, i) => {
     window.setTimeout(() => {
       if (window.__tekcroftHash || window.location.hash) return;
       pinScrollTop();
-      forceRevealsVisible();
+      if (i === 0 || i === delays.length - 1) forceRevealsVisible();
       syncNavPlate();
     }, ms);
   });

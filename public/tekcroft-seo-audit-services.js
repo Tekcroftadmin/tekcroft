@@ -14,20 +14,27 @@
   });
 
   /* ---------------- button labels ----------------
-     The ink wipe is a positioned ::before and would paint over a loose text
-     node, so every button's own words get wrapped once, here. */
-  $$(".btn").forEach(function(btn){
-    if (btn.querySelector(".btn-label")) return;
-    Array.prototype.slice.call(btn.childNodes).forEach(function(node){
-      if (node.nodeType !== 3) return;
-      var text = node.nodeValue.replace(/\s+/g, " ").trim();
-      if (!text) return;
-      var label = document.createElement("span");
-      label.className = "btn-label";
-      label.textContent = text;
-      btn.replaceChild(label, node);
+     Defer wrap off the load task — PageBodyEffects also wraps; this catches
+     any remaining buttons without extending TBT. */
+  function wrapBtnLabels(){
+    $$(".btn").forEach(function(btn){
+      if (btn.querySelector(".btn-label")) return;
+      Array.prototype.slice.call(btn.childNodes).forEach(function(node){
+        if (node.nodeType !== 3) return;
+        var text = node.nodeValue.replace(/\s+/g, " ").trim();
+        if (!text) return;
+        var label = document.createElement("span");
+        label.className = "btn-label";
+        label.textContent = text;
+        btn.replaceChild(label, node);
+      });
     });
-  });
+  }
+  if (typeof window.requestIdleCallback === "function"){
+    window.requestIdleCallback(wrapBtnLabels, { timeout: 1500 });
+  } else {
+    setTimeout(wrapBtnLabels, 300);
+  }
 
   /* ---------------- nav ---------------- */
   var nav = $("#nav"), burger = $(".js-burger"), mnav = $(".js-mnav");
