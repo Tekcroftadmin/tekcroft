@@ -41,10 +41,18 @@ function pageInit() {
   if (softNav) {
     document.querySelectorAll(".rv").forEach((el) => {
       el.classList.add("in");
-      if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
-        (el as HTMLElement).style.setProperty("opacity", "1", "important");
-        (el as HTMLElement).style.setProperty("transform", "none", "important");
-      }
+      if (!(el instanceof HTMLElement)) return;
+      /* Always pin — Chromium can keep used opacity at 0 after soft-nav. */
+      el.style.setProperty("transition", "none", "important");
+      el.style.setProperty("opacity", "1", "important");
+      el.style.setProperty("transform", "none", "important");
+      requestAnimationFrame(() => {
+        try {
+          el.style.removeProperty("transition");
+        } catch {
+          /* ignore */
+        }
+      });
     });
     document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
       el.classList.add("seen");
@@ -83,10 +91,17 @@ function pageInit() {
     wrapButtons();
     document.querySelectorAll(".rv").forEach((el) => {
       el.classList.add("in");
-      if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
-        (el as HTMLElement).style.setProperty("opacity", "1", "important");
-        (el as HTMLElement).style.setProperty("transform", "none", "important");
-      }
+      if (!(el instanceof HTMLElement)) return;
+      el.style.setProperty("transition", "none", "important");
+      el.style.setProperty("opacity", "1", "important");
+      el.style.setProperty("transform", "none", "important");
+      requestAnimationFrame(() => {
+        try {
+          el.style.removeProperty("transition");
+        } catch {
+          /* ignore */
+        }
+      });
     });
     document.querySelectorAll(".eg-sec .eg-card").forEach((el) => {
       el.classList.add("seen");

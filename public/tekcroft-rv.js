@@ -25,15 +25,18 @@
 
   function hardClear(el) {
     try {
-      el.style.removeProperty("opacity");
-      el.style.removeProperty("transform");
+      /* Always pin opacity — Chromium soft-nav can report .in with used
+         opacity still 0 (blank white sections). Do not gate on getComputedStyle. */
+      el.style.setProperty("transition", "none", "important");
+      el.style.setProperty("opacity", "1", "important");
+      el.style.setProperty("transform", "none", "important");
       el.style.removeProperty("animation");
       el.style.removeProperty("visibility");
-      /* Nuclear clear if a prior transition left computed opacity at 0. */
-      if (parseFloat(window.getComputedStyle(el).opacity) < 0.05) {
-        el.style.setProperty("opacity", "1", "important");
-        el.style.setProperty("transform", "none", "important");
-      }
+      requestAnimationFrame(function () {
+        try {
+          el.style.removeProperty("transition");
+        } catch (err) {}
+      });
     } catch (e) {}
   }
 

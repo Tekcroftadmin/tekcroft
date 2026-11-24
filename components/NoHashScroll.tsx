@@ -6,6 +6,9 @@ import { usePathname } from "next/navigation";
 declare global {
   interface Window {
     __tekcroftHash?: string;
+    __tekcroftMeasureNavH?: () => void;
+    __tekcroftCloseMnav?: (opts?: { skipRestore?: boolean }) => void;
+    __tekcroftPageInit?: () => void;
   }
 }
 
@@ -41,35 +44,119 @@ function scrollToSection(el: HTMLElement, behavior: ScrollBehavior) {
   el.scrollIntoView({ behavior, block: "start" });
 }
 
+/** Drop leftover menu / modal body locks that leave a blank white band. */
+function clearBodyLockStyles() {
+  const b = document.body;
+  const h = document.documentElement;
+  b.style.position = "";
+  b.style.top = "";
+  b.style.left = "";
+  b.style.right = "";
+  b.style.overflow = "";
+  b.style.paddingRight = "";
+  b.style.width = "";
+  b.style.height = "";
+  h.style.overflow = "";
+  h.style.height = "";
+  h.style.position = "";
+  b.classList.remove("menu-open", "no-scroll", "mnav-open", "nav-open");
+  h.classList.remove("menu-open", "no-scroll", "mnav-open", "nav-open");
+}
+
+/** Soft-nav remounts #boot — dismiss so it cannot sit as a blank curtain. */
+function dismissBoot() {
+  const boot = document.getElementById("boot");
+  if (boot && !document.body.classList.contains("booting")) {
+    boot.classList.add("done");
+  }
+  document.body.classList.remove("booting");
+}
+
+/**
+ * Force every .rv visible. Soft-nav remounts nodes under html.js-ready
+ * without .in; Chromium can leave opacity stuck at 0 even with .in
+ * (blank white #proof-v2 strip — only the mid hairline shows).
+ * Always pin inline opacity — do not trust getComputedStyle mid-transition.
+ */
+function forceRevealsVisible() {
+  document.querySelectorAll(".rv").forEach((el) => {
+    el.classList.add("in");
+    if (!(el instanceof HTMLElement)) return;
+    try {
+      el.style.setProperty("transition", "none", "important");
+      el.style.setProperty("opacity", "1", "important");
+      el.style.setProperty("transform", "none", "important");
+      el.style.removeProperty("visibility");
+      /* Re-enable transitions on next frame so later scroll reveals still animate. */
+      requestAnimationFrame(() => {
+        try {
+          el.style.removeProperty("transition");
+        } catch {
+          /* ignore */
+        }
+      });
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
 /** Keep fixed nav plate in sync after we force scroll (back / soft-nav). */
 function syncNavPlate() {
   const nav = document.getElementById("nav");
   if (!nav) return;
+  const y =
+    window.scrollY ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0;
   const booting = document.body.classList.contains("booting");
-  nav.classList.toggle("stuck", !booting && window.scrollY > 12);
+  nav.classList.toggle("stuck", !booting && y > 12);
+  try {
+    window.__tekcroftMeasureNavH?.();
+  } catch {
+    /* ignore */
+  }
   window.dispatchEvent(new Event("scroll"));
 }
 
-/**
- * history.scrollRestoration is manual (boot script) so soft-nav / bfcache /
- * back-forward will not reset scroll on their own — force top + nav plate.
- */
-function resetScrollTop() {
+function pinScrollTop() {
   try {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    const se = document.scrollingElement;
+    if (se) se.scrollTop = 0;
   } catch {
     /* ignore */
   }
+}
+
+/**
+ * history.scrollRestoration is manual, but mobile Chrome still applies a
+ * late restore after popstate — and mnav unlock used to scroll to savedY.
+ * Pin top + clear chrome, then re-pin for a few frames to win the race.
+ */
+function resetScrollTop() {
+  clearBodyLockStyles();
+  try {
+    window.__tekcroftCloseMnav?.({ skipRestore: true });
+  } catch {
+    /* ignore */
+  }
+  dismissBoot();
+  pinScrollTop();
+  forceRevealsVisible();
   syncNavPlate();
-  requestAnimationFrame(() => {
-    try {
-      window.scrollTo(0, 0);
-    } catch {
-      /* ignore */
-    }
-    syncNavPlate();
+
+  const delays = [0, 16, 50, 100, 200, 400];
+  delays.forEach((ms) => {
+    window.setTimeout(() => {
+      if (window.__tekcroftHash || window.location.hash) return;
+      pinScrollTop();
+      forceRevealsVisible();
+      syncNavPlate();
+    }, ms);
   });
 }
 
@@ -217,9 +304,7 @@ export default function NoHashScroll() {
     /* Soft-nav / back-forward: re-init reveals + button labels. */
     try {
       window.dispatchEvent(new Event("tekcroft:nav"));
-      (
-        window as Window & { __tekcroftPageInit?: () => void }
-      ).__tekcroftPageInit?.();
+      window.__tekcroftPageInit?.();
     } catch {
       /* ignore */
     }

@@ -704,24 +704,28 @@ markMmCurrent();
        Still clear those props on unlock in case anything else set them. */
   }
 
-  function unlockScroll(){
+  function unlockScroll(opts){
     clearBodyLock();
     if (locked){
       locked = false;
-      window.scrollTo(0, savedY);
+      /* Soft-nav / back must not re-apply the menu's savedY — that leaves a
+         blank white band + stuck mid-page chrome after history traversal. */
+      if (!(opts && opts.skipRestore)) {
+        window.scrollTo(0, savedY);
+      }
     }
     measureNavH();
     clearHeroInlineSizes();
   }
 
-  function closeMenu(){
+  function closeMenu(opts){
     if (!mnav) return;
     mnav.classList.remove('open');
     if (burger){
       burger.classList.remove('open');
       burger.setAttribute('aria-expanded', 'false');
     }
-    unlockScroll();
+    unlockScroll(opts);
   }
 
   function onMenuOpenChange(open){
@@ -778,14 +782,20 @@ markMmCurrent();
     var now = location.pathname + location.search;
     if (now !== lastPath){
       lastPath = now;
-      closeMenu();
+      closeMenu({ skipRestore: true });
       measureNavH();
       clearHeroInlineSizes();
     }
   }, 400);
 
   window.addEventListener('popstate', function(){
-    closeMenu();
+    closeMenu({ skipRestore: true });
+    measureNavH();
+    clearHeroInlineSizes();
+  });
+
+  window.addEventListener('pageshow', function(){
+    closeMenu({ skipRestore: true });
     measureNavH();
     clearHeroInlineSizes();
   });
