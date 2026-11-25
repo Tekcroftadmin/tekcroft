@@ -1,11 +1,15 @@
 /** Blog-post-page helpers only — does not change shared WordPress mapping. */
 
+import { decodeEntities } from "@/lib/wordpress/sanitize";
+
 export type TocItem = { id: string; text: string };
 
 export type FaqItem = { question: string; answerHtml: string };
 
 function stripTags(html: string): string {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return decodeEntities(html.replace(/<[^>]+>/g, " "))
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function slugify(text: string, used: Set<string>): string {
@@ -242,11 +246,12 @@ export function ensureHeadingIds(
       const attrStr = cleaned ? ` ${cleaned}` : "";
       toc.push({ id, text });
 
-      // Keep editor-authored <em>; skip Conclusion/FAQ; else two-tone accent.
-      let accented = inner;
+      // Always rebuild from decoded plain text so WP &nbsp; / entities
+      // never survive escapeHtml as visible "&nbsp;" on the page.
+      let accented: string;
       if (skipHeadingAccent(text)) {
         accented = escapeHtml(text);
-      } else if (!/<em[\s>]/i.test(inner)) {
+      } else {
         accented = accentHeadingText(text, focusKeyword);
       }
       return `<h2 id="${id}"${attrStr}>${accented}</h2>`;
