@@ -1149,6 +1149,45 @@ html[data-theme="dark"] .nav.stuck .burger i{background:#fff;}
   transform: none !important;
 }
 
+/* Homepage hero: pin final flex geometry in critical CSS so deferred
+   service-hero-lock cannot shift .hero-in / #lamp after first paint (CLS). */
+#top.hero,
+header.hero{
+  --hero-strip-height:72px;
+  height:auto !important;
+  max-height:none !important;
+  min-height:100vh !important;
+  min-height:100svh !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  overflow:visible !important;
+  padding-bottom:0 !important;
+}
+#top.hero .hero-in,
+header.hero .hero-in{
+  margin-block:0 !important;
+  flex:1 1 auto !important;
+  width:100%;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+#top.hero > .ticker,
+header.hero > .ticker{
+  height:var(--hero-strip-height, 72px) !important;
+  min-height:var(--hero-strip-height, 72px) !important;
+  max-height:var(--hero-strip-height, 72px) !important;
+  flex:0 0 var(--hero-strip-height, 72px) !important;
+  box-sizing:border-box !important;
+}
+/* Empty kw slot would collapse the H1 line until JS — keep a line box */
+#top.hero .kw,
+header.hero .kw{
+  min-height:1.15em;
+}
+
 /* Kill white Speed Index flash before service-hero-lock chunk arrives */
 body:has(#hero-1.hs){
   background:#0c0c0c;

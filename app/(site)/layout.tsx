@@ -4,12 +4,9 @@ import DeferredStylesheet from "@/components/DeferredStylesheet";
 import SiteShell from "@/components/SiteShell";
 import { readSiteFooter, readSiteHeader } from "@/lib/compose-site-html";
 import { stampFooterYear } from "@/lib/stamp-footer-year";
-/* ATF-only locks stay render-blocking. Below-fold locks load deferred
-   as one sheet so Lighthouse is not blocked by 8–10 CSS chunks. */
-import "./../responsive.css";
-import "./../mobile-menu.css";
-import "./../service-hero-lock.css";
-import "./../mobile-cta-btn-lock.css";
+/* All site lock CSS is deferred via /css/site-locks-defer.css so homepage
+   (and other pages) are not blocked by 5+ Next CSS chunks. ATF hero geometry
+   for #top.hero is pinned in tekcroft-critical (perf.css). */
 /* stats-strip / nav-pill / perf are inlined via tekcroft-critical.css */
 
 const criticalCssPath = path.join(

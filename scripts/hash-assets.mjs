@@ -180,7 +180,8 @@ function syncDeferredPageCss(name) {
 syncDeferredPageCss("local-seo.css");
 syncDeferredPageCss("seo-audit-services.css");
 
-/* Below-fold site locks — one deferred sheet instead of many Next CSS chunks */
+/* Below-fold + former render-blocking locks — one deferred sheet so
+   Lighthouse is not blocked by 5+ Next CSS chunks on homepage. */
 {
   const lockNames = [
     "footer-lock.css",
@@ -191,7 +192,14 @@ syncDeferredPageCss("seo-audit-services.css");
     "hero-marquee-lock.css",
     "a11y-lock.css",
     "internal-link.css",
+    /* Was imported as blocking Next chunks in (site)/layout — defer instead */
+    "responsive.css",
+    "mobile-menu.css",
+    "service-hero-lock.css",
+    "mobile-cta-btn-lock.css",
   ];
+  /* Also emit standalone deferred sheets referenced by pages */
+  syncDeferredPageCss("home-invite.css");
   const parts = [];
   for (const name of lockNames) {
     const p = path.join(ROOT, "app", name);

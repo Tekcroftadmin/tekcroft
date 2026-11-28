@@ -3,14 +3,13 @@ import fs from "fs";
 import path from "path";
 import Script from "next/script";
 import SitePage from "@/components/SitePage";
+import DeferredStylesheet from "@/components/DeferredStylesheet";
 import { readPreparedBody } from "@/lib/compose-site-html";
 import JsonLd from "@/components/JsonLd";
 import assets from "@/lib/asset-manifest.json";
 import meta from "@/lib/homepage-meta.json";
 import { homeSchema } from "@/lib/schema";
-/* Shared mobile hero logos/ticker flow (≤900px) — same as /services pages */
-import "@/app/service-hero-lock.css";
-import "@/app/home-invite.css";
+/* service-hero-lock + home-invite ship via deferred CSS (no blocking chunks) */
 
 const homeInviteBoot = fs
   .readFileSync(path.join(process.cwd(), "lib", "home-invite-boot.js"), "utf8")
@@ -62,6 +61,8 @@ export default function HomePage() {
         type="image/webp"
         fetchPriority="high"
       />
+      {/* Invite modal styles — not needed for first paint */}
+      <DeferredStylesheet href="/css/home-invite.css" />
       <SitePage html={html} prepared />
       {/* afterInteractive: body markup exists; boot can measure nav logo */}
       <Script src={assets.main} strategy="lazyOnload" />

@@ -166,9 +166,12 @@
     if (!kwSlots.length) return;
     kwSlots.forEach(function(slot){
       slot.__tcWired = true;
-      slot.innerHTML = "<u></u>" + KEYWORDS.map(function(w, i){
-        return "<i" + (i === 0 ? ' class="on"' : "") + ">" + w + "</i>";
-      }).join("");
+      /* SSR may already ship the keyword list — do not wipe (CLS). */
+      if (!slot.querySelector("i")){
+        slot.innerHTML = "<u></u>" + KEYWORDS.map(function(w, i){
+          return "<i" + (i === 0 ? ' class="on"' : "") + ">" + w + "</i>";
+        }).join("");
+      }
     });
 
     /* Width comes from CSS grid (longest keyword). JS only swaps classes. */
